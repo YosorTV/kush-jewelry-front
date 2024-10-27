@@ -1,10 +1,10 @@
 import { NextAuthConfig } from 'next-auth';
-import GoogleProvider from 'next-auth/providers/google';
 import CredentialProvider, { CredentialInput } from 'next-auth/providers/credentials';
+import GoogleProvider from 'next-auth/providers/google';
 
 import { googleTokenAdapter, sessionAdapter, tokenAdapter } from '@/adapters/auth';
 
-import { strapiProviderLogin, login } from '@/services';
+import { login, strapiProviderLogin } from '@/services';
 
 export const authOptions: NextAuthConfig = {
   secret: process.env.NEXTAUTH_SECRET,

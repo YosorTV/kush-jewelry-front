@@ -1,12 +1,15 @@
 import { Search } from '@/components/complex';
 import { ShoppingCart } from '@/components/complex/ShoppingCart';
-import { LangChanger, Menu, ThemeChanger } from '@/components/simple';
 import { Logo } from '@/components/elements';
+import { LangChanger, Menu, ThemeChanger } from '@/components/simple';
 
-import { HeaderProps } from '@/types/components';
 import UserSession from '@/components/complex/UserSession';
+import { getCurrency } from '@/services';
+import { HeaderProps } from '@/types/components';
 
 export default async function Header({ data, shoppingCart, session, locale }: HeaderProps) {
+  const currency = await getCurrency();
+
   const {
     pages,
     cta,
@@ -46,7 +49,7 @@ export default async function Header({ data, shoppingCart, session, locale }: He
         </div>
         <div className='flex items-center gap-x-6'>
           <Search placeholder={searchTitle} />
-          <ShoppingCart data={shoppingCart} locale={locale} />
+          <ShoppingCart data={shoppingCart} locale={locale} currency={currency} />
           <UserSession
             cta={cta}
             locale={locale}

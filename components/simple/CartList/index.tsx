@@ -3,9 +3,8 @@
 import { motion } from 'framer-motion';
 import { useTranslations } from 'next-intl';
 import { useTheme } from 'next-themes';
-import { FC, useEffect, useState } from 'react';
+import { FC } from 'react';
 
-import { getCurrency } from '@/services';
 import { useCart } from '@/store';
 
 import { cn } from '@/lib';
@@ -20,9 +19,7 @@ import { CartItem } from '../CartItem';
 
 import lottieAnim from '@/public/LottieEmpty.json';
 
-export const CartList: FC<any> = ({ data }) => {
-  const [currency, setCurrency] = useState<number>();
-
+export const CartList: FC<any> = ({ data, currency }) => {
   const cartStore = useCart();
 
   const { theme } = useTheme();
@@ -30,19 +27,7 @@ export const CartList: FC<any> = ({ data }) => {
 
   const { totalPrice } = formatTotalAmount(cartStore.cart);
 
-  const handleBack = () => cartStore.onToggle();
-
-  const fetchCurrency = async () => {
-    const response = await getCurrency();
-
-    setCurrency(response);
-  };
-
-  useEffect(() => {
-    if (cartStore.cart.length > 0) {
-      fetchCurrency();
-    }
-  }, [cartStore.isOpen]);
+  const handleClose = () => cartStore.onToggle();
 
   if (!cartStore.cart.length) {
     return (
@@ -53,17 +38,17 @@ export const CartList: FC<any> = ({ data }) => {
         className='relative flex w-full flex-col items-center justify-center gap-y-4'
       >
         <Title level='2'>{data.emptyList}</Title>
-        <Button onClick={handleBack} className='btn btn-link text-base normal-case'>
+        <Button onClick={handleClose} className='btn btn-link justify-start px-0 text-lg normal-case'>
           {data.getBack}
         </Button>
-        <Lottie src={lottieAnim} playerClassName={cn(theme === 'sunset' ? 'invert' : 'invert-0')} />
+        <Lottie src={lottieAnim} playerClassName={cn(theme === 'sunset' ? 'invert' : 'invert-0', 'opacity-75')} />
       </motion.div>
     );
   }
 
   return (
     <div className='relative flex w-full flex-col items-start gap-y-5 p-5'>
-      <Button onClick={handleBack} className='btn btn-link relative -top-2.5 px-0 text-lg normal-case'>
+      <Button onClick={handleClose} className='btn btn-link relative -top-2.5 px-0 text-lg normal-case'>
         {t('system.stepBack')}
       </Button>
       <div className='flex w-full flex-col gap-y-6'>

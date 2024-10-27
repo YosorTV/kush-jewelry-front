@@ -1,3 +1,5 @@
+import { DEFAULT_LOCALE } from './constants';
+
 export const formatPrice = (amount: number, currency: number) => {
   let formattedAmount = new Intl.NumberFormat('uk-UA', {
     style: 'currency',
@@ -58,4 +60,8 @@ export const getInitials = ({ firstName, lastName }: getInitials) => {
   const lastInitial = lastName ? lastName.charAt(0).toUpperCase() : '';
 
   return `${firstInitial}${lastInitial}`;
+};
+
+export const getProviderErrorMessage = ({ locale = DEFAULT_LOCALE }: { locale: string }) => {
+  return locale === 'uk' ? 'Авторізаційна помилка. Не вірний провайдер.' : 'Authorization error. Incorrect provider.';
 };

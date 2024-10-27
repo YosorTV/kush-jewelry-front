@@ -7,8 +7,6 @@ import { FC, useCallback, useEffect, useMemo, useRef } from 'react';
 import { liqPayAdapter } from '@/adapters/payment';
 import { Button } from '@/components/elements';
 import { formatPrice } from '@/helpers/formatters';
-import { toaster } from '@/lib';
-import { useScrollLock } from '@/lib/hooks';
 import { paymentCallback } from '@/services/api/payment-update';
 import { useCart } from '@/store';
 import { CartItemType } from '@/types/store';
@@ -28,8 +26,6 @@ export const CartCheckout: FC<ICartCheckout> = ({ currency, liqPayData }) => {
   const liqPayContainerRef = useRef<HTMLDivElement | null>(null);
 
   const handleBack = useCallback(() => cartStore.setForm('delivery'), [cartStore]);
-
-  useScrollLock(cartStore.isOpen);
 
   const products = useMemo(() => {
     return cartStore.cart.map((item: CartItemType) => ({
@@ -63,11 +59,7 @@ export const CartCheckout: FC<ICartCheckout> = ({ currency, liqPayData }) => {
         cartStore.globalReset();
         cartStore.setForm('success');
       }
-
-      toaster({ key: 'success', message: result.message });
-
-      return result;
-    }, 500),
+    }, 1000),
 
     [cartStore.delivery, products, session]
   );

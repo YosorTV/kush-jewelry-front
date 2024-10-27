@@ -1,5 +1,6 @@
 export type ShoppingCartProps = {
   locale: string;
+  currency: number;
   data: {
     title: string;
     totalPrice: string;

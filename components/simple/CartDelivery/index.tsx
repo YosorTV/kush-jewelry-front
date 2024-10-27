@@ -9,7 +9,6 @@ import { useCallback, useEffect, useState } from 'react';
 import { ROOT } from '@/helpers/constants';
 import { isFormIncomplete } from '@/helpers/validator';
 import { useRouter } from '@/lib';
-import { useScrollLock } from '@/lib/hooks';
 import { getMe } from '@/services/api/get-me';
 import { useTranslations } from 'next-intl';
 
@@ -21,13 +20,15 @@ export const CartDelivery = () => {
   const cartStore = useCart();
   const session = useSession();
 
-  useScrollLock(cartStore.isOpen);
-
   const fetchProfileData = useCallback(async () => {
-    const { data } = await getMe({ token: session.data.accessToken });
+    if (session.data) {
+      const { data } = await getMe({ token: session.data.accessToken });
 
-    setUser(data);
-  }, [session.data.accessToken, getMe]);
+      setUser(data);
+    }
+
+    return;
+  }, [session?.data?.accessToken, getMe]);
 
   const handleBack = () => {
     cartStore.setForm('cart');

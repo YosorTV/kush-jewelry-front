@@ -4,30 +4,24 @@ import { FC, useCallback, useEffect, useState } from 'react';
 
 import { useCart } from '@/store';
 
-import { CartList } from '@/components/simple';
-import { ShoppingCartProps } from '@/types/components/complex';
-import { Success } from '../Success';
-import { BsFillBagFill } from 'react-icons/bs';
+import { paymentDataAdapter } from '@/adapters/payment';
 import { Button, Portal, Sidebar } from '@/components/elements';
 import { Badge } from '@/components/elements/Badge';
-import { CartDelivery } from '@/components/simple/CartDelivery';
+import { CartList } from '@/components/simple';
 import { CartCheckout } from '@/components/simple/CartCheckout';
-import { getCurrency, paymentCreate } from '@/services';
-import { paymentDataAdapter } from '@/adapters/payment';
+import { CartDelivery } from '@/components/simple/CartDelivery';
+import { paymentCreate } from '@/services';
+import { ShoppingCartProps } from '@/types/components/complex';
+import { BsFillBagFill } from 'react-icons/bs';
+import { Success } from '../Success';
 
-export const ShoppingCart: FC<ShoppingCartProps> = ({ data, locale }) => {
-  const cartStore = useCart();
-
-  const [currency, setCurrency] = useState<number>(0);
+export const ShoppingCart: FC<ShoppingCartProps> = ({ data, locale, currency }) => {
   const [liqPayData, setLiqPayData] = useState({
     data: '',
     signature: ''
   });
 
-  const fetchCurrency = useCallback(async () => {
-    const response = await getCurrency();
-    setCurrency(response);
-  }, []);
+  const cartStore = useCart();
 
   const fetchLiqPayData = useCallback(async () => {
     const options = paymentDataAdapter({
@@ -43,17 +37,13 @@ export const ShoppingCart: FC<ShoppingCartProps> = ({ data, locale }) => {
   }, [currency, cartStore.cart, cartStore.delivery]);
 
   useEffect(() => {
-    fetchCurrency();
-  }, []);
-
-  useEffect(() => {
     if (cartStore.key === 'checkout') {
       fetchLiqPayData();
     }
   }, [cartStore.key]);
 
   const contentZone = {
-    cart: <CartList data={data} />,
+    cart: <CartList data={data} currency={currency} />,
     delivery: <CartDelivery />,
     checkout: <CartCheckout currency={currency} liqPayData={liqPayData} />,
     success: <Success />

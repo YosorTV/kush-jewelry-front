@@ -3,11 +3,11 @@ import { notFound } from 'next/navigation';
 
 import { ProfileForm } from '@/components/forms';
 
-import { getProfileData } from '@/services';
-import { PageProps } from '@/types/app/page.types';
 import { auth } from '@/auth';
-import { getMe } from '@/services/api/get-me';
 import { Title } from '@/components/elements';
+import { getProfileData } from '@/services';
+import { getMe } from '@/services/api/get-me';
+import { PageProps } from '@/types/app/page.types';
 import { getTranslations } from 'next-intl/server';
 
 export async function generateMetadata(props: PageProps): Promise<Metadata> {
@@ -25,7 +25,6 @@ export default async function ProfilePage({ params }: PageProps) {
   const { locale } = params;
 
   const session = await auth();
-
   const t = await getTranslations('system');
 
   const { data } = await getProfileData({ locale, token: session.accessToken });

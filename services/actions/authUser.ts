@@ -2,18 +2,20 @@
 
 import { signIn, signOut } from '@/auth';
 import { DEFAULT_LOCALE, ROOT } from '@/helpers/constants';
+import { getProviderErrorMessage } from '@/helpers/formatters';
+import { isAuthorizationArgumentError } from '@/helpers/validator';
 import { schemas } from '@/lib/zod';
 import { AuthError } from 'next-auth';
 
 export async function authUserAction(prevState: any, formData: FormData) {
-  try {
-    const fields = {
-      identifier: formData.get('identifier'),
-      password: formData.get('password'),
-      remember: formData.get('remember') ?? 'off',
-      locale: formData.get('locale') ?? 'uk'
-    };
+  const fields = {
+    identifier: formData.get('identifier'),
+    password: formData.get('password'),
+    remember: formData.get('remember') ?? 'off',
+    locale: formData.get('locale') ?? 'uk'
+  };
 
+  try {
     const validatedData: any = schemas.login(fields.locale as string).safeParse(fields);
 
     if (!validatedData.success) {
@@ -57,6 +59,12 @@ export async function authUserAction(prevState: any, formData: FormData) {
     };
   } catch (error) {
     if (error instanceof AuthError) {
+      const isProviderError = isAuthorizationArgumentError(error);
+
+      const errorMessage = isProviderError
+        ? getProviderErrorMessage({ locale: fields.locale as string })
+        : error.cause['err'].message;
+
       switch (error.type) {
         case 'CallbackRouteError':
           return {
@@ -65,7 +73,7 @@ export async function authUserAction(prevState: any, formData: FormData) {
             errors: null,
             status: 400,
             message: '',
-            strapiError: error.cause['err'].message ?? 'An unexpected error occurred'
+            strapiError: errorMessage
           };
         default:
           return {
