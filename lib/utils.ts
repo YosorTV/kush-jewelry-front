@@ -1,5 +1,5 @@
-import React from 'react';
 import { InputProps } from '@/types/components';
+import React from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
 export function getStrapiURL() {
@@ -92,6 +92,7 @@ export const getStatusColor = (status: string) => {
     case 'sandbox':
       return 'bg-purple-600';
     case 'completed':
+    case 'success':
       return 'bg-success';
     case 'error':
       return 'bg-error';
@@ -107,6 +108,7 @@ export const getStatusBorder = (status: string) => {
     case 'sandbox':
       return 'border-purple-600';
     case 'completed':
+    case 'success':
       return 'border-success';
     case 'error':
       return 'border-error';

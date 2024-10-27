@@ -118,5 +118,12 @@
   "notFound": {
     "message": "Oops! The page you are looking for does not exist",
     "return": "Return to home page"
+  },
+  "status": {
+    "completed": "Delivered",
+    "success": "Paid",
+    "error": "Rejected",
+    "pending": "Pending",
+    "sandbox": "Test"
   }
 }
