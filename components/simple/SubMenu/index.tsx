@@ -1,5 +1,4 @@
 import { FC } from 'react';
-import dynamic from 'next/dynamic';
 
 import { cormorant } from '@/assets/fonts';
 import { cn } from '@/lib';
@@ -8,13 +7,12 @@ import { Title } from '@/components/elements';
 import { MenuItem } from '../Menu/MenuItem';
 
 import { TSubMenu } from '@/types/components/simple/subMenu.types';
-
-const CollectionCarousel = dynamic(() => import('../CollectionCarousel'), { ssr: false });
+import CollectionCarousel from '../CollectionCarousel';
 
 const SubMenu: FC<TSubMenu> = ({ categoryTitle, categories, collections, collectionTitle }) => {
   return (
-    <nav className='fixed left-0 top-16 z-10 flex h-[340px] w-full gap-x-20 bg-info-content px-5'>
-      <div className='relative top-5 flex flex-col gap-y-2.5'>
+    <nav className='fixed left-0 top-16 z-30 flex h-[340px] w-full gap-x-20 bg-info-content px-5'>
+      <div className='relative top-5 z-30 flex flex-col gap-y-2.5'>
         {categoryTitle && (
           <Title level='5' className={cn('text-xl uppercase text-base-200', cormorant.className)}>
             {categoryTitle}

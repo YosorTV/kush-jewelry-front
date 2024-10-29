@@ -1,8 +1,7 @@
 'use client';
 
-import { FC, useState, useMemo, useCallback, useEffect } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import dynamic from 'next/dynamic';
+import { FC, useCallback, useEffect, useMemo, useState } from 'react';
 
 import { useFilters } from '@/store';
 
@@ -16,8 +15,7 @@ import { ROOT } from '@/helpers/constants';
 import { StrapiLinkType } from '@/types/components';
 
 import { navAnimations } from '@/assets/animations';
-
-const SubMenu = dynamic(() => import('../SubMenu'), { ssr: false });
+import SubMenu from '../SubMenu';
 
 type ListOFPagesProps = {
   pages: StrapiLinkType[];
@@ -96,7 +94,7 @@ export const ListOfPages: FC<ListOFPagesProps> = ({
     <ul className={cn('flex gap-x-6', className)}>
       {pages.length > 0 && pages.map(printLink)}
       <Portal selector='portal'>
-        <AnimatePresence mode='wait' initial={false}>
+        <AnimatePresence mode='sync'>
           {isLgScreen && (
             <motion.div
               initial='initial'

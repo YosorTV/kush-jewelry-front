@@ -66,8 +66,7 @@ export const CartCheckout: FC<ICartCheckout> = ({ currency, liqPayData }) => {
         liqPayContainerRef.current.innerHTML = '';
       }
 
-      const liqPayInstance = LiqPayCheckout?.init(liqPayAdapter(liqPayData));
-      liqPayInstance.on('liqpay.callback', debouncedCallback);
+      LiqPayCheckout.init(liqPayAdapter(liqPayData)).on('liqpay.callback', debouncedCallback);
     }
 
     return () => {

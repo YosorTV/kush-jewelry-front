@@ -21,8 +21,8 @@ export const OrderCardMobile: FC<IOrderCard> = ({
   t
 }) => {
   return (
-    <div className='group card image-full h-80 w-full overflow-hidden rounded-none'>
-      <figure className='overflow-hidden !rounded-none transition-all duration-300 ease-in-out md:ml-auto md:group-hover:z-50'>
+    <div className='group card image-full !z-10 h-80 w-full overflow-hidden rounded-none'>
+      <figure className='overflow-hidden !rounded-none transition-all duration-300 ease-in-out md:ml-auto md:group-hover:z-20'>
         <StrapiImage
           src={image.url}
           width={image.width}

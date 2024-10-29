@@ -45,7 +45,7 @@ export const CartList: FC<any> = ({ data, currency }) => {
         initial={animCart.basket.initial}
         animate={animCart.basket.animate}
         exit={animCart.basket.exit}
-        className='relative flex w-full flex-col items-center justify-center gap-y-4'
+        className='relative flex w-full flex-col items-center justify-center gap-y-5 py-5'
       >
         <Title level='2'>{data.emptyList}</Title>
         <Lottie src={lottieAnim} playerClassName={cn(theme === 'sunset' ? 'invert' : 'invert-0', 'opacity-75')} />
