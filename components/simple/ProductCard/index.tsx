@@ -4,8 +4,7 @@ import { NextLink, Title } from '@/components/elements';
 import { Price, Wishlist } from '@/components/simple';
 import AnimatedImage from '@/components/simple/AnimatedImage';
 
-import { cn } from '@/lib';
-import { Link } from '@/lib/navigation';
+import { cn, Link } from '@/lib';
 
 import { ProductCardProps } from '@/types/components';
 
@@ -30,7 +29,11 @@ export const ProductCard: FC<ProductCardProps> = ({ product, className, imgClass
             inWishlist={product?.inWishlist ?? false}
           />
         </div>
-        <div className='min-h-4'>
+        <div title={product.description} className='group flex flex-col gap-y-2.5'>
+          <p className='line-clamp-1 w-1/2 text-base font-medium text-base-200 transition-all duration-300 group-hover:w-full'>
+            {product.description}
+          </p>
+          <div className='flex w-full items-end justify-between'>
           {product?.collections &&
             product.collections.data.map((collection) => (
               <Link
@@ -41,13 +44,6 @@ export const ProductCard: FC<ProductCardProps> = ({ product, className, imgClass
                 {t('collection')}&nbsp;{collection.title}
               </Link>
             ))}
-        </div>
-        <div title={product.description} className='group flex flex-col pt-2'>
-          <p className='line-clamp-1 w-1/2 text-base font-medium text-base-200 transition-all duration-300 group-hover:w-full'>
-            {product.description}
-          </p>
-          <div className='flex w-full items-end justify-between'>
-            <span className='text-sm'>{t('available', { number: product.quantity })}</span>
             <Price currency={currency} price={product?.price} sale={product?.saleValue} />
           </div>
         </div>
