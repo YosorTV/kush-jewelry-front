@@ -10,18 +10,22 @@ import { Badge } from '@/components/elements/Badge';
 import { CartList } from '@/components/simple';
 import { CartCheckout } from '@/components/simple/CartCheckout';
 import { CartDelivery } from '@/components/simple/CartDelivery';
+import { cn } from '@/lib';
 import { paymentCreate } from '@/services';
 import { ShoppingCartProps } from '@/types/components/complex';
+import { useTranslations } from 'next-intl';
 import { BsFillBagFill } from 'react-icons/bs';
+import { IoArrowBack } from 'react-icons/io5';
 import { Success } from '../Success';
 
 export const ShoppingCart: FC<ShoppingCartProps> = ({ data, locale, currency }) => {
+  const t = useTranslations();
+  const cartStore = useCart();
+
   const [liqPayData, setLiqPayData] = useState({
     data: '',
     signature: ''
   });
-
-  const cartStore = useCart();
 
   const fetchLiqPayData = useCallback(async () => {
     const options = paymentDataAdapter({
@@ -51,6 +55,18 @@ export const ShoppingCart: FC<ShoppingCartProps> = ({ data, locale, currency }) 
 
   const handleToggle = () => cartStore.onToggle();
 
+  const handleBack = () => {
+    if (cartStore.key === 'cart') {
+      handleToggle();
+    } else if (cartStore.key === 'delivery') {
+      cartStore.setForm('cart');
+    } else if (cartStore.key === 'checkout') {
+      cartStore.setForm('delivery');
+    } else {
+      handleToggle();
+    }
+  };
+
   return (
     <>
       <Button
@@ -63,7 +79,17 @@ export const ShoppingCart: FC<ShoppingCartProps> = ({ data, locale, currency }) 
 
       <Portal selector='portal'>
         <Sidebar position='right' onToggle={handleToggle} opened={cartStore.isOpen}>
-          <div className='relative top-12 flex h-full'>{contentZone[cartStore.key]}</div>
+          <div className={cn('relative top-16 flex w-full flex-col items-start px-5')}>
+            <Button
+              type='button'
+              onClick={handleBack}
+              className='!text-xs underline-offset-8 hover:underline md:!text-sm'
+              icon={{ before: <IoArrowBack className='h-4 w-4 fill-base-200 md:h-6 md:w-6' /> }}
+            >
+              {t('system.stepBack')}
+            </Button>
+            {contentZone[cartStore.key]}
+          </div>
         </Sidebar>
       </Portal>
     </>

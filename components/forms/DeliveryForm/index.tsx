@@ -31,7 +31,19 @@ export const DeliveryForm: FC<IDeliveryForm> = ({ data, title = 'Спосіб д
     value: data?.cityID
   };
 
-  const handleSelf = () => setSelf(!self);
+  const handleSelf = () => {
+    setSelf((prev) => {
+      if (!prev) setWithNp(false);
+      return !prev;
+    });
+  };
+
+  const handleWithNp = () => {
+    setWithNp((prev) => {
+      if (!prev) setSelf(false);
+      return !prev;
+    });
+  };
 
   useEffect(() => {
     cartStore.setDelivery('self', self);
@@ -44,14 +56,23 @@ export const DeliveryForm: FC<IDeliveryForm> = ({ data, title = 'Спосіб д
 
   return (
     <form className='form-control gap-y-5'>
-      <Title level='4' className='w-full self-center text-center text-2xl font-light'>
+      <Title level='2' className='w-full self-center text-center'>
         2.{title}
       </Title>
-      <div className='divider my-0' />
-      <div className='flex flex-col gap-y-5 sm:flex-row sm:justify-between'>
+      <div className='flex flex-col gap-y-5 py-5 sm:flex-row sm:justify-between'>
+        <Input
+          id='np'
+          type='checkbox'
+          checked={withNp}
+          label={t('novapost')}
+          onChange={handleWithNp}
+          className='checkbox checked:fill-base-200'
+          labelStyle='text-base-200 font-medium text-base cursor-pointer'
+          containerClass='flex-row flex-row-reverse justify-end sm:justify-start items-center gap-x-3'
+        />
+
         <Input
           id='self'
-          disabled={withNp}
           type='checkbox'
           checked={self}
           label={t('self')}
@@ -59,18 +80,6 @@ export const DeliveryForm: FC<IDeliveryForm> = ({ data, title = 'Спосіб д
           className='checkbox checked:fill-base-200'
           labelStyle='text-base-200 font-medium text-base cursor-pointer'
           containerClass='flex-row flex-row-reverse justify-end items-center gap-x-3'
-        />
-
-        <Input
-          id='np'
-          type='checkbox'
-          disabled={self}
-          checked={withNp}
-          label={t('novapost')}
-          onChange={() => setWithNp(!withNp)}
-          className='checkbox checked:fill-base-200'
-          labelStyle='text-base-200 font-medium text-base cursor-pointer'
-          containerClass='flex-row flex-row-reverse justify-end sm:justify-start items-center gap-x-3'
         />
       </div>
       {withNp && (

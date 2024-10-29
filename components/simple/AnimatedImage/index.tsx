@@ -35,7 +35,7 @@ const AnimatedImage: FC<TAnimatedImage> = ({ product }) => {
       onClick={handleRedirect}
       onMouseEnter={() => md && setShowOverlay(true)}
       onMouseLeave={() => md && setShowOverlay(false)}
-      className='relative h-80 sm:h-96 md:h-112'
+      className='relative h-80 sm:h-96 md:h-[400px] lg:h-[548px] xl:h-[600px]'
     >
       {[img1, img2].map((img, idx) => (
         <div

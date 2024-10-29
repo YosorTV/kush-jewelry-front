@@ -6,6 +6,7 @@ export type CartItemProps = {
   currency: number;
   onAdd: () => void;
   onRemove: () => void;
+  t: (key: string, options?: Record<string, any>) => string;
 };
 
 export type AddCartProps = {

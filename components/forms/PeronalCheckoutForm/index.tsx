@@ -32,8 +32,8 @@ export const PeronalCheckoutForm: FC<IPersonalCheckoutForm> = ({ data, title = '
   };
 
   return (
-    <div className='form-control gap-y-5'>
-      <Title level='4' className='w-full self-center text-center text-2xl font-light'>
+    <div className='form-control gap-y-2.5'>
+      <Title level='2' className='w-full self-center text-center'>
         1.{title}
       </Title>
       <form className='form-control gap-y-5'>

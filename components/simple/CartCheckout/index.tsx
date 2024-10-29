@@ -1,11 +1,10 @@
 'use client';
 
 import { useSession } from 'next-auth/react';
-import { useLocale, useTranslations } from 'next-intl';
+import { useLocale } from 'next-intl';
 import { FC, useCallback, useEffect, useMemo, useRef } from 'react';
 
 import { liqPayAdapter } from '@/adapters/payment';
-import { Button } from '@/components/elements';
 import { formatPrice } from '@/helpers/formatters';
 import { paymentCallback } from '@/services/api/payment-update';
 import { useCart } from '@/store';
@@ -20,12 +19,9 @@ interface ICartCheckout {
 export const CartCheckout: FC<ICartCheckout> = ({ currency, liqPayData }) => {
   const locale = useLocale();
   const cartStore = useCart();
-  const t = useTranslations();
   const { data: session } = useSession();
 
   const liqPayContainerRef = useRef<HTMLDivElement | null>(null);
-
-  const handleBack = useCallback(() => cartStore.setForm('delivery'), [cartStore]);
 
   const products = useMemo(() => {
     return cartStore.cart.map((item: CartItemType) => ({
@@ -70,7 +66,7 @@ export const CartCheckout: FC<ICartCheckout> = ({ currency, liqPayData }) => {
         liqPayContainerRef.current.innerHTML = '';
       }
 
-      const liqPayInstance = LiqPayCheckout.init(liqPayAdapter(liqPayData));
+      const liqPayInstance = LiqPayCheckout?.init(liqPayAdapter(liqPayData));
       liqPayInstance.on('liqpay.callback', debouncedCallback);
     }
 
@@ -79,13 +75,5 @@ export const CartCheckout: FC<ICartCheckout> = ({ currency, liqPayData }) => {
     };
   }, [liqPayData]);
 
-  return (
-    <div className='w-full'>
-      <Button onClick={handleBack} className='btn btn-link relative left-5 mx-5 justify-start'>
-        {t('system.stepBack')}
-      </Button>
-
-      <div ref={liqPayContainerRef} id='liqpay_checkout' />
-    </div>
-  );
+  return <div ref={liqPayContainerRef} className='w-full pb-10 pt-5' id='liqpay_checkout' />;
 };

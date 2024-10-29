@@ -60,6 +60,7 @@ export const liqPayAdapter = ({ data, signature }: ILiqPayAdapter) => {
     data,
     signature,
     embedTo: '#liqpay_checkout',
-    mode: 'embed'
+    mode: 'embed',
+    paytypes: 'applepay'
   };
 };

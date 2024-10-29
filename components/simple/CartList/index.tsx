@@ -12,7 +12,7 @@ import { cn } from '@/lib';
 import { animCart } from '@/assets/animations';
 import { formatPrice, formatTotalAmount } from '@/helpers/formatters';
 
-import { Button, Title } from '@/components/elements';
+import { Title } from '@/components/elements';
 import { Lottie } from '@/components/elements/Lottie';
 
 import { CartItem } from '../CartItem';
@@ -27,7 +27,17 @@ export const CartList: FC<any> = ({ data, currency }) => {
 
   const { totalPrice } = formatTotalAmount(cartStore.cart);
 
-  const handleClose = () => cartStore.onToggle();
+  const printCartItem = (item: any) => (
+    <motion.div key={item.id} className='flex flex-row-reverse items-center justify-between gap-x-2.5'>
+      <CartItem
+        data={item}
+        t={t}
+        currency={currency}
+        onAdd={() => cartStore.onIncrease(item)}
+        onRemove={() => cartStore.onRemove(item)}
+      />
+    </motion.div>
+  );
 
   if (!cartStore.cart.length) {
     return (
@@ -38,38 +48,26 @@ export const CartList: FC<any> = ({ data, currency }) => {
         className='relative flex w-full flex-col items-center justify-center gap-y-4'
       >
         <Title level='2'>{data.emptyList}</Title>
-        <Button onClick={handleClose} className='btn btn-link justify-start px-0 text-lg normal-case'>
-          {data.getBack}
-        </Button>
         <Lottie src={lottieAnim} playerClassName={cn(theme === 'sunset' ? 'invert' : 'invert-0', 'opacity-75')} />
       </motion.div>
     );
   }
 
   return (
-    <div className='relative flex w-full flex-col items-start gap-y-5 p-5'>
-      <Button onClick={handleClose} className='btn btn-link relative -top-2.5 px-0 text-lg normal-case'>
-        {t('system.stepBack')}
-      </Button>
-      <div className='flex w-full flex-col gap-y-6'>
-        <Title level='3' className='w-full self-center text-center text-2xl font-light'>
-          {t('checkout.title')}
-        </Title>
-        {cartStore.cart.map((item) => (
-          <motion.div layout key={item.id} className='flex gap-x-3 px-5'>
-            <CartItem
-              data={item}
-              onAdd={() => cartStore.onIncrease(item)}
-              currency={currency}
-              onRemove={() => cartStore.onRemove(item)}
-            />
-          </motion.div>
-        ))}
-      </div>
-      <p className='font-semibold capitalize'>
+    <div className='relative flex w-full flex-col items-start gap-y-5'>
+      <Title level='2' className='w-full self-center text-center'>
+        {t('checkout.title')}
+      </Title>
+      <div className='divider my-0' />
+      <div className='w-full'>{cartStore.cart.map(printCartItem)}</div>
+      <div className='divider my-0' />
+      <p className='ml-auto font-semibold text-base-200'>
         {t('checkout.total')}: {formatPrice(totalPrice, currency)}
       </p>
-      <button onClick={() => cartStore.setForm('delivery')} className='btn btn-primary w-full text-base-100'>
+      <button
+        onClick={() => cartStore.setForm('delivery')}
+        className='btn btn-primary w-full !rounded-none text-base-100'
+      >
         {t('checkout.delivery')}
       </button>
     </div>

@@ -98,7 +98,7 @@ module.exports = {
           secondary: '#F5A81A',
           error: '#AA0A0A',
           neutral: '#033178',
-          'info-content': '#2D2D2D',
+          'info-content': 'rgb(48,48,48)',
           'base-100': '#242424',
           'base-200': '#FFFFFF',
           'base-300': '#FFFFFF'
