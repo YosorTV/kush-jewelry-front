@@ -9,7 +9,7 @@ import { cn } from '@/lib';
 import { useScreen } from '@/lib/hooks';
 import { usePathname } from '@/lib/navigation';
 
-import { NextLink, Portal } from '@/components/elements';
+import { NextLink } from '@/components/elements';
 
 import { ROOT } from '@/helpers/constants';
 import { StrapiLinkType } from '@/types/components';
@@ -93,7 +93,6 @@ export const ListOfPages: FC<ListOFPagesProps> = ({
   return (
     <ul className={cn('flex gap-x-6', className)}>
       {pages.length > 0 && pages.map(printLink)}
-      <Portal selector='portal'>
         <AnimatePresence mode='sync'>
           {isLgScreen && (
             <motion.div
@@ -112,7 +111,6 @@ export const ListOfPages: FC<ListOFPagesProps> = ({
             </motion.div>
           )}
         </AnimatePresence>
-      </Portal>
     </ul>
   );
 };

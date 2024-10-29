@@ -1,6 +1,6 @@
 'use client';
 
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 
 import { Lottie, Title } from '@/components/elements';
 import { OrderCardMobile, Price } from '@/components/simple';
@@ -8,7 +8,10 @@ import { OrderCardMobile, Price } from '@/components/simple';
 import lottieAnim from '@/public/LottieEmplyList.json';
 
 const OrdersSection = ({ orders, emptyTitle = 'Не знайдено' }: any) => {
+  const locale = useLocale();
   const t = useTranslations('order');
+
+  const replaceLocaleInUrl = (url:string) => url.replace(/-(uk|en)$/, `-${locale}`);
 
   if (!orders.length) {
     return <Lottie text={emptyTitle} src={lottieAnim} className='relative top-20' playerClassName='h-96 w-96' />;
@@ -28,7 +31,8 @@ const OrdersSection = ({ orders, emptyTitle = 'Не знайдено' }: any) =>
           return (
             <OrderCardMobile
               t={t}
-              url={el.url}
+              locale={locale}
+              url={replaceLocaleInUrl(el.url)}
               key={el.id}
               id={order.id}
               amount={order.amount}

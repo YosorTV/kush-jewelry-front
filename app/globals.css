@@ -87,7 +87,7 @@ input:-webkit-autofill:active {
   --slide-size: 100%;
   --slide-height: 100%;
   --slide-spacing: 0.5rem;
-  --slide-size-lg: calc(100% / 3);
+  --slide-size-lg: calc(100% / 2.5);
   --slide-size-md: calc(100% / 2);
   --slide-size-sm: calc(100% / 1);
 }
@@ -110,14 +110,12 @@ input:-webkit-autofill:active {
   display: flex;
   backface-visibility: hidden;
   touch-action: pan-y pinch-zoom;
-  margin-left: calc(var(--slide-spacing) * -1);
 }
 
 .embla__slide {
   min-width: 0;
   flex: 0 0 var(--slide-size);
   margin-left: calc(var(--slide-spacing));
-  margin-right: calc(var(--slide-spacing));
 }
 
 @media (min-width: 486px) {

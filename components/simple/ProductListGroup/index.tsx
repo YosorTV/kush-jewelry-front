@@ -1,17 +1,17 @@
-import { FC } from 'react';
 import { getTranslations } from 'next-intl/server';
+import { FC } from 'react';
 
 import { cn } from '@/lib';
 
 import { Lottie } from '@/components/elements/Lottie';
 
-import { Product } from '@/types/components';
 import { gridCols } from '@/helpers/formatters';
+import { Product } from '@/types/components';
 import { ProductCard } from '../ProductCard';
 
+import { auth } from '@/auth';
 import lottieAnim from '@/public/LottieEmplyList.json';
 import { getCurrency } from '@/services';
-import { auth } from '@/auth';
 
 interface IProductListGroup {
   data: Product[];
@@ -44,7 +44,7 @@ const ProductListGroup: FC<IProductListGroup> = async ({
   }
 
   return (
-    <div className={cn('grid min-h-96 gap-5', className, data.length >= 4 && 'grid-cols-fluid')}>
+    <div className={cn('grid min-h-96 gap-5 mb-5', className, data.length >= 4 && 'grid-cols-fluid')}>
       {data.map(printProduct)}
     </div>
   );

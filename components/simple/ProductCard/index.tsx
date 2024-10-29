@@ -9,11 +9,11 @@ import { Link } from '@/lib/navigation';
 
 import { ProductCardProps } from '@/types/components';
 
-export const ProductCard: FC<ProductCardProps> = ({ product, className, session = null, currency = 41, t }) => {
+export const ProductCard: FC<ProductCardProps> = ({ product, className, imgClassName, session = null, currency = 41, t }) => {
   return (
     <figure className={cn('grid cursor-pointer', className)}>
       <div className='relative'>
-        <AnimatedImage product={product} />
+        <AnimatedImage product={product} className={imgClassName} />
         <span className='absolute left-0 top-0 z-[3] bg-neutral p-2 text-base-300'>{product.hintText}</span>
       </div>
       <figcaption className='flex w-full flex-col'>
@@ -30,8 +30,7 @@ export const ProductCard: FC<ProductCardProps> = ({ product, className, session 
             inWishlist={product?.inWishlist ?? false}
           />
         </div>
-
-        <div className='h-6'>
+        <div className='min-h-4'>
           {product?.collections &&
             product.collections.data.map((collection) => (
               <Link

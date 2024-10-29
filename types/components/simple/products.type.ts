@@ -69,5 +69,6 @@ export type ProductCardProps = {
   className?: string;
   currency?: number;
   session?: Session;
+  imgClassName?:string;
   t: (key: string, options?: Record<string, any>) => string;
 };

@@ -27,7 +27,8 @@ export const CartList: FC<any> = ({ data, currency }) => {
 
   const { totalPrice } = formatTotalAmount(cartStore.cart);
 
-  const printCartItem = (item: any) => (
+  const printCartItem = (item: any, index:number) => (
+    <>
     <motion.div key={item.id} className='flex flex-row-reverse items-center justify-between gap-x-2.5'>
       <CartItem
         data={item}
@@ -37,6 +38,8 @@ export const CartList: FC<any> = ({ data, currency }) => {
         onRemove={() => cartStore.onRemove(item)}
       />
     </motion.div>
+    {index < cartStore.cart.length - 1 && <div className='divider my-0' />}
+    </>
   );
 
   if (!cartStore.cart.length) {
@@ -54,14 +57,14 @@ export const CartList: FC<any> = ({ data, currency }) => {
   }
 
   return (
-    <div className='relative flex w-full flex-col items-start gap-y-5'>
+    <div className='relative flex w-full flex-col items-start gap-y-5 pb-10'>
       <Title level='2' className='w-full self-center text-center'>
         {t('checkout.title')}
       </Title>
       <div className='divider my-0' />
-      <div className='w-full'>{cartStore.cart.map(printCartItem)}</div>
+      <div className='w-full flex flex-col gap-y-6'>{cartStore.cart.map(printCartItem)}</div>
       <div className='divider my-0' />
-      <p className='ml-auto font-semibold text-base-200'>
+      <p className='font-semibold text-base-200'>
         {t('checkout.total')}: {formatPrice(totalPrice, currency)}
       </p>
       <button

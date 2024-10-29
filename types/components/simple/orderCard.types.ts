@@ -9,5 +9,6 @@ export interface IOrderCard {
   self_delivery: boolean;
   publishedAt: Date;
   url: string | undefined;
+  locale:string;
   t: (key: string, options?: Record<string, any>) => string;
 }

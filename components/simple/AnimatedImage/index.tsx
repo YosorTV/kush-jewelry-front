@@ -11,9 +11,10 @@ import { StrapiImage } from '../StrapiImage';
 
 interface TAnimatedImage {
   product: Product;
+  className?:string;
 }
 
-const AnimatedImage: FC<TAnimatedImage> = ({ product }) => {
+const AnimatedImage: FC<TAnimatedImage> = ({ product, className = 'sm:h-96 md:h-[400px] lg:h-[548px] xl:h-[600px]' }) => {
   const [showOverlay, setShowOverlay] = useState<boolean>(false);
   const router = useRouter();
 
@@ -35,7 +36,7 @@ const AnimatedImage: FC<TAnimatedImage> = ({ product }) => {
       onClick={handleRedirect}
       onMouseEnter={() => md && setShowOverlay(true)}
       onMouseLeave={() => md && setShowOverlay(false)}
-      className='relative h-80 sm:h-96 md:h-[400px] lg:h-[548px] xl:h-[600px]'
+      className={cn('relative h-80', className)}
     >
       {[img1, img2].map((img, idx) => (
         <div
