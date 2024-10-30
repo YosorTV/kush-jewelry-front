@@ -9,6 +9,14 @@ import { routing } from './lib/navigation';
 const intlMiddleware = createIntlMiddleware(routing);
 
 export default auth((req) => {
+  if (req.nextUrl.pathname === '/.well-known/apple-developer-merchantid-domain-association') {
+    const res = NextResponse.next();
+
+    res.headers.set('Content-Type', 'text/plain');
+
+    return res;
+  }
+
   const { nextUrl } = req;
 
   const isAuthenticated = !!req.auth;

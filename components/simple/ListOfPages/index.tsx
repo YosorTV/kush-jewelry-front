@@ -1,6 +1,6 @@
 'use client';
 
-import { AnimatePresence, motion } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { FC, useCallback, useEffect, useMemo, useState } from 'react';
 
 import { useFilters } from '@/store';
@@ -93,7 +93,6 @@ export const ListOfPages: FC<ListOFPagesProps> = ({
   return (
     <ul className={cn('flex gap-x-6', className)}>
       {pages.length > 0 && pages.map(printLink)}
-        <AnimatePresence mode='sync'>
           {isLgScreen && (
             <motion.div
               initial='initial'
@@ -110,7 +109,6 @@ export const ListOfPages: FC<ListOFPagesProps> = ({
               />
             </motion.div>
           )}
-        </AnimatePresence>
     </ul>
   );
 };
