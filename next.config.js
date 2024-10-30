@@ -19,10 +19,8 @@ const nextConfig = {
       {
         source: '/.well-known/apple-developer-merchantid-domain-association',
         headers: [
-          {
-            key: 'Content-Type',
-            value: 'text/plain'
-          }
+          { key: 'Content-Type', value: 'text/plain' },
+          { key: 'Cache-Control', value: 'no-cache, no-store, must-revalidate' }
         ]
       }
     ];
