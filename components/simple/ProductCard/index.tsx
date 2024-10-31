@@ -8,7 +8,14 @@ import { cn, Link } from '@/lib';
 
 import { ProductCardProps } from '@/types/components';
 
-export const ProductCard: FC<ProductCardProps> = ({ product, className, imgClassName, session = null, currency = 41, t }) => {
+export const ProductCard: FC<ProductCardProps> = ({
+  product,
+  className,
+  imgClassName,
+  session = null,
+  currency = 41,
+  t
+}) => {
   return (
     <figure className={cn('grid cursor-pointer', className)}>
       <div className='relative'>
@@ -34,17 +41,17 @@ export const ProductCard: FC<ProductCardProps> = ({ product, className, imgClass
             {product.description}
           </p>
           <div className='flex w-full items-end justify-between'>
-          {product?.collections &&
-            product.collections.data.map((collection) => (
-              <Link
-                className='link-hover link flex gap-x-2 underline-offset-8'
-                key={collection.slug}
-                href={`/collection/${collection.slug}`}
-              >
-                {t('collection')}&nbsp;{collection.title}
-              </Link>
-            ))}
-            <Price currency={currency} price={product?.price} sale={product?.saleValue} />
+            {product?.collections &&
+              product.collections.data.map((collection) => (
+                <Link
+                  className='link-hover link flex gap-x-2 underline-offset-8'
+                  key={collection.slug}
+                  href={`/collection/${collection.slug}`}
+                >
+                  {t('collection')}&nbsp;{collection.title}
+                </Link>
+              ))}
+            <Price className='ml-auto' currency={currency} price={product?.price} sale={product?.saleValue} />
           </div>
         </div>
       </figcaption>

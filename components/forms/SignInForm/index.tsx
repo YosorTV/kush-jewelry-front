@@ -52,7 +52,7 @@ export const SignInForm = ({ data, locale = 'uk' }: any) => {
       className='auth-page_form absolute-center'
     >
       <StepBack className='absolute left-5 top-2' />
-      <div className='relative mt-14 w-full md:mt-5'>
+      <div className='relative mt-14 w-full md:mt-10'>
         <Title level='1' className={cn(cormorant.className, 'auth-form_title')}>
           {data.title}
         </Title>

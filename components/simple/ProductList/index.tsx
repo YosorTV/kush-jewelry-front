@@ -1,5 +1,5 @@
-import { FC } from 'react';
 import { getLocale } from 'next-intl/server';
+import { FC } from 'react';
 
 import { cn } from '@/lib';
 
@@ -7,8 +7,8 @@ import { Title } from '@/components/elements';
 
 import { getProductsData } from '@/services';
 
-import ProductListGroup from '../ProductListGroup';
 import { PaginateController } from '../PaginateController';
+import ProductListGroup from '../ProductListGroup';
 
 interface IProductsList {
   title?: string;
@@ -24,7 +24,7 @@ export const ProductList: FC<IProductsList> = async ({ className, title, ...rest
   const isLastPage = meta?.pagination?.page === meta?.pagination?.pageCount || !data.length;
 
   return (
-    <section className={cn('relative flex h-max flex-col justify-between', className)}>
+    <section className={cn('relative flex h-max flex-col justify-between gap-y-10', className)}>
       {title && (
         <Title
           level='3'

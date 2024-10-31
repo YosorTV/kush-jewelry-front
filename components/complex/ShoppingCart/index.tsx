@@ -5,6 +5,7 @@ import { FC, useCallback, useEffect, useState } from 'react';
 import { useCart } from '@/store';
 
 import { paymentDataAdapter } from '@/adapters/payment';
+import { CloseIcon } from '@/assets/icons';
 import { Button, Portal, Sidebar } from '@/components/elements';
 import { Badge } from '@/components/elements/Badge';
 import { CartList } from '@/components/simple';
@@ -80,14 +81,22 @@ export const ShoppingCart: FC<ShoppingCartProps> = ({ data, locale, currency }) 
       <Portal selector='portal'>
         <Sidebar position='right' onToggle={handleToggle} opened={cartStore.isOpen}>
           <div className={cn('relative top-16 flex w-full flex-col items-start px-5')}>
-            <Button
-              type='button'
-              onClick={handleBack}
-              className='!text-xs underline-offset-8 hover:underline md:!text-sm'
-              icon={{ before: <IoArrowBack className='h-4 w-4 fill-base-200 md:h-6 md:w-6' /> }}
-            >
-              {t('system.stepBack')}
-            </Button>
+            <div className='flex w-full justify-between pb-5'>
+              <Button
+                type='button'
+                onClick={handleBack}
+                className='!text-xs underline-offset-8 hover:underline md:!text-sm'
+                icon={{ before: <IoArrowBack className='h-4 w-4 fill-base-200 md:h-6 md:w-6' /> }}
+              >
+                {t('system.stepBack')}
+              </Button>
+              <Button
+                type='button'
+                onClick={handleToggle}
+                className='!text-xs underline-offset-8 hover:underline md:!text-sm'
+                icon={{ before: <CloseIcon className='h-4 w-4 fill-base-200 md:h-6 md:w-6' /> }}
+              />
+            </div>
             {contentZone[cartStore.key]}
           </div>
         </Sidebar>

@@ -59,7 +59,7 @@
   }
 
   .auth-page_form {
-    @apply flex w-11/12 flex-col gap-y-2.5 rounded-md bg-base-100 p-4 shadow-2xl xs:p-5 sm:w-5/6 md:w-2/3 md:p-10 xl:w-1/2;
+    @apply flex w-11/12 flex-col gap-y-2.5 rounded-md bg-base-100 p-4 shadow-2xl xs:p-5 sm:w-5/6 md:w-2/3 md:p-10 xl:w-[40%];
   }
 
   .auth-form_submit {
@@ -67,11 +67,11 @@
   }
 
   .auth-form_title {
-    @apply text-center text-2xl text-base-200 sm:text-3xl md:text-4xl;
+    @apply pb-4 text-center text-2xl text-base-200 sm:text-3xl md:text-4xl xl:text-5xl;
   }
 
   .auth-link {
-    @apply btn w-full rounded-none border-none bg-transparent shadow-none outline-none hover:bg-base-200 hover:text-base-100;
+    @apply btn w-full rounded-none border-none bg-transparent uppercase shadow-none outline-none hover:bg-base-200 hover:text-base-100;
   }
 }
 

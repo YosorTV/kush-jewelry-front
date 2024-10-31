@@ -1,11 +1,11 @@
-import { getMessages, unstable_setRequestLocale as setRequestLocale } from 'next-intl/server';
+import { getMessages, setRequestLocale } from 'next-intl/server';
 
 import { LayoutProps } from '@/types/app/layout.types';
 
 import BaseLayout from '@/components/layouts/Base';
 
-import { getLayoutData } from '@/services';
 import { auth } from '@/auth';
+import { getLayoutData } from '@/services';
 
 import { LOCALES } from '@/helpers/constants';
 

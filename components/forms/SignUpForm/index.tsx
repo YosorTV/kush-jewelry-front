@@ -5,12 +5,12 @@ import { FC } from 'react';
 import { cn, schemas } from '@/lib';
 import { createUserAction } from '@/services';
 
-import { SubmitButton } from '@/components/simple';
 import { Form, Input, Title } from '@/components/elements';
+import { SubmitButton } from '@/components/simple';
 
 import { cormorant } from '@/assets/fonts';
-import { InputProps } from '@/types/components';
 import { StepBack } from '@/components/simple/StepBack';
+import { InputProps } from '@/types/components';
 
 interface ISignUpForm {
   formFields: any[];

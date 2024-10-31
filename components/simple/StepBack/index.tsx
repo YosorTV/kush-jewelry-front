@@ -1,9 +1,9 @@
 'use client';
 
+import { useRouter } from '@/lib/navigation';
 import { FC } from 'react';
 import { IoArrowBack } from 'react-icons/io5';
 import { useTranslations } from 'use-intl';
-import { useRouter } from '@/lib/navigation';
 
 import { Button } from '@/components/elements';
 import { cn } from '@/lib';

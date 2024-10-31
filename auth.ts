@@ -10,6 +10,7 @@ export const {
   auth,
   signIn,
   signOut,
+  unstable_update,
   handlers: { GET, POST }
 } = NextAuth({
   trustHost: true,
@@ -37,12 +38,11 @@ export const {
     })
   ],
   callbacks: {
-    async jwt({ token, user, account }) {
+    async jwt({ token, user, account, trigger, session }) {
       if (account) {
         if (account.provider === 'credentials') {
           return tokenAdapter({ token, user });
         }
-
         if (account.provider === 'google') {
           const response = await strapiProviderLogin({
             provider: account.provider,
@@ -57,8 +57,13 @@ export const {
         }
       }
 
+      if (trigger === 'update' && session) {
+        return { ...token, user: session };
+      }
+
       return token;
     },
+
     async session({ token, session }: any) {
       session = sessionAdapter({ token });
 

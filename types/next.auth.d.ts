@@ -1,11 +1,10 @@
-import NextAuth from 'next-auth';
+import 'next-auth';
 
 declare module 'next-auth' {
   interface User {
     id: number;
     username: string;
     email: string;
-    avatar: string;
     firstName: string;
     lastName: string;
     phoneNumber: string;

@@ -17,13 +17,11 @@ export const sessionAdapter = ({ token }: any) => {
     };
   }
 
-  const decodedTokenData = jwt.decode(token.accessToken) as any;
-
   return {
     accessToken: token.accessToken,
     refreshToken: token.refreshToken,
     exp: token.expires ?? token.exp,
-    user: { ...decodedTokenData, name: token.name }
+    user: token.user
   };
 };
 
@@ -36,10 +34,19 @@ export const tokenAdapter = ({ token, user }: any) => {
     token.accessToken = user.jwt.accessToken;
     token.refreshToken = user.jwt.refreshToken;
     token.expires = decodedTokenData.exp;
-    token.name = user.username;
-    token.picture = user.picture;
-    token.id = user.id;
-    token.email = user.email || decodedTokenData.email;
+    token.user = {
+      id: user.id,
+      username: user.username,
+      firstName: decodedTokenData.firstName,
+      lastName: decodedTokenData.lastName,
+      phoneNumber: decodedTokenData.phoneNumber,
+      email: decodedTokenData.email,
+      date: decodedTokenData?.date,
+      city: decodedTokenData?.city,
+      cityID: decodedTokenData.cityID,
+      warehouse: decodedTokenData.warehouse,
+      warehouseID: decodedTokenData.warehouseID
+    };
 
     return token;
   }

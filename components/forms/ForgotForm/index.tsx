@@ -5,8 +5,8 @@ import { forgotPassword } from '@/services';
 import { cn } from '@/lib';
 import { schemas } from '@/lib/zod';
 
-import { StepBack, SubmitButton } from '@/components/simple';
 import { Form, Input, NextLink, Title } from '@/components/elements';
+import { StepBack, SubmitButton } from '@/components/simple';
 
 import { cormorant } from '@/assets/fonts';
 
@@ -24,7 +24,7 @@ export const ForgotForm = ({ data, locale }: any) => {
       className='auth-page_form absolute-center'
     >
       <StepBack className='absolute left-5 top-2' />
-      <div className='relative mt-14 w-full md:mt-5'>
+      <div className='relative w-full pt-5'>
         <Title level='1' className={cn(cormorant.className, 'auth-form_title')}>
           {data.title}
         </Title>
@@ -32,15 +32,17 @@ export const ForgotForm = ({ data, locale }: any) => {
           <Input hidden readOnly name='locale' value={locale} className='hidden' />
           {data.formFields.map(printInput)}
         </div>
-        <SubmitButton
-          text={data.submitBtn.text}
-          loadingText={data.submitBtn.loadingText}
-          className='auth-form_submit'
-        />
-        <div className='divider m-0 w-full px-5' />
-        <NextLink className='auth-link' href={data.loginUrl.url} replace={data.loginUrl.isExternal}>
-          {data.loginUrl.text}
-        </NextLink>
+        <div className='pt-2.5'>
+          <SubmitButton
+            text={data.submitBtn.text}
+            loadingText={data.submitBtn.loadingText}
+            className='auth-form_submit'
+          />
+          <div className='divider m-0 w-full px-5' />
+          <NextLink className='auth-link' href={data.loginUrl.url} replace={data.loginUrl.isExternal}>
+            {data.loginUrl.text}
+          </NextLink>
+        </div>
       </div>
     </Form>
   );

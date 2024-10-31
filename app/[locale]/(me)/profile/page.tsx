@@ -27,22 +27,22 @@ export default async function ProfilePage({ params }: PageProps) {
   const session = await auth();
   const t = await getTranslations('system');
 
-  const { data } = await getProfileData({ locale, token: session.accessToken });
-  const { data: me } = await getMe({ token: session.accessToken });
+  const [profilePage, me] = await Promise.all([
+    getProfileData({ locale, token: session.accessToken }),
+    getMe({ token: session.accessToken })
+  ]);
 
-  if (!data || !me) {
+  if (!profilePage.data || !me.data) {
     return notFound();
   }
 
   return (
     <section className='mt-10 w-full bg-info-content p-5'>
-      <Title level='2' variant='subheading' className='my-5 whitespace-nowrap text-center text-base'>
+      <Title level='2' variant='subheading' className='my-5 whitespace-nowrap text-center'>
         {t('profile')}
       </Title>
       <div className='divider' />
-      {data?.formFields && me && (
-        <ProfileForm data={data.formFields} state={me} locale={locale} token={session.accessToken} />
-      )}
+      <ProfileForm data={profilePage.data.formFields} state={me.data} locale={locale} token={session.accessToken} />
     </section>
   );
 }

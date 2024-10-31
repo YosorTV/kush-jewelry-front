@@ -42,7 +42,7 @@ export default async function BaseLayout({
             </ThemeProvider>
           </SessionProvider>
         </NextIntlClientProvider>
-        <Script src='//static.liqpay.ua/libjs/checkout.js' strategy='lazyOnload' async />
+        <Script src='//static.liqpay.ua/libjs/checkout.js' strategy='beforeInteractive' async />
       </body>
     </html>
   );

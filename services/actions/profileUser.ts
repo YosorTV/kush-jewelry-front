@@ -1,6 +1,8 @@
 'use server';
 
+import { unstable_update } from '@/auth';
 import { schemas } from '@/lib';
+import { revalidateTag } from 'next/cache';
 import { putUserData } from '../api/put-user-profile';
 
 export async function updateProfileAction(prevState: any, formData: FormData) {
@@ -16,7 +18,7 @@ export async function updateProfileAction(prevState: any, formData: FormData) {
       errors,
       status: 400,
       strapiError: null,
-      message: 'Missing Fields. Failed to Register.'
+      message: fields.locale === 'uk' ? 'Валідаційна помилка' : 'Missing Fields. Failed to Register.'
     };
   }
 
@@ -31,6 +33,8 @@ export async function updateProfileAction(prevState: any, formData: FormData) {
       strapiError: fields.locale === 'uk' ? 'Помилка в запиті.' : 'Bad request.'
     };
   }
+
+  await unstable_update({ ...response }).then(() => revalidateTag('profile'));
 
   return {
     ...prevState,

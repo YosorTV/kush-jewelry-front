@@ -5,8 +5,8 @@ import { useFormState } from 'react-dom';
 
 import { processChild, toaster } from '@/lib';
 
-import { FormProps } from '@/types/components';
 import { useRouter } from '@/lib/navigation';
+import { FormProps } from '@/types/components';
 
 import { debounce } from 'lodash';
 
@@ -32,6 +32,7 @@ export const Form: FC<FormProps<any>> = ({
 
   useEffect(() => {
     if (formState?.status === 200) {
+      router.refresh();
       ref.current.reset();
       if (formState?.url) {
         debouncedPush(formState?.url);
