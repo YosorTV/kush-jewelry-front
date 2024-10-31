@@ -8,14 +8,14 @@ import { isFormIncomplete } from '@/helpers/validator';
 import { useTranslations } from 'next-intl';
 
 export const CartDelivery = () => {
-  const t = useTranslations();
   const cartStore = useCart();
   const session = useSession();
+  const t = useTranslations();
 
   return (
     <div className='form-control w-full gap-y-5 pb-10'>
-      <PeronalCheckoutForm data={session.data.user} title={t('cart.personal')} />
-      <DeliveryForm data={session.data.user} title={t('cart.delivery')} />
+      <PeronalCheckoutForm data={session?.data?.user} title={t('cart.personal')} />
+      <DeliveryForm data={session?.data?.user} title={t('cart.delivery')} />
       <div className='divider my-0' />
       <button
         disabled={isFormIncomplete(cartStore.delivery)}

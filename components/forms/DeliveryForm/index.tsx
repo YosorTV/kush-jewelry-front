@@ -22,13 +22,13 @@ export const DeliveryForm: FC<IDeliveryForm> = ({ data, title = 'Спосіб д
   const [withNp, setWithNp] = useState(false);
 
   const warehouseOptions = {
-    label: data?.warehouse,
-    value: data?.warehouseID
+    label: data?.warehouse ?? null,
+    value: data?.warehouseID ?? null
   };
 
   const cityOptions = {
-    label: data?.city,
-    value: data?.cityID
+    label: data?.city ?? null,
+    value: data?.cityID ?? null
   };
 
   const handleSelf = () => {
