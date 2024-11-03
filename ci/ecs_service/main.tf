@@ -7,7 +7,7 @@ terraform {
     }
   }
   backend "s3" {
-    key = "ecs_service/test"
+    key = "ecs_service/frontend"
   }
 }
 
