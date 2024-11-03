@@ -1,0 +1,40 @@
+version: 0.2
+
+phases:
+  pre_build:
+    commands:
+      - echo Logging in to Amazon ECR...
+      - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com
+      - echo Installing Terraform...
+      - curl -o terraform.zip https://releases.hashicorp.com/terraform/1.5.0/terraform_1.5.0_linux_amd64.zip
+      - unzip terraform.zip
+      - mv terraform /usr/local/bin/
+      - rm terraform.zip
+      - terraform --version
+      - echo Build started on `date`
+      - echo Checking for Dockerfile...
+      - ls -al Dockerfile
+
+  build:
+    commands:
+      - aws s3 cp $S3_BUCKET/env.frontend .env
+      - echo Building the Docker image...
+      - docker build -t kush-e-commerce-frontend:$CODEBUILD_BUILD_NUMBER .
+      - echo Tagging the Docker image...
+      - docker tag kush-e-commerce-frontend:$CODEBUILD_BUILD_NUMBER $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/kush-e-commerce-frontend:$CODEBUILD_BUILD_NUMBER
+      - echo Pushing the Docker image to ECR...
+      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/kush-e-commerce-frontend:$CODEBUILD_BUILD_NUMBER
+      - echo Build completed on `date`
+      - cd ci/ecs_service 
+      - export TF_VAR_image_tag=$CODEBUILD_BUILD_NUMBER
+      - terraform init -backend-config dev.config
+      - terraform apply -auto-approve
+  # post_build:
+  #   commands:
+  #     - echo Pushing the Docker image to ECR...
+  #     - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/kush-e-commerce-back:$CODEBUILD_BUILD_NUMBER
+  #     - echo Build completed on `date`
+  #     - cd ci/ecs_service 
+  #     - export TF_VAR_image_tag=$CODEBUILD_BUILD_NUMBER
+  #     - terraform init -backend-config dev.config
+  #     - terraform apply -auto-approve
