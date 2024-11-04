@@ -22,7 +22,7 @@ resource "aws_ecs_service" "ecs_service" {
   task_definition = aws_ecs_task_definition.service.arn
   desired_count   = 1
   load_balancer {
-    target_group_arn = data.terraform_remote_state.ecs.outputs.target_group_backend_arn
+    target_group_arn = data.terraform_remote_state.ecs.outputs.target_group_frontend_arn
     container_name = var.name
     container_port = 3000
   }
