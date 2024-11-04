@@ -1,4 +1,4 @@
-FROM node:22 as builder
+FROM node:22-alpine as builder
 WORKDIR /app
 COPY . .
 
@@ -23,7 +23,7 @@ ENV UV_THREADPOOL_SIZE=1
 RUN yarn install --network-concurrency 1
 RUN NEXT_PUBLIC_DATABASE_URL=${NEXT_PUBLIC_DATABASE_URL} GOOGLE_CLIENT_ID=${GOOGLE_CLIENT_ID} GOOGLE_CLIENT_SECRET=${GOOGLE_CLIENT_SECRET} NEXT_PUBLIC_URL=${NEXT_PUBLIC_URL} NEXT_PUBLIC_STRAPI_URL=${NEXT_PUBLIC_STRAPI_URL} yarn build
 
-FROM node:22 as runner
+FROM node:22-alpine as runner
 WORKDIR /app
 
 RUN addgroup --system --gid 1001 nodejs
