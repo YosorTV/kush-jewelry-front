@@ -24,8 +24,10 @@ phases:
              --build-arg PREVIEW_SECRET="${PREVIEW_SECRET}" \
              --build-arg NEXT_PUBLIC_URL="${NEXT_PUBLIC_URL}" \
              --build-arg NEXT_PUBLIC_STRAPI_URL="${NEXT_PUBLIC_STRAPI_URL}" \
-             --build-arg NEXTAUTH_SECRET="${NEXTAUTH_SECRET}" \
-             -t kush-e-commerce-frontend:$CODEBUILD_BUILD_NUMBER .
+             --build-arg NEXTAUTH_SECRET="${NEXTAUTH_SECRET}" -t kush-e-commerce-frontend:$CODEBUILD_BUILD_NUMBER .
+
+
+
       # - docker build -t kush-e-commerce-frontend:$CODEBUILD_BUILD_NUMBER .
       - echo Tagging the Docker image...
       - docker tag kush-e-commerce-frontend:$CODEBUILD_BUILD_NUMBER $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/kush-e-commerce-frontend:$CODEBUILD_BUILD_NUMBER
