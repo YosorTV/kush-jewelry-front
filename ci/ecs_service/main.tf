@@ -44,5 +44,6 @@ data "template_file" "template" {
     image_tag = var.image_tag
     container_port = 3000
     host_port = 3000
+    environment = var.environment
   }
 }

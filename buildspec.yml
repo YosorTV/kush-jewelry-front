@@ -28,6 +28,7 @@ phases:
       - echo Build completed on `date`
       - cd ci/ecs_service 
       - export TF_VAR_image_tag=$CODEBUILD_BUILD_NUMBER
+      - export TF_VAR_environment=$ENVIRONMENT
       - terraform init -backend-config dev.config
       - terraform apply -auto-approve
   # post_build:
