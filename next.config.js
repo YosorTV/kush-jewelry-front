@@ -62,6 +62,11 @@ const nextConfig = {
       },
       {
         protocol: 'https',
+        hostname: 'dev.kush.jewelry',
+        pathname: 'uploads/**/*'
+      },
+      {
+        protocol: 'https',
         hostname: 'placehold.co'
       }
     ]

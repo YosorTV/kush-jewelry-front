@@ -17,11 +17,11 @@ export const WishlistNotification: FC<IWishlistNotification> = async ({ locale }
       <p className='text-base text-base-200'>{data.description}</p>
       <NextLink
         href={data?.link?.url}
-        title={data.link.text}
-        replace={data.link.isExternal}
+        title={data?.link?.text}
+        replace={data?.link?.isExternal}
         className='auth-link uppercase'
       >
-        {data.link.text}
+        {data?.link?.text}
       </NextLink>
     </div>
   );
