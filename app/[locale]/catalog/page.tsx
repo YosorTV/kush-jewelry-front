@@ -33,9 +33,9 @@ export default async function Catalog({ params, searchParams }: PageProps) {
           fill
           priority
           className='hero-image'
-          formats={data.cover.formats}
-          src={data.cover.url}
-          alt={data.cover.alternativeText}
+          formats={data?.cover?.formats}
+          src={data?.cover?.url}
+          alt={data?.cover?.alternativeText}
           overlay
         />
         <Title

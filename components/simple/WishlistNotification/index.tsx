@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import { Title, NextLink } from '@/components/elements';
+import { NextLink, Title } from '@/components/elements';
 
 import { getWishlistNotiifcation } from '@/services/api/get-wishlist-notification';
 
@@ -16,7 +16,7 @@ export const WishlistNotification: FC<IWishlistNotification> = async ({ locale }
       <Title level='3'>{data.title}</Title>
       <p className='text-base text-base-200'>{data.description}</p>
       <NextLink
-        href={data.link.url}
+        href={data?.link?.url}
         title={data.link.text}
         replace={data.link.isExternal}
         className='auth-link uppercase'

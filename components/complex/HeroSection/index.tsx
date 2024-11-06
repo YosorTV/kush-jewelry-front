@@ -1,6 +1,6 @@
-import { FC } from 'react';
-import { StrapiImage } from '@/components/simple';
 import { NextLink, Title } from '@/components/elements';
+import { StrapiImage } from '@/components/simple';
+import { FC } from 'react';
 
 export const HeroSection: FC<any> = ({ data }) => {
   return (
@@ -24,7 +24,7 @@ export const HeroSection: FC<any> = ({ data }) => {
           {data.title}
         </Title>
         <NextLink
-          href={data.link.url}
+          href={data?.link?.url}
           className='absolute-x-center link-hover link bottom-10 z-10 !text-base-300 underline-offset-8'
         >
           {data?.link?.text}
