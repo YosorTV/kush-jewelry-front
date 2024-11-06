@@ -1,4 +1,4 @@
-FROM node:22-alpine as builder
+FROM public.ecr.aws/docker/library/node:22-alpine as builder
 WORKDIR /app
 COPY . .
 
@@ -23,7 +23,7 @@ ENV UV_THREADPOOL_SIZE=1
 RUN yarn install --network-concurrency 1
 RUN NEXT_PUBLIC_DATABASE_URL=${NEXT_PUBLIC_DATABASE_URL} GOOGLE_CLIENT_ID=${GOOGLE_CLIENT_ID} GOOGLE_CLIENT_SECRET=${GOOGLE_CLIENT_SECRET} NEXT_PUBLIC_URL=${NEXT_PUBLIC_URL} NEXT_PUBLIC_STRAPI_URL=${NEXT_PUBLIC_STRAPI_URL} yarn build
 
-FROM node:22-alpine as runner
+FROM public.ecr.aws/docker/library/node:22-alpine as runner
 WORKDIR /app
 
 RUN addgroup --system --gid 1001 nodejs
@@ -31,7 +31,7 @@ RUN adduser --system --uid 1001 nextjs
 
 # Copy entire app directory from the builder
 COPY --from=builder /app /app
- 
+
 EXPOSE 3000
 
 CMD ["yarn", "start"]
