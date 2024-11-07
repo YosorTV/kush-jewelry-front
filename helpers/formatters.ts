@@ -39,15 +39,25 @@ export const formatBySlug = (data: any[], slug: string) => {
   return data.filter((element) => element?.slug === slug);
 };
 
-export const gridCols = (index: number) => {
-  if (index % 5 === 0 && index > 4) return 'col-span-2 lg:col-span-2 xl:col-span-1';
-  if (index % 5 === 1) return 'col-span-1 lg:col-span-2 xl:col-span-2';
-  if (index % 5 === 2) return 'col-span-1 lg:col-span-2 xl:col-span-1';
-  if (index % 5 === 3) return 'col-span-1 xl:col-span-2';
+export const gridCols = (index: number): string => {
+  if (index === 1) {
+    return 'col-span-2 md:col-span-2 xl:col-span-2';
+  }
 
-  return 'col-span-1';
+  if ((index - 2) % 5 === 0) {
+    return 'col-span-2 md:col-span-2 xl:col-span-2';
+  }
+
+  const spanClasses = new Map<number, string>([
+    [1, 'col-span-1 md:col-span-2 xl:col-span-2'],
+    [2, 'col-span-1 md:col-span-2 xl:col-span-1'],
+    [3, 'col-span-1 xl:col-span-2'],
+    [4, 'col-span-1']
+  ]);
+
+  // Use modulo to repeat every 5 items
+  return spanClasses.get(index % 5) || 'col-span-1';
 };
-
 type getInitials = {
   firstName: string;
   lastName: string;

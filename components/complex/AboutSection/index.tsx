@@ -1,8 +1,8 @@
-import React, { FC } from 'react';
 import { Title } from '@/components/elements';
 import { StrapiContentBlock, StrapiImage } from '@/components/simple';
 import { IImageFormats } from '@/types/components';
 import { BlocksContent } from '@strapi/blocks-react-renderer';
+import { FC } from 'react';
 
 interface IAboutSection {
   title: string;
@@ -36,9 +36,9 @@ export const AboutSection: FC<IAboutSection> = ({ title, cover, content }) => {
           className='absolute aspect-auto h-full w-full object-cover'
         />
       </div>
-      <div className='flex flex-col gap-5 p-6'>
+      <div className='flex flex-col gap-5'>
         {content && (
-          <section className='h- flex flex-1 flex-col gap-5'>
+          <section className='flex flex-1 flex-col gap-5 py-5'>
             <StrapiContentBlock content={content} imageClass='h-2md' />
           </section>
         )}

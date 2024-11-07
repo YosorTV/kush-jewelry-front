@@ -14,13 +14,17 @@ export const StrapiContentBlock: FC<IStrapiContentBlock> = ({ content, imageClas
     <BlocksRenderer
       content={content}
       blocks={{
-        quote: ({ children }) => <Blockquote>{children}</Blockquote>,
+        quote: ({ children }) => <Blockquote className='ml-8 font-semibold opacity-70'>{children}</Blockquote>,
         link: ({ children, url }) => (
-          <NextLink href={url} className='text-blue-500 underline-offset-2 hover:underline'>
+          <NextLink href={url} className='px-5 text-blue-500 underline-offset-2 hover:underline'>
             {children}
           </NextLink>
         ),
-        heading: ({ level, children }) => <Title level={`${level}`}>{children}</Title>,
+        heading: ({ level, children }) => (
+          <Title level={`${level}`} className='px-5'>
+            {children}
+          </Title>
+        ),
         image: ({ image }) => {
           return (
             <StrapiImage
@@ -32,11 +36,13 @@ export const StrapiContentBlock: FC<IStrapiContentBlock> = ({ content, imageClas
               priority={false}
               formats={image?.formats}
               previewUrl={image?.previewUrl}
-              className={cn('aspect-video w-full object-cover object-center-to-top', imageClass)}
+              containerClass='h-96'
+              overlay
+              className={cn('aspect-video h-96 w-full object-cover object-center', imageClass)}
             />
           );
         },
-        paragraph: ({ children }) => <p className='break-words text-sm text-base-200 md:text-base'>{children}</p>
+        paragraph: ({ children }) => <p className='break-words px-5 text-sm text-base-200 md:text-base'>{children}</p>
       }}
     />
   );
