@@ -54,9 +54,9 @@ const AnimatedImage: FC<TAnimatedImage> = ({
             src={img?.url}
             formats={img?.formats}
             alt={img?.alternativeText}
-            previewUrl={img?.previewUrl}
-            width={img?.formats?.large?.width ?? 500}
-            height={img?.formats?.large?.height ?? 500}
+            previewUrl={img?.previewUrl || img?.formats?.thumbnail?.url}
+            width={img?.width ?? 500}
+            height={img?.height ?? 500}
             className='h-full w-full object-cover'
           />
         </div>
