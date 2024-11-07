@@ -3,13 +3,13 @@ import { getTranslations } from 'next-intl/server';
 
 import { getCurrency, getProductData, getProductMeta, getSizesData } from '@/services';
 
-import { PageLayout } from '@/components/layouts';
-import { NextLink, Title } from '@/components/elements';
-import { Price, Wishlist, AddCart, DeliveryBlock, StepBack } from '@/components/simple';
 import { CompleteLook, DeliveryRules, ProductGallery, ProductParams } from '@/components/complex';
+import { NextLink, Title } from '@/components/elements';
+import { PageLayout } from '@/components/layouts';
+import { AddCart, DeliveryBlock, Price, StepBack, Wishlist } from '@/components/simple';
 
-import { CartItemType } from '@/types/store';
 import { PageProps } from '@/types/app/page.types';
+import { CartItemType } from '@/types/store';
 import { notFound } from 'next/navigation';
 
 import { auth } from '@/auth';
@@ -91,7 +91,7 @@ export default async function ProductDetails({ params }: PageProps) {
           </ProductParams>
           <DeliveryBlock locale={locale} />
         </section>
-        <ProductGallery images={data?.images?.data.slice(0, 4)} />
+        <ProductGallery images={data?.images?.data?.slice(0, 4)} />
       </article>
       <DeliveryRules locale={locale} />
       <CompleteLook locale={locale} currency={currency} category={data.category} />
