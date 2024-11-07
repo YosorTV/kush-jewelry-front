@@ -52,7 +52,7 @@ export const ListOfPages: FC<ListOFPagesProps> = ({
 
   const handleShowSubMenu = useCallback(
     (index: number) => {
-      setShowOverlay(!state.isOpen && !isFooter && index !== 0 && index !== 1);
+      setShowOverlay(!state.isOpen && !isFooter && index !== 2 && index !== 3);
     },
     [state.isOpen, isFooter]
   );
