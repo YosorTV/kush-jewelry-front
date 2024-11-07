@@ -37,13 +37,13 @@ const AnimatedImage: FC<TAnimatedImage> = ({
       onClick={handleRedirect}
       onMouseEnter={() => md && setShowOverlay(true)}
       onMouseLeave={() => md && setShowOverlay(false)}
-      className={cn('relative min-h-80', className)}
+      className={cn('relative', className)}
     >
       {[img1, img2].map((img, idx) => (
         <div
           key={idx}
           className={cn(
-            'absolute inset-0 h-full min-h-96 w-full transform-gpu transition-opacity duration-300 ease-in-out',
+            'absolute inset-0 h-full w-full transform-gpu transition-opacity duration-300 ease-in-out',
             showOverlay === (idx === 1) ? 'opacity-100' : 'opacity-0',
             product.quantity === 0 && 'grayscale filter'
           )}
