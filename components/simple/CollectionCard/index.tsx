@@ -1,13 +1,13 @@
 'use client';
 
+import { AnimatePresence, motion } from 'framer-motion';
 import { FC, useState } from 'react';
 import { IoNavigateCircleSharp } from 'react-icons/io5';
-import { AnimatePresence, motion } from 'framer-motion';
 
 import { cn } from '@/lib';
 
-import { StrapiImage } from '@/components/simple';
 import { NextLink, Title } from '@/components/elements';
+import { StrapiImage } from '@/components/simple';
 import { IImageFormats } from '@/types/components';
 
 type TCollectioCard = {
@@ -54,11 +54,11 @@ export const CollectionCard: FC<TCollectioCard> = ({ img, className, title, hint
         </AnimatePresence>
         <StrapiImage
           overlay
-          src={img.url}
+          src={img?.url}
           alt={img?.alternativeText}
-          formats={img.formats}
-          height={img.formats.medium.height}
-          width={img.formats.medium.width}
+          formats={img?.formats}
+          height={img?.formats?.medium?.height ?? 500}
+          width={img?.formats?.medium?.width ?? 500}
           loading='lazy'
           className='aspect-square h-full w-full object-cover'
         />

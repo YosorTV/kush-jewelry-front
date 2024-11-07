@@ -1,16 +1,16 @@
 'use client';
 
-import { FC, useState } from 'react';
-import { useTranslations } from 'next-intl';
 import { AnimatePresence, motion } from 'framer-motion';
+import { useTranslations } from 'next-intl';
+import { FC, useState } from 'react';
 import { IoNavigateCircleSharp } from 'react-icons/io5';
 
+import { NextLink, Title } from '@/components/elements';
 import { StrapiImage } from '@/components/simple';
-import { Title, NextLink } from '@/components/elements';
-import { cn } from '@/lib';
 import { Price } from '@/components/simple/Price';
+import { cn } from '@/lib';
 
-export const CategoryCard: FC<any> = ({ data, currency, locale = 'uk' }) => {
+export const CategoryCard: FC<any> = ({ data, currency }) => {
   const t = useTranslations();
 
   const [showOverlay, setShowOverlay] = useState<boolean>(false);

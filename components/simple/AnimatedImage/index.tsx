@@ -11,10 +11,13 @@ import { StrapiImage } from '../StrapiImage';
 
 interface TAnimatedImage {
   product: Product;
-  className?:string;
+  className?: string;
 }
 
-const AnimatedImage: FC<TAnimatedImage> = ({ product, className = 'sm:h-96 md:h-[400px] lg:h-[548px] xl:h-[600px]' }) => {
+const AnimatedImage: FC<TAnimatedImage> = ({
+  product,
+  className = 'h-80 sm:h-96 md:h-[400px] lg:h-[548px] xl:h-[600px]'
+}) => {
   const [showOverlay, setShowOverlay] = useState<boolean>(false);
   const router = useRouter();
 
@@ -28,21 +31,19 @@ const AnimatedImage: FC<TAnimatedImage> = ({ product, className = 'sm:h-96 md:h-
     router.push(`/catalog/${product.slug}`);
   };
 
-  if (!img1 && !img2) return null;
-
   return (
     <div
       aria-hidden
       onClick={handleRedirect}
       onMouseEnter={() => md && setShowOverlay(true)}
       onMouseLeave={() => md && setShowOverlay(false)}
-      className={cn('relative h-80', className)}
+      className={cn('relative min-h-80', className)}
     >
       {[img1, img2].map((img, idx) => (
         <div
           key={idx}
           className={cn(
-            'absolute inset-0 h-full w-full transform-gpu transition-opacity duration-300 ease-in-out',
+            'absolute inset-0 h-full min-h-96 w-full transform-gpu transition-opacity duration-300 ease-in-out',
             showOverlay === (idx === 1) ? 'opacity-100' : 'opacity-0',
             product.quantity === 0 && 'grayscale filter'
           )}

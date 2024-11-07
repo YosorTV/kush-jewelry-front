@@ -1,5 +1,5 @@
-import { cn } from '@/lib';
 import { Image } from '@/components/elements';
+import { cn } from '@/lib';
 
 import { IStrapiImageProps } from '@/types/components/simple/strapiImage.types';
 
@@ -34,6 +34,7 @@ export function StrapiImage({
           blurDataURL={previewUrl}
           sizes={sizes}
           className={className}
+          unoptimized={src ? false : true}
         />
       ) : (
         <Image
@@ -48,6 +49,7 @@ export function StrapiImage({
           priority={priority}
           className={className}
           sizes={sizes}
+          unoptimized={src ? false : true}
         />
       )}
       {overlay && (
