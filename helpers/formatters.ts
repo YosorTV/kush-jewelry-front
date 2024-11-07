@@ -1,16 +1,20 @@
 import { DEFAULT_LOCALE } from './constants';
 
-export const formatPrice = (amount: number, currency: number) => {
+export const formatPrice = (amount: number, exchangeRate: number) => {
+  const roundedAmount = Math.round((amount * exchangeRate) / 100) * 100;
+
   let formattedAmount = new Intl.NumberFormat('uk-UA', {
     style: 'currency',
-    currency: 'UAH'
-  }).format(Number(currency) * amount);
+    currency: 'UAH',
+    currencyDisplay: 'symbol',
+    roundingMode: 'ceil',
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0
+  }).format(roundedAmount);
 
   formattedAmount = formattedAmount.replace('грн', '₴');
 
-  const [integerPart, fractionalPart] = formattedAmount.split('.');
-
-  return fractionalPart === '00' ? integerPart : formattedAmount;
+  return formattedAmount;
 };
 
 export const formatTotalAmount = (data: any[]) => {
@@ -41,10 +45,10 @@ export const formatBySlug = (data: any[], slug: string) => {
 
 export const gridCols = (index: number) => {
   const defaultClasses = new Map<number, string>([
-    [0, 'col-span-2 lg:col-span-1 xl:col-span-1'],
+    [0, 'col-span-2 lg:col-span-1 xl:col-span-2'],
     [1, 'col-span-1 lg:col-span-2 xl:col-span-2'],
     [2, 'col-span-1 lg:col-span-1 xl:col-span-1'],
-    [3, 'col-span-1 lg:col-span-1'],
+    [3, 'col-span-1 xl:col-span-2'],
     [4, 'col-span-1']
   ]);
 

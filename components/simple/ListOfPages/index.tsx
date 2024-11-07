@@ -50,9 +50,12 @@ export const ListOfPages: FC<ListOFPagesProps> = ({
     return lg && showOverlay;
   }, [lg, showOverlay]);
 
-  const handleShowSubMenu = useCallback(() => {
-    setShowOverlay(!state.isOpen && !isFooter);
-  }, [state.isOpen, isFooter]);
+  const handleShowSubMenu = useCallback(
+    (index: number) => {
+      setShowOverlay(!state.isOpen && !isFooter && index !== 0 && index !== 1);
+    },
+    [state.isOpen, isFooter]
+  );
 
   const printLink = (page: StrapiLinkType, index: number) => {
     const urlObj = new URL(page.url, process.env.NEXT_PUBLIC_URL);
@@ -65,7 +68,7 @@ export const ListOfPages: FC<ListOFPagesProps> = ({
     return (
       <li
         key={page.id}
-        onMouseEnter={handleShowSubMenu}
+        onMouseEnter={() => handleShowSubMenu(index)}
         className={cn('group py-2.5 text-base-200 hover:underline hover:underline-offset-8', {
           active: isActive
         })}

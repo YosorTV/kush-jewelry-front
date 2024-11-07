@@ -36,11 +36,9 @@ export const ProductCard: FC<ProductCardProps> = ({
             inWishlist={product?.inWishlist ?? false}
           />
         </div>
-        <div title={product.description} className='group flex flex-col gap-y-2.5'>
-          <p className='line-clamp-1 w-1/2 text-base font-medium text-base-200 transition-all duration-300 group-hover:w-full'>
-            {product.description}
-          </p>
+        <div className='group flex flex-col gap-y-2.5'>
           <div className='flex w-full items-end justify-between'>
+            <Price currency={currency} price={product?.price} sale={product?.saleValue} />
             {product?.collections &&
               product.collections.data.map((collection) => (
                 <Link
@@ -51,7 +49,6 @@ export const ProductCard: FC<ProductCardProps> = ({
                   {t('collection')}&nbsp;{collection.title}
                 </Link>
               ))}
-            <Price className='ml-auto' currency={currency} price={product?.price} sale={product?.saleValue} />
           </div>
         </div>
       </figcaption>

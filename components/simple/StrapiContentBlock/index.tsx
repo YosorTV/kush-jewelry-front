@@ -14,7 +14,7 @@ export const StrapiContentBlock: FC<IStrapiContentBlock> = ({ content, imageClas
     <BlocksRenderer
       content={content}
       blocks={{
-        quote: ({ children }) => <Blockquote className='ml-8 font-semibold opacity-70'>{children}</Blockquote>,
+        quote: ({ children }) => <Blockquote className='mx-5 font-semibold opacity-70'>{children}</Blockquote>,
         link: ({ children, url }) => (
           <NextLink href={url} className='px-5 text-blue-500 underline-offset-2 hover:underline'>
             {children}
