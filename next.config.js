@@ -1,6 +1,4 @@
 const createNextIntlPlugin = require('next-intl/plugin');
-const { hostname } = require('os');
-
 const withNextIntl = createNextIntlPlugin('./lib/i18n.ts');
 
 const nextConfig = {
@@ -54,16 +52,6 @@ const nextConfig = {
       {
         protocol: 'https',
         hostname: 'res.cloudinary.com'
-      },
-      {
-        protocol: 'https',
-        hostname: 'dev.kush-test.pp.ua',
-        pathname: 'uploads/**/*'
-      },
-      {
-        protocol: 'https',
-        hostname: 'dev.kush.jewelry',
-        pathname: 'uploads/**/*'
       },
       {
         protocol: 'https',
