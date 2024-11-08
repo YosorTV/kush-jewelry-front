@@ -56,9 +56,12 @@ export const tokenAdapter = ({ token, user }: any) => {
 
 export const googleTokenAdapter = ({ token, user }: any) => {
   token.accessToken = user.jwt;
-  token.id = user.user.id;
-  token.provider = user.user.provider;
-  token.email = user.user.email;
+  token.user = {
+    ...user.user,
+    username: user.user.username ?? token.name,
+    email: user.user.email ?? token.email,
+    picture: token.picture
+  };
 
   return token;
 };
