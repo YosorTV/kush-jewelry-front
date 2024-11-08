@@ -40,7 +40,7 @@ const AnimatedImage: FC<TAnimatedImage> = ({ product, className = 'h-80 sm:h-96 
         <div
           key={idx}
           className={cn(
-            'absolute inset-0 h-full w-full transform-gpu transition-opacity duration-300 ease-in-out',
+            'absolute inset-0 h-full w-full transform-gpu overflow-hidden transition-opacity duration-300 ease-in-out',
             showOverlay === (idx === 1) ? 'opacity-100' : 'opacity-0',
             product.quantity === 0 && 'grayscale filter'
           )}
@@ -54,7 +54,7 @@ const AnimatedImage: FC<TAnimatedImage> = ({ product, className = 'h-80 sm:h-96 
             previewUrl={img?.previewUrl || img?.formats?.thumbnail?.url}
             width={img?.width ?? 500}
             height={img?.height ?? 500}
-            className='h-full w-full object-cover'
+            className='aspect-square h-full w-full overflow-hidden object-cover'
           />
         </div>
       ))}
