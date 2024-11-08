@@ -1,7 +1,7 @@
 'use client';
 
 import { useSession } from 'next-auth/react';
-import { useLocale } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { FC, useCallback, useEffect, useMemo, useRef } from 'react';
 
 import { liqPayAdapter } from '@/adapters/payment';
@@ -19,6 +19,7 @@ interface ICartCheckout {
 export const CartCheckout: FC<ICartCheckout> = ({ currency, liqPayData }) => {
   const locale = useLocale();
   const cartStore = useCart();
+  const t = useTranslations('material');
   const { data: session } = useSession();
 
   const liqPayContainerRef = useRef<HTMLDivElement | null>(null);
@@ -30,7 +31,9 @@ export const CartCheckout: FC<ICartCheckout> = ({ currency, liqPayData }) => {
       quantity: item.quantity,
       images: item.images,
       price: formatPrice(item.unit_amount, currency).replace(/[^\d.,-]/g, ''),
-      url: item.url
+      url: item.url,
+      size: item?.size,
+      material: `${t(item?.material)}`
     }));
   }, [cartStore.cart, locale, currency]);
 
