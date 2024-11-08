@@ -20,7 +20,7 @@ interface ICollectionDetails {
   };
 }
 
-export const CollectionDetails: FC<ICollectionDetails> = async ({ content, title, cover, products }) => {
+export const CollectionDetails: FC<ICollectionDetails> = async ({ content, title, cover, products = [] }) => {
   const t = await getTranslations('system');
   const session = await auth();
   const currency = await getCurrency();
@@ -45,14 +45,14 @@ export const CollectionDetails: FC<ICollectionDetails> = async ({ content, title
           className='absolute aspect-auto h-full w-full object-cover'
         />
       </div>
-      <div className='flex flex-col gap-5 p-6'>
+      <div className='flex flex-col gap-5'>
         {content && (
           <section className='flex flex-1 flex-col gap-5'>
             <StrapiContentBlock content={content} />
           </section>
         )}
         {products.length > 0 && (
-          <section className='grid h-min w-full grid-cols-fluid gap-5'>{products.map(printProduct)}</section>
+          <section className='grid h-min w-full grid-cols-fluid gap-5 px-5'>{products.map(printProduct)}</section>
         )}
       </div>
     </article>
