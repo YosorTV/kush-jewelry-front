@@ -24,12 +24,12 @@ export const ProductList: FC<IProductsList> = async ({ className, title, ...rest
   const isLastPage = meta?.pagination?.page === meta?.pagination?.pageCount || !data.length;
 
   return (
-    <section className={cn('relative flex h-max flex-col justify-between gap-y-5', className)}>
+    <section className={cn('relative flex h-max flex-col justify-between gap-y-2.5 md:gap-y-5', className)}>
       {title && (
         <Title
           level='3'
           variant='subheading'
-          className='py-2.5 text-2xl uppercase text-base-200 xs:text-4xl md:py-5 lg:text-5xl'
+          className='pt-2.5 text-2xl uppercase text-base-200 xs:text-4xl md:pt-5 lg:text-5xl'
         >
           {title}
         </Title>
