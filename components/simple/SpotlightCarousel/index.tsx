@@ -28,7 +28,7 @@ export const SpotlightCarousel: FC<PropType> = async ({ data = [], title }) => {
       options={{ loop: data.length > 3 }}
       autoScroll
       titleClass='pt-1.5 md:py-0 text-white'
-      className='px-3 pb-5 lg:px-6'
+      className='px-3 pb-5 lg:px-5'
       fill='fill-white'
     >
       {data.map(printSpotlightCard)}

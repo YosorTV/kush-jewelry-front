@@ -1,17 +1,17 @@
 'use client';
 
-import { FC } from 'react';
 import { EmblaOptionsType } from 'embla-carousel';
 import useEmblaCarousel from 'embla-carousel-react';
+import { FC } from 'react';
 
-import { usePrevNextButtons } from '@/lib/hooks';
 import { Button, Zoom } from '@/components/elements';
+import { usePrevNextButtons } from '@/lib/hooks';
 
 import { LiaLongArrowAltLeftSolid, LiaLongArrowAltRightSolid } from 'react-icons/lia';
 
+import { cn } from '@/lib';
 import { RxDividerVertical } from 'react-icons/rx';
 import { StrapiImage } from '../StrapiImage';
-import { cn } from '@/lib';
 
 type PropType = {
   data: any[];
@@ -43,7 +43,7 @@ export const ProductCarousel: FC<PropType> = ({ data, options, containerClass })
 
   return (
     <div className={cn('embla-standart', containerClass)}>
-      <div className='embla__controls justify-end px-6'>
+      <div className='embla__controls justify-end px-5'>
         <div className='embla__buttons'>
           <Button type='button' onClick={onPrevButtonClick} disabled={prevBtnDisabled}>
             <LiaLongArrowAltLeftSolid className='h-6 w-6 fill-base-200' />
