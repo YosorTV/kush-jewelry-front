@@ -9,7 +9,7 @@ import Autoplay from 'embla-carousel-autoplay';
 
 import { CarouselControllers } from '@/elements/Carousel/CarouselControllers';
 import { CarouselTitle } from '@/elements/Carousel/CarouselTitle';
-import { useAutoScroll } from '@/lib/hooks';
+import { useAutoScroll, useScreen } from '@/lib/hooks';
 import useEmblaCarousel from 'embla-carousel-react';
 
 interface EmblaCarouselProps {
@@ -36,6 +36,8 @@ const Carousel: FC<PropsWithChildren<EmblaCarouselProps>> = ({
   fill = 'fill-base-200',
   format = 'standart'
 }) => {
+  const { xl } = useScreen();
+
   const autoScrollPlugin = AutoScroll({ playOnInit: false, stopOnMouseEnter: true, stopOnInteraction: true });
   const autoPlayPlugin = Autoplay({ delay: 250, stopOnMouseEnter: true, stopOnLastSnap: true });
 
@@ -51,8 +53,12 @@ const Carousel: FC<PropsWithChildren<EmblaCarouselProps>> = ({
       mini: total > 2
     };
 
-    return Boolean(showByFormat[format]);
-  }, [format]);
+    if (xl) {
+      return showByFormat[format];
+    } else {
+      return true;
+    }
+  }, [format, xl, total]);
 
   return (
     <div className={cn(`embla-${format}`, className)}>

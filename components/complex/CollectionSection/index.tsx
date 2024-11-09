@@ -1,3 +1,5 @@
+'use client';
+
 import { FC } from 'react';
 
 import CollectionCarousel from '@/components/simple/CollectionCarousel';
@@ -23,9 +25,9 @@ export const CollectionSection: FC<ICollectionSection> = ({ data }) => {
       <CollectionCarousel
         format='standart'
         title={title}
-        titleClass='!text-white'
+        titleClass='!text-white pt-2.5'
         data={collections.data}
-        autoScroll={collections.data.length > 4}
+        slideClass='h-96'
       />
     </section>
   );
