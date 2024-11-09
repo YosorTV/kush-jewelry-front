@@ -1,7 +1,7 @@
 'use client';
 
-import { FC, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
+import { FC, useState } from 'react';
 
 import { useTranslations } from 'use-intl';
 
@@ -28,7 +28,7 @@ export const PaginateController: FC<IPaginateController> = ({ total = 0, disable
   };
 
   return (
-    <div className='flex flex-col items-center justify-center py-6'>
+    <div className='flex flex-col items-center justify-center pb-5'>
       {total ? (
         <span className='text-sm font-medium uppercase text-base-200'>{t('total', { number: total })}</span>
       ) : null}

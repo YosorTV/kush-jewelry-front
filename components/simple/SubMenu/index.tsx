@@ -35,6 +35,7 @@ const SubMenu: FC<TSubMenu> = ({ categoryTitle, categories, collections, collect
       </div>
       {collections && collections.length > 0 && (
         <CollectionCarousel
+          loop
           format='mini'
           data={collections}
           title={collectionTitle}

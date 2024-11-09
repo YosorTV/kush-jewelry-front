@@ -1,10 +1,10 @@
-import { getStrapiData } from '../strapi';
-import { STRAPI_QUERIES } from '../queries';
-import { generateStrapiQuery } from '@/lib';
-import { ISlugQuery } from '@/types/services/quries';
 import { auth } from '@/auth';
-import { getWishlistProducts } from './get-wished-products';
+import { generateStrapiQuery } from '@/lib';
 import { Product } from '@/types/components';
+import { ISlugQuery } from '@/types/services/quries';
+import { STRAPI_QUERIES } from '../queries';
+import { getStrapiData } from '../strapi';
+import { getWishlistProducts } from './get-wished-products';
 
 export async function getProductData({ locale, slug }: ISlugQuery) {
   const productApi = STRAPI_QUERIES.PRODUCT({ locale, slug });
@@ -16,11 +16,13 @@ export async function getProductData({ locale, slug }: ISlugQuery) {
   if (response?.data && response?.data?.length > 0) {
     const product = response.data[0];
 
-    if (session?.accessToken) {
+    if (session?.user && session?.accessToken) {
       const { data: wishlist } = await getWishlistProducts({
         locale,
         userId: Number(session.user.id),
-        token: session.accessToken
+        token: session.accessToken,
+        page: '1',
+        pageSize: '5'
       });
 
       const wishlistProductIds = wishlist

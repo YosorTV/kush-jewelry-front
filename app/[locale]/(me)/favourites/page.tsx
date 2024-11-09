@@ -1,11 +1,11 @@
 import { Metadata } from 'next';
 
-import { PageProps } from '@/types/app/page.types';
-import { getWishlistProducts } from '@/services/api/get-wished-products';
-import { auth } from '@/auth';
-import ProductListGroup from '@/components/simple/ProductListGroup';
 import { inWishlistDataAdatapter } from '@/adapters/product';
+import { auth } from '@/auth';
 import { Title } from '@/components/elements';
+import ProductListGroup from '@/components/simple/ProductListGroup';
+import { getWishlistProducts } from '@/services/api/get-wished-products';
+import { PageProps } from '@/types/app/page.types';
 import { getTranslations } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 
@@ -35,7 +35,7 @@ export default async function FavouritesPage({ params, searchParams }: PageProps
     token: session.accessToken
   });
 
-  if (!data) {
+  if (!data || !session?.user) {
     return notFound();
   }
 

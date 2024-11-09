@@ -23,9 +23,9 @@ export const CollectionSection: FC<ICollectionSection> = ({ data }) => {
       <CollectionCarousel
         format='standart'
         title={title}
-        titleClass='!text-white py-2.5 md:py-5'
+        titleClass='!text-white'
         data={collections.data}
-        autoScroll
+        autoScroll={collections.data.length > 4}
       />
     </section>
   );

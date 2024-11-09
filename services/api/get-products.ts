@@ -21,7 +21,7 @@ export async function getProductsData({ locale, page = 1, pageSize = 5, name, ..
 
   const response = await getStrapiData('products', generateStrapiQuery(productsApi), { next: { tags: ['products'] } });
 
-  if (session?.accessToken) {
+  if (session?.user && session?.accessToken) {
     const { data: wishlist } = await getWishlistProducts({
       locale,
       page: '1',

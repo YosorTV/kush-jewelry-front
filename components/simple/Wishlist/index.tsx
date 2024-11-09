@@ -2,8 +2,8 @@
 
 import { FC, useEffect, useRef, useState } from 'react';
 
-import { toast } from 'sonner';
 import { Session } from 'next-auth';
+import { toast } from 'sonner';
 
 import { HeartIcon } from '@/assets/icons';
 import { Button } from '@/components/elements';
@@ -33,7 +33,7 @@ export const Wishlist: FC<IWishlist> = ({ productId, text, locale, session = nul
   }, []);
 
   const handleAdd = async () => {
-    if (!Boolean(session?.accessToken)) {
+    if (!Boolean(session?.accessToken) || session?.user === null) {
       dialogRef.current?.showModal();
     } else {
       setAdd((prev) => !prev);

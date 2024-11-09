@@ -11,7 +11,7 @@ interface IRuleSection {
 
 export const RuleSection: FC<IRuleSection> = ({ title, content }) => {
   return (
-    <section className='container mx-auto my-6 flex flex-col justify-center gap-y-6 px-5'>
+    <section className='container mx-auto my-6 flex flex-col justify-center gap-y-5'>
       <Title level='1' variant='subheading' className='text-center'>
         {title}
       </Title>

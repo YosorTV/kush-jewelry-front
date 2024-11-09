@@ -1,3 +1,8 @@
+import { SessionProvider } from 'next-auth/react';
+import { NextIntlClientProvider } from 'next-intl';
+import Script from 'next/script';
+import { PropsWithChildren } from 'react';
+
 import { montserrat } from '@/assets/fonts';
 import { ClientSideRender } from '@/components/complex';
 import Modal from '@/components/complex/Modal';
@@ -8,11 +13,6 @@ import { AutoLogoutProvider, ThemeProvider } from '@/components/providers';
 import { WishlistNotification } from '@/components/simple/WishlistNotification';
 import { cn } from '@/lib';
 import { BaseLayoutProps } from '@/types/components';
-import { SessionProvider } from 'next-auth/react';
-import { NextIntlClientProvider } from 'next-intl';
-
-import Script from 'next/script';
-import { PropsWithChildren } from 'react';
 
 export default async function BaseLayout({
   children,

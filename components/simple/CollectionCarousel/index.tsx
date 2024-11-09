@@ -15,6 +15,7 @@ type PropType = {
   format: 'standart' | 'mini';
   autoplay?: boolean;
   autoScroll?: boolean;
+  loop?: boolean;
 };
 
 const CollectionCarousel: FC<PropType> = ({
@@ -22,6 +23,7 @@ const CollectionCarousel: FC<PropType> = ({
   title,
   titleClass,
   autoScroll = false,
+  loop = true,
   className = 'w-full',
   slideClass = 'h-full md:h-96',
   fill = 'fill-white',
@@ -43,13 +45,14 @@ const CollectionCarousel: FC<PropType> = ({
 
   return (
     <Carousel
-      autoScroll={autoScroll}
-      format={format}
-      title={title}
-      className={className}
-      options={{ loop: true }}
-      titleClass={cn('text-base-200', titleClass)}
       fill={fill}
+      title={title}
+      format={format}
+      total={data.length}
+      className={className}
+      autoScroll={autoScroll}
+      options={{ loop }}
+      titleClass={cn('text-base-200', titleClass)}
     >
       {data.map(printCollectionCard)}
     </Carousel>

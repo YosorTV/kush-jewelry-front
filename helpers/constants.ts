@@ -110,7 +110,16 @@ export const AUTH_LOGIN_FIELDS = {
   }
 };
 
-export const META_FIELDS = ['metaTitle', 'metaDescription', 'metaRobots', 'keywords'];
+export const META_FIELDS = [
+  'metaTitle',
+  'metaDescription',
+  'metaRobots',
+  'keywords',
+  'metaViewport',
+  'canonicalURL',
+  'metaImage',
+  'metaSocial'
+];
 
 export const ROOT = '/';
 

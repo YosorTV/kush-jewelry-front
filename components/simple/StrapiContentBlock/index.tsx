@@ -14,9 +14,13 @@ export const StrapiContentBlock: FC<IStrapiContentBlock> = ({ content, imageClas
     <BlocksRenderer
       content={content}
       blocks={{
+        list: ({ children }) => <ul className='px-10'>{children}</ul>,
+        'list-item': ({ children }) => (
+          <li className='list-decimal break-words text-sm text-base-200 md:text-base'>{children}</li>
+        ),
         quote: ({ children }) => <Blockquote className='mx-5 font-semibold opacity-70'>{children}</Blockquote>,
         link: ({ children, url }) => (
-          <NextLink href={url} className='px-5 text-blue-500 underline-offset-2 hover:underline'>
+          <NextLink href={url} className='px-0.5 text-blue-500 underline-offset-2 hover:underline'>
             {children}
           </NextLink>
         ),
