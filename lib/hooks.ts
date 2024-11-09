@@ -1,11 +1,11 @@
 'use client';
 
-import { useCallback, useEffect, useState } from 'react';
-import { EmblaCarouselType } from 'embla-carousel';
 import { SCREEEN } from '@/helpers/constants';
+import { EmblaCarouselType } from 'embla-carousel';
+import { useCallback, useEffect, useState } from 'react';
 
-import { debounce } from './utils';
 import { getCurrency } from '@/services';
+import { debounce } from './utils';
 
 const useMediaQuery = (query: string) => {
   const [matches, setMatches] = useState(false);
@@ -59,27 +59,38 @@ export const usePrevNextButtons = (
   const [nextBtnDisabled, setNextBtnDisabled] = useState(true);
 
   const onPrevButtonClick = useCallback(() => {
-    if (!emblaApi) return;
-    emblaApi.scrollPrev();
-    if (onButtonClick) onButtonClick(emblaApi);
+    if (emblaApi) {
+      emblaApi.scrollPrev(false);
+      onButtonClick?.(emblaApi);
+    }
   }, [emblaApi, onButtonClick]);
 
   const onNextButtonClick = useCallback(() => {
-    if (!emblaApi) return;
-    emblaApi.scrollNext();
-    if (onButtonClick) onButtonClick(emblaApi);
+    if (emblaApi) {
+      emblaApi.scrollNext(false);
+      onButtonClick?.(emblaApi);
+    }
   }, [emblaApi, onButtonClick]);
 
-  const onSelect = useCallback((emblaApi: EmblaCarouselType) => {
-    setPrevBtnDisabled(!emblaApi.canScrollPrev());
-    setNextBtnDisabled(!emblaApi.canScrollNext());
-  }, []);
+  const onSelect = useCallback(() => {
+    if (emblaApi) {
+      setPrevBtnDisabled(!emblaApi.canScrollPrev());
+      setNextBtnDisabled(!emblaApi.canScrollNext());
+    }
+  }, [emblaApi]);
 
   useEffect(() => {
     if (!emblaApi) return;
 
-    onSelect(emblaApi);
-    emblaApi.on('reInit', onSelect).on('select', onSelect);
+    emblaApi.on('reInit', onSelect);
+    emblaApi.on('select', onSelect);
+
+    onSelect();
+
+    return () => {
+      emblaApi.off('reInit', onSelect);
+      emblaApi.off('select', onSelect);
+    };
   }, [emblaApi, onSelect]);
 
   return {
@@ -98,7 +109,7 @@ export const useScrollLock = (isLocked: boolean) => {
 
     if (isLocked) {
       document.body.style.overflow = 'hidden';
-      window.addEventListener('scroll', preventScroll, { passive: false });
+      window.addEventListener('scroll', preventScroll);
     } else {
       document.body.style.overflow = '';
       window.removeEventListener('scroll', preventScroll);

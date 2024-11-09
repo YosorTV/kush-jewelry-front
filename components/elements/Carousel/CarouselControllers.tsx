@@ -1,13 +1,13 @@
 'use client';
 
-import { FC, useCallback } from 'react';
-import { RxDividerVertical } from 'react-icons/rx';
 import { EmblaCarouselType } from 'embla-carousel';
+import { FC, useCallback } from 'react';
 import { LiaLongArrowAltLeftSolid, LiaLongArrowAltRightSolid } from 'react-icons/lia';
+import { RxDividerVertical } from 'react-icons/rx';
 
+import { cn } from '@/lib';
 import { usePrevNextButtons, useScreen } from '@/lib/hooks';
 import { Button } from '../Button';
-import { cn } from '@/lib';
 interface ICarouseControllers {
   emblaApi: EmblaCarouselType;
   autoplay?: boolean;
@@ -33,30 +33,26 @@ export const CarouselControllers: FC<ICarouseControllers> = ({
       if (autoScroll) {
         const resetOrStop = scrollPlugin.options.stopOnInteraction === false ? scrollPlugin.reset : scrollPlugin.stop;
         resetOrStop();
-        callback();
-      } else {
-        callback();
       }
 
       if (autoplay) {
         const resetOrStop =
           autoplayPlugin.options.stopOnInteraction === false ? autoplayPlugin.reset : autoplayPlugin.stop;
         resetOrStop();
-        callback();
-      } else {
-        callback();
       }
+
+      callback();
     },
     [autoScroll, autoplay, emblaApi]
   );
 
-  const size = lg ? 28 : 24;
+  const size = lg ? 24 : 20;
 
   return (
     <div className='embla__controls'>
       <div className='embla__buttons'>
         <Button
-          className='embla__button embla__button--prev'
+          className={cn('embla__button embla__button--prev', prevBtnDisabled && 'opacity-25')}
           type='button'
           onClick={() => handleButtonAutoplayClick(onPrevButtonClick)}
           disabled={prevBtnDisabled}
@@ -68,7 +64,7 @@ export const CarouselControllers: FC<ICarouseControllers> = ({
           style={{ height: size, width: size }}
         />
         <Button
-          className='embla__button embla__button--next'
+          className={cn('embla__button embla__button--next', nextBtnDisabled && 'opacity-25')}
           type='button'
           onClick={() => handleButtonAutoplayClick(onNextButtonClick)}
           disabled={nextBtnDisabled}

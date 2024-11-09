@@ -27,7 +27,7 @@ export const SpotlightCarousel: FC<PropType> = async ({ data = [], title }) => {
       total={data.length}
       options={{ loop: data.length > 3 }}
       autoScroll
-      titleClass='py-0 text-white'
+      titleClass='pt-1.5 md:py-0 text-white'
       className='px-3 pb-5 lg:px-6'
       fill='fill-white'
     >

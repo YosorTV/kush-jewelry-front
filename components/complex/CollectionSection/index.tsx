@@ -25,7 +25,7 @@ export const CollectionSection: FC<ICollectionSection> = ({ data }) => {
       <CollectionCarousel
         format='standart'
         title={title}
-        titleClass='!text-white pt-2.5'
+        titleClass='!text-white pt-1.5'
         data={collections.data}
         slideClass='h-96'
       />
