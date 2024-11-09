@@ -45,7 +45,7 @@ export const CollectionDetails: FC<ICollectionDetails> = async ({ content, title
           className='absolute aspect-auto h-full w-full object-cover'
         />
       </div>
-      <div className='flex flex-col gap-5'>
+      <div className='flex flex-col gap-5 py-5'>
         {content && (
           <section className='flex flex-1 flex-col gap-5'>
             <StrapiContentBlock content={content} />
