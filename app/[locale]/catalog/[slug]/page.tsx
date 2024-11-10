@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 
-import { getCurrency, getProductData, getProductMeta, getSizesData } from '@/services';
+import { getCurrency, getProductData, getProductMeta, getProductsData, getSizesData } from '@/services';
 
 import { CompleteLook, DeliveryRules, ProductGallery, ProductParams } from '@/components/complex';
 import { NextLink, Title } from '@/components/elements';
@@ -31,6 +31,7 @@ export default async function ProductDetails({ params }: PageProps) {
   const currency = await getCurrency();
   const { data } = await getProductData({ locale, slug });
   const { data: sizes } = await getSizesData({ locale });
+  const { data: products } = await getProductsData({ locale });
 
   if (!data) {
     return notFound();
@@ -48,11 +49,11 @@ export default async function ProductDetails({ params }: PageProps) {
   };
 
   return (
-    <PageLayout className='relative mt-16'>
+    <PageLayout className='relative mb-5 mt-16'>
       <StepBack className='absolute z-10 !mx-5 justify-start lg:relative lg:z-0' />
       <article className='relative flex flex-col-reverse lg:flex-row-reverse'>
-        <section className='flex h-full w-full flex-col gap-2.5 bg-base-100 p-3 !py-0 sm:p-5 lg:w-[50svw]'>
-          <header className='flex w-full flex-wrap justify-between gap-2.5 pt-5 lg:pt-0' role='product-name'>
+        <section className='flex h-full w-full flex-col gap-2.5 bg-base-100 px-2.5 md:px-5 lg:w-[50svw]'>
+          <header className='flex w-full flex-wrap justify-between gap-2.5 pt-2.5 lg:pt-0' role='product-name'>
             {data?.title && (
               <Title
                 level='1'
@@ -65,7 +66,7 @@ export default async function ProductDetails({ params }: PageProps) {
             )}
             <span className='bg-neutral p-2 text-base-300'>{data?.hintText}</span>
           </header>
-          <div className='flex flex-wrap items-baseline justify-between py-2.5'>
+          <div className='flex flex-wrap items-center justify-between'>
             <Price currency={currency} price={data?.price} sale={data?.saleValue} className='flex flex-row' />
             <NextLink
               href={`/catalog?categories=${data?.category}`}
@@ -94,7 +95,7 @@ export default async function ProductDetails({ params }: PageProps) {
         <ProductGallery images={data?.images?.data?.slice(0, 4)} />
       </article>
       <DeliveryRules locale={locale} />
-      <CompleteLook locale={locale} currency={currency} category={data.category} />
+      <CompleteLook products={products} currency={currency} category={data.category} session={session} />
     </PageLayout>
   );
 }

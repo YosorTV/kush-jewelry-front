@@ -1,23 +1,23 @@
-import { completeLookAdapter } from '@/adapters/product';
-import { auth } from '@/auth';
-import Carousel from '@/components/elements/Carousel';
-import { ProductCard } from '@/components/simple';
-import { getCurrency, getProductsData } from '@/services';
-import { Product } from '@/types/components';
+import { Session } from 'next-auth';
 import { getTranslations } from 'next-intl/server';
 import { FC } from 'react';
 
+import Carousel from '@/components/elements/Carousel';
+import { ProductCard } from '@/components/simple';
+
+import { Product } from '@/types/components';
+
+import { completeLookAdapter } from '@/adapters/product';
+
 interface ICompleteLook {
-  locale: string;
   category: string;
   currency: number;
+  session: Session;
+  products: any[];
 }
 
-export const CompleteLook: FC<ICompleteLook> = async ({ locale, category }) => {
-  const { data: products } = await getProductsData({ locale });
+export const CompleteLook: FC<ICompleteLook> = async ({ products, currency, category, session }) => {
   const t = await getTranslations('system');
-  const session = await auth();
-  const currency = await getCurrency();
 
   const data = completeLookAdapter({ products, category });
 
@@ -37,11 +37,11 @@ export const CompleteLook: FC<ICompleteLook> = async ({ locale, category }) => {
 
   return (
     <Carousel
-      total={data.length}
-      format='standart'
       title={t('look')}
-      titleClass='text-base-200 py-6 xs:py-3 pl-3 md:pl-0'
-      className='w-svw px-5 pb-10'
+      format='standart'
+      total={data.length}
+      className='w-svw px-2.5 md:px-5'
+      titleClass='text-base-200 !text-xl md:py-5 py-2.5'
       options={{ loop: true, align: 'start' }}
     >
       {data.map(printProduct)}

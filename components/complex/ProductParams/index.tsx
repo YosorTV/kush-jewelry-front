@@ -2,8 +2,8 @@
 
 import { MaterialOptions } from '@/components/simple/MaterialOptions';
 import { SizeOptions } from '@/components/simple/SizeOptions';
-import { useCart } from '@/store';
 import { usePathname } from '@/lib/navigation';
+import { useCart } from '@/store';
 import { FC, PropsWithChildren, useEffect } from 'react';
 import { useTranslations } from 'use-intl';
 
@@ -25,7 +25,7 @@ export const ProductParams: FC<PropsWithChildren<any>> = ({
   }, [pathname]);
 
   return (
-    <section className='flex flex-col gap-y-6'>
+    <section className='flex flex-col gap-y-2.5 md:gap-y-5'>
       {materials && <MaterialOptions data={materials} title={t('material.title')} />}
       {availableSizes.length ? <SizeOptions data={sizes} sizes={availableSizes} title={t('size.title')} /> : null}
       {children}

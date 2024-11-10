@@ -44,7 +44,7 @@ const ProductListGroup: FC<IProductListGroup> = async ({
   }
 
   return (
-    <div className={cn('grid min-h-96 gap-5 mb-5', className, data.length >= 4 && 'grid-cols-fluid')}>
+    <div className={cn('mb-5 grid min-h-96 gap-x-2.5 gap-y-5', className, data.length >= 4 && 'grid-cols-fluid')}>
       {data.map(printProduct)}
     </div>
   );

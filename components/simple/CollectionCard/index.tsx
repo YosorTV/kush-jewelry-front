@@ -53,7 +53,7 @@ export const CollectionCard: FC<TCollectioCard> = ({ img, className, title, hint
           )}
         </AnimatePresence>
         <StrapiImage
-          overlay
+          overlay={showOverlay}
           src={img?.url}
           alt={img?.alternativeText}
           formats={img?.formats}
@@ -62,7 +62,11 @@ export const CollectionCard: FC<TCollectioCard> = ({ img, className, title, hint
           loading='lazy'
           className='aspect-square h-full w-full object-cover'
         />
-        <Title level='4' variant='subheading' className='absolute bottom-3 !text-2xl !text-white lg:bottom-1'>
+        <Title
+          level='4'
+          variant='subheading'
+          className={cn('absolute bottom-3 !text-2xl lg:bottom-1', showOverlay ? 'text-base-300' : 'text-black')}
+        >
           {title}
         </Title>
       </NextLink>

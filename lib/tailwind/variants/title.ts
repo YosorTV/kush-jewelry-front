@@ -8,7 +8,7 @@ export const title = tv({
   variants: {
     variant: {
       heading: 'text-4xl xs:text-5xl sm:text-6xl md:text-7xl lg:text-8xl',
-      subheading: 'text-2xl xs:text-4xl md:text-4xl lg:text-5xl',
+      subheading: 'text-2xl xs:text-3xl md:text-4xl lg:text-5xl'
     },
     size: {
       xs: 'text-xs',
@@ -22,8 +22,8 @@ export const title = tv({
       '5xl': 'text-5xl',
       '6xl': 'text-6xl',
       '7xl': 'text-7xl',
-      '8xl': 'text-8xl',
-    },
+      '8xl': 'text-8xl'
+    }
   },
-  compoundVariants: [{ variant: ['heading', 'subheading'], className: cn(cormorant.className, 'uppercase') }],
+  compoundVariants: [{ variant: ['heading', 'subheading'], className: cn(cormorant.className, 'uppercase') }]
 });

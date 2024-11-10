@@ -4,21 +4,9 @@ import { CollectionCard } from '../CollectionCard';
 
 import Carousel from '@/components/elements/Carousel';
 import { cn } from '@/lib';
+import { ICollectionCarousel } from '@/types/components';
 
-type PropType = {
-  data: any[];
-  title?: string;
-  slideClass?: string;
-  className?: string;
-  fill?: string;
-  titleClass?: string;
-  format: 'standart' | 'mini';
-  autoplay?: boolean;
-  autoScroll?: boolean;
-  loop?: boolean;
-};
-
-const CollectionCarousel: FC<PropType> = ({
+const CollectionCarousel: FC<ICollectionCarousel> = ({
   data,
   title,
   titleClass,
@@ -51,7 +39,7 @@ const CollectionCarousel: FC<PropType> = ({
       total={data.length}
       className={className}
       autoScroll={autoScroll}
-      options={{ loop }}
+      options={{ loop, align: 'start' }}
       titleClass={cn('text-base-200', titleClass)}
     >
       {data.map(printCollectionCard)}
