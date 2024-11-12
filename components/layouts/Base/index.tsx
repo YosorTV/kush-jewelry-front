@@ -1,6 +1,5 @@
 import { SessionProvider } from 'next-auth/react';
 import { NextIntlClientProvider } from 'next-intl';
-import Script from 'next/script';
 import { PropsWithChildren } from 'react';
 
 import { montserrat } from '@/assets/fonts';
@@ -10,6 +9,7 @@ import { Footer } from '@/components/elements';
 import Header from '@/components/elements/Header';
 import { AutoLogoutProvider, ThemeProvider } from '@/components/providers';
 
+import { ExternalScripts } from '@/components/scripts/ExternalScript';
 import { WishlistNotification } from '@/components/simple/WishlistNotification';
 import { cn } from '@/lib';
 import { BaseLayoutProps } from '@/types/components';
@@ -25,6 +25,8 @@ export default async function BaseLayout({
 }: PropsWithChildren<BaseLayoutProps>) {
   return (
     <html lang={locale} suppressHydrationWarning className={cn(montserrat.className, 'scroll-smooth scrollbar')}>
+      <ExternalScripts />
+
       <body className='relative grid overflow-x-clip'>
         <NextIntlClientProvider messages={messages}>
           <SessionProvider session={session}>
@@ -42,7 +44,6 @@ export default async function BaseLayout({
             </ThemeProvider>
           </SessionProvider>
         </NextIntlClientProvider>
-        <Script src='//static.liqpay.ua/libjs/checkout.js' strategy='beforeInteractive' async />
       </body>
     </html>
   );
