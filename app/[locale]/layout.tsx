@@ -27,24 +27,22 @@ export const viewport: Viewport = {
 };
 
 export default async function GlobalLayout({ children, params }: LayoutProps) {
-  const { locale } = params;
+  const { locale = 'uk' } = params;
 
-  setRequestLocale(locale);
+  setRequestLocale(locale ?? 'uk');
 
   const session = await auth();
   const messages = await getMessages();
   const data = await getLayoutData({ locale });
 
-  const { header, footer, shoppingCart } = data;
-
   return (
     <BaseLayout
       locale={locale}
-      header={header}
-      footer={footer}
       session={session}
       messages={messages}
-      cart={shoppingCart}
+      header={data?.header}
+      footer={data?.footer}
+      cart={data?.shoppingCart}
     >
       {children}
     </BaseLayout>

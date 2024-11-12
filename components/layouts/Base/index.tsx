@@ -26,7 +26,6 @@ export default async function BaseLayout({
   return (
     <html lang={locale} suppressHydrationWarning className={cn(montserrat.className, 'scroll-smooth scrollbar')}>
       <ExternalScripts />
-
       <body className='relative grid overflow-x-clip'>
         <NextIntlClientProvider messages={messages}>
           <SessionProvider session={session}>
