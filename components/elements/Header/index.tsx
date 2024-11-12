@@ -7,7 +7,7 @@ import UserSession from '@/components/complex/UserSession';
 import { getCurrency } from '@/services';
 import { HeaderProps } from '@/types/components';
 
-export default async function Header({ data, shoppingCart, session, locale }: HeaderProps) {
+export default async function rnHeader({ data, shoppingCart, session, locale }: HeaderProps) {
   const currency = await getCurrency();
 
   const {

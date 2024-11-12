@@ -2,8 +2,8 @@
 
 import { FC, useEffect } from 'react';
 
-import { motion } from 'framer-motion';
 import { Hamburger, Portal, Sidebar } from '@/components/elements';
+import { motion } from 'framer-motion';
 import { MenuNav } from './MenuNav';
 
 import { usePathname } from '@/lib/navigation';
@@ -33,7 +33,7 @@ export const Menu: FC<MenuProps> = ({ pages, categories, collections }) => {
   const pathname = usePathname();
   const params = useSearchParams();
 
-  const category = params.get('category');
+  const category = params.get('categories');
 
   const handleToggle = () => menu.onToggle();
 
@@ -41,6 +41,7 @@ export const Menu: FC<MenuProps> = ({ pages, categories, collections }) => {
     return () => {
       menu.onClose();
     };
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname, category]);
 
