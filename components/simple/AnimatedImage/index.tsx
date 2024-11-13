@@ -53,6 +53,7 @@ const AnimatedImage: FC<TAnimatedImage> = ({ product, className = 'h-[428px] md:
             previewUrl={img?.previewUrl || img?.formats?.thumbnail?.url}
             width={img?.width ?? 500}
             height={img?.height ?? 500}
+            fill
             className='aspect-square h-full w-full overflow-hidden object-cover'
           />
         </div>

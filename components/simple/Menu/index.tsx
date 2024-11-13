@@ -47,7 +47,7 @@ export const Menu: FC<MenuProps> = ({ pages, categories, collections }) => {
 
   return (
     <>
-      <ListOfPages pages={pages.data} categories={categories} collections={collections} className='hidden lg:flex' />
+      <ListOfPages pages={pages?.data} categories={categories} collections={collections} className='hidden lg:flex' />
       <motion.div initial={false} animate={menu.isOpen ? 'open' : 'closed'} className='w-full lg:hidden'>
         <Hamburger isOpened={menu.isOpen} toggle={handleToggle} />
         <Portal selector='portal'>

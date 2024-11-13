@@ -44,11 +44,10 @@ export const CategoryCard: FC<any> = ({ data, currency }) => {
             </motion.div>
           )}
         </AnimatePresence>
-        <div className='h-96 w-full lg:h-[512px]'>
+        <div className='h-[468px] w-full lg:h-[512px]'>
           <StrapiImage
             fill
             priority
-            loading='eager'
             overlay={showOverlay}
             formats={data?.images?.data?.[0]?.formats}
             src={data?.images?.data?.[0]?.url}

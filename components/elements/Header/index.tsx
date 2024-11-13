@@ -11,8 +11,6 @@ export default async function rnHeader({ data, shoppingCart, session, locale }: 
   const currency = await getCurrency();
 
   const {
-    pages,
-    cta,
     categories,
     collections,
     pagesTitle,
@@ -25,17 +23,17 @@ export default async function rnHeader({ data, shoppingCart, session, locale }: 
 
   const collectionsData = {
     title: collectionTitle,
-    data: collections.data ?? []
+    data: collections?.data ?? []
   };
 
   const categoryData = {
     title: categoryTitle,
-    data: categories.data ?? []
+    data: categories?.data ?? []
   };
 
   const pagesData = {
     title: pagesTitle,
-    data: pages
+    data: data?.pages
   };
 
   return (
@@ -51,7 +49,7 @@ export default async function rnHeader({ data, shoppingCart, session, locale }: 
           <Search placeholder={searchTitle} />
           <ShoppingCart data={shoppingCart} locale={locale} currency={currency} />
           <UserSession
-            cta={cta}
+            cta={data?.cta}
             locale={locale}
             session={session}
             signOutTitle={signOutTitle}

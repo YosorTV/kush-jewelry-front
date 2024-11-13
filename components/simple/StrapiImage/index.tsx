@@ -12,9 +12,9 @@ export function StrapiImage({
   className,
   containerClass,
   previewUrl,
-  fill = false,
-  height = 600,
-  width = 600,
+  fill,
+  height,
+  width,
   priority = false,
   overlay = false,
   sizes = '100vw'
@@ -31,8 +31,8 @@ export function StrapiImage({
         priority={priority}
         loading={priority ? undefined : loading}
         blurDataURL={previewUrl}
-        sizes={sizes}
         fill={fill}
+        sizes={!fill ? sizes : undefined}
         height={!fill ? height : undefined}
         width={!fill ? width : undefined}
         className={className}
