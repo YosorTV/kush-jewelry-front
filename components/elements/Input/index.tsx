@@ -77,7 +77,6 @@ export const Input = ({
             placeholder={placeholder}
             className={className}
             error={Boolean(error)}
-            defaultValue={rest?.defaultValue as string}
             {...rest}
           />
         );

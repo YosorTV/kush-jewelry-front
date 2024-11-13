@@ -14,7 +14,7 @@ import { WishlistNotification } from '@/components/simple/WishlistNotification';
 import { cn } from '@/lib';
 import { BaseLayoutProps } from '@/types/components';
 
-export default async function BaseLayout({
+export default function BaseLayout({
   children,
   locale,
   header,
@@ -27,7 +27,7 @@ export default async function BaseLayout({
     <html lang={locale} suppressHydrationWarning className={cn(montserrat.className, 'scroll-smooth scrollbar')}>
       <ExternalScripts />
       <body className='relative grid overflow-x-clip'>
-        <NextIntlClientProvider messages={messages}>
+        <NextIntlClientProvider locale={locale} messages={messages}>
           <SessionProvider session={session}>
             <ThemeProvider>
               <Header data={header} shoppingCart={cart} locale={locale} session={session} />

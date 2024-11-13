@@ -15,6 +15,17 @@ export const {
 } = NextAuth({
   trustHost: true,
   session: { strategy: 'jwt' },
+  cookies: {
+    sessionToken: {
+      name: `__Secure-next-auth.session-token`,
+      options: {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production',
+        sameSite: 'none',
+        path: '/'
+      }
+    }
+  },
   secret: process.env.AUTH_SECRET || '81l3XFFjNE2TVjN9LS0ZuiPaTC8UqaR4',
   pages: { signIn: '/login' },
   providers: [
