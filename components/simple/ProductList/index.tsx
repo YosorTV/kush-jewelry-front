@@ -24,7 +24,7 @@ export const ProductList: FC<IProductsList> = async ({ className, title, ...rest
   const isLastPage = meta?.pagination?.page === meta?.pagination?.pageCount || !data.length;
 
   return (
-    <section className={cn('relative flex h-max flex-col justify-between gap-y-2.5 md:gap-y-5', className)}>
+    <section className={cn('relative flex h-max flex-col justify-between gap-y-16', className)}>
       {title && (
         <Title
           level='3'

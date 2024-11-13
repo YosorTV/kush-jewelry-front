@@ -19,7 +19,7 @@ interface IProductListGroup {
 
 const ProductListGroup: FC<IProductListGroup> = async ({
   data,
-  className = 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4'
+  className = 'grid-cols-1 xs:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4'
 }) => {
   const currency = await getCurrency();
   const session = await auth();
@@ -39,7 +39,14 @@ const ProductListGroup: FC<IProductListGroup> = async ({
   };
 
   if (!data?.length) {
-    return <Lottie text={t('emptyList')} src={lottieAnim} className='relative top-10' playerClassName='h-96 w-96' />;
+    return (
+      <Lottie
+        text={t('emptyList')}
+        src={lottieAnim}
+        className='relative top-10 my-6 gap-y-5'
+        playerClassName='h-96 w-96'
+      />
+    );
   }
 
   return (
