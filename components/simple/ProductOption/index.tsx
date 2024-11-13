@@ -18,7 +18,7 @@ export const ProductOption = ({ id, value, title, name, className, onChange, che
         checked={checked}
         name={name}
         value={value}
-        onChange={onChange}
+        onChange={(e) => onChange(e.target.checked)}
         className='radio w-6'
       />
       <span className='w-full whitespace-pre-wrap text-pretty font-semibold text-base-200'>{title}</span>

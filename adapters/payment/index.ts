@@ -9,6 +9,7 @@ interface IPaymentAdapter {
   locale: string;
   currency: number;
   customer: IDeliveryForm;
+  prePurchase: boolean;
 }
 
 interface ILiqPayAdapter {
@@ -16,12 +17,14 @@ interface ILiqPayAdapter {
   signature: string;
 }
 
-export const paymentDataAdapter = ({ data, locale, currency, customer }: IPaymentAdapter) => {
+export const paymentDataAdapter = ({ data, currency, prePurchase = false, customer }: IPaymentAdapter) => {
   const { totalPrice } = formatTotalAmount(data);
 
   const order_id = `order_${uuidv4()}`;
   const description = data.map((item: CartItemType) => item.name).join(',');
-  const amount = parseFloat(formatPrice(totalPrice, currency).replace(/[^\d.,-]/g, ''));
+  const amount = parseFloat(
+    formatPrice(prePurchase ? totalPrice * 0.3 : totalPrice, currency).replace(/[^\d.,-]/g, '')
+  );
 
   const products = data.map((item: CartItemType) => ({
     id: item.id,

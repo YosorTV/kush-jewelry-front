@@ -36,13 +36,14 @@ export const ShoppingCart: FC<ShoppingCartProps> = ({ data, locale, currency }) 
       locale,
       currency,
       data: cartStore.cart,
-      customer: cartStore.delivery
+      customer: cartStore.delivery,
+      prePurchase: cartStore.prePurchase
     });
 
     const response = await paymentCreate(options);
 
     setLiqPayData(response);
-  }, [currency, cartStore.cart, cartStore.delivery]);
+  }, [currency, cartStore.cart, cartStore.delivery, cartStore.prePurchase]);
 
   useEffect(() => {
     if (cartStore.key === 'checkout') {

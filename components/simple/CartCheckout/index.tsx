@@ -6,6 +6,7 @@ import { FC, useCallback, useEffect, useMemo, useRef } from 'react';
 
 import { liqPayAdapter } from '@/adapters/payment';
 import { formatPrice } from '@/helpers/formatters';
+import { useRouter } from '@/lib';
 import { paymentCallback } from '@/services/api/payment-update';
 import { useCart } from '@/store';
 import { CartItemType } from '@/types/store';
@@ -19,6 +20,7 @@ interface ICartCheckout {
 export const CartCheckout: FC<ICartCheckout> = ({ currency, liqPayData }) => {
   const locale = useLocale();
   const cartStore = useCart();
+  const router = useRouter();
   const t = useTranslations('material');
   const { data: session } = useSession();
 
@@ -30,7 +32,7 @@ export const CartCheckout: FC<ICartCheckout> = ({ currency, liqPayData }) => {
       name: item.name,
       quantity: item.quantity,
       images: item.images,
-      price: formatPrice(item.unit_amount, currency).replace(/[^\d.,-]/g, ''),
+      price: formatPrice(cartStore.totalPrice, currency).replace(/[^\d.,-]/g, ''),
       url: item.url,
       size: item?.size,
       material: `${t(item?.material)}`
@@ -55,6 +57,7 @@ export const CartCheckout: FC<ICartCheckout> = ({ currency, liqPayData }) => {
       });
 
       if (result.status === 200) {
+        router.push(`/?checkout=success`);
         cartStore.globalReset();
         cartStore.setForm('success');
       }

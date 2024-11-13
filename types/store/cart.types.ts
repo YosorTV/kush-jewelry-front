@@ -26,11 +26,13 @@ type FormKey = 'checkout' | 'cart' | 'success' | 'delivery';
 export type CartState = {
   formState: CartItemType;
   delivery: IDeliveryForm;
+  prePurchase: boolean;
+  totalPrice: number;
   cart: CartItemType[];
-  globalReset: () => void;
   key: FormKey;
   isOpen: boolean;
   paymentIntentId: string;
+  globalReset: () => void;
   setDelivery: (key: keyof IDeliveryForm, value: any) => void;
   setPaymentIntentId: (value: string) => void;
   setForm: (value: FormKey) => void;
@@ -42,4 +44,6 @@ export type CartState = {
   onIncrease: (data: CartItemType) => void;
   resetDelivery: () => void;
   syncCartData: (data: CartItemType) => void;
+  onPrePurchase: () => void;
+  setTotalPrice: (value: number) => void;
 };

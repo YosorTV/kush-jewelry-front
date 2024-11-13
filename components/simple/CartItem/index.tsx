@@ -30,11 +30,11 @@ export const CartItem: FC<CartItemProps> = ({ data, currency, onAdd, onRemove, t
         src={data?.images?.url}
         alt={data?.images?.alternativeText}
         formats={data?.images?.formats}
-        loading='lazy'
-        width={400}
-        height={400}
+        priority
+        width={428}
+        height={428}
         className='aspect-square rounded-none object-cover'
-        containerClass='w-40'
+        containerClass='w-32 sm:w-48'
       />
       <div className='flex flex-col'>
         <div className='flex flex-col gap-y-2.5'>

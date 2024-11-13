@@ -32,8 +32,12 @@ export const cartSlice: StateCreator<CartState> = (set) => ({
   cart: [],
   key: 'cart',
   isOpen: false,
+  prePurchase: false,
+  totalPrice: 0,
   paymentIntentId: '',
   onToggle: () => set((state) => ({ isOpen: !state.isOpen })),
+  setTotalPrice: (price) => set(() => ({ totalPrice: price })),
+  onPrePurchase: () => set((state) => ({ prePurchase: !state.prePurchase })),
   onSubmit: (item) =>
     set((state) => {
       const existedItem = state.cart.find(({ id }) => item.id === id);
