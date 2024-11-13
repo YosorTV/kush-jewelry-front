@@ -11,10 +11,11 @@ import { Badge } from '@/components/elements/Badge';
 import { CartList } from '@/components/simple';
 import { CartCheckout } from '@/components/simple/CartCheckout';
 import { CartDelivery } from '@/components/simple/CartDelivery';
-import { cn } from '@/lib';
+import { cn, useRouter } from '@/lib';
 import { paymentCreate } from '@/services';
 import { ShoppingCartProps } from '@/types/components/complex';
 import { useTranslations } from 'next-intl';
+import { useSearchParams } from 'next/navigation';
 import { BsFillBagFill } from 'react-icons/bs';
 import { IoArrowBack } from 'react-icons/io5';
 import { Success } from '../Success';
@@ -22,6 +23,8 @@ import { Success } from '../Success';
 export const ShoppingCart: FC<ShoppingCartProps> = ({ data, locale, currency }) => {
   const t = useTranslations();
   const cartStore = useCart();
+  const router = useRouter();
+  const searchParams = useSearchParams();
 
   const [liqPayData, setLiqPayData] = useState({
     data: '',
@@ -46,6 +49,19 @@ export const ShoppingCart: FC<ShoppingCartProps> = ({ data, locale, currency }) 
       fetchLiqPayData();
     }
   }, [cartStore.key]);
+
+  useEffect(() => {
+    const currentStep = cartStore.key;
+    const newParams = new URLSearchParams(searchParams.toString());
+
+    if (cartStore.isOpen) {
+      newParams.set('checkout', currentStep);
+      router.replace(`?${newParams.toString()}`);
+    } else {
+      newParams.delete('checkout');
+      router.replace(`?${newParams.toString()}`);
+    }
+  }, [cartStore.isOpen, cartStore.key, router, searchParams]);
 
   const contentZone = {
     cart: <CartList data={data} currency={currency} />,
