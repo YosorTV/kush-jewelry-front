@@ -1,16 +1,12 @@
 'use client';
 
 import { EmblaOptionsType } from 'embla-carousel';
-import useEmblaCarousel from 'embla-carousel-react';
+
 import { FC } from 'react';
 
-import { Button, Zoom } from '@/components/elements';
-import { usePrevNextButtons } from '@/lib/hooks';
+import { Zoom } from '@/components/elements';
 
-import { LiaLongArrowAltLeftSolid, LiaLongArrowAltRightSolid } from 'react-icons/lia';
-
-import { cn } from '@/lib';
-import { RxDividerVertical } from 'react-icons/rx';
+import Carousel from '@/components/elements/Carousel';
 import { StrapiImage } from '../StrapiImage';
 
 type PropType = {
@@ -20,10 +16,6 @@ type PropType = {
 };
 
 export const ProductCarousel: FC<PropType> = ({ data, options, containerClass }) => {
-  const [emblaRef, emblaApi] = useEmblaCarousel(options);
-
-  const { prevBtnDisabled, nextBtnDisabled, onPrevButtonClick, onNextButtonClick } = usePrevNextButtons(emblaApi);
-
   const printProductSlide = (image: any) => {
     return (
       <li key={image.id} className='embla__slide hover:cursor-grab active:cursor-grabbing'>
@@ -42,21 +34,16 @@ export const ProductCarousel: FC<PropType> = ({ data, options, containerClass })
   };
 
   return (
-    <div className={cn('embla-standart', containerClass)}>
-      <div className='embla__controls justify-end px-5'>
-        <div className='embla__buttons'>
-          <Button type='button' onClick={onPrevButtonClick} disabled={prevBtnDisabled}>
-            <LiaLongArrowAltLeftSolid className='h-6 w-6 fill-base-200' />
-          </Button>
-          <RxDividerVertical className='h-6 w-6 rotate-45 text-base-200' />
-          <Button type='button' onClick={onNextButtonClick} disabled={nextBtnDisabled}>
-            <LiaLongArrowAltRightSolid className='h-6 w-6 fill-base-200' />
-          </Button>
-        </div>
-      </div>
-      <div className='embla__viewport' ref={emblaRef}>
-        <ul className='embla__container'>{data.map(printProductSlide)}</ul>
-      </div>
-    </div>
+    <Carousel
+      autoScroll
+      format='standart'
+      total={data.length}
+      options={{ loop: data.length > 3 }}
+      titleClass='pt-1.5 md:py-0 text-white'
+      className='px-3 pb-5 lg:px-5'
+      fill='fill-white'
+    >
+      {data.map(printProductSlide)}
+    </Carousel>
   );
 };

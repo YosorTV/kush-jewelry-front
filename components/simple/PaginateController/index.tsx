@@ -30,7 +30,7 @@ export const PaginateController: FC<IPaginateController> = ({ total = 0, disable
   }, [pageSize, router, pathname, params, locale]);
 
   return (
-    <div className='flex flex-col items-center justify-center pb-5'>
+    <div className='flex flex-col items-center justify-center py-10'>
       {total ? (
         <span className='text-sm font-medium uppercase text-base-200'>{t('total', { number: total })}</span>
       ) : null}

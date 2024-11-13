@@ -75,7 +75,7 @@ export const CartList: FC<any> = ({ data, currency }) => {
             id='np'
             type='checkbox'
             checked={cartStore.prePurchase}
-            label='Перед.оплата'
+            label={t('checkout.pre_purchase')}
             onChange={() => cartStore.onPrePurchase()}
             className='checkbox checked:fill-base-200'
             labelStyle='text-base-200 font-medium text-base cursor-pointer'

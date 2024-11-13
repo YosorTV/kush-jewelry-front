@@ -114,12 +114,13 @@ input:-webkit-autofill:active {
 
 .embla__slide {
   min-width: 0;
+  list-style: none;
   flex: 0 0 var(--slide-size);
   margin-left: calc(var(--slide-spacing));
   margin-right: calc(var(--slide-spacing));
 }
 
-@media (min-width: 424px) {
+@media (min-width: 528px) {
   .embla__slide {
     flex: 0 0 var(--slide-size-sm);
   }

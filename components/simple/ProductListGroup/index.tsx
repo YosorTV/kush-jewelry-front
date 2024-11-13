@@ -40,12 +40,7 @@ const ProductListGroup: FC<IProductListGroup> = async ({
 
   if (!data?.length) {
     return (
-      <Lottie
-        text={t('emptyList')}
-        src={lottieAnim}
-        className='relative top-10 my-6 gap-y-5'
-        playerClassName='h-96 w-96'
-      />
+      <Lottie text={t('emptyList')} src={lottieAnim} className='relative my-6 gap-y-5' playerClassName='h-96 w-96' />
     );
   }
 

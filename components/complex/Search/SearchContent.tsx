@@ -1,13 +1,13 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import { useTranslations } from 'next-intl';
 import { useSession } from 'next-auth/react';
+import { useTranslations } from 'next-intl';
+import { useEffect, useState } from 'react';
 
 import { getCurrency } from '@/services';
 
-import { ProductCard } from '@/components/simple';
 import { Lottie } from '@/components/elements/Lottie';
+import { ProductCard } from '@/components/simple';
 
 import { useSearch } from '@/store';
 
@@ -49,5 +49,9 @@ export const SearchContent = () => {
     );
   };
 
-  return <div className='my-10 grid grid-cols-1 gap-5 md:grid-cols-2'>{state.searchResult.map(printProducts)}</div>;
+  return (
+    <div className='my-10 grid grid-cols-fluid gap-x-5 gap-y-10 xl:grid-cols-4'>
+      {state.searchResult.map(printProducts)}
+    </div>
+  );
 };

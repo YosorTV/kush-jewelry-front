@@ -97,7 +97,8 @@
     "quantity": "Quantity",
     "payments": "Checkout",
     "delivery": "Set delivery options",
-    "title": "Purchase list"
+    "title": "Purchase list",
+    "pre_purchase": "By pre-purchase"
   },
   "wishlist": {
     "added": "Remove from wishlist",
