@@ -2,7 +2,7 @@
 
 import { useMemo } from 'react';
 
-import { StrapiImage, ProductCarousel } from '@/components/simple';
+import { ProductCarousel, StrapiImage } from '@/components/simple';
 
 import { Zoom } from '@/components/elements';
 
@@ -26,7 +26,7 @@ export const ProductGallery = ({ images = [] }: { images: any[] }) => {
             height={image.height}
             formats={image.formats}
             alt={image.alternativeText}
-            className='aspect-square h-full w-full cursor-pointer object-cover'
+            className='aspect-square h-[468px] w-full cursor-pointer object-cover 2xl:h-[648px]'
           />
         </Zoom>
       </li>
@@ -35,7 +35,7 @@ export const ProductGallery = ({ images = [] }: { images: any[] }) => {
 
   const printGallery = useMemo(() => {
     if (lg) {
-      return <ul className='grid w-full grid-cols-fluid gap-2.5 2xl:grid-cols-2'>{gallery.map(printImage)}</ul>;
+      return <ul className='grid w-full grid-cols-fluid gap-2.5 md:grid-cols-2'>{gallery.map(printImage)}</ul>;
     } else {
       return <ProductCarousel data={images} options={{ loop: true }} containerClass='lg:hidden w-svw' />;
     }

@@ -29,7 +29,7 @@ export const CompleteLook: FC<ICompleteLook> = async ({ products, currency, cate
         session={session}
         key={product.id}
         product={product}
-        imgClassName='h-80 md:h-96'
+        imgClassName='h-[468px]'
         className='embla__slide cursor-grab active:cursor-grabbing'
       />
     );
@@ -42,7 +42,7 @@ export const CompleteLook: FC<ICompleteLook> = async ({ products, currency, cate
       total={data.length}
       className='w-svw px-2.5 md:px-5'
       titleClass='text-base-200 !text-xl md:py-5 py-2.5'
-      options={{ loop: true, align: 'start' }}
+      options={{ loop: true, align: 'center' }}
     >
       {data.map(printProduct)}
     </Carousel>

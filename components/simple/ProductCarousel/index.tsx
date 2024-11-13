@@ -34,7 +34,7 @@ export const ProductCarousel: FC<PropType> = ({ data, options, containerClass })
             src={image.url}
             height={image.height}
             width={image.width}
-            className='aspect-video h-80 w-full object-cover'
+            className='aspect-square h-full w-full object-cover sm:h-[468px]'
           />
         </Zoom>
       </li>

@@ -19,7 +19,7 @@ interface IProductListGroup {
 
 const ProductListGroup: FC<IProductListGroup> = async ({
   data,
-  className = 'grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'
+  className = 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4'
 }) => {
   const currency = await getCurrency();
   const session = await auth();
