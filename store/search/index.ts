@@ -1,6 +1,6 @@
-import { StateCreator } from 'zustand';
-import { TSearchState } from '@/types/store';
 import { getProductsData } from '@/services';
+import { TSearchState } from '@/types/store';
+import { StateCreator } from 'zustand';
 
 export const searchSlice: StateCreator<TSearchState> = (set) => ({
   isOpen: false,
@@ -17,7 +17,7 @@ export const searchSlice: StateCreator<TSearchState> = (set) => ({
       error: null,
       searchValue: '',
       searchResult: [],
-      meta: { page: 1, pageCount: 0, pageSize: 4, total: 0 }
+      meta: { page: 1, pageCount: 0, pageSize: 8, total: 0 }
     }),
   fetchProducts: async ({ locale, name, page, pageSize }) => {
     set({ isLoading: true, error: null });
@@ -26,7 +26,7 @@ export const searchSlice: StateCreator<TSearchState> = (set) => ({
 
     const pagination = meta?.pagination || {
       page: 1,
-      pageSize: 4,
+      pageSize: 8,
       pageCount: 1,
       total: 0
     };

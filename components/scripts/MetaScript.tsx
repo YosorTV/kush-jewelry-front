@@ -3,7 +3,7 @@ import Script from 'next/script';
 export const MetaScript = () => {
   return (
     <>
-      <Script id='meta-pixel' strategy='beforeInteractive'>
+      <Script id='meta-pixel' strategy='afterInteractive'>
         {`
       !function(f,b,e,v,n,t,s)
       {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -24,6 +24,7 @@ export const MetaScript = () => {
           style={{ display: 'none' }}
           src='https://www.facebook.com/tr?id=351610264681498&ev=PageView&noscript=1'
           alt=''
+          loading='lazy'
         />
       </noscript>
     </>

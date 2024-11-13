@@ -1,14 +1,14 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 'use client';
 
-import { ChangeEvent, FC, ReactNode, useCallback, useEffect, useMemo } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
+import { ChangeEvent, FC, ReactNode, useCallback, useEffect, useMemo } from 'react';
 import { IoClose } from 'react-icons/io5';
 
 import { useSearch } from '@/store';
 
-import { Button, Input, Logo } from '@/components/elements';
 import { childrenVariants, fadeVariants, searchVariants } from '@/assets/animations';
+import { Button, Input, Logo } from '@/components/elements';
 import { useLocale } from 'next-intl';
 
 import { useDebounce } from '@/lib/hooks';
@@ -32,7 +32,7 @@ export const SearchController: FC<TSearchController> = ({ onClose, children, pla
       name,
       locale,
       page: '1',
-      pageSize: '20'
+      pageSize: '16'
     });
   }, [state, locale, name]);
 

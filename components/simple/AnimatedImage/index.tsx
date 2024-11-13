@@ -14,7 +14,7 @@ interface TAnimatedImage {
   className?: string;
 }
 
-const AnimatedImage: FC<TAnimatedImage> = ({ product, className = 'h-80 sm:h-96 md:h-[416px] lg:h-[548px]' }) => {
+const AnimatedImage: FC<TAnimatedImage> = ({ product, className = 'h-[428px] md:h-[468px] xl:h-[528px]' }) => {
   const [showOverlay, setShowOverlay] = useState<boolean>(false);
   const router = useRouter();
 
@@ -47,7 +47,6 @@ const AnimatedImage: FC<TAnimatedImage> = ({ product, className = 'h-80 sm:h-96 
         >
           <StrapiImage
             priority
-            loading='eager'
             src={img?.url}
             formats={img?.formats}
             alt={img?.alternativeText}

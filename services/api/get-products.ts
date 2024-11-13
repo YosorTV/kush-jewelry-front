@@ -8,7 +8,7 @@ import { STRAPI_QUERIES } from '../queries';
 import { getStrapiData } from '../strapi';
 import { getWishlistProducts } from './get-wished-products';
 
-export async function getProductsData({ locale, page = 1, pageSize = 5, name, ...rest }: any) {
+export async function getProductsData({ locale, page = 1, pageSize = 8, name, ...rest }: any) {
   const session = await auth();
 
   const productsApi = STRAPI_QUERIES.PRODUCTS({
@@ -25,7 +25,7 @@ export async function getProductsData({ locale, page = 1, pageSize = 5, name, ..
     const { data: wishlist } = await getWishlistProducts({
       locale,
       page: '1',
-      pageSize: '10',
+      pageSize: '8',
       userId: Number(session.user.id),
       token: session.accessToken
     });

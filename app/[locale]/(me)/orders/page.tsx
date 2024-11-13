@@ -1,13 +1,13 @@
 import { Metadata } from 'next';
 
-import { getOrdersData } from '@/services';
-import { PageProps } from '@/types/app/page.types';
 import { auth } from '@/auth';
 import OrdersSection from '@/components/complex/OrdersSection';
+import { getOrdersData } from '@/services';
+import { PageProps } from '@/types/app/page.types';
 
-import { getTranslations } from 'next-intl/server';
-import { PaginateController } from '@/components/simple/PaginateController';
 import { Title } from '@/components/elements';
+import { PaginateController } from '@/components/simple/PaginateController';
+import { getTranslations } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 
 export async function generateMetadata(props: PageProps): Promise<Metadata> {
@@ -52,7 +52,7 @@ export default async function OrdersPage({ params, searchParams }: PageProps) {
       <PaginateController
         disabled={isLastPage}
         total={meta.pagination.total}
-        perPage={meta?.pagination?.pageSize + 5}
+        perPage={meta?.pagination?.pageSize + meta?.pagination?.pageSize}
       />
     </section>
   );

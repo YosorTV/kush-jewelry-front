@@ -11,7 +11,7 @@ import { Button } from '@/components/elements';
 
 import { IPaginateController } from '@/types/components';
 
-export const PaginateController: FC<IPaginateController> = ({ total = 0, disabled = true, perPage = 5 }) => {
+export const PaginateController: FC<IPaginateController> = ({ total = 0, disabled = true, perPage = 8 }) => {
   const [pageSize, setPageSize] = useState<number>(perPage);
 
   const router = useRouter();

@@ -22,7 +22,7 @@ export async function getProductData({ locale, slug }: ISlugQuery) {
         userId: Number(session.user.id),
         token: session.accessToken,
         page: '1',
-        pageSize: '5'
+        pageSize: '8'
       });
 
       const wishlistProductIds = wishlist

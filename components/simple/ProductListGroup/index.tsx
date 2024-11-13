@@ -5,7 +5,6 @@ import { cn } from '@/lib';
 
 import { Lottie } from '@/components/elements/Lottie';
 
-import { gridCols } from '@/helpers/formatters';
 import { Product } from '@/types/components';
 import { ProductCard } from '../ProductCard';
 
@@ -20,13 +19,13 @@ interface IProductListGroup {
 
 const ProductListGroup: FC<IProductListGroup> = async ({
   data,
-  className = 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3'
+  className = 'grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'
 }) => {
   const currency = await getCurrency();
   const session = await auth();
   const t = await getTranslations('system');
 
-  const printProduct = (product: Product, index: number) => {
+  const printProduct = (product: Product) => {
     return (
       <ProductCard
         t={t}
@@ -34,7 +33,7 @@ const ProductListGroup: FC<IProductListGroup> = async ({
         key={product.id}
         product={product}
         currency={currency}
-        className={gridCols(index)}
+        className='col-span-1'
       />
     );
   };
@@ -44,7 +43,7 @@ const ProductListGroup: FC<IProductListGroup> = async ({
   }
 
   return (
-    <div className={cn('mb-5 grid min-h-96 gap-x-2.5 gap-y-5', className, data.length >= 4 && 'grid-cols-fluid')}>
+    <div className={cn('mb-5 grid min-h-96 gap-x-2.5 gap-y-5', className, 'grid-cols-fluid')}>
       {data.map(printProduct)}
     </div>
   );
