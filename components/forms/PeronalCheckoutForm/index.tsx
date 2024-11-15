@@ -8,7 +8,7 @@ import { useLocale } from 'next-intl';
 import { FC, useEffect } from 'react';
 
 interface IPersonalCheckoutForm {
-  data: Session['user'];
+  data: Session['user'] | IDeliveryForm;
   title: string;
 }
 
@@ -21,7 +21,7 @@ export const PeronalCheckoutForm: FC<IPersonalCheckoutForm> = ({ data, title = '
       cartStore.setDelivery('firstName', data.firstName || '');
       cartStore.setDelivery('lastName', data.lastName || '');
       cartStore.setDelivery('email', data.email || '');
-      cartStore.setDelivery('phone', data.phoneNumber || '');
+      cartStore.setDelivery('phoneNumber', data.phoneNumber || '');
     }
   }, [data]);
 
@@ -30,6 +30,11 @@ export const PeronalCheckoutForm: FC<IPersonalCheckoutForm> = ({ data, title = '
 
     cartStore.setDelivery(name as keyof IDeliveryForm, value);
   };
+
+  const firstName = cartStore.delivery.firstName ?? data?.firstName;
+  const lastName = cartStore.delivery.lastName ?? data?.lastName;
+  const email = cartStore.delivery.email ?? data?.email;
+  const phoneNumber = cartStore.delivery.phoneNumber ?? data?.phoneNumber;
 
   return (
     <div className='form-control gap-y-2.5'>
@@ -41,7 +46,7 @@ export const PeronalCheckoutForm: FC<IPersonalCheckoutForm> = ({ data, title = '
           id='name'
           name='firstName'
           label={locale === 'uk' ? "Ім'я" : 'Name'}
-          defaultValue={data && data?.firstName}
+          defaultValue={firstName}
           onChange={handleChange}
           className='input checked:fill-base-200'
           labelStyle='text-base-200 font-medium text-base cursor-pointer'
@@ -49,7 +54,7 @@ export const PeronalCheckoutForm: FC<IPersonalCheckoutForm> = ({ data, title = '
         <Input
           id='lastName'
           name='lastName'
-          defaultValue={data && data?.lastName}
+          defaultValue={lastName}
           label={locale === 'uk' ? 'Прізвисько' : 'Last name'}
           onChange={handleChange}
           className='input checked:fill-base-200'
@@ -58,7 +63,7 @@ export const PeronalCheckoutForm: FC<IPersonalCheckoutForm> = ({ data, title = '
         <Input
           id='email'
           name='email'
-          defaultValue={data && data?.email}
+          defaultValue={email}
           label={locale === 'uk' ? 'Пошта' : 'Email'}
           onChange={handleChange}
           className='input checked:fill-base-200'
@@ -67,10 +72,10 @@ export const PeronalCheckoutForm: FC<IPersonalCheckoutForm> = ({ data, title = '
         <Input
           id='phone'
           autoComplete='off'
-          value={data && data?.phoneNumber}
+          value={phoneNumber}
           type='tel'
           name='phone'
-          onChange={(v) => cartStore.setDelivery('phone', String(v))}
+          onChange={(v) => cartStore.setDelivery('phoneNumber', String(v))}
           label={locale === 'uk' ? 'Номер телефону' : 'Phone number'}
           className='input checked:fill-base-200'
           labelStyle='text-base-200 font-medium text-base cursor-pointer'

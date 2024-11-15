@@ -38,7 +38,12 @@ export const ProductCard: FC<ProductCardProps> = ({
         </div>
         <div className='group flex flex-col gap-y-2.5'>
           <div className='flex w-full items-end justify-between'>
-            <Price currency={currency} price={product?.price} sale={product?.saleValue} />
+            <Price
+              currency={currency}
+              price={product?.price}
+              textClassName='!text-base !text-base-200'
+              sale={product?.saleValue}
+            />
             {product?.collections &&
               product.collections.data.map((collection) => (
                 <Link

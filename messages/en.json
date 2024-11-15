@@ -12,7 +12,13 @@
     "novapost": "Nova Post",
     "delivery_spot": "Select delivery address",
     "thanks": "Thanks for purchasing",
-    "proceed": "Procced with shopping"
+    "proceed": "Procced with shopping",
+    "name": "Name: {name}",
+    "quantity": "Quantity: {number}",
+    "price": "Price per unit:",
+    "size": "Size: {number}",
+    "total": "Total amount of payment: {number}",
+    "remove": "Remove"
   },
   "validation": {
     "length": "Min {number} characters long",
@@ -23,6 +29,8 @@
   },
   "system": {
     "loadMore": "Load more",
+    "city": "City",
+    "warehouse": "Warehouse",
     "explore": "Explore now",
     "total": "Total {number}",
     "stepBack": "Back",
@@ -117,6 +125,7 @@
     "novapay": "Nova post",
     "link": "Link to the product"
   },
+
   "notFound": {
     "message": "Oops! The page you are looking for does not exist",
     "return": "Return to home page"

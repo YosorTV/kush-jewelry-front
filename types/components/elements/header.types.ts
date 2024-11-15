@@ -4,6 +4,7 @@ import { StrapiLinkType } from './link.types';
 export type HeaderProps = {
   locale: string;
   session: Session;
+  currency: number;
   data: {
     id: number | string;
     session?: any;
@@ -22,5 +23,5 @@ export type HeaderProps = {
     };
     sessionLinks: StrapiLinkType[];
   };
-  shoppingCart?: any;
+  cart?: any;
 };

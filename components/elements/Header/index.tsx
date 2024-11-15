@@ -4,35 +4,22 @@ import { Logo } from '@/components/elements';
 import { LangChanger, Menu, ThemeChanger } from '@/components/simple';
 
 import UserSession from '@/components/complex/UserSession';
-import { getCurrency } from '@/services';
+
 import { HeaderProps } from '@/types/components';
 
-export default async function rnHeader({ data, shoppingCart, session, locale }: HeaderProps) {
-  const currency = await getCurrency();
-
-  const {
-    categories,
-    collections,
-    pagesTitle,
-    categoryTitle,
-    collectionTitle,
-    searchTitle,
-    signOutTitle,
-    sessionLinks
-  } = data;
-
+export default function Header({ data, cart, session, locale, currency }: HeaderProps) {
   const collectionsData = {
-    title: collectionTitle,
-    data: collections?.data ?? []
+    title: data?.collectionTitle,
+    data: data?.collections?.data ?? []
   };
 
   const categoryData = {
-    title: categoryTitle,
-    data: categories?.data ?? []
+    title: data?.categoryTitle,
+    data: data?.categories?.data ?? []
   };
 
   const pagesData = {
-    title: pagesTitle,
+    title: data?.pagesTitle,
     data: data?.pages
   };
 
@@ -46,14 +33,14 @@ export default async function rnHeader({ data, shoppingCart, session, locale }: 
           <Logo width={160} height={48} className='hidden xs:block' />
         </div>
         <div className='flex items-center gap-x-6'>
-          <Search placeholder={searchTitle} />
-          <ShoppingCart data={shoppingCart} locale={locale} currency={currency} />
+          <Search placeholder={data?.searchTitle} />
+          <ShoppingCart data={cart} locale={locale} currency={currency} />
           <UserSession
             cta={data?.cta}
             locale={locale}
             session={session}
-            signOutTitle={signOutTitle}
-            sessionLinks={sessionLinks}
+            signOutTitle={data?.signOutTitle}
+            sessionLinks={data?.sessionLinks}
           />
           <div className='hidden lg:flex lg:gap-x-6'>
             <LangChanger />

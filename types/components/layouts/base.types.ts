@@ -1,6 +1,6 @@
 import { Session } from 'next-auth';
-import { StrapiLinkType } from '../elements';
 import { AbstractIntlMessages } from 'next-intl';
+import { StrapiLinkType } from '../elements';
 
 type THeader = {
   id: number | string;
@@ -26,6 +26,7 @@ export type BaseLayoutProps = {
   session: Session;
   messages: AbstractIntlMessages;
   header: THeader;
+  currency: number;
   footer: Record<string, string>;
   cart: Record<string, string>;
 };

@@ -49,25 +49,24 @@ export default async function ProductDetails({ params }: PageProps) {
   };
 
   return (
-    <PageLayout className='relative mb-5 mt-16'>
-      <StepBack className='absolute z-10 !mx-5 justify-start lg:relative lg:z-0' />
-      <article className='relative flex flex-col-reverse lg:flex-row-reverse'>
-        <section className='flex h-full w-full flex-col gap-2.5 bg-base-100 px-2.5 md:px-5 lg:w-[50svw]'>
-          <header className='flex w-full flex-wrap justify-between gap-2.5 pt-2.5 lg:pt-0' role='product-name'>
+    <PageLayout className='mb-5 mt-16'>
+      <StepBack className='absolute z-20 !mx-5 justify-start !text-base-300' />
+      <article className='relative flex flex-col-reverse xl:flex-row-reverse'>
+        <section className='flex h-full w-full flex-col gap-5 bg-base-100 p-2.5 md:p-5 xl:w-[50svw]'>
+          <header className='flex w-full flex-wrap justify-between gap-2.5 pt-0' role='product-name'>
             {data?.title && (
               <Title
                 level='1'
                 id='product-title'
                 aria-label='product-title'
-                className='text-xl font-semibold leading-10 text-base-200 md:text-3xl lg:text-4xl'
+                className='text-xl font-semibold leading-10 text-base-200 md:text-3xl xl:text-4xl'
               >
                 {data?.title}
               </Title>
             )}
             <span className='bg-neutral p-2 text-base-300'>{data?.hintText}</span>
           </header>
-          <div className='flex flex-wrap items-center justify-between'>
-            <Price currency={currency} price={data?.price} sale={data?.saleValue} className='flex flex-row' />
+          <div className='flex flex-wrap items-end justify-between'>
             <NextLink
               href={`/catalog?categories=${data?.category}`}
               className='capitalize text-base-200 underline underline-offset-8'
@@ -75,6 +74,7 @@ export default async function ProductDetails({ params }: PageProps) {
             >
               {t(`category.${data?.category}`)}
             </NextLink>
+            <Price currency={currency} price={data?.price} sale={data?.saleValue} className='flex flex-row' />
           </div>
           <p className='whitespace-pre-line text-wrap'>{data?.description}</p>
           <ProductParams sizes={sizes} materials={data.materials.data} availableSizes={data.sizes.data}>

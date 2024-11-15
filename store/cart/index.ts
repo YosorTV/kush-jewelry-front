@@ -18,7 +18,7 @@ export const cartSlice: StateCreator<CartState> = (set) => ({
     firstName: '',
     lastName: '',
     email: '',
-    phone: '',
+    phoneNumber: '',
     self: false,
     novapostCity: {
       label: null,
@@ -68,6 +68,7 @@ export const cartSlice: StateCreator<CartState> = (set) => ({
 
       return { cart: state.cart.filter((el) => el.id !== item.id) };
     }),
+  onDelete: (item) => set((state) => ({ cart: state.cart.filter((el) => el.id !== item.id) })),
   onAdd: ({ key, value }) =>
     set((state) => ({
       formState: {
@@ -131,7 +132,7 @@ export const cartSlice: StateCreator<CartState> = (set) => ({
         firstName: '',
         lastName: '',
         email: '',
-        phone: '',
+        phoneNumber: '',
         self: false,
         novapostCity: {
           label: null,
@@ -149,7 +150,7 @@ export const cartSlice: StateCreator<CartState> = (set) => ({
         firstName: '',
         lastName: '',
         email: '',
-        phone: '',
+        phoneNumber: '',
         self: false,
         novapostCity: {
           label: null,

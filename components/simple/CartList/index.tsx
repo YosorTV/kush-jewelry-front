@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion';
 import { useTranslations } from 'next-intl';
 import { useTheme } from 'next-themes';
-import { FC } from 'react';
+import { FC, Fragment } from 'react';
 
 import { useCart } from '@/store';
 
@@ -27,19 +27,25 @@ export const CartList: FC<any> = ({ data, currency }) => {
 
   const { totalPrice } = formatTotalAmount(cartStore.cart);
 
+  const handleSubmit = () => {
+    cartStore.setTotalPrice(cartStore.prePurchase ? totalPrice * 0.3 : totalPrice);
+    cartStore.setForm('delivery');
+  };
+
   const printCartItem = (item: any, index: number) => (
-    <>
-      <motion.div key={index} className='flex flex-row-reverse items-center justify-between gap-x-2.5'>
+    <Fragment key={item.id}>
+      <div className='flex flex-row-reverse items-center justify-between gap-x-2.5'>
         <CartItem
-          data={item}
           t={t}
+          data={item}
           currency={currency}
           onAdd={() => cartStore.onIncrease(item)}
+          onDelete={() => cartStore.onDelete(item)}
           onRemove={() => cartStore.onRemove(item)}
         />
-      </motion.div>
+      </div>
       {index < cartStore.cart.length - 1 && <div className='divider my-0' />}
-    </>
+    </Fragment>
   );
 
   if (!cartStore.cart.length) {
@@ -55,11 +61,6 @@ export const CartList: FC<any> = ({ data, currency }) => {
       </motion.div>
     );
   }
-
-  const handleSubmit = () => {
-    cartStore.setTotalPrice(cartStore.prePurchase ? totalPrice * 0.3 : totalPrice);
-    cartStore.setForm('delivery');
-  };
 
   return (
     <div className='relative flex w-full flex-col items-start gap-y-5 pb-10'>
@@ -86,6 +87,7 @@ export const CartList: FC<any> = ({ data, currency }) => {
           {t('checkout.total')}: {formatPrice(cartStore.prePurchase ? totalPrice * 0.3 : totalPrice, currency)}
         </p>
       </div>
+      <div className='divider my-0' />
       <button onClick={handleSubmit} className='btn btn-primary w-full !rounded-none text-base-100'>
         {t('checkout.delivery')}
       </button>

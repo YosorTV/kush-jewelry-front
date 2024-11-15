@@ -26,20 +26,12 @@ export const ProductList: FC<IProductsList> = async ({ className, title, ...rest
   return (
     <section className={cn('relative flex h-max flex-col justify-between', className)}>
       {title && (
-        <Title
-          level='3'
-          variant='subheading'
-          className='pt-2.5 text-2xl uppercase text-base-200 xs:text-4xl md:pt-5 lg:text-5xl'
-        >
+        <Title level='3' variant='subheading' className='text-2xl uppercase text-base-200 xs:text-4xl lg:text-5xl'>
           {title}
         </Title>
       )}
       <ProductListGroup data={data} />
-      <PaginateController
-        disabled={isLastPage}
-        total={meta?.pagination?.total}
-        perPage={meta?.pagination?.pageSize + meta?.pagination?.pageSize}
-      />
+      <PaginateController disabled={isLastPage} total={meta?.pagination?.total} perPage={meta?.pagination?.pageSize} />
     </section>
   );
 };

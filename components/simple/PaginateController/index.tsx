@@ -1,33 +1,31 @@
 'use client';
 
 import { useSearchParams } from 'next/navigation';
-import { FC, useEffect, useState } from 'react';
+import { FC } from 'react';
 
-import { useLocale, useTranslations } from 'use-intl';
+import { useTranslations } from 'use-intl';
 
-import { updateUrlParams, usePathname, useRouter } from '@/lib';
+import { usePathname, useRouter } from '@/lib';
 
 import { Button } from '@/components/elements';
 
 import { IPaginateController } from '@/types/components';
 
 export const PaginateController: FC<IPaginateController> = ({ total = 0, disabled = true, perPage = 8 }) => {
-  const [pageSize, setPageSize] = useState<number>(perPage);
+  const t = useTranslations('system');
 
-  const router = useRouter();
   const pathname = usePathname();
   const params = useSearchParams();
-  const t = useTranslations('system');
-  const locale = useLocale();
+  const router = useRouter();
 
   const handleMore = () => {
-    setPageSize((prevSize) => prevSize + 4);
-  };
+    const updatedParams = new URLSearchParams(params.toString());
+    updatedParams.set('pageSize', String(perPage + 4));
 
-  useEffect(() => {
-    const url = updateUrlParams(pathname, params, 'pageSize', String(pageSize));
-    router.replace(url, { locale, scroll: false });
-  }, [pageSize, router, pathname, params, locale]);
+    const newUrl = `${pathname}/?${updatedParams.toString()}`;
+
+    router.replace(newUrl, { scroll: false });
+  };
 
   return (
     <div className='flex flex-col items-center justify-center py-10'>

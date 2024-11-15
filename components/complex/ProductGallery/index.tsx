@@ -11,7 +11,7 @@ import { getImgGrid } from '@/lib';
 import { useScreen } from '@/lib/hooks';
 
 export const ProductGallery = ({ images = [] }: { images: any[] }) => {
-  const { lg } = useScreen();
+  const { xl } = useScreen();
 
   const gallery = getImgGrid({ images });
 
@@ -26,7 +26,7 @@ export const ProductGallery = ({ images = [] }: { images: any[] }) => {
             height={image.height}
             formats={image.formats}
             alt={image.alternativeText}
-            className='aspect-square h-[468px] w-full cursor-pointer object-cover 2xl:h-[648px]'
+            className='aspect-square h-[468px] w-full cursor-pointer object-cover'
           />
         </Zoom>
       </li>
@@ -34,15 +34,15 @@ export const ProductGallery = ({ images = [] }: { images: any[] }) => {
   };
 
   const printGallery = useMemo(() => {
-    if (lg) {
+    if (xl) {
       return <ul className='grid w-full grid-cols-fluid gap-2.5 md:grid-cols-2'>{gallery.map(printImage)}</ul>;
     } else {
       return <ProductCarousel data={images} options={{ loop: true }} containerClass='lg:hidden w-svw' />;
     }
-  }, [lg, gallery, images]);
+  }, [xl, gallery, images]);
 
   return (
-    <section className='w-full md:w-[50svw]' aria-label='Product gallery'>
+    <section className='w-full bg-neutral xl:w-[50svw] xl:bg-transparent' aria-label='Product gallery'>
       {printGallery}
     </section>
   );

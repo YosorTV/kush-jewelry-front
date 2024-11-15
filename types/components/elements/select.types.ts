@@ -12,6 +12,7 @@ export interface SelectProps {
   onInputChange?: (value: string) => void;
   placeholder?: string;
   value: OptionType | null;
+  label?: string;
   options?: OptionType[];
   disabled: boolean;
 }

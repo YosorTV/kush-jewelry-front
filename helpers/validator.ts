@@ -2,9 +2,9 @@ import { IDeliveryForm } from '@/types/store';
 import { AuthError } from 'next-auth';
 
 export const isFormIncomplete = (data: IDeliveryForm): boolean => {
-  const { firstName, lastName, email, phone, self, novapostCity, novapostWarehouse } = data;
+  const { firstName, lastName, email, phoneNumber, self, novapostCity, novapostWarehouse } = data;
 
-  const isBasicInfoIncomplete = !firstName || !lastName || !email || !phone;
+  const isBasicInfoIncomplete = !firstName || !lastName || !email || !phoneNumber;
 
   if (self) {
     return isBasicInfoIncomplete;

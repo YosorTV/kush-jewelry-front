@@ -15,14 +15,9 @@ const classes: ClassNamesType = {
   menu: () => '!bg-base-100 !rounded-lg mt-1 !z-20',
   control: () => 'flex items-center transition duration-150 !bg-base-100 !input !input-bordered',
   option: (state) => {
-    return cn(
-      'cursor-pointer px-4 py-2',
-      { '!bg-neutral !text-base-300': state.isFocused || state.isSelected },
-      {
-        'bg-base-100': !state.isSelected
-      },
-      'hover:bg-neutral hover:text-base-300'
-    );
+    return cn('cursor-pointer px-4 py-2 !bg-base-100 !text-base-200 hover:bg-neutral hover:text-base-300', {
+      '!bg-neutral !text-base-300': state.isFocused
+    });
   }
 };
 
@@ -30,21 +25,27 @@ export const AsyncSelect: FC<SelectProps> = ({
   loadOptions,
   onChange,
   value,
+  label,
   placeholder = 'Search...',
   disabled = false
 }) => {
   return (
-    <AsyncPaginate
-      isClearable
-      isDisabled={disabled}
-      value={value}
-      defaultOptions
-      className={cn(disabled && 'cursor-not-allowed opacity-50')}
-      classNames={classes}
-      placeholder={placeholder}
-      loadOptions={loadOptions}
-      onChange={onChange}
-      additional={{ page: 1 }}
-    />
+    <div className='flex flex-col gap-y-1.5'>
+      <span className='text-sm font-medium text-base-200'>{label}</span>
+      <AsyncPaginate
+        isClearable
+        menuPosition='absolute'
+        menuPlacement='auto'
+        isDisabled={disabled}
+        value={value}
+        defaultOptions
+        className={cn(disabled && 'cursor-not-allowed opacity-50')}
+        classNames={classes}
+        placeholder={placeholder}
+        loadOptions={loadOptions}
+        onChange={onChange}
+        additional={{ page: 1 }}
+      />
+    </div>
   );
 };

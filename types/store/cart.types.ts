@@ -15,7 +15,7 @@ export interface IDeliveryForm {
   firstName: string;
   lastName: string;
   email: string;
-  phone: string;
+  phoneNumber: string;
   self: boolean;
   novapostWarehouse: Record<string, string | null>;
   novapostCity: Record<string, string | null>;
@@ -37,6 +37,7 @@ export type CartState = {
   setPaymentIntentId: (value: string) => void;
   setForm: (value: FormKey) => void;
   onToggle: () => void;
+  onDelete: (item: CartItemType) => void;
   onAdd: (field: { key: keyof CartItemType; value: any }) => void;
   onSubmit: (item: CartItemType) => void;
   onRemove: (item: CartItemType) => void;

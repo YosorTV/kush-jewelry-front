@@ -95,14 +95,17 @@ export const NovaPostOptions: FC<INovaPostOptions> = ({
   return (
     <>
       <AsyncSelect
+        label={t('city')}
         value={city}
         placeholder={t('search')}
         disabled={disabled}
         onChange={handleCityChange}
         loadOptions={loadCityOptions}
       />
+
       {city && city?.value && (
         <AsyncSelect
+          label={t('warehouse')}
           disabled={disabled}
           placeholder={t('search')}
           key={city.value}

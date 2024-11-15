@@ -6,7 +6,7 @@ import { LayoutProps } from '@/types/app/layout.types';
 import BaseLayout from '@/components/layouts/Base';
 
 import { auth } from '@/auth';
-import { getLayoutData } from '@/services';
+import { getCurrency, getLayoutData } from '@/services';
 
 import { LOCALES } from '@/helpers/constants';
 
@@ -31,12 +31,14 @@ export default async function GlobalLayout({ children, params }: LayoutProps) {
 
   setRequestLocale(locale ?? 'uk');
 
-  const session = await auth();
-  const messages = await getMessages();
   const data = await getLayoutData({ locale });
+  const messages = await getMessages();
+  const currency = await getCurrency();
+  const session = await auth();
 
   return (
     <BaseLayout
+      currency={currency}
       locale={locale}
       session={session}
       messages={messages}

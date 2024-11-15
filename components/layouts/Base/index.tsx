@@ -21,6 +21,7 @@ export default function BaseLayout({
   footer,
   session,
   messages,
+  currency,
   cart
 }: PropsWithChildren<BaseLayoutProps>) {
   return (
@@ -30,15 +31,15 @@ export default function BaseLayout({
         <NextIntlClientProvider locale={locale} messages={messages}>
           <SessionProvider session={session}>
             <ThemeProvider>
-              <Header data={header} shoppingCart={cart} locale={locale} session={session} />
+              <Header data={header} currency={currency} cart={cart} locale={locale} session={session} />
               <main className='flex min-h-dvh flex-col'>
                 <AutoLogoutProvider>{children}</AutoLogoutProvider>
               </main>
               <Footer data={footer} locale={locale} />
+              <div id='portal' />
               <Modal id='my_modal_3'>
                 <WishlistNotification locale={locale} />
               </Modal>
-              <div id='portal' />
               <ClientSideRender />
             </ThemeProvider>
           </SessionProvider>

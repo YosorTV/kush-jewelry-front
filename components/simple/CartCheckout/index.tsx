@@ -25,6 +25,7 @@ export const CartCheckout: FC<ICartCheckout> = ({ currency, liqPayData }) => {
   const { data: session } = useSession();
 
   const liqPayContainerRef = useRef<HTMLDivElement | null>(null);
+  const liqPayInstanceRef = useRef<any>(null);
 
   const products = useMemo(() => {
     return cartStore.cart.map((item: CartItemType) => ({
@@ -62,7 +63,6 @@ export const CartCheckout: FC<ICartCheckout> = ({ currency, liqPayData }) => {
         cartStore.setForm('success');
       }
     }, 1000),
-
     [cartStore.delivery, products, session]
   );
 
@@ -72,13 +72,23 @@ export const CartCheckout: FC<ICartCheckout> = ({ currency, liqPayData }) => {
         liqPayContainerRef.current.innerHTML = '';
       }
 
-      LiqPayCheckout.init(liqPayAdapter(liqPayData)).on('liqpay.callback', debouncedCallback);
+      if (liqPayInstanceRef.current) {
+        liqPayInstanceRef.current.destroy?.();
+      }
+
+      liqPayInstanceRef.current = LiqPayCheckout.init(liqPayAdapter(liqPayData)).on(
+        'liqpay.callback',
+        debouncedCallback
+      );
     }
 
     return () => {
-      liqPayContainerRef.current = null;
+      if (liqPayInstanceRef.current) {
+        liqPayInstanceRef.current.destroy?.();
+        liqPayInstanceRef.current = null;
+      }
     };
-  }, [liqPayData]);
+  }, [liqPayData, debouncedCallback]);
 
-  return <div ref={liqPayContainerRef} className='w-full pb-10 pt-5' id='liqpay_checkout' />;
+  return <div ref={liqPayContainerRef} className='h-full w-full overflow-hidden pb-10 pt-5' id='liqpay_checkout' />;
 };

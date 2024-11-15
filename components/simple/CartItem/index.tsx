@@ -1,55 +1,48 @@
 'use client';
 
-import { FC, useMemo } from 'react';
+import { FC } from 'react';
 
 import { Title } from '@/components/elements';
-import { formatPrice } from '@/helpers/formatters';
 import { CartItemProps } from '@/types/components';
-import { useLocale } from 'next-intl';
-import { IoAddCircle, IoRemoveCircle } from 'react-icons/io5';
+import { IoAddCircle, IoRemoveCircle, IoTrash } from 'react-icons/io5';
+import { Price } from '../Price';
 import { StrapiImage } from '../StrapiImage';
 
-export const CartItem: FC<CartItemProps> = ({ data, currency, onAdd, onRemove, t }) => {
-  const locale = useLocale();
-
-  const quantityTitle = useMemo(() => {
-    return locale === 'uk' ? 'Кількість:' : 'Quantity:';
-  }, [locale]);
-
-  const priceTitle = useMemo(() => {
-    return locale === 'uk' ? 'Ціна за одиницю:' : 'Price for item:';
-  }, [locale]);
-
-  const sizeTitle = useMemo(() => {
-    return locale === 'uk' ? 'Розмір:' : 'Size:';
-  }, [locale]);
-
+export const CartItem: FC<CartItemProps> = ({ data, currency, onAdd, onRemove, onDelete, t }) => {
   return (
-    <>
-      <StrapiImage
-        src={data?.images?.url}
-        alt={data?.images?.alternativeText}
-        formats={data?.images?.formats}
-        priority
-        width={428}
-        height={428}
-        className='aspect-square rounded-none object-cover'
-        containerClass='w-32 sm:w-48'
-      />
-      <div className='flex flex-col'>
-        <div className='flex flex-col gap-y-2.5'>
-          <Title level='4'>{data?.name}</Title>
-          {data?.size && (
-            <p className='text-sm font-medium normal-case text-base-200'>
-              {sizeTitle}&nbsp;{data?.size}
-            </p>
-          )}
-
-          <div className='flex h-min items-center gap-x-2'>
-            <p className='text-sm font-medium normal-case text-base-200'>
-              {quantityTitle}&nbsp;{data?.quantity}
-            </p>
-            <div className='flex items-center gap-x-1.5'>
+    <div className='group card image-full relative !z-10 h-80 w-full overflow-hidden rounded-none'>
+      <figure className='overflow-hidden !rounded-none transition-all duration-300 ease-in-out'>
+        <StrapiImage
+          sizes='100vw'
+          src={data?.images.url}
+          alt={data?.images.alt}
+          width={data?.images?.formats?.medium?.width}
+          height={data?.images?.formats?.medium?.height}
+          containerClass='w-full'
+          className='aspect-square h-full w-full object-center transition-all'
+        />
+        <button
+          onClick={onDelete}
+          type='button'
+          className='absolute right-4 top-4 z-10 h-6 w-6 text-base-300 hover:fill-red-500'
+        >
+          <IoTrash height={32} width={32} className='h-6 w-6 fill-base-300 hover:fill-red-500' />
+        </button>
+      </figure>
+      <div className='card-body mt-auto flex flex-col'>
+        <div className='flex flex-col gap-y-2.5 !text-base-300'>
+          <Title level='4' className='text-base-300'>
+            {data?.name}
+          </Title>
+          <p className='whitespace-pre-line break-words normal-case text-base-300'>
+            {t('cart.size', { number: data.size })}
+          </p>
+          <p className='whitespace-pre-line break-words normal-case text-base-300'>
+            {t('material.title')}: {t(`material.${data.material}`)}
+          </p>
+          <div className='flex h-min w-36 items-center gap-x-2'>
+            <p className='w-min text-base-300'>{t('cart.quantity', { number: data?.quantity })}</p>
+            <div className='mr-auto flex items-center gap-x-1.5'>
               <button className='btn-circle h-min w-auto' onClick={onRemove}>
                 <IoRemoveCircle height={6} width={6} />
               </button>
@@ -59,17 +52,12 @@ export const CartItem: FC<CartItemProps> = ({ data, currency, onAdd, onRemove, t
             </div>
           </div>
 
-          {data.material && (
-            <p className='text-sm font-medium normal-case text-base-200'>
-              {t('material.title')}: {t(`material.${data.material}`)}
-            </p>
-          )}
-
-          <p className='text-sm font-medium normal-case text-base-200'>
-            {priceTitle}&nbsp;{formatPrice(data?.unit_amount, currency)}
-          </p>
+          <div className='flex w-min gap-x-2'>
+            <p className='whitespace-nowrap normal-case text-base-300'>{t('cart.price')}</p>
+            <Price currency={currency} price={data.unit_amount} textClassName='text-base-300 text-sm' />
+          </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
