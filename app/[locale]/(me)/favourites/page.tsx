@@ -47,7 +47,7 @@ export default async function FavouritesPage({ params, searchParams }: PageProps
         {t('wishlist')}
       </Title>
       <div className='divider' />
-      <ProductListGroup data={wishlist} className='grid-cols-fluid' />
+      <ProductListGroup data={wishlist} className='grid-cols-fluid lg:grid-cols-3 2xl:grid-cols-4' />
     </section>
   );
 }

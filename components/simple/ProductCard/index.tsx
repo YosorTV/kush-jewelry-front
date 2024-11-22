@@ -1,12 +1,13 @@
 import { FC } from 'react';
 
 import { NextLink, Title } from '@/components/elements';
-import { Price, Wishlist } from '@/components/simple';
 import AnimatedImage from '@/components/simple/AnimatedImage';
 
 import { cn, Link } from '@/lib';
 
 import { ProductCardProps } from '@/types/components';
+import { Price } from '../Price';
+import { Wishlist } from '../Wishlist';
 
 export const ProductCard: FC<ProductCardProps> = ({
   product,
@@ -17,44 +18,49 @@ export const ProductCard: FC<ProductCardProps> = ({
   t
 }) => {
   return (
-    <figure className={cn('grid cursor-pointer', className)}>
+    <figure className={cn('grid cursor-pointer overflow-hidden', className)}>
       <div className='relative'>
         <AnimatedImage product={product} className={imgClassName} />
         <span className='absolute left-0 top-0 z-[3] bg-neutral p-2 text-base-300'>{product.hintText}</span>
+        {product.saleValue > 0 && (
+          <span className='absolute left-0 top-12 z-[3] bg-neutral p-2 text-base-300'>-{product.saleValue}%</span>
+        )}
       </div>
-      <figcaption className='flex w-full flex-col'>
-        <div className='flex h-6 flex-1 items-center justify-between'>
+      <figcaption className='flex w-full flex-col pt-2.5'>
+        <div className='flex min-h-6 flex-1 items-center justify-between'>
           <NextLink href={`/catalog/${product.slug}`}>
             <Title level='3' className='font-semibold'>
               {product.title}
             </Title>
           </NextLink>
+          <Price
+            currency={currency}
+            price={product?.price}
+            className='!text-base !text-base-200'
+            sale={product?.saleValue}
+          />
+        </div>
+        <div
+          className={cn(
+            'flex min-h-6 w-full items-center justify-between',
+            product.collections.data.length > 0 ? 'justify-between' : 'justify-end'
+          )}
+        >
+          {product.collections.data.map((collection) => (
+            <Link
+              className='link-hover link flex gap-x-2 underline-offset-8'
+              key={collection.slug}
+              href={`/collection/${collection.slug}`}
+            >
+              {t('collection')}&nbsp;{collection.title}
+            </Link>
+          ))}
           <Wishlist
             session={session}
             locale={product.locale}
             productId={product.id}
             inWishlist={product?.inWishlist ?? false}
           />
-        </div>
-        <div className='group flex flex-col gap-y-2.5'>
-          <div className='flex w-full items-end justify-between'>
-            <Price
-              currency={currency}
-              price={product?.price}
-              textClassName='!text-base !text-base-200'
-              sale={product?.saleValue}
-            />
-            {product?.collections &&
-              product.collections.data.map((collection) => (
-                <Link
-                  className='link-hover link flex gap-x-2 underline-offset-8'
-                  key={collection.slug}
-                  href={`/collection/${collection.slug}`}
-                >
-                  {t('collection')}&nbsp;{collection.title}
-                </Link>
-              ))}
-          </div>
         </div>
       </figcaption>
     </figure>

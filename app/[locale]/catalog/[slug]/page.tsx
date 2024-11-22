@@ -74,7 +74,7 @@ export default async function ProductDetails({ params }: PageProps) {
             >
               {t(`category.${data?.category}`)}
             </NextLink>
-            <Price currency={currency} price={data?.price} sale={data?.saleValue} className='flex flex-row' />
+            <Price currency={currency} price={data?.price} sale={data?.saleValue} containerClass='flex flex-row' />
           </div>
           <p className='whitespace-pre-line text-wrap'>{data?.description}</p>
           <ProductParams sizes={sizes} materials={data.materials.data} availableSizes={data.sizes.data}>

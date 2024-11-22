@@ -16,9 +16,9 @@ export const OrderCardMobile: FC<IOrderCard> = ({
   publishedAt,
   image,
   url,
+  currency = 41,
   t
 }) => {
-
   return (
     <div className='group card image-full !z-10 h-80 w-full overflow-hidden rounded-none'>
       <figure className='overflow-hidden !rounded-none transition-all duration-300 ease-in-out md:ml-auto md:group-hover:z-20'>
@@ -42,7 +42,7 @@ export const OrderCardMobile: FC<IOrderCard> = ({
             <span className='whitespace-nowrap'>{t('name', { name })}</span>
             <span className='whitespace-nowrap'>{t('quantity', { number: quantity })}</span>
             <span className='flex items-baseline gap-x-2.5 whitespace-nowrap'>
-              {t('price')} <Price price={parseFloat(price)} currency={1} className='text-xs' />
+              {t('price')} <Price price={parseFloat(price)} currency={currency} className='text-xs' />
             </span>
             <span>{t('date', { date: formatDate(publishedAt) })}</span>
             <span>

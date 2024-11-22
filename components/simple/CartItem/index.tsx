@@ -52,9 +52,9 @@ export const CartItem: FC<CartItemProps> = ({ data, currency, onAdd, onRemove, o
             </div>
           </div>
 
-          <div className='flex w-min gap-x-2'>
+          <div className='flex w-min items-baseline gap-x-2'>
             <p className='whitespace-nowrap normal-case text-base-300'>{t('cart.price')}</p>
-            <Price currency={currency} price={data.unit_amount} textClassName='text-base-300 text-sm' />
+            <Price currency={currency} price={data.unit_amount} className='!text-sm text-base-300' />
           </div>
         </div>
       </div>

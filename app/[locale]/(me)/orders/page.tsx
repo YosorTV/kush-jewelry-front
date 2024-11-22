@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 
 import { auth } from '@/auth';
 import OrdersSection from '@/components/complex/OrdersSection';
-import { getOrdersData } from '@/services';
+import { getCurrency, getOrdersData } from '@/services';
 import { PageProps } from '@/types/app/page.types';
 
 import { Title } from '@/components/elements';
@@ -27,6 +27,7 @@ export default async function OrdersPage({ params, searchParams }: PageProps) {
 
   const session = await auth();
   const t = await getTranslations('system');
+  const currency = await getCurrency();
 
   const { data, meta } = await getOrdersData({
     locale,
@@ -48,7 +49,7 @@ export default async function OrdersPage({ params, searchParams }: PageProps) {
         {t('orders')}
       </Title>
       <div className='divider' />
-      <OrdersSection orders={data} emptyTitle={t('emptyList')} />
+      <OrdersSection t={t('order')} orders={data} currency={currency} locale={locale} emptyTitle={t('emptyList')} />
       <PaginateController
         disabled={isLastPage}
         total={meta.pagination.total}

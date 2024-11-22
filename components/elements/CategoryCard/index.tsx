@@ -11,7 +11,6 @@ import { Price } from '@/components/simple/Price';
 import { cn } from '@/lib';
 
 export const CategoryCard: FC<any> = ({ data, currency }) => {
-  console.log('data: ', data);
   const t = useTranslations();
 
   const [showOverlay, setShowOverlay] = useState<boolean>(false);
@@ -68,8 +67,9 @@ export const CategoryCard: FC<any> = ({ data, currency }) => {
             </p>
             <div className='flex w-full items-center justify-between'>
               <Price
-                className='!flex-row font-medium'
-                textClassName='!text-base-300 text-sm'
+                containerClass='!flex-row'
+                saleClassName='text-base-300'
+                className='text-base-300'
                 price={data?.price}
                 sale={data?.saleValue}
                 currency={currency}

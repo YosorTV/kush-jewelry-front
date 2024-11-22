@@ -1,17 +1,10 @@
-'use client';
-
-import { useLocale, useTranslations } from 'next-intl';
-
 import { Lottie, Title } from '@/components/elements';
 import { OrderCardMobile, Price } from '@/components/simple';
 
 import lottieAnim from '@/public/LottieEmplyList.json';
 
-const OrdersSection = ({ orders, emptyTitle = 'Не знайдено' }: any) => {
-  const locale = useLocale();
-  const t = useTranslations('order');
-
-  const replaceLocaleInUrl = (url:string) => url.replace(/-(uk|en)$/, `-${locale}`);
+const OrdersSection = ({ orders, currency, locale, t, emptyTitle = 'Не знайдено' }: any) => {
+  const replaceLocaleInUrl = (url: string) => url.replace(/-(uk|en)$/, `-${locale}`);
 
   if (!orders.length) {
     return <Lottie text={emptyTitle} src={lottieAnim} className='relative top-20' playerClassName='h-96 w-96' />;
@@ -23,7 +16,7 @@ const OrdersSection = ({ orders, emptyTitle = 'Не знайдено' }: any) =>
         <div className='flex w-full flex-col items-center justify-between md:flex-row'>
           <Title level='3'> {t('order', { number: order.id })}</Title>
           <span className='flex items-baseline gap-x-2.5 whitespace-nowrap'>
-            {t('total')} <Price price={parseFloat(order.amount)} currency={1} className='!text-xs' />
+            {t('total')} <Price price={parseFloat(order.amount)} currency={currency} className='!text-xs' />
           </span>
         </div>
 
@@ -32,6 +25,7 @@ const OrdersSection = ({ orders, emptyTitle = 'Не знайдено' }: any) =>
             <OrderCardMobile
               t={t}
               locale={locale}
+              currency={currency}
               url={replaceLocaleInUrl(el.url)}
               key={el.id}
               id={order.id}

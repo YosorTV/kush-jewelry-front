@@ -7,7 +7,8 @@ interface IPrice {
   sale?: number;
   currency: any;
   className?: string;
-  textClassName?: string;
+  saleClassName?: string;
+  containerClass?: string;
 }
 
 export const Price: FC<Readonly<IPrice>> = ({
@@ -15,7 +16,8 @@ export const Price: FC<Readonly<IPrice>> = ({
   sale = 0,
   currency,
   className,
-  textClassName = 'text-base-200'
+  containerClass,
+  saleClassName = 'text-base-200'
 }) => {
   const discountAmount = price * (sale / 100);
   const originalPrice = formatPrice(price, currency);
@@ -24,15 +26,13 @@ export const Price: FC<Readonly<IPrice>> = ({
   return (
     <p
       aria-label={`Price: ${price}`}
-      className={cn('flex flex-col-reverse items-baseline gap-2.5 xs:flex-row', className)}
+      className={cn('flex flex-col-reverse items-baseline gap-2.5 xs:flex-row', containerClass)}
     >
-      {sale > 0 && (
-        <span className={cn('md:text-md text-base text-base-300 lg:text-lg', textClassName)}>{salePrice}</span>
-      )}
+      {sale > 0 && <span className={cn('text-lg', saleClassName)}>{salePrice}</span>}
       <span
         className={cn(
-          sale > 0 ? 'md:text-md text-base line-through lg:text-base' : 'md:text-md text-base lg:text-lg',
-          textClassName
+          sale > 0 ? 'text-sm line-through md:text-sm lg:text-base' : 'md:text-md text-base lg:text-lg',
+          className
         )}
       >
         {originalPrice}

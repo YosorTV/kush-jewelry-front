@@ -17,9 +17,10 @@ interface IWishlist {
   inWishlist: boolean;
   text?: string;
   session: Session;
+  className?: string;
 }
 
-export const Wishlist: FC<IWishlist> = ({ productId, text, locale, session = null, inWishlist = false }) => {
+export const Wishlist: FC<IWishlist> = ({ productId, text, locale, session = null, inWishlist = false, className }) => {
   const dialogRef = useRef<HTMLDialogElement | null>(null);
 
   const [add, setAdd] = useState(inWishlist);
@@ -55,7 +56,7 @@ export const Wishlist: FC<IWishlist> = ({ productId, text, locale, session = nul
   return (
     <Button
       onClick={handleAdd}
-      className={cn(text && 'btn btn-block !bg-base-200 !text-base-100')}
+      className={cn(text && 'btn btn-block !bg-base-200 !text-base-100', className)}
       title='wishlist'
       aria-label='wishlist'
       icon={{

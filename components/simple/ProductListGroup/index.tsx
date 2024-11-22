@@ -17,10 +17,7 @@ interface IProductListGroup {
   className?: string;
 }
 
-const ProductListGroup: FC<IProductListGroup> = async ({
-  data,
-  className = 'grid-cols-1 xs:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4'
-}) => {
+const ProductListGroup: FC<IProductListGroup> = async ({ data, className = 'grid-cols-fluid ' }) => {
   const currency = await getCurrency();
   const session = await auth();
   const t = await getTranslations('system');
@@ -44,11 +41,7 @@ const ProductListGroup: FC<IProductListGroup> = async ({
     );
   }
 
-  return (
-    <div className={cn('mb-5 grid min-h-96 gap-x-2.5 gap-y-5', className, 'grid-cols-fluid')}>
-      {data.map(printProduct)}
-    </div>
-  );
+  return <div className={cn('mb-5 grid min-h-80 gap-x-2.5 gap-y-10', className)}>{data.map(printProduct)}</div>;
 };
 
 export default ProductListGroup;
