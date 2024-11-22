@@ -14,14 +14,12 @@ import { CartDelivery } from '@/components/simple/CartDelivery';
 import { cn, useRouter } from '@/lib';
 import { paymentCreate } from '@/services';
 import { ShoppingCartProps } from '@/types/components/complex';
-import { useTranslations } from 'next-intl';
 import { useSearchParams } from 'next/navigation';
 import { BsFillBagFill } from 'react-icons/bs';
 import { IoArrowBack } from 'react-icons/io5';
 import { Success } from '../Success';
 
 export const ShoppingCart: FC<ShoppingCartProps> = ({ data, locale, currency }) => {
-  const t = useTranslations();
   const cartStore = useCart();
   const router = useRouter();
   const searchParams = useSearchParams();
