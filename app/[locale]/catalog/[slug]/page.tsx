@@ -66,7 +66,7 @@ export default async function ProductDetails({ params }: PageProps) {
             )}
             <span className='bg-neutral p-2 text-base-300'>{data?.hintText}</span>
           </header>
-          <div className='flex flex-wrap items-end justify-between'>
+          <div className='flex flex-wrap items-center justify-between gap-5'>
             <NextLink
               href={`/catalog?categories=${data?.category}`}
               className='capitalize text-base-200 underline underline-offset-8'
@@ -74,9 +74,9 @@ export default async function ProductDetails({ params }: PageProps) {
             >
               {t(`category.${data?.category}`)}
             </NextLink>
-            <Price currency={currency} price={data?.price} sale={data?.saleValue} containerClass='flex flex-row' />
+            <Price currency={currency} price={data?.price} sale={data?.saleValue} />
           </div>
-          <p className='whitespace-pre-line text-wrap'>{data?.description}</p>
+          <p className='whitespace-pre-line text-wrap text-base-200'>{data?.description}</p>
           <ProductParams sizes={sizes} materials={data.materials.data} availableSizes={data.sizes.data}>
             <div className='mt-5 flex flex-col'>
               <Wishlist

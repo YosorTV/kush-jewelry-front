@@ -16,7 +16,7 @@ export const Price: FC<Readonly<IPrice>> = ({
   sale = 0,
   currency,
   className,
-  containerClass,
+  containerClass = 'flex-row-reverse',
   saleClassName = 'text-base-200'
 }) => {
   const discountAmount = price * (sale / 100);
@@ -24,14 +24,13 @@ export const Price: FC<Readonly<IPrice>> = ({
   const salePrice = formatPrice(price - discountAmount, currency);
 
   return (
-    <p
-      aria-label={`Price: ${price}`}
-      className={cn('flex flex-col-reverse items-baseline gap-2.5 xs:flex-row', containerClass)}
-    >
+    <p aria-label={`Price: ${price}`} className={cn('flex items-center gap-2.5', containerClass)}>
       {sale > 0 && <span className={cn('text-lg', saleClassName)}>{salePrice}</span>}
       <span
         className={cn(
-          sale > 0 ? 'text-sm line-through md:text-sm lg:text-base' : 'md:text-md text-base lg:text-lg',
+          sale > 0
+            ? 'text-sm text-red-500 line-through md:text-sm lg:text-base'
+            : 'md:text-md text-base text-base-200 lg:text-lg',
           className
         )}
       >

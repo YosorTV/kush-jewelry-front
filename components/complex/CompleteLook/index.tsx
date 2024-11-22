@@ -29,7 +29,7 @@ export const CompleteLook: FC<ICompleteLook> = async ({ products, currency, cate
         session={session}
         key={product.id}
         product={product}
-        imgClassName='h-80 sm:h-96'
+        imgClassName='h-112 sm:h-120'
         className='embla__slide cursor-grab active:cursor-grabbing'
       />
     );

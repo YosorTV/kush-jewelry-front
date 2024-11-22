@@ -1,6 +1,6 @@
 import { Accordion } from '@/components/elements';
 import { getDeliveryData } from '@/services/api/get-delivery';
-import React, { FC } from 'react';
+import { FC } from 'react';
 
 interface IDeliveryBlock {
   locale: string;
@@ -12,7 +12,7 @@ export const DeliveryBlock: FC<IDeliveryBlock> = async ({ locale = 'uk' }) => {
   const DELIVERY_OPTIONS = [
     {
       title: delivery?.title,
-      component: <p className='whitespace-pre-line text-pretty'>{delivery?.description}</p>
+      component: <p className='whitespace-pre-line text-pretty text-base-200'>{delivery?.description}</p>
     }
   ];
 
