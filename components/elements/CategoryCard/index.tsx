@@ -44,7 +44,7 @@ export const CategoryCard: FC<any> = ({ data, currency }) => {
             </motion.div>
           )}
         </AnimatePresence>
-        <div className='h-[468px] w-full lg:h-[512px]'>
+        <div className='relative h-[468px] w-full lg:h-[512px]'>
           <StrapiImage
             fill
             priority
@@ -54,6 +54,10 @@ export const CategoryCard: FC<any> = ({ data, currency }) => {
             alt={data?.images?.data?.[0]?.alternativeText}
             className='aspect-square h-full w-full object-cover'
           />
+          <span className='absolute left-0 top-0 z-[3] bg-white p-2 text-neutral'>{data.hintText}</span>
+          {data.saleValue > 0 && (
+            <span className='absolute left-0 top-12 z-[3] bg-white p-2 text-neutral'>-{data.saleValue}%</span>
+          )}
         </div>
         <div className='group absolute bottom-0 left-0 z-10 w-full bg-black/50 p-5'>
           <div className='flex flex-1 justify-between pt-2'>

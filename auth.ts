@@ -26,7 +26,7 @@ export const {
       }
     }
   },
-  secret: process.env.AUTH_SECRET || '81l3XFFjNE2TVjN9LS0ZuiPaTC8UqaR4',
+  secret: process.env.AUTH_SECRET,
   pages: { signIn: '/login' },
   providers: [
     CredentialProvider({

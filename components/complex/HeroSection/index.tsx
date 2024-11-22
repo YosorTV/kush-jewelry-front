@@ -5,7 +5,7 @@ import { FC } from 'react';
 export const HeroSection: FC<any> = ({ data }) => {
   return (
     <section className='group relative flex flex-col'>
-      <div className='relative flex h-96 w-full overflow-hidden md:h-2md'>
+      <div className='relative flex h-96 w-full overflow-hidden md:h-lg'>
         <StrapiImage
           fill
           priority
