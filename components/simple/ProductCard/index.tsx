@@ -25,6 +25,13 @@ export const ProductCard: FC<ProductCardProps> = ({
         {product.saleValue > 0 && (
           <span className='absolute left-0 top-12 z-[3] bg-neutral p-2 text-base-300'>-{product.saleValue}%</span>
         )}
+        <Wishlist
+          className='absolute !right-0 top-0 !z-[3]'
+          session={session}
+          locale={product.locale}
+          productId={product.id}
+          inWishlist={product?.inWishlist ?? false}
+        />
       </div>
       <figcaption className='flex w-full flex-col pt-2.5'>
         <div className='flex min-h-6 flex-1 items-center justify-between'>
@@ -43,10 +50,10 @@ export const ProductCard: FC<ProductCardProps> = ({
         <div
           className={cn(
             'flex min-h-6 w-full items-center justify-between',
-            product.collections.data.length > 0 ? 'justify-between' : 'justify-end'
+            product?.collections?.data?.length > 0 ? 'justify-between' : 'justify-end'
           )}
         >
-          {product.collections.data.map((collection) => (
+          {product?.collections?.data?.map((collection) => (
             <Link
               className='link-hover link flex gap-x-2 underline-offset-8'
               key={collection.slug}
@@ -55,12 +62,6 @@ export const ProductCard: FC<ProductCardProps> = ({
               {t('collection')}&nbsp;{collection.title}
             </Link>
           ))}
-          <Wishlist
-            session={session}
-            locale={product.locale}
-            productId={product.id}
-            inWishlist={product?.inWishlist ?? false}
-          />
         </div>
       </figcaption>
     </figure>
