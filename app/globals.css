@@ -32,7 +32,7 @@
   }
 
   .absolute-center {
-    @apply absolute inset-0 flex items-center justify-center;
+    @apply absolute flex items-center justify-center;
   }
 
   .absolute-y-center {
@@ -59,11 +59,11 @@
   }
 
   .auth-page_wrapper {
-    @apply relative h-screen w-full items-center justify-center overflow-hidden;
+    @apply relative h-dvh w-full items-center justify-center overflow-hidden;
   }
 
   .auth-page_form {
-    @apply flex w-11/12 flex-col gap-y-2.5 rounded-md bg-base-100 p-4 shadow-2xl xs:p-5 sm:w-5/6 md:w-2/3 md:p-10 xl:w-[40%];
+    @apply right-0 flex h-full h-min w-full flex-col gap-y-2.5 bg-base-100 bg-opacity-90 p-5 shadow-2xl md:w-3/4 md:p-10 xl:w-1/2;
   }
 
   .auth-form_submit {
@@ -71,7 +71,7 @@
   }
 
   .auth-form_title {
-    @apply pb-4 text-center text-2xl text-base-200 sm:text-3xl md:text-4xl xl:text-5xl;
+    @apply my-2.5 text-center !text-3xl text-base-200 md:!text-4xl xl:!text-5xl;
   }
 
   .auth-link {

@@ -6,7 +6,7 @@ import { StrapiImage } from '@/components/simple';
 
 export const PageLayout: FC<PageLayoutProps> = ({ children, className, cover }) => {
   return (
-    <div className={cn('flex flex-grow flex-col', className)}>
+    <div className={cn('flex flex-grow animate-reveal flex-col opacity-0', className)}>
       {cover && cover.url && (
         <StrapiImage
           alt={cover.alternativeText}

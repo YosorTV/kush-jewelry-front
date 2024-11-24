@@ -1,12 +1,13 @@
 'use client';
 
-import { motion } from 'framer-motion';
 import { MenuItem } from './MenuItem';
 import { CategoryLinkType, CollectionLinkType, StrapiLinkType } from '@/types/components';
 import { FC } from 'react';
-import { Logo, Title } from '@/components/elements';
+import { Title } from '@/components/elements';
 import { cormorant } from '@/assets/fonts';
 import { cn } from '@/lib';
+import { LangChanger } from '../LangChanger';
+import { ThemeChanger } from '../ThemeChanger';
 
 type MenuNavProps = {
   pages: {
@@ -42,7 +43,7 @@ export const MenuNav: FC<MenuNavProps> = ({ pages, categories, collections }) =>
         <Title level='5' className={cn(cormorant.className, 'text-2xl capitalize')}>
           {pages.title}
         </Title>
-        <motion.ul>
+        <ul>
           {pages.data.map((item: StrapiLinkType) => (
             <MenuItem
               id={item.id}
@@ -53,21 +54,21 @@ export const MenuNav: FC<MenuNavProps> = ({ pages, categories, collections }) =>
               isExternal={item.isExternal}
             />
           ))}
-        </motion.ul>
+        </ul>
       </div>
       <div className='divider pr-5' />
       <div className='flex flex-col gap-y-2.5'>
         <Title level='5' className={cn(cormorant.className, 'text-2xl capitalize')}>
           {categories.title}
         </Title>
-        <motion.ul>{categories.data.map(printCategory)}</motion.ul>
+        <ul>{categories.data.map(printCategory)}</ul>
       </div>
       <div className='divider pr-5' />
       <div className='flex flex-col gap-y-2.5'>
         <Title level='5' className={cn(cormorant.className, 'text-2xl capitalize')}>
           {collections.title}
         </Title>
-        <motion.ul>
+        <ul>
           {collections.data.map((item: CollectionLinkType) => (
             <MenuItem
               className='py-2.5'
@@ -78,10 +79,13 @@ export const MenuNav: FC<MenuNavProps> = ({ pages, categories, collections }) =>
               isExternal={false}
             />
           ))}
-        </motion.ul>
+        </ul>
         <div className='divider pr-5' />
-        <div className='flex w-full justify-center'>
-          <Logo height={90} />
+        <div className='flex w-full'>
+          <div className='col-start-2 flex gap-x-6 lg:hidden'>
+            <ThemeChanger />
+            <LangChanger className='dropdown-top' />
+          </div>
         </div>
       </div>
     </div>

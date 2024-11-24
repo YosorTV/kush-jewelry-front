@@ -4,13 +4,15 @@ type LogoIconProps = {
   width?: number;
   height?: number;
   className?: string;
+  onClick?: () => void;
 };
 
-export const LogoIcon: FC<LogoIconProps> = ({ width = 150, height = 42, className }) => {
+export const LogoIcon: FC<LogoIconProps> = ({ width = 150, height = 42, className, onClick }) => {
   return (
     <svg
       width={width}
       height={height}
+      onClick={onClick}
       viewBox={`0 0 ${width} ${height}`}
       fill='none'
       xmlns='http://www.w3.org/2000/svg'

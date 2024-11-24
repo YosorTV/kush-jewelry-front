@@ -1,9 +1,7 @@
 'use client';
 
-import { cormorant } from '@/assets/fonts';
 import { Form, Input, Title } from '@/components/elements';
 import { SubmitButton } from '@/components/simple';
-import { cn } from '@/lib';
 import { schemas } from '@/lib/zod';
 import { resetPassword } from '@/services';
 
@@ -20,10 +18,10 @@ export const ResetForm = ({ data, code, locale }: any) => {
       method='post'
       id='reset-password'
       action={resetPassword}
-      className='auth-page_form absolute-center'
+      className='auth-page_form absolute-center h-full'
     >
       <div className='relative w-full'>
-        <Title level='1' className={cn(cormorant.className, 'auth-form_title')}>
+        <Title level='1' className='auth-form_title'>
           {data.title}
         </Title>
         <div className='flex flex-col gap-y-5 py-2.5'>

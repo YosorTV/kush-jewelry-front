@@ -28,20 +28,20 @@ export default async function Catalog({ params, searchParams }: PageProps) {
 
   return (
     <PageLayout className='mt-16'>
-      <div className='relative h-2md w-full overflow-hidden md:h-lg'>
+      <div className='relative h-2md w-full overflow-hidden md:h-2lg'>
         <StrapiImage
           fill
           priority
-          className='animate-zoomOut aspect-square h-full w-full object-cover transition-transform duration-300 ease-out md:aspect-video'
           formats={data?.cover?.formats}
           src={data?.cover?.url}
           alt={data?.cover?.alternativeText}
           overlay
+          className='aspect-square h-full w-full animate-zoomOut object-cover transition-transform duration-300 ease-out md:aspect-video'
         />
         <Title
           level='1'
           variant='subheading'
-          className='absolute-center animate-reveal mx-auto w-3/4 whitespace-break-spaces text-center text-base-300'
+          className='absolute-center inset-0 mx-auto w-3/4 whitespace-break-spaces text-center text-base-300'
         >
           {data.title}
         </Title>

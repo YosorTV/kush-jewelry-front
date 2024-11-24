@@ -81,8 +81,8 @@ module.exports = {
           '100%': { transform: 'scale(1)', opacity: '1' }
         },
         reveal: {
-          '0%': { transform: 'translateY(50px)', opacity: '0' },
-          '100%': { transform: 'translateY(0)', opacity: '1' }
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' }
         }
       },
       animation: {

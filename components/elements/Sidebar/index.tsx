@@ -12,7 +12,7 @@ export const Sidebar: FC<PropsWithChildren<SidebarProps>> = ({ opened, position,
   useScrollLock(opened);
 
   return (
-    <AnimatePresence mode='wait' presenceAffectsLayout>
+    <AnimatePresence mode='wait'>
       {opened && (
         <motion.div
           layout

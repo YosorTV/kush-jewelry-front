@@ -1,11 +1,9 @@
 'use client';
 
-import { cormorant } from '@/assets/fonts';
 import { SignInProviders } from '@/components/complex';
 import { Form, Input, NextLink, Title } from '@/components/elements';
 import { SubmitButton } from '@/components/simple';
 import { StepBack } from '@/components/simple/StepBack';
-import { cn } from '@/lib';
 import { schemas } from '@/lib/zod';
 import { authUserAction } from '@/services';
 import { StrapiLinkType } from '@/types/components';
@@ -20,7 +18,7 @@ export const SignInForm = ({ data, locale = 'uk' }: any) => {
     if (!data) return;
 
     return data.map((input: any) => (
-      <Input autoComplete={input.type === 'email' && 'email'} key={input.id} {...input} />
+      <Input autoComplete={input.type === 'email' ? 'email' : 'off'} key={input.id} {...input} />
     ));
   };
 
@@ -49,18 +47,18 @@ export const SignInForm = ({ data, locale = 'uk' }: any) => {
       method='post'
       schema={schema}
       action={authUserAction}
-      className='auth-page_form absolute-center'
+      className='auth-page_form absolute-center h-full'
     >
-      <StepBack className='absolute left-5 top-2' />
-      <div className='relative mt-14 w-full md:mt-10'>
-        <Title level='1' className={cn(cormorant.className, 'auth-form_title')}>
+      <StepBack className='absolute left-5 top-20' />
+      <div className='relative w-full pt-5'>
+        <Title level='1' className='auth-form_title'>
           {data.title}
         </Title>
-        <div className='mx-auto flex w-full flex-col gap-y-5'>
+        <div className='grid grid-cols-1 gap-y-5 pt-5'>
           <Input hidden readOnly name='locale' defaultValue={locale} className='hidden' />
           {printInputs(data.formFields)}
         </div>
-        <div className='flex w-full items-end justify-between gap-5 py-5 md:gap-10'>
+        <div className='flex w-full items-end justify-between gap-5 py-5'>
           {data.rememberMe && (
             <div>
               <Input

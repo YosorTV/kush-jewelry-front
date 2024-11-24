@@ -6,7 +6,7 @@ import { FC } from 'react';
 export const HeroSection: FC<any> = ({ data }) => {
   return (
     <section className='group relative flex flex-col items-center justify-center'>
-      <div className='relative h-md w-full overflow-hidden md:h-lg'>
+      <div className='relative h-2md w-full overflow-hidden md:h-2lg'>
         <StrapiImage
           fill
           overlay
@@ -15,18 +15,14 @@ export const HeroSection: FC<any> = ({ data }) => {
           src={data.image.url}
           formats={data.image.formats}
           alt={data.image.alternativeText}
-          className='animate-zoomOut aspect-square h-full w-full object-cover transition-transform duration-300 ease-out md:aspect-video'
+          className='aspect-square h-full w-full animate-zoomOut object-cover transition-transform duration-300 ease-out md:aspect-video'
         />
-        <Title
-          level='1'
-          variant='subheading'
-          className='absolute-center animate-reveal text-center text-base-300 opacity-0 md:whitespace-pre-line'
-        >
+        <Title level='1' variant='subheading' className='absolute-center top-1/2 mx-auto w-full text-base-300'>
           {data.title}
         </Title>
         <NextLink
           href={data?.link?.url}
-          className='absolute-center animate-reveal link-hover link bottom-10 !items-end text-center text-base-300 underline-offset-8 opacity-0'
+          className='absolute-center link-hover link inset-0 bottom-10 !items-end text-base-300 underline-offset-8'
         >
           {data?.link?.text}
         </NextLink>

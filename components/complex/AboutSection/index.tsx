@@ -23,10 +23,7 @@ interface IAboutSection {
 export const AboutSection: FC<IAboutSection> = ({ title, cover, content }) => {
   return (
     <article className='flex flex-col'>
-      <div className='relative h-md w-full overflow-hidden md:h-lg'>
-        <Title level='1' variant='heading' className='absolute-center animate-reveal z-10 text-base-300'>
-          {title}
-        </Title>
+      <div className='relative h-md w-full overflow-hidden md:h-2md'>
         <StrapiImage
           fill
           overlay
@@ -34,16 +31,21 @@ export const AboutSection: FC<IAboutSection> = ({ title, cover, content }) => {
           formats={cover.formats}
           src={cover.url}
           alt={cover?.alternativeText}
-          className='animate-zoomOut absolute aspect-auto h-full w-full object-cover'
+          className='absolute aspect-square h-full w-full animate-zoomOut object-cover object-top transition-transform duration-300 ease-out md:aspect-video'
         />
+        <Title
+          level='1'
+          variant='subheading'
+          className='absolute-center inset-0 right-20 mx-auto whitespace-break-spaces text-center text-base-300'
+        >
+          {title}
+        </Title>
       </div>
-      <AnimatedTag tag='div' className='flex flex-col gap-5 py-5'>
-        {content && (
-          <section className='flex flex-1 flex-col gap-5'>
-            <StrapiContentBlock content={content} imageClass='h-2md' />
-          </section>
-        )}
-      </AnimatedTag>
+      {content && (
+        <AnimatedTag tag='section' className='flex flex-1 flex-col gap-5 py-5'>
+          <StrapiContentBlock content={content} imageClass='h-2md' />
+        </AnimatedTag>
+      )}
     </article>
   );
 };

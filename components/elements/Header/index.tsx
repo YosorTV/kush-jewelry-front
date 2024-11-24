@@ -29,7 +29,11 @@ export default function Header({ data, cart, session, locale, currency }: Header
         <div className='flex items-center'>
           <Menu pages={pagesData} collections={collectionsData} categories={categoryData} />
         </div>
-        <Logo width={160} height={48} className='top-2.5 sm:block sm:w-full' />
+        <Logo
+          width={160}
+          height={48}
+          className='relative right-16 top-1 hidden w-svw items-center justify-center sm:flex'
+        />
         <div className='flex items-center gap-x-6'>
           <Search placeholder={data?.searchTitle} />
           <ShoppingCart data={cart} locale={locale} currency={currency} />
