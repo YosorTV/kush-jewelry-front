@@ -32,7 +32,7 @@ export default function Header({ data, cart, session, locale, currency }: Header
         <Logo
           width={160}
           height={48}
-          className='relative right-16 top-1 hidden w-svw items-center justify-center sm:flex'
+          className='absolute-center inset-0 top-3 hidden w-svw items-center justify-center sm:flex'
         />
         <div className='flex items-center gap-x-6'>
           <Search placeholder={data?.searchTitle} />

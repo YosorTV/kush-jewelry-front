@@ -17,12 +17,12 @@ export const HeroSection: FC<any> = ({ data }) => {
           alt={data.image.alternativeText}
           className='aspect-square h-full w-full animate-zoomOut object-cover transition-transform duration-300 ease-out md:aspect-video'
         />
-        <Title level='1' variant='subheading' className='absolute-center top-1/2 mx-auto w-full text-base-300'>
+        <Title level='1' variant='subheading' className='absolute-center inset-0 w-svw text-base-300'>
           {data.title}
         </Title>
         <NextLink
           href={data?.link?.url}
-          className='absolute-center link-hover link inset-0 bottom-10 !items-end text-base-300 underline-offset-8'
+          className='absolute-center link-hover link bottom-10 top-[90%] h-min w-svw !items-end text-base-300 underline-offset-8'
         >
           {data?.link?.text}
         </NextLink>

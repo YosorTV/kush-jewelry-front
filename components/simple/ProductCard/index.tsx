@@ -3,7 +3,7 @@ import { FC } from 'react';
 import { NextLink, Title } from '@/components/elements';
 import AnimatedImage from '@/components/simple/AnimatedImage';
 
-import { cn, Link } from '@/lib';
+import { cn } from '@/lib';
 
 import { ProductCardProps } from '@/types/components';
 import { Price } from '../Price';
@@ -42,22 +42,6 @@ export const ProductCard: FC<ProductCardProps> = ({
             </Title>
           </NextLink>
           <Price currency={currency} price={product?.price} sale={product?.saleValue} />
-        </div>
-        <div
-          className={cn(
-            'flex min-h-6 w-full items-center justify-between',
-            product?.collections?.data?.length > 0 ? 'justify-between' : 'justify-end'
-          )}
-        >
-          {product?.collections?.data?.map((collection) => (
-            <Link
-              className='link-hover link flex gap-x-2 underline-offset-8'
-              key={collection.slug}
-              href={`/collection/${collection.slug}`}
-            >
-              {t('collection')}&nbsp;{collection.title}
-            </Link>
-          ))}
         </div>
       </figcaption>
     </AnimatedTag>

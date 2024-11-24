@@ -26,10 +26,6 @@ export const Wishlist: FC<IWishlist> = ({ productId, text, locale, session = nul
   const [add, setAdd] = useState(inWishlist);
 
   useEffect(() => {
-    setAdd(inWishlist);
-  }, [inWishlist]);
-
-  useEffect(() => {
     dialogRef.current = document.getElementById('my_modal_3') as HTMLDialogElement;
   }, []);
 
