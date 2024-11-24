@@ -28,7 +28,7 @@ export default async function Catalog({ params, searchParams }: PageProps) {
 
   return (
     <PageLayout className='mt-16'>
-      <div className='relative h-2md w-full overflow-hidden md:h-2lg'>
+      <div className='relative h-md w-full overflow-hidden md:h-2md'>
         <StrapiImage
           fill
           priority

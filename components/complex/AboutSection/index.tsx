@@ -23,7 +23,7 @@ interface IAboutSection {
 export const AboutSection: FC<IAboutSection> = ({ title, cover, content }) => {
   return (
     <article className='flex flex-col'>
-      <div className='relative h-md w-full overflow-hidden md:h-2md'>
+      <div className='relative h-md w-full overflow-hidden'>
         <StrapiImage
           fill
           overlay
@@ -36,14 +36,14 @@ export const AboutSection: FC<IAboutSection> = ({ title, cover, content }) => {
         <Title
           level='1'
           variant='subheading'
-          className='absolute-center inset-0 right-20 mx-auto whitespace-break-spaces text-center text-base-300'
+          className='absolute-center inset-0 w-svw whitespace-break-spaces text-center text-base-300'
         >
           {title}
         </Title>
       </div>
       {content && (
         <AnimatedTag tag='section' className='flex flex-1 flex-col gap-5 py-5'>
-          <StrapiContentBlock content={content} imageClass='h-2md' />
+          <StrapiContentBlock content={content} imageClass='h-md' />
         </AnimatedTag>
       )}
     </article>
