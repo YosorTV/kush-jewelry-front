@@ -74,6 +74,20 @@ module.exports = {
       gridTemplateColumns: {
         hero: 'auto 1fr',
         fluid: 'repeat(auto-fit, minmax(19rem, 1fr))'
+      },
+      keyframes: {
+        zoomOut: {
+          '0%': { transform: 'scale(1.2)', opacity: '0.5' },
+          '100%': { transform: 'scale(1)', opacity: '1' }
+        },
+        reveal: {
+          '0%': { transform: 'translateY(50px)', opacity: '0' },
+          '100%': { transform: 'translateY(0)', opacity: '1' }
+        }
+      },
+      animation: {
+        zoomOut: 'zoomOut 0.5s ease-out forwards',
+        reveal: 'reveal 0.5s ease-out 0.5s forwards'
       }
     }
   },

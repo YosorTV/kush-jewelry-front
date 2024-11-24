@@ -22,12 +22,10 @@ export default async function Home({ params, searchParams }: PageProps) {
 
   const { data } = await getHomeData({ locale });
 
-  if (!data) {
-    return notFound();
-  }
+  if (!data) notFound();
 
   return (
-    <PageLayout className='mt-16'>
+    <PageLayout>
       <StrapiBlockRender data={data.blocks} {...searchParams} />
     </PageLayout>
   );

@@ -1,4 +1,3 @@
-import type { Viewport } from 'next';
 import { getMessages, setRequestLocale } from 'next-intl/server';
 
 import { LayoutProps } from '@/types/app/layout.types';
@@ -9,10 +8,9 @@ import { auth } from '@/auth';
 import { getCurrency, getLayoutData } from '@/services';
 
 import { LOCALES } from '@/helpers/constants';
+import { Viewport } from 'next';
 
-export function generateStaticParams() {
-  return LOCALES.map((locale) => ({ locale }));
-}
+export const revalidate = 60;
 
 export const viewport: Viewport = {
   colorScheme: 'dark light',
@@ -26,15 +24,21 @@ export const viewport: Viewport = {
   ]
 };
 
+export function generateStaticParams() {
+  return LOCALES.map((locale) => ({ locale }));
+}
+
 export default async function GlobalLayout({ children, params }: LayoutProps) {
   const { locale = 'uk' } = params;
 
   setRequestLocale(locale ?? 'uk');
 
-  const data = await getLayoutData({ locale });
-  const messages = await getMessages();
-  const currency = await getCurrency();
-  const session = await auth();
+  const [data, messages, currency, session] = await Promise.all([
+    getLayoutData({ locale }),
+    getMessages(),
+    getCurrency(),
+    auth()
+  ]);
 
   return (
     <BaseLayout

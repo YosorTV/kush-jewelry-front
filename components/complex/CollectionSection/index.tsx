@@ -3,6 +3,7 @@
 import { FC } from 'react';
 
 import CollectionCarousel from '@/components/simple/CollectionCarousel';
+import AnimatedTag from '@/components/simple/AnimatedTag';
 
 interface ICollectionSection {
   data: {
@@ -15,11 +16,11 @@ interface ICollectionSection {
 }
 
 export const CollectionSection: FC<ICollectionSection> = ({ data }) => {
-  const { id, title, collections } = data;
+  const { title, collections } = data;
 
   return (
-    <section
-      key={id}
+    <AnimatedTag
+      tag='section'
       className='relative flex flex-col bg-neutral p-2.5 !pt-0 hover:cursor-grab active:cursor-grabbing lg:p-5'
     >
       <CollectionCarousel
@@ -29,6 +30,6 @@ export const CollectionSection: FC<ICollectionSection> = ({ data }) => {
         data={collections.data}
         slideClass='h-96'
       />
-    </section>
+    </AnimatedTag>
   );
 };

@@ -1,19 +1,15 @@
 import { FC } from 'react';
-import { NextLink } from '@/components/elements/Link';
-import { ROOT } from '@/helpers/constants';
 import { LogoIcon } from '@/assets/icons';
+import { cn } from '@/lib';
 
 interface TLogo {
   className?: string;
   width?: number;
   height?: number;
-  onClick?: () => void;
 }
 
-export const Logo: FC<TLogo> = ({ className, width = 150, height = 42, onClick }) => {
+export const Logo: FC<TLogo> = ({ className, width = 160, height = 42 }) => {
   return (
-    <NextLink href={ROOT} className={className} onClick={onClick}>
-      <LogoIcon width={width} height={height} className='relative top-1 fill-base-200 p-2' />
-    </NextLink>
+    <LogoIcon width={width} height={height} className={cn('absolute-center -z-10 fill-base-200 py-1', className)} />
   );
 };

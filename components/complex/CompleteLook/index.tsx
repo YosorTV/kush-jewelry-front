@@ -42,7 +42,7 @@ export const CompleteLook: FC<ICompleteLook> = async ({ products, currency, cate
       total={data.length}
       className='w-svw px-2.5 md:px-5'
       titleClass='text-base-200 !text-xl md:py-5 py-2.5'
-      options={{ loop: true, align: 'center' }}
+      options={{ loop: true, align: 'start' }}
     >
       {data.map(printProduct)}
     </Carousel>

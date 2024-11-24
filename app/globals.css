@@ -32,11 +32,15 @@
   }
 
   .absolute-center {
-    @apply absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform;
+    @apply absolute inset-0 flex items-center justify-center;
+  }
+
+  .absolute-y-center {
+    @apply absolute top-1/2 my-auto;
   }
 
   .absolute-x-center {
-    @apply absolute left-1/2 -translate-x-1/2 transform;
+    @apply absolute mx-auto w-full;
   }
 
   .react-tel-input .flag-dropdown.open .selected-flag {

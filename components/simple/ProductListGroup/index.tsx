@@ -11,6 +11,7 @@ import { ProductCard } from '../ProductCard';
 import { auth } from '@/auth';
 import lottieAnim from '@/public/LottieEmplyList.json';
 import { getCurrency } from '@/services';
+import AnimatedTag from '../AnimatedTag';
 
 interface IProductListGroup {
   data: Product[];
@@ -41,7 +42,11 @@ const ProductListGroup: FC<IProductListGroup> = async ({ data, className = 'grid
     );
   }
 
-  return <div className={cn('mb-5 grid min-h-80 gap-x-2.5 gap-y-5', className)}>{data.map(printProduct)}</div>;
+  return (
+    <AnimatedTag tag='div' className={cn('mb-5 grid min-h-80 gap-x-2.5 gap-y-5', className)}>
+      {data.map(printProduct)}
+    </AnimatedTag>
+  );
 };
 
 export default ProductListGroup;
