@@ -42,7 +42,10 @@ export const paymentDataAdapter = ({ data, currency, prePurchase = false, custom
     order_id,
     products,
     customer: {
-      ...customer,
+      firstName: customer.firstName,
+      lastName: customer.lastName,
+      email: customer.email,
+      phone: customer.phoneNumber,
       customer_city: customer.self ? '' : customer.novapostCity.label,
       customer_warehouse: customer.self ? '' : customer.novapostWarehouse.label,
       self_delivery: customer.self

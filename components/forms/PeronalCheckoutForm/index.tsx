@@ -74,7 +74,7 @@ export const PeronalCheckoutForm: FC<IPersonalCheckoutForm> = ({ data, title = '
           autoComplete='off'
           value={phoneNumber}
           type='tel'
-          name='phone'
+          name='phoneNumber'
           onChange={(v) => cartStore.setDelivery('phoneNumber', String(v))}
           label={locale === 'uk' ? 'Номер телефону' : 'Phone number'}
           className='input checked:fill-base-200'

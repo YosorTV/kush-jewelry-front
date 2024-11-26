@@ -50,7 +50,10 @@ export const CartCheckout: FC<ICartCheckout> = ({ currency, liqPayData }) => {
         products,
         userId: Number(session?.user?.id) || null,
         customer: {
-          ...cartStore.delivery,
+          firstName: cartStore.delivery.firstName,
+          lastName: cartStore.delivery.lastName,
+          email: cartStore.delivery.email,
+          phone: cartStore.delivery.phoneNumber,
           customer_city: cartStore.delivery.self ? '' : cartStore.delivery.novapostCity.label,
           customer_warehouse: cartStore.delivery.self ? '' : cartStore.delivery.novapostWarehouse.label,
           self_delivery: cartStore.delivery.self

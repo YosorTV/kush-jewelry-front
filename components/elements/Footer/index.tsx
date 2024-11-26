@@ -40,9 +40,10 @@ export const Footer: FC<FooterProps> = ({ data, locale }) => {
               {data.contactGroupTitle}
             </Title>
             <ul className='flex flex-wrap items-center justify-center gap-x-6 md:flex-col md:flex-nowrap md:items-start md:justify-start'>
-              <li className='flex flex-wrap gap-x-6 py-2.5'>
+              <li className='flex flex-wrap gap-x-6 gap-y-2.5 py-2.5'>
                 <NextLink href={`tel:${data.primaryPhone}`}>{data.primaryPhone}</NextLink>
                 <NextLink href={`tel:${data.secondaryPhone}`}>{data.primaryPhone}</NextLink>
+                <NextLink href={`tel:${data.tertiaryPhone}`}>{data.tertiaryPhone}</NextLink>
               </li>
               <li className='py-2.5 sm:whitespace-nowrap lg:max-w-56'>
                 <span>{data.address}</span>
