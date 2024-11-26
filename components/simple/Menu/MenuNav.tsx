@@ -38,7 +38,7 @@ export const MenuNav: FC<MenuNavProps> = ({ pages, categories, collections }) =>
   );
 
   return (
-    <div className='relative top-16 px-5'>
+    <div className='relative top-16 px-2.5 md:px-5'>
       <div className='flex flex-col gap-y-2.5'>
         <Title level='5' className={cn(cormorant.className, 'text-2xl capitalize')}>
           {pages.title}
@@ -81,7 +81,7 @@ export const MenuNav: FC<MenuNavProps> = ({ pages, categories, collections }) =>
           ))}
         </ul>
         <div className='divider pr-5' />
-        <div className='flex w-full'>
+        <div className='flex w-full pb-20'>
           <div className='col-start-2 flex gap-x-6 lg:hidden'>
             <ThemeChanger />
             <LangChanger className='dropdown-top' />

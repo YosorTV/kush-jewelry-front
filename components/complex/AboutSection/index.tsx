@@ -23,7 +23,7 @@ interface IAboutSection {
 export const AboutSection: FC<IAboutSection> = ({ title, cover, content }) => {
   return (
     <article className='flex flex-col'>
-      <div className='relative h-md w-full overflow-hidden'>
+      <div className='relative h-2lg w-full overflow-hidden'>
         <StrapiImage
           fill
           overlay
