@@ -39,13 +39,13 @@ export const Footer: FC<FooterProps> = ({ data, locale }) => {
             <Title level='4' className='hidden md:block'>
               {data.contactGroupTitle}
             </Title>
-            <ul className='flex flex-wrap items-center justify-center gap-x-6 md:flex-col md:flex-nowrap md:items-start md:justify-start'>
+            <ul className='flex flex-col items-center justify-center gap-x-6 font-medium text-base-200 lg:items-start lg:justify-start'>
               <li className='flex flex-wrap gap-x-6 gap-y-2.5 py-2.5'>
                 <NextLink href={`tel:${data.primaryPhone}`}>{data.primaryPhone}</NextLink>
                 <NextLink href={`tel:${data.secondaryPhone}`}>{data.primaryPhone}</NextLink>
                 <NextLink href={`tel:${data.tertiaryPhone}`}>{data.tertiaryPhone}</NextLink>
               </li>
-              <li className='py-2.5 sm:whitespace-nowrap lg:max-w-56'>
+              <li className='py-2.5 text-center sm:whitespace-nowrap md:text-left lg:max-w-56'>
                 <span>{data.address}</span>
               </li>
             </ul>
