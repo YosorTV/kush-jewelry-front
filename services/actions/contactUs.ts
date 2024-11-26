@@ -10,8 +10,9 @@ export async function contactUs(prevState: any, formData: FormData) {
   const fields = {
     email: formData.get('email'),
     name: formData.get('name'),
+    phone: formData.get('phone'),
     message: formData.get('message'),
-    locale: formData.get('locale'),
+    locale: formData.get('locale')
   };
 
   const validatedData: any = schemas.contacts(locale as string).safeParse(fields);
@@ -24,7 +25,7 @@ export async function contactUs(prevState: any, formData: FormData) {
       errors,
       strapiError: null,
       status: 400,
-      message: locale === 'uk' ? 'Валідаційна помилка.' : 'Validation error',
+      message: locale === 'uk' ? 'Валідаційна помилка.' : 'Validation error'
     };
   }
 
@@ -36,7 +37,7 @@ export async function contactUs(prevState: any, formData: FormData) {
       errors: null,
       status: 400,
       message: response.error.message,
-      strapiError: locale === 'uk' ? 'Помилка в запиті.' : 'Bad request.',
+      strapiError: locale === 'uk' ? 'Помилка в запиті.' : 'Bad request.'
     };
   }
 
@@ -45,6 +46,6 @@ export async function contactUs(prevState: any, formData: FormData) {
     errors: null,
     strapiError: null,
     status: 200,
-    message: response.message,
+    message: response.message
   };
 }

@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { NextLink, Title } from '@/components/elements';
 import { getContactUsData } from '@/services/api/get-contact-us';
 import { DEFAULT_LOCALE } from '@/helpers/constants';
@@ -19,9 +19,10 @@ export const ContactUsBlock: FC<IContactUSBlock> = async ({ address, locale = DE
       </li>
       <li className='flex flex-col gap-y-3'>
         <Title level='3'>{data?.phoneTitle}</Title>
-        <div className='flex gap-x-3'>
+        <div className='flex gap-3'>
           <NextLink href={`tel:${data?.primaryPhone}`}>{data?.primaryPhone}</NextLink>
           <NextLink href={`tel:${data?.secondaryPhone}`}>{data?.primaryPhone}</NextLink>
+          <NextLink href={`tel:${data?.tertiaryPhone}`}>{data?.tertiaryPhone}</NextLink>
         </div>
       </li>
       {address && (

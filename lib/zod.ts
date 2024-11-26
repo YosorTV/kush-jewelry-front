@@ -127,6 +127,7 @@ export const subscriptionSchema = (locale: Locale) =>
 export const contactUsSchema = (locale: Locale) => {
   return z.object({
     email: emailSchema(locale),
+    phone: emailSchema(locale),
     name: requiredTextField(locale),
     message: requiredTextField(locale),
     locale: z.string().readonly()
