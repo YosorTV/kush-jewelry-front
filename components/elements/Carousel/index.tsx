@@ -49,7 +49,7 @@ const Carousel: FC<PropsWithChildren<EmblaCarouselProps>> = ({
 
   const isAvailableControllers = useMemo(() => {
     const showByFormat = {
-      standart: total > 4,
+      standart: total > 3,
       mini: total > 2
     };
 

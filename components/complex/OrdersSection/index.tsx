@@ -15,7 +15,7 @@ const OrdersSection = ({ orders, currency, locale, t, emptyTitle = 'Не зна�
       <>
         <div className='flex w-full flex-col items-center justify-between md:flex-row'>
           <Title level='3'> {t('order', { number: order.id })}</Title>
-          <span className='flex items-baseline gap-x-2.5 whitespace-nowrap'>
+          <span className='flex items-baseline gap-x-3 whitespace-nowrap'>
             {t('total')} <Price price={parseFloat(order.amount)} currency={currency} className='!text-xs' />
           </span>
         </div>

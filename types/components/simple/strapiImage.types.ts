@@ -16,3 +16,10 @@ export interface IStrapiImageProps {
   previewUrl?: string;
   sizes?: string;
 }
+
+export interface IStrapiImage {
+  id: number;
+  url: string;
+  alternativeText: string;
+  formats: IImageFormats;
+}

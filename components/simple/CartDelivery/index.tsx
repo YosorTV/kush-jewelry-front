@@ -13,7 +13,7 @@ export const CartDelivery = () => {
   const t = useTranslations();
 
   return (
-    <div className='form-control w-full gap-y-5 pb-10'>
+    <div className='form-control w-full gap-y-6 pb-10'>
       <PeronalCheckoutForm data={session?.data?.user} title={t('cart.personal')} />
       <DeliveryForm data={session?.data?.user} title={t('cart.delivery')} />
       <div className='divider my-0' />

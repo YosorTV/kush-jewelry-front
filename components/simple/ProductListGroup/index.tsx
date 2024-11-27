@@ -37,11 +37,11 @@ const ProductListGroup: FC<IProductListGroup> = async ({ data, className = 'grid
 
   if (!data?.length) {
     return (
-      <Lottie text={t('emptyList')} src={lottieAnim} className='relative my-6 gap-y-5' playerClassName='h-96 w-96' />
+      <Lottie text={t('emptyList')} src={lottieAnim} className='relative my-6 gap-y-6' playerClassName='h-96 w-96' />
     );
   }
 
-  return <div className={cn('mb-5 grid min-h-80 gap-x-2.5 gap-y-5', className)}>{data.map(printProduct)}</div>;
+  return <div className={cn('mb-5 grid min-h-80 gap-x-3 gap-y-6', className)}>{data.map(printProduct)}</div>;
 };
 
 export default ProductListGroup;

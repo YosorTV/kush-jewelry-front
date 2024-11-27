@@ -7,7 +7,7 @@ import { useTranslations } from 'next-intl';
 const StatusBadge: FC<IStatusBadge> = ({ status }) => {
   const t = useTranslations('status');
 
-  return <span className={cn('ml-2 rounded-md px-2.5 py-1.5 text-white', getStatusColor(status))}>{t(status)}</span>;
+  return <span className={cn('ml-2 rounded-md px-3 py-1.5 text-white', getStatusColor(status))}>{t(status)}</span>;
 };
 
 export default StatusBadge;

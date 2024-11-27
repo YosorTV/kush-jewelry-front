@@ -24,7 +24,7 @@ export const Price: FC<Readonly<IPrice>> = ({
   const salePrice = formatPrice(price - discountAmount, currency);
 
   return (
-    <p aria-label={`Price: ${price}`} className={cn('flex items-center gap-2.5', containerClass)}>
+    <p aria-label={`Price: ${price}`} className={cn('flex items-center gap-3', containerClass)}>
       {sale > 0 && <span className={cn('text-lg', saleClassName)}>{salePrice}</span>}
       <span
         className={cn(

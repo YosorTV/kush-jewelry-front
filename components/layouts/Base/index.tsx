@@ -28,22 +28,22 @@ export default function BaseLayout({
     <html lang={locale} suppressHydrationWarning className={cn(montserrat.className, 'scroll-smooth scrollbar')}>
       <ExternalScripts />
       <body className='relative grid overflow-x-clip'>
-        <NextIntlClientProvider locale={locale} messages={messages}>
-          <SessionProvider session={session}>
-            <ThemeProvider>
+        <ThemeProvider>
+          <NextIntlClientProvider locale={locale} messages={messages}>
+            <SessionProvider session={session}>
               <Header data={header} currency={currency} cart={cart} locale={locale} session={session} />
               <main className='flex min-h-dvh flex-col'>
                 <AutoLogoutProvider>{children}</AutoLogoutProvider>
               </main>
-              <Footer data={footer} locale={locale} />
+              <Footer data={footer} sessionLinks={header?.sessionLinks} session={session} locale={locale} />
               <div id='portal' />
               <Modal id='my_modal_3'>
                 <WishlistNotification locale={locale} />
               </Modal>
               <ClientSideRender />
-            </ThemeProvider>
-          </SessionProvider>
-        </NextIntlClientProvider>
+            </SessionProvider>
+          </NextIntlClientProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

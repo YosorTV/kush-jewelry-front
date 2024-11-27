@@ -19,16 +19,15 @@ export const CollectionSection: FC<ICollectionSection> = ({ data }) => {
   const { title, collections } = data;
 
   return (
-    <AnimatedTag
-      tag='section'
-      className='relative flex flex-col bg-neutral p-2.5 !pt-0 hover:cursor-grab active:cursor-grabbing lg:p-5'
-    >
+    <AnimatedTag tag='section' className='relative flex flex-col bg-neutral p-3 lg:p-6'>
       <CollectionCarousel
+        autoScroll
         format='standart'
         title={title}
-        titleClass='!text-white pt-1.5'
+        titleClass='!text-white pb-3 lg:pb-6'
+        className='pb-6'
         data={collections.data}
-        slideClass='h-96'
+        slideClass='spotlight-img-carousel'
       />
     </AnimatedTag>
   );

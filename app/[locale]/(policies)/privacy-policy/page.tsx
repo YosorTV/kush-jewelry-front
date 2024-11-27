@@ -29,7 +29,7 @@ export default async function PrivacyPolicy({ params }: PageProps) {
   }
 
   return (
-    <PageLayout className='mt-16'>
+    <PageLayout className='mt-20'>
       {data?.content && <RuleSection content={data?.content} title={data?.title} />}
     </PageLayout>
   );

@@ -5,7 +5,7 @@ import { forgotPassword } from '@/services';
 import { schemas } from '@/lib/zod';
 
 import { Form, Input, NextLink, Title } from '@/components/elements';
-import { StepBack, SubmitButton } from '@/components/simple';
+import { SubmitButton } from '@/components/simple';
 
 export const ForgotForm = ({ data, locale }: any) => {
   const schema = schemas.forgotUserPassword(locale);
@@ -18,9 +18,8 @@ export const ForgotForm = ({ data, locale }: any) => {
       method='post'
       schema={schema}
       action={forgotPassword}
-      className='auth-page_form absolute-center h-full'
+      className='auth-page_form absolute-center h-full pt-40'
     >
-      <StepBack className='absolute left-5 top-20' />
       <Title level='1' className='auth-form_title'>
         {data.title}
       </Title>
@@ -34,7 +33,7 @@ export const ForgotForm = ({ data, locale }: any) => {
           loadingText={data.submitBtn.loadingText}
           className='auth-form_submit'
         />
-        <div className='divider m-0 w-full px-5' />
+        <div className='divider m-0 w-full px-6' />
         <NextLink className='auth-link' href={data.loginUrl.url} replace={data.loginUrl.isExternal}>
           {data.loginUrl.text}
         </NextLink>

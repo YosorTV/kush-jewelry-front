@@ -1,52 +1,44 @@
+'use client';
+
 import { Search } from '@/components/complex';
 import { ShoppingCart } from '@/components/complex/ShoppingCart';
 import { Logo } from '@/components/elements';
-import { LangChanger, Menu, ThemeChanger } from '@/components/simple';
-
-import UserSession from '@/components/complex/UserSession';
+import { Menu } from '@/components/simple';
 
 import { HeaderProps } from '@/types/components';
+import { generateHeaderData } from '@/helpers';
+import UserSession from '@/components/complex/UserSession';
 
 export default function Header({ data, cart, session, locale, currency }: HeaderProps) {
-  const collectionsData = {
-    title: data?.collectionTitle,
-    data: data?.collections?.data ?? []
-  };
-
-  const categoryData = {
-    title: data?.categoryTitle,
-    data: data?.categories?.data ?? []
-  };
-
-  const pagesData = {
-    title: data?.pagesTitle,
-    data: data?.pages
-  };
+  const collectionsData = generateHeaderData(data?.collectionTitle, data?.collections?.data);
+  const categoryData = generateHeaderData(data?.categoryTitle, data?.categories?.data);
+  const pagesData = generateHeaderData(data?.pagesTitle, data?.pages);
 
   return (
-    <header className='fixed z-50 flex min-h-16 w-full cursor-pointer items-center border-b border-info-content bg-base-100 px-2.5 drop-shadow-md md:px-5'>
-      <nav className='flex w-full items-center justify-between'>
-        <div className='z-10 flex items-center'>
-          <Menu pages={pagesData} collections={collectionsData} categories={categoryData} />
-        </div>
-        <Logo
-          width={160}
-          height={48}
-          className='absolute-center -right-3 top-3 z-0 hidden w-svw items-center justify-center sm:flex'
-        />
-        <div className='flex items-center gap-x-6'>
-          <Search placeholder={data?.searchTitle} />
-          <ShoppingCart data={cart} locale={locale} currency={currency} />
-          <UserSession
-            cta={data?.cta}
-            locale={locale}
-            session={session}
-            signOutTitle={data?.signOutTitle}
+    <header className='fixed z-50 flex min-h-20 w-screen cursor-pointer items-center border-b border-info-content bg-base-100 px-3 drop-shadow-md lg:px-6'>
+      <nav className='relative flex w-full items-center justify-between'>
+        <Logo width={160} height={48} className='lg:absolute-center relative top-1.5 -z-10 block lg:w-full' />
+
+        <div className='flex flex-1 flex-row-reverse items-end gap-x-6 lg:flex-row lg:items-center lg:justify-between'>
+          <Menu
+            pages={pagesData}
+            authLink={data?.cta}
             sessionLinks={data?.sessionLinks}
+            collections={collectionsData}
+            categories={categoryData}
           />
-          <div className='hidden lg:flex lg:gap-x-6'>
-            <LangChanger />
-            <ThemeChanger />
+          <div className='flex items-center gap-x-6'>
+            <Search placeholder={data?.searchTitle} />
+            <ShoppingCart data={cart} locale={locale} currency={currency} />
+            <div className='hidden lg:flex'>
+              <UserSession
+                cta={data?.cta}
+                locale={locale}
+                session={session}
+                signOutTitle={data?.signOutTitle}
+                sessionLinks={data?.sessionLinks}
+              />
+            </div>
           </div>
         </div>
       </nav>

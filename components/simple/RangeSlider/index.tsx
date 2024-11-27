@@ -25,7 +25,7 @@ export const RangeSlider = () => {
   );
 
   return (
-    <div className='flex w-full flex-col px-2.5'>
+    <div className='flex w-full flex-col px-3'>
       <Range
         step={1}
         min={1}

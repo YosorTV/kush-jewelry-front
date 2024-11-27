@@ -14,7 +14,7 @@ interface TAnimatedImage {
   className?: string;
 }
 
-const AnimatedImage: FC<TAnimatedImage> = ({ product, className = 'h-[380px] md:h-[468px] xl:h-[500px]' }) => {
+const AnimatedImage: FC<TAnimatedImage> = ({ product, className = 'h-120 xl:h-[584px]' }) => {
   const [showOverlay, setShowOverlay] = useState<boolean>(false);
   const router = useRouter();
 
@@ -54,7 +54,7 @@ const AnimatedImage: FC<TAnimatedImage> = ({ product, className = 'h-[380px] md:
             width={img?.width ?? 500}
             height={img?.height ?? 500}
             fill
-            className='aspect-[3/4] h-full w-full overflow-hidden object-cover'
+            className='aspect-square h-full w-full overflow-hidden object-cover'
           />
         </div>
       ))}

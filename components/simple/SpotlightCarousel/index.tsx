@@ -4,18 +4,15 @@ import { Product } from '@/types/components';
 
 import { CategoryCard } from '@/components/elements';
 import Carousel from '@/components/elements/Carousel';
-import { getCurrency } from '@/services';
-import { getLocale } from 'next-intl/server';
 
 type PropType = {
   data: Product[];
   title: string;
+  currency: number;
+  locale: string;
 };
 
-export const SpotlightCarousel: FC<PropType> = async ({ data = [], title }) => {
-  const currency = await getCurrency();
-  const locale = await getLocale();
-
+export const SpotlightCarousel: FC<PropType> = ({ data = [], title, currency, locale }) => {
   const printSpotlightCard = (product: Product) => {
     return <CategoryCard data={product} key={product.id} currency={currency} locale={locale} />;
   };
@@ -27,8 +24,8 @@ export const SpotlightCarousel: FC<PropType> = async ({ data = [], title }) => {
       title={title}
       total={data.length}
       options={{ loop: data.length > 3 }}
-      titleClass='py-1.5 md:py-2.5 text-white'
-      className='px-3 pb-5 lg:px-5'
+      titleClass='py-3 md:py-6 text-white'
+      className='px-3 pb-6 lg:px-6'
       fill='fill-white'
     >
       {data.map(printSpotlightCard)}

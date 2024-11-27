@@ -30,7 +30,7 @@ export const CartItem: FC<CartItemProps> = ({ data, currency, onAdd, onRemove, o
         </button>
       </figure>
       <div className='card-body mt-auto flex flex-col'>
-        <div className='flex flex-col gap-y-2.5 !text-base-300'>
+        <div className='flex flex-col gap-y-3 !text-base-300'>
           <Title level='4' className='text-base-300'>
             {data?.name}
           </Title>

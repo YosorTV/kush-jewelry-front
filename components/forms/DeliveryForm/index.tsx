@@ -41,11 +41,11 @@ export const DeliveryForm: FC<IDeliveryForm> = ({ data, title = 'Спосіб д
   };
 
   return (
-    <form className='form-control gap-y-5 pt-2.5'>
+    <form className='form-control gap-y-6 pt-2.5'>
       <Title level='2' className='w-full self-center text-center'>
         2.{title}
       </Title>
-      <div className='flex flex-col gap-y-5 py-5 sm:flex-row sm:justify-between'>
+      <div className='flex flex-col gap-y-6 py-5 sm:flex-row sm:justify-between'>
         <Input
           id='np'
           type='checkbox'
@@ -72,7 +72,7 @@ export const DeliveryForm: FC<IDeliveryForm> = ({ data, title = 'Спосіб д
       {!cartStore.delivery.self && (
         <>
           <div className='divider my-0' />
-          <div className='form-control gap-y-5'>
+          <div className='form-control gap-y-6'>
             <Title level='4'>{t('delivery_spot')}</Title>
             <NovaPostOptions
               warehouseOptions={warehouseOptions}

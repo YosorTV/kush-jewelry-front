@@ -37,7 +37,7 @@ export const CollectionCard: FC<TCollectioCard> = ({ img, className, title, hint
     >
       <NextLink
         href={`/collection/${slug}`}
-        className='z-20 flex h-full w-full flex-col items-center gap-x-2.5 font-semibold text-base-300'
+        className='z-20 flex h-full w-full flex-col items-center gap-x-3 font-semibold text-base-300'
       >
         <AnimatePresence mode='sync'>
           {showOverlay && (

@@ -34,7 +34,7 @@ export const CartList: FC<any> = ({ data, currency }) => {
 
   const printCartItem = (item: any, index: number) => (
     <Fragment key={item.id}>
-      <div className='flex flex-row-reverse items-center justify-between gap-x-2.5'>
+      <div className='flex flex-row-reverse items-center justify-between gap-x-3'>
         <CartItem
           t={t}
           data={item}
@@ -54,7 +54,7 @@ export const CartList: FC<any> = ({ data, currency }) => {
         initial={animCart.basket.initial}
         animate={animCart.basket.animate}
         exit={animCart.basket.exit}
-        className='relative flex w-full flex-col items-center justify-center gap-y-5 py-5'
+        className='relative flex w-full flex-col items-center justify-center gap-y-6 py-5'
       >
         <Title level='2'>{data.emptyList}</Title>
         <Lottie src={lottieAnim} playerClassName={cn(theme === 'sunset' ? 'invert' : 'invert-0', 'opacity-75')} />
@@ -63,7 +63,7 @@ export const CartList: FC<any> = ({ data, currency }) => {
   }
 
   return (
-    <div className='relative flex w-full flex-col items-start gap-y-5 pb-10'>
+    <div className='relative flex w-full flex-col items-start gap-y-6 pb-10'>
       <Title level='2' className='w-full self-center text-center'>
         {t('checkout.title')}
       </Title>

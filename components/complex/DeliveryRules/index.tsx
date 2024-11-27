@@ -15,7 +15,7 @@ export const DeliveryRules: FC<IDeliveryRules> = async ({ locale = 'uk' }) => {
   );
 
   return (
-    <AnimatedTag tag='section' className='mt-6 flex w-svw flex-col gap-y-6 bg-neutral px-2.5 py-5 md:px-5 xl:flex-row'>
+    <AnimatedTag tag='section' className='mt-6 flex w-svw flex-col gap-y-6 bg-neutral px-3 py-6 md:px-6 xl:flex-row'>
       {data.rules.map(printRule)}
     </AnimatedTag>
   );

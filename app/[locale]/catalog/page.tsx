@@ -1,6 +1,6 @@
-import { Title } from '@/components/elements';
+import { HeroSection } from '@/components/complex';
 import { PageLayout } from '@/components/layouts';
-import { StrapiBlockRender, StrapiImage } from '@/components/simple';
+import { StrapiBlockRender } from '@/components/simple';
 import { STRAPI_ENTRIES } from '@/helpers/constants';
 
 import { getCatalogData, getMetadata } from '@/services';
@@ -26,26 +26,19 @@ export default async function Catalog({ params, searchParams }: PageProps) {
     return notFound();
   }
 
+  const heroData = {
+    id: data.id,
+    __component: 'complex.hero-section',
+    description: '',
+    title: data.title,
+    image: data?.cover,
+    sub_image: null as null,
+    link: null as null
+  };
+
   return (
-    <PageLayout className='mt-16'>
-      <div className='relative h-2lg w-full overflow-hidden'>
-        <StrapiImage
-          fill
-          priority
-          formats={data?.cover?.formats}
-          src={data?.cover?.url}
-          alt={data?.cover?.alternativeText}
-          overlay
-          className='aspect-square h-full w-full animate-zoomOut object-cover transition-transform duration-300 ease-out md:aspect-video'
-        />
-        <Title
-          level='1'
-          variant='subheading'
-          className='absolute-center inset-0 mx-auto w-3/4 whitespace-break-spaces text-center text-base-300'
-        >
-          {data.title}
-        </Title>
-      </div>
+    <PageLayout className='mt-20'>
+      <HeroSection key={data.id} data={heroData} />
       <StrapiBlockRender data={data.blocks} {...searchParams} />
     </PageLayout>
   );

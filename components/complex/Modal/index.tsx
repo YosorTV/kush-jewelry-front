@@ -1,5 +1,6 @@
 'use client';
 
+import { CloseIcon } from '@/assets/icons';
 import { cn } from '@/lib';
 import { usePathname } from '@/lib/navigation';
 import { FC, PropsWithChildren, useEffect, useRef } from 'react';
@@ -22,10 +23,12 @@ const Modal: FC<PropsWithChildren<IModal>> = ({ id = 'my_modal_3', children, cla
   }, [id, pathname]);
 
   return (
-    <dialog ref={dialogRef} id={id} className='modal'>
-      <div className={cn('modal-box', className)}>
+    <dialog ref={dialogRef} id={id} className='modal !rounded-none'>
+      <div className={cn('modal-box !rounded-none', className)}>
         <form method='dialog'>
-          <button className='btn btn-circle btn-ghost btn-sm absolute right-2 top-2'>✕</button>
+          <button className='btn btn-circle btn-ghost btn-sm absolute right-2 top-2'>
+            <CloseIcon height={24} width={24} className='h-6 w-6' />
+          </button>
         </form>
         {children}
       </div>

@@ -52,7 +52,7 @@ export const CollectionDetails: FC<ICollectionDetails> = async ({ content, title
           </section>
         )}
         {products.length > 0 && (
-          <section className='grid h-min w-full grid-cols-fluid gap-5 px-5'>{products.map(printProduct)}</section>
+          <section className='grid h-min w-full grid-cols-fluid gap-5 px-6'>{products.map(printProduct)}</section>
         )}
       </div>
     </article>

@@ -8,7 +8,6 @@ import { createUserAction } from '@/services';
 import { Form, Input, Title } from '@/components/elements';
 import { SubmitButton } from '@/components/simple';
 
-import { StepBack } from '@/components/simple/StepBack';
 import { InputProps } from '@/types/components';
 
 interface ISignUpForm {
@@ -36,14 +35,13 @@ export const SignUpForm: FC<ISignUpForm> = ({ title, formFields, className, loca
       action={createUserAction}
       className='auth-page_form absolute-center h-full'
     >
-      <StepBack className='absolute left-5 top-2' />
-      <div className='relative w-full'>
+      <div className='relative w-full pt-5'>
         <Title level='1' className='auth-form_title'>
           {title}
         </Title>
         <Input id='locale' name='locale' value={locale} containerClass='hidden' type='text' hidden readOnly />
-        <div className='grid grid-cols-1 gap-y-5 pt-5'>{printInputs(formFields)}</div>
-        <div className='divider m-0 mb-5 w-full px-5' />
+        <div className='grid grid-cols-1 gap-y-6 pt-5'>{printInputs(formFields)}</div>
+        <div className='divider m-0 mb-5 w-full px-6' />
         <SubmitButton text={cta.text} loadingText={cta.loadingText} className='auth-form_submit' />
       </div>
     </Form>

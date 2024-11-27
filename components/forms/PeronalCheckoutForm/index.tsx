@@ -37,11 +37,11 @@ export const PeronalCheckoutForm: FC<IPersonalCheckoutForm> = ({ data, title = '
   const phoneNumber = cartStore.delivery.phoneNumber ?? data?.phoneNumber;
 
   return (
-    <div className='form-control gap-y-2.5'>
+    <div className='form-control gap-y-3'>
       <Title level='2' className='w-full self-center text-center'>
         1.{title}
       </Title>
-      <form className='form-control gap-y-5'>
+      <form className='form-control gap-y-6'>
         <Input
           id='name'
           name='firstName'

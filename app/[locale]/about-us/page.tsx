@@ -26,7 +26,7 @@ export default async function AboutUs({ params }: PageProps) {
   }
 
   return (
-    <PageLayout className='mt-16'>
+    <PageLayout className='mt-20'>
       <AboutSection cover={data?.cover} title={data?.title} content={data?.story} subImage={data?.subImage} />
     </PageLayout>
   );

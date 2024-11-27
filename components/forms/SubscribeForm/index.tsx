@@ -20,10 +20,7 @@ export const SubscribeForm = ({ formField, className, locale }: any) => {
         type={formField.type}
         name={formField.name}
         className='w-full'
-        labelStyle={cn(
-          'text-base flex items-center justify-center w-full sm:text-lg xl:text-xl pb-2.5 text-center',
-          cormorant.className
-        )}
+        labelStyle={cn('text-base flex items-center w-full sm:text-lg xl:text-xl pb-2.5', cormorant.className)}
       >
         <SubmitButton className='absolute right-2' icon={<IoIosSend className='h-6 w-6 fill-base-200' />} />
       </Input>

@@ -23,7 +23,7 @@ export const RuleCard: FC<IRuleCard> = ({ icon, title, description }) => {
   return (
     <figure className='relative flex w-full items-center md:items-start'>
       {Icon[icon]}
-      <figcaption className='mx-10 flex w-full flex-col md:mx-16 md:gap-y-2.5'>
+      <figcaption className='mx-10 flex w-full flex-col md:mx-16 md:gap-y-3'>
         {title && (
           <Title level='4' className='!text-xs uppercase !text-white md:!text-base'>
             {title}

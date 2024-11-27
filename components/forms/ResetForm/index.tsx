@@ -18,13 +18,13 @@ export const ResetForm = ({ data, code, locale }: any) => {
       method='post'
       id='reset-password'
       action={resetPassword}
-      className='auth-page_form absolute-center h-full'
+      className='auth-page_form absolute-center h-full pt-40'
     >
       <div className='relative w-full'>
         <Title level='1' className='auth-form_title'>
           {data.title}
         </Title>
-        <div className='flex flex-col gap-y-5 py-2.5'>
+        <div className='flex flex-col gap-y-6 py-2.5'>
           <Input type='hidden' name='locale' value={locale} containerClass='hidden' />
           <Input type='hidden' name='code' containerClass='hidden' value={code} />
           {printInputs(data.formFields)}

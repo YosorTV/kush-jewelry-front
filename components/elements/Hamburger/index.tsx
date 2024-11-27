@@ -12,7 +12,7 @@ interface HamburgerProps {
 
 export const Hamburger: FC<HamburgerProps> = ({ toggle, isOpened }) => {
   return (
-    <button onClick={toggle} className={cn('relative bg-base-100 py-2.5', isOpened ? 'w-min' : 'w-auto')}>
+    <button onClick={toggle} className={cn('relative z-30 bg-transparent', isOpened ? 'w-min' : 'w-auto')}>
       <svg width={24} height={24} viewBox='0 0 24 24'>
         <Path
           className='stroke-base-200'
@@ -24,11 +24,11 @@ export const Hamburger: FC<HamburgerProps> = ({ toggle, isOpened }) => {
         <Path
           className='stroke-base-200'
           d='M 2 9.423 L 20 9.423'
+          transition={{ duration: 0.1 }}
           variants={{
             closed: { opacity: 1 },
             open: { opacity: 0 }
           }}
-          transition={{ duration: 0.1 }}
         />
         <Path
           className='stroke-base-200'

@@ -40,7 +40,7 @@ export const CompleteLook: FC<ICompleteLook> = async ({ products, currency, cate
       title={t('look')}
       format='standart'
       total={data.length}
-      className='w-svw px-2.5 md:px-5'
+      className='w-svw px-3 md:px-6'
       titleClass='text-base-200 !text-xl md:py-5 py-2.5'
       options={{ loop: true, align: 'start' }}
     >

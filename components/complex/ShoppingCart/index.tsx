@@ -97,7 +97,7 @@ export const ShoppingCart: FC<ShoppingCartProps> = ({ data, locale, currency }) 
       </Button>
 
       <Sidebar position='right' onToggle={handleToggle} opened={cartStore.isOpen}>
-        <div className={cn('relative flex w-full flex-col items-start px-5')}>
+        <div className={cn('relative flex w-full flex-col items-start px-6')}>
           <div className='flex w-full items-end justify-between'>
             <Button
               type='button'

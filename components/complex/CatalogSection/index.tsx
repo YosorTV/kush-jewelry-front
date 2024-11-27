@@ -11,7 +11,7 @@ interface ICatalogSection {
 
 export const CatalogSection: FC<ICatalogSection> = async ({ title, ...rest }) => {
   return (
-    <section className='flex min-h-[640px] flex-col gap-y-2.5 p-2.5 md:p-5'>
+    <section className='flex min-h-[640px] flex-col gap-y-3 p-2.5 md:p-5'>
       <ProductsController title={title} />
       <CategoryFilterButton />
       <ProductList {...rest} />

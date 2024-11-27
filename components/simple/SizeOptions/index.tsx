@@ -36,7 +36,7 @@ export const SizeOptions: FC<ISizeOptions> = ({ sizes, title }) => {
   };
 
   return (
-    <div className='flex flex-col gap-y-2.5'>
+    <div className='flex flex-col gap-y-3'>
       <p className='text-lg font-semibold'>{title}</p>
       {availableSizes.length > 0 && <div className='flex flex-wrap gap-3'>{availableSizes.map(printSize)}</div>}
     </div>

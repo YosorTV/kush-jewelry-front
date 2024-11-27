@@ -1,15 +1,17 @@
-'use client';
-
 import { MenuItem } from './MenuItem';
 import { CategoryLinkType, CollectionLinkType, StrapiLinkType } from '@/types/components';
 import { FC } from 'react';
 import { Title } from '@/components/elements';
 import { cormorant } from '@/assets/fonts';
 import { cn } from '@/lib';
-import { LangChanger } from '../LangChanger';
-import { ThemeChanger } from '../ThemeChanger';
+import { SiteSettings } from '../SiteSettings';
+import { Session } from 'next-auth';
+import { SignInLink } from '../SignInLink';
 
 type MenuNavProps = {
+  session: Session;
+  authLink: StrapiLinkType;
+  sessionLinks: StrapiLinkType[];
   pages: {
     title: string;
     data: StrapiLinkType[];
@@ -24,7 +26,7 @@ type MenuNavProps = {
   };
 };
 
-export const MenuNav: FC<MenuNavProps> = ({ pages, categories, collections }) => {
+export const MenuNav: FC<MenuNavProps> = ({ pages, categories, authLink, session, collections, sessionLinks }) => {
   const printCategory = (item: CategoryLinkType) => (
     <MenuItem
       id={item.id}
@@ -37,55 +39,59 @@ export const MenuNav: FC<MenuNavProps> = ({ pages, categories, collections }) =>
     />
   );
 
+  const printPage = (item: StrapiLinkType) => (
+    <MenuItem
+      id={item.id}
+      key={item.id}
+      text={item.text}
+      url={item.url}
+      className='py-2.5'
+      isExternal={item.isExternal}
+    />
+  );
+
+  const printCollection = (item: CollectionLinkType) => (
+    <MenuItem
+      className='py-2.5'
+      id={item.id}
+      key={item.id}
+      text={item.title}
+      url={`/collection/${item.slug}`}
+      isExternal={false}
+    />
+  );
+
   return (
-    <div className='relative top-16 px-2.5 md:px-5'>
-      <div className='flex flex-col gap-y-2.5'>
+    <div className='relative p-2.5'>
+      <div className='form-control gap-y-6'>
         <Title level='5' className={cn(cormorant.className, 'text-2xl capitalize')}>
           {pages.title}
         </Title>
-        <ul>
-          {pages.data.map((item: StrapiLinkType) => (
-            <MenuItem
-              id={item.id}
-              key={item.id}
-              text={item.text}
-              url={item.url}
-              className='py-2.5'
-              isExternal={item.isExternal}
-            />
-          ))}
-        </ul>
+        <div className='form-control'>
+          <ul>{pages.data.map(printPage)}</ul>
+          {session?.accessToken ? (
+            <ul>{sessionLinks?.map(printPage)}</ul>
+          ) : (
+            <SignInLink url={authLink.url} isExternal={authLink.isExternal} text={authLink.text} />
+          )}
+        </div>
       </div>
-      <div className='divider pr-5' />
-      <div className='flex flex-col gap-y-2.5'>
+      <div className='divider' />
+      <div className='form-control gap-y-6'>
         <Title level='5' className={cn(cormorant.className, 'text-2xl capitalize')}>
           {categories.title}
         </Title>
         <ul>{categories.data.map(printCategory)}</ul>
       </div>
-      <div className='divider pr-5' />
-      <div className='flex flex-col gap-y-2.5'>
+      <div className='divider' />
+      <div className='form-control gap-y-6'>
         <Title level='5' className={cn(cormorant.className, 'text-2xl capitalize')}>
           {collections.title}
         </Title>
-        <ul>
-          {collections.data.map((item: CollectionLinkType) => (
-            <MenuItem
-              className='py-2.5'
-              id={item.id}
-              key={item.id}
-              text={item.title}
-              url={`/collection/${item.slug}`}
-              isExternal={false}
-            />
-          ))}
-        </ul>
-        <div className='divider pr-5' />
+        <ul>{collections.data.map(printCollection)}</ul>
+        <div className='divider' />
         <div className='flex w-full pb-20'>
-          <div className='col-start-2 flex gap-x-6 lg:hidden'>
-            <ThemeChanger />
-            <LangChanger className='dropdown-top' />
-          </div>
+          <SiteSettings className='col-start-2 flex gap-x-6 lg:hidden' />
         </div>
       </div>
     </div>

@@ -50,7 +50,7 @@ export const SearchContent = () => {
   };
 
   return (
-    <div className='mt-10 grid grid-cols-fluid gap-x-2.5 gap-y-5 lg:grid-cols-3 2xl:grid-cols-4'>
+    <div className='mt-10 grid grid-cols-fluid gap-x-3 gap-y-6 lg:grid-cols-3 2xl:grid-cols-4'>
       {state.searchResult.map(printProducts)}
     </div>
   );

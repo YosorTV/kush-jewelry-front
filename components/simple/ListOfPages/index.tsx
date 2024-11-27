@@ -69,7 +69,7 @@ export const ListOfPages: FC<ListOFPagesProps> = ({
       <li
         key={page.id}
         onMouseEnter={() => handleShowSubMenu(index)}
-        className={cn('group py-2.5 text-base-200 hover:underline hover:underline-offset-8', {
+        className={cn('group hover:text-base-200 hover:underline hover:underline-offset-8', {
           active: isActive
         })}
       >
@@ -77,7 +77,7 @@ export const ListOfPages: FC<ListOFPagesProps> = ({
           href={page.url}
           replace={page.isExternal}
           className={cn(
-            'whitespace-nowrap py-2.5 font-medium group-[.active]:underline group-[.active]:underline-offset-8',
+            'whitespace-nowrap font-medium underline-offset-8 group-[.active]:text-base-200 group-[.active]:underline',
             linkStyle
           )}
         >

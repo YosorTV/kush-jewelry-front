@@ -25,7 +25,7 @@ export default async function ContactUs({ params }: PageProps) {
   }
 
   return (
-    <PageLayout className='mt-16'>
+    <PageLayout className='mt-20'>
       <ContactUsSection data={data} />
     </PageLayout>
   );

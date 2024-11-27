@@ -42,5 +42,5 @@ export const MaterialList = ({ data }: any) => {
     />
   );
 
-  return <div className='form-control gap-y-2.5'>{data.map(printMaterialList)}</div>;
+  return <div className='form-control gap-y-3'>{data.map(printMaterialList)}</div>;
 };

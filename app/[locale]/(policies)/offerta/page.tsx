@@ -28,7 +28,7 @@ export default async function Offerta({ params }: PageProps) {
   }
 
   return (
-    <PageLayout className='mt-16'>
+    <PageLayout className='mt-20'>
       {data?.content && <OffertaSection content={data.content} title={data.title} />}
     </PageLayout>
   );

@@ -8,20 +8,23 @@ import { usePathname } from '@/lib/navigation';
 import { UserIcon } from '@/assets/icons';
 
 import { StrapiLinkType } from '@/types/components';
+import { useScreen } from '@/lib/hooks';
 
-export const SignInLink: FC<StrapiLinkType> = ({ url }) => {
+export const SignInLink: FC<StrapiLinkType> = ({ url, text = 'Login' }) => {
+  const { lg } = useScreen();
   const pathname = usePathname();
+
   const isActive = pathname.startsWith(url);
 
   return (
     <NextLink
       href={url}
       className={cn(
-        'py-2.5 font-medium text-base-200',
-        isActive && 'underline underline-offset-8'
+        'py-2.5 text-sm font-medium underline-offset-8 hover:text-base-200 hover:underline lg:text-base-200',
+        isActive && 'text-base-200 underline'
       )}
     >
-      <UserIcon />
+      {lg ? <UserIcon /> : text}
     </NextLink>
   );
 };

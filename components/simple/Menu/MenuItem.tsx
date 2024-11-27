@@ -25,7 +25,7 @@ export const MenuItem: FC<CategoryLinkType> = ({ text, url, slug, isExternal, cl
       <NextLink
         href={url}
         replace={isExternal}
-        className='py-2.5 text-sm font-medium capitalize text-base-200 underline-offset-8 group-[.active]:underline hover:underline'
+        className='text-sm font-medium capitalize underline-offset-8 group-[.active]:text-base-200 group-[.active]:underline hover:text-base-200 hover:underline'
       >
         {text}
       </NextLink>

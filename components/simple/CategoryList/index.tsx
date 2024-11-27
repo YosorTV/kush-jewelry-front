@@ -48,5 +48,5 @@ export const CategoryList = () => {
     />
   );
 
-  return <div className='form-control gap-y-2.5'>{categories.map(printCategoryList)}</div>;
+  return <div className='form-control gap-y-3'>{categories.map(printCategoryList)}</div>;
 };

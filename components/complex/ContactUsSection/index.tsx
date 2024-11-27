@@ -29,10 +29,10 @@ export const ContactUsSection: FC<IContactUs> = async ({ data }) => {
       </div>
 
       <div className='order-1 flex flex-1 flex-col lg:order-2'>
-        <Title level='1' variant='subheading' className='!mt-5 text-center'>
+        <Title level='1' variant='subheading' className='!mt-10 text-center'>
           {title}
         </Title>
-        <div className='flex w-full flex-col gap-y-10 p-6 lg:gap-x-16 xl:gap-x-36'>
+        <div className='flex w-full flex-col gap-y-10 p-6 lg:gap-x-20 xl:gap-x-40'>
           <ContactUsForm data={formFields} locale={locale} submit={submitBtn} />
           <ContactUsBlock locale={locale} address={map?.address} />
         </div>

@@ -3,6 +3,7 @@ import Script from 'next/script';
 export const MetaScript = () => {
   return (
     <>
+      <link rel='preload' href='https://www.facebook.com/tr?id=351610264681498&ev=PageView&noscript=1' as='image' />
       <Script id='meta-pixel' strategy='afterInteractive'>
         {`
       !function(f,b,e,v,n,t,s)
@@ -22,8 +23,8 @@ export const MetaScript = () => {
           height='1'
           width='1'
           style={{ display: 'none' }}
-          src='https://www.facebook.com/tr?id=351610264681498&ev=PageView&noscript=1'
           alt=''
+          src='https://www.facebook.com/tr?id=351610264681498&ev=PageView&noscript=1'
           loading='lazy'
         />
       </noscript>

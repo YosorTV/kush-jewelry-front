@@ -96,7 +96,7 @@ export const FilterForm = () => {
   }, [pathname, router, state]);
 
   return (
-    <form onSubmit={handleSubmit} className='relative top-16 flex flex-col gap-y-2.5 p-5'>
+    <form onSubmit={handleSubmit} className='relative top-16 flex flex-col gap-y-3 p-5'>
       <div className='flex w-full items-baseline justify-between'>
         <Title level='2' className='text-xl font-semibold text-base-200'>
           {t('sort.title')}:

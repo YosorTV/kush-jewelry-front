@@ -25,7 +25,7 @@ export const StrapiContentBlock: FC<IStrapiContentBlock> = ({ content, imageClas
           </NextLink>
         ),
         heading: ({ level, children }) => (
-          <Title level={`${level}`} className='px-5'>
+          <Title level={`${level}`} className='px-6'>
             {children}
           </Title>
         ),
@@ -46,7 +46,7 @@ export const StrapiContentBlock: FC<IStrapiContentBlock> = ({ content, imageClas
             />
           );
         },
-        paragraph: ({ children }) => <p className='break-words px-5 text-sm text-base-200 md:text-base'>{children}</p>
+        paragraph: ({ children }) => <p className='break-words px-6 text-sm text-base-200 md:text-base'>{children}</p>
       }}
     />
   );

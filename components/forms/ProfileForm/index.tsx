@@ -60,12 +60,12 @@ export const ProfileForm = ({ data, state, locale = DEFAULT_LOCALE, token }: any
 
       <div className='flex flex-col gap-5 lg:flex-row'>{printInputs(updatedGeneralFields)}</div>
       <div className='divider' />
-      <div className='flex flex-col gap-y-5'>
+      <div className='flex flex-col gap-y-6'>
         <Title level='3'>{data?.contactsTitle}</Title>
         <div className='flex flex-col gap-5 lg:flex-row'>{printInputs(updatedContactsFields)}</div>
       </div>
       <div className='divider' />
-      <div className='flex flex-col gap-y-5'>
+      <div className='flex flex-col gap-y-6'>
         <Title level='3'>{data?.additionalTitle}</Title>
         <div className='flex flex-col gap-5 lg:flex-row'>
           <NovaPostOptions

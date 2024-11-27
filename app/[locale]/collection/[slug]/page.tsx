@@ -24,7 +24,7 @@ export default async function Collection({ params }: PageProps) {
   }
 
   return (
-    <PageLayout className='mt-16 min-h-screen'>
+    <PageLayout className='mt-20 min-h-screen'>
       <CollectionDetails
         title={data.title}
         content={data.description}

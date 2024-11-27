@@ -28,7 +28,7 @@ export const SortFields: FC<ISortFields> = ({ data }) => {
       onChange={() => handleChange(field.name)}
       className='radio checked:bg-base-200'
       labelStyle='text-base-200 font-medium text-lg cursor-pointer'
-      containerClass='flex-row flex-row-reverse justify-end items-center gap-x-5'
+      containerClass='flex-row flex-row-reverse justify-end items-center gap-x-6'
     />
   );
 

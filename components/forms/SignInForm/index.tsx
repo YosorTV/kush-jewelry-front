@@ -3,7 +3,6 @@
 import { SignInProviders } from '@/components/complex';
 import { Form, Input, NextLink, Title } from '@/components/elements';
 import { SubmitButton } from '@/components/simple';
-import { StepBack } from '@/components/simple/StepBack';
 import { schemas } from '@/lib/zod';
 import { authUserAction } from '@/services';
 import { StrapiLinkType } from '@/types/components';
@@ -49,12 +48,11 @@ export const SignInForm = ({ data, locale = 'uk' }: any) => {
       action={authUserAction}
       className='auth-page_form absolute-center h-full'
     >
-      <StepBack className='absolute left-5 top-20' />
-      <div className='relative w-full pt-5'>
+      <div className='relative w-full pt-24'>
         <Title level='1' className='auth-form_title'>
           {data.title}
         </Title>
-        <div className='grid grid-cols-1 gap-y-5 pt-5'>
+        <div className='grid grid-cols-1 gap-y-6'>
           <Input hidden readOnly name='locale' defaultValue={locale} className='hidden' />
           {printInputs(data.formFields)}
         </div>
@@ -81,9 +79,9 @@ export const SignInForm = ({ data, locale = 'uk' }: any) => {
           loadingText={data.submitBtn.loadingText}
           className='auth-form_submit'
         />
-        <div className='divider my-2 px-5' />
+        <div className='divider my-2 px-6' />
         {printProviders(data.providers)}
-        <div className='divider my-2 px-5' />
+        <div className='divider my-2 px-6' />
         {data.createAccountLink && (
           <NextLink
             key={data.createAccountLink.id}

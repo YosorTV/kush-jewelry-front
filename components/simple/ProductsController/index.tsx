@@ -21,7 +21,7 @@ export const ProductsController: FC<IProductsController> = ({ title }) => {
   const { md } = useScreen();
 
   return (
-    <nav className='flex h-min w-full flex-row items-center justify-between gap-x-5 tracking-wider'>
+    <nav className='flex h-min w-full flex-row items-center justify-between gap-x-6 tracking-wider'>
       <Title level='2' variant='subheading'>
         {title}
       </Title>

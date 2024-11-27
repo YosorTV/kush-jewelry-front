@@ -19,8 +19,8 @@ export const Copyright = async () => {
   );
 
   return (
-    <div className='flex w-full flex-col items-center gap-y-2.5 pt-5'>
-      <div className='flex flex-wrap gap-x-6 gap-y-2.5 text-xs text-base-200'>{systemPages.map(printLink)}</div>
+    <div className='flex w-full flex-col items-center justify-between gap-y-3 border-t border-info-content pt-5 lg:flex-row'>
+      <div className='flex flex-wrap gap-x-6 gap-y-3 text-xs text-base-200'>{systemPages.map(printLink)}</div>
       <span className='whitespace-pre-wrap text-xs'>
         {t('copyright.title')} © {currentYear} KUSH. {t('copyright.subTitle')}.
       </span>

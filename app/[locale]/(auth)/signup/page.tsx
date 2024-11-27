@@ -28,7 +28,7 @@ export default async function SignUpPage({ params }: PageProps) {
   }
 
   return (
-    <PageLayout className='auth-page_wrapper mt-16' cover={data.cover}>
+    <PageLayout className='auth-page_wrapper mt-20' cover={data.cover}>
       <SignUpForm locale={locale} cta={data.submitBtn} title={data.title} formFields={data.formFields} />
     </PageLayout>
   );

@@ -62,7 +62,9 @@ export const SearchController: FC<TSearchController> = ({ onClose, children, pla
   }, [name, locale, state.isOpen]);
 
   useEffect(() => {
-    onClose();
+    return () => {
+      onClose();
+    };
   }, [pathname]);
 
   const cta = useMemo(() => {
@@ -75,17 +77,17 @@ export const SearchController: FC<TSearchController> = ({ onClose, children, pla
   const isLastPage = state.meta.page === state.meta.pageCount || !state.searchResult.length;
 
   return (
-    <AnimatePresence mode='wait'>
+    <AnimatePresence mode='wait' presenceAffectsLayout>
       {state.isOpen && (
         <motion.div
           initial='initial'
           animate='animate'
           exit='exit'
           variants={searchVariants}
-          className='fixed left-0 top-16 z-20 h-screen w-full'
+          className='fixed left-0 top-0 z-20 h-screen w-full'
         >
           <motion.div
-            layout
+            layout='position'
             className='absolute right-0 top-0 z-20 h-screen w-full overflow-y-auto bg-info-content p-8'
           >
             <motion.div

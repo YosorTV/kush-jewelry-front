@@ -29,7 +29,7 @@ export const CategoryCard: FC<any> = ({ data, currency }) => {
     >
       <NextLink
         href={`/catalog/${data.slug}`}
-        className='relative z-20 flex items-center gap-x-2.5 bg-white font-semibold text-black'
+        className='relative z-20 flex items-center gap-x-3 bg-white font-semibold text-black'
       >
         <AnimatePresence mode='sync'>
           {showOverlay && (
@@ -44,7 +44,7 @@ export const CategoryCard: FC<any> = ({ data, currency }) => {
             </motion.div>
           )}
         </AnimatePresence>
-        <div className='relative h-[468px] w-full lg:h-[512px]'>
+        <div className='spotlight-img-carousel'>
           <StrapiImage
             fill
             priority
@@ -65,7 +65,7 @@ export const CategoryCard: FC<any> = ({ data, currency }) => {
               {data.title}
             </Title>
           </div>
-          <div className='flex flex-col gap-y-2.5'>
+          <div className='flex flex-col gap-y-3'>
             <p className='line-clamp-1 w-full text-base font-normal text-white transition-all duration-300'>
               {data.description}
             </p>

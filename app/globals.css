@@ -32,7 +32,7 @@
   }
 
   .absolute-center {
-    @apply absolute flex items-center justify-center;
+    @apply absolute inset-0 flex items-center justify-center;
   }
 
   .absolute-y-center {
@@ -41,6 +41,10 @@
 
   .absolute-x-center {
     @apply absolute mx-auto w-full;
+  }
+
+  .spotlight-img-carousel {
+    @apply relative h-120 w-full sm:h-[680px];
   }
 
   .react-tel-input .flag-dropdown.open .selected-flag {
@@ -59,23 +63,23 @@
   }
 
   .auth-page_wrapper {
-    @apply relative h-dvh w-full items-center justify-center overflow-hidden;
+    @apply relative h-screen w-full items-center justify-start overflow-hidden;
   }
 
   .auth-page_form {
-    @apply right-0 flex h-full h-min w-full flex-col gap-y-2.5 bg-base-100 bg-opacity-90 p-5 shadow-2xl md:w-3/4 md:p-10 xl:w-1/2;
+    @apply ml-auto flex h-full h-min w-full flex-col justify-start gap-y-3 overflow-hidden bg-base-100 bg-opacity-90 px-3 shadow-2xl md:w-3/4 md:p-10 xl:w-1/2;
   }
 
   .auth-form_submit {
-    @apply w-full hover:!bg-base-200 hover:text-base-100;
+    @apply !mt-3 w-full !normal-case hover:!bg-base-200 hover:text-base-100 md:!mt-6;
   }
 
   .auth-form_title {
-    @apply my-2.5 text-center !text-3xl text-base-200 md:!text-4xl xl:!text-5xl;
+    @apply !my-5 text-center !text-3xl text-base-200 md:!text-4xl xl:!text-5xl;
   }
 
   .auth-link {
-    @apply btn w-full rounded-none border-none bg-transparent uppercase shadow-none outline-none hover:bg-base-200 hover:text-base-100;
+    @apply btn w-full rounded-none border-none bg-transparent shadow-none outline-none hover:bg-base-200 hover:text-base-100;
   }
 }
 
@@ -91,8 +95,8 @@ input:-webkit-autofill:active {
   --slide-size: 100%;
   --slide-height: 100%;
   --slide-spacing: 0.25rem;
-  --slide-size-xl: calc(100% / 4);
-  --slide-size-lg: calc(100% / 3);
+  --slide-size-xl: calc(100% / 3);
+  --slide-size-lg: calc(100% / 2.5);
   --slide-size-md: calc(100% / 2);
   --slide-size-sm: calc(100% / 1.5);
 }
@@ -101,13 +105,13 @@ input:-webkit-autofill:active {
   --slide-size: 100%;
   --slide-height: 300px;
   --slide-spacing: 0.25rem;
-  --slide-size-xl: calc(100% / 4);
+  --slide-size-xl: calc(100% / 3);
   --slide-size-md: calc(100% / 2);
 }
 
 .embla__viewport {
   overflow: hidden;
-  padding: 5px 0;
+  padding: 0;
 }
 
 .embla__container {

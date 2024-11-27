@@ -11,6 +11,7 @@ const CollectionCarousel: FC<ICollectionCarousel> = ({
   title,
   titleClass,
   autoScroll = false,
+  autoplay = false,
   loop = true,
   className = 'w-full',
   slideClass = 'h-full md:h-96',
