@@ -32,7 +32,7 @@ export const SearchController: FC<TSearchController> = ({ onClose, children, pla
       name,
       locale,
       page: '1',
-      pageSize: '16'
+      pageSize: '8'
     });
   }, [state, locale, name]);
 
@@ -80,16 +80,14 @@ export const SearchController: FC<TSearchController> = ({ onClose, children, pla
     <AnimatePresence mode='wait' presenceAffectsLayout>
       {state.isOpen && (
         <motion.div
+          layout='position'
           initial='initial'
           animate='animate'
           exit='exit'
           variants={searchVariants}
           className='fixed left-0 top-0 z-20 h-screen w-full'
         >
-          <motion.div
-            layout='position'
-            className='absolute right-0 top-0 z-20 h-screen w-full overflow-y-auto bg-info-content p-8'
-          >
+          <motion.div className='absolute right-0 top-0 z-20 h-screen w-full overflow-y-auto bg-info-content p-8'>
             <motion.div
               initial='hidden'
               animate='visible'

@@ -36,7 +36,7 @@ export default function BaseLayout({
                 <AutoLogoutProvider>{children}</AutoLogoutProvider>
               </main>
               <Footer data={footer} sessionLinks={header?.sessionLinks} session={session} locale={locale} />
-              <div id='portal' />
+              <div id='portal' className='z-50' />
               <Modal id='my_modal_3'>
                 <WishlistNotification locale={locale} />
               </Modal>

@@ -2,7 +2,7 @@
 
 import { FC, useEffect } from 'react';
 
-import { Hamburger, Sidebar } from '@/components/elements';
+import { Hamburger, Portal, Sidebar } from '@/components/elements';
 import { motion } from 'framer-motion';
 import { MenuNav } from './MenuNav';
 
@@ -41,28 +41,33 @@ export const Menu: FC<MenuProps> = ({ pages, categories, authLink, collections, 
   const handleToggle = () => menu.onToggle();
 
   useEffect(() => {
-    return () => {
-      menu.onClose();
-    };
-
+    menu.onClose();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname, category]);
 
   return (
     <>
       <ListOfPages pages={pages?.data} categories={categories} collections={collections} className='hidden lg:flex' />
-      <motion.div initial={false} animate={menu.isOpen ? 'open' : 'closed'} className='z-20 h-auto w-min lg:hidden'>
+      <motion.div
+        layout='position'
+        initial={false}
+        animate={menu.isOpen ? 'open' : 'closed'}
+        className='z-20 h-auto w-min lg:hidden'
+      >
         <Hamburger isOpened={menu.isOpen} toggle={handleToggle} />
-        <Sidebar opened={menu.isOpen} position='right' onToggle={handleToggle}>
-          <MenuNav
-            pages={pages}
-            categories={categories}
-            authLink={authLink}
-            session={session.data}
-            sessionLinks={sessionLinks}
-            collections={collections}
-          />
-        </Sidebar>
+        <Portal selector='portal'>
+          <Sidebar opened={menu.isOpen} position='right' onToggle={handleToggle}>
+            <MenuNav
+              onToggle={handleToggle}
+              pages={pages}
+              categories={categories}
+              authLink={authLink}
+              session={session.data}
+              sessionLinks={sessionLinks}
+              collections={collections}
+            />
+          </Sidebar>
+        </Portal>
       </motion.div>
     </>
   );

@@ -6,6 +6,7 @@ export interface TSearchState {
   searchResult: Product[];
   isOpen: boolean;
   isLoading: boolean;
+  currency: number;
   error: any;
   meta: {
     page: number;
@@ -16,10 +17,6 @@ export interface TSearchState {
   onToggle: () => void;
   onReset: () => void;
   onSearch: (value: string) => void;
-  fetchProducts: ({
-    locale,
-    name,
-    page,
-    pageSize,
-  }: PageProps['searchParams']) => Promise<void>;
+  fetchCurrency: () => Promise<void>;
+  fetchProducts: ({ locale, name, page, pageSize }: PageProps['searchParams']) => Promise<void>;
 }

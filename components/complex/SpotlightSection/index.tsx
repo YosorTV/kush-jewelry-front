@@ -1,11 +1,9 @@
-import { FC } from 'react';
-
 import { SpotlightCarousel } from '@/components/simple';
 import AnimatedTag from '@/components/simple/AnimatedTag';
 import { getCurrency } from '@/services';
 import { getLocale } from 'next-intl/server';
 
-export const SpotlightSection: FC<any> = async ({ data }) => {
+export async function SpotlightSection({ data }: any) {
   const locale = await getLocale();
   const currency = await getCurrency();
 
@@ -16,4 +14,4 @@ export const SpotlightSection: FC<any> = async ({ data }) => {
       )}
     </AnimatedTag>
   );
-};
+}

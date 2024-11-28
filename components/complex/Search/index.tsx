@@ -1,12 +1,12 @@
 'use client';
 
-import { FC, useCallback } from 'react';
+import { FC, useCallback, useEffect } from 'react';
 import { IoSearchSharp } from 'react-icons/io5';
 
 import { useSearch } from '@/store';
 import { useScrollLock } from '@/lib/hooks';
 
-import { Button } from '@/components/elements';
+import { Button, Portal } from '@/components/elements';
 import { SearchController } from './SearchController';
 import { SearchContent } from './SearchContent';
 
@@ -27,15 +27,21 @@ export const Search: FC<TSearch> = ({ placeholder }) => {
     state.onReset();
   }, [state.onReset]);
 
+  useEffect(() => {
+    state.fetchCurrency();
+  }, []);
+
   return (
     <>
       <Button onClick={handleOpen} type='button'>
         <IoSearchSharp className='h-6 w-6 fill-base-200' />
       </Button>
 
-      <SearchController onClose={handleClose} placeholder={placeholder}>
-        <SearchContent />
-      </SearchController>
+      <Portal selector='portal'>
+        <SearchController onClose={handleClose} placeholder={placeholder}>
+          <SearchContent currency={state.currency} />
+        </SearchController>
+      </Portal>
     </>
   );
 };

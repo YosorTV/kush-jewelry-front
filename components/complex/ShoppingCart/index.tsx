@@ -6,7 +6,7 @@ import { useCart } from '@/store';
 
 import { paymentDataAdapter } from '@/adapters/payment';
 import { CloseIcon } from '@/assets/icons';
-import { Button, Sidebar } from '@/components/elements';
+import { Button, Portal, Sidebar } from '@/components/elements';
 import { Badge } from '@/components/elements/Badge';
 import { CartList } from '@/components/simple';
 import { CartCheckout } from '@/components/simple/CartCheckout';
@@ -96,26 +96,28 @@ export const ShoppingCart: FC<ShoppingCartProps> = ({ data, locale, currency }) 
         <BsFillBagFill className='h-6 w-6 fill-base-200' />
       </Button>
 
-      <Sidebar position='right' onToggle={handleToggle} opened={cartStore.isOpen}>
-        <div className={cn('relative flex w-full flex-col items-start px-6')}>
-          <div className='flex w-full items-end justify-between'>
-            <Button
-              type='button'
-              onClick={handleBack}
-              className='!text-xs underline-offset-8 hover:underline md:!text-sm'
-              icon={{ before: <IoArrowBack className='h-4 w-4 fill-base-200 md:h-6 md:w-6' /> }}
-            />
+      <Portal selector='portal'>
+        <Sidebar position='right' onToggle={handleToggle} opened={cartStore.isOpen}>
+          <div className={cn('relative flex w-full flex-col items-start px-6')}>
+            <div className='flex w-full items-end justify-between'>
+              <Button
+                type='button'
+                onClick={handleBack}
+                className='!text-xs underline-offset-8 hover:underline md:!text-sm'
+                icon={{ before: <IoArrowBack className='h-4 w-4 fill-base-200 md:h-6 md:w-6' /> }}
+              />
 
-            <Button
-              type='button'
-              onClick={handleToggle}
-              className='!text-xs underline-offset-8 hover:underline md:!text-sm'
-              icon={{ before: <CloseIcon className='h-4 w-4 fill-base-200 md:h-6 md:w-6' /> }}
-            />
+              <Button
+                type='button'
+                onClick={handleToggle}
+                className='!text-xs underline-offset-8 hover:underline md:!text-sm'
+                icon={{ before: <CloseIcon className='h-4 w-4 fill-base-200 md:h-6 md:w-6' /> }}
+              />
+            </div>
+            {contentZone[cartStore.key]}
           </div>
-          {contentZone[cartStore.key]}
-        </div>
-      </Sidebar>
+        </Sidebar>
+      </Portal>
     </>
   );
 };

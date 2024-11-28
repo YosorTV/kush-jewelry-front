@@ -12,7 +12,7 @@ interface HamburgerProps {
 
 export const Hamburger: FC<HamburgerProps> = ({ toggle, isOpened }) => {
   return (
-    <button onClick={toggle} className={cn('relative z-30 bg-transparent', isOpened ? 'w-min' : 'w-auto')}>
+    <button onClick={toggle} className={cn('relative bg-transparent', isOpened ? 'w-min' : 'w-auto')}>
       <svg width={24} height={24} viewBox='0 0 24 24'>
         <Path
           className='stroke-base-200'

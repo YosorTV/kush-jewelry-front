@@ -8,7 +8,7 @@ import { IHeroSection } from '@/types/components/complex/hero-section';
 export const HeroSection: FC<IHeroSection> = ({ data }) => {
   return (
     <section className='group relative flex flex-col items-center justify-center'>
-      <div className='relative h-screen w-full'>
+      <div className='relative h-2lg w-full md:h-screen'>
         <StrapiImage
           fill
           overlay
@@ -17,9 +17,9 @@ export const HeroSection: FC<IHeroSection> = ({ data }) => {
           src={data.image.url}
           formats={data.image.formats}
           alt={data.image.alternativeText}
-          className='aspect-square h-full w-full animate-zoomOut object-cover transition-transform duration-300 ease-out'
+          className='aspect-video h-full w-full animate-zoomOut object-cover transition-transform duration-300 ease-out'
         />
-        <Title level='1' variant='subheading' className='absolute-center text-center text-base-300'>
+        <Title level='1' variant='subheading' className='absolute-center px-6 text-center text-base-300'>
           {data.title}
         </Title>
         <NextLink

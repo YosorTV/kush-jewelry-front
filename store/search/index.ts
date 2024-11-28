@@ -1,10 +1,11 @@
-import { getProductsData } from '@/services';
+import { getCurrency, getProductsData } from '@/services';
 import { TSearchState } from '@/types/store';
 import { StateCreator } from 'zustand';
 
 export const searchSlice: StateCreator<TSearchState> = (set) => ({
   isOpen: false,
   isLoading: false,
+  currency: 41,
   searchValue: '',
   searchResult: [],
   error: null,
@@ -19,6 +20,13 @@ export const searchSlice: StateCreator<TSearchState> = (set) => ({
       searchResult: [],
       meta: { page: 1, pageCount: 0, pageSize: 8, total: 0 }
     }),
+  fetchCurrency: async () => {
+    set({ isLoading: true, error: null });
+
+    const response = await getCurrency();
+
+    set({ isLoading: false, currency: response });
+  },
   fetchProducts: async ({ locale, name, page, pageSize }) => {
     set({ isLoading: true, error: null });
 

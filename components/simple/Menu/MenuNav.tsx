@@ -1,15 +1,17 @@
 import { MenuItem } from './MenuItem';
 import { CategoryLinkType, CollectionLinkType, StrapiLinkType } from '@/types/components';
 import { FC } from 'react';
-import { Title } from '@/components/elements';
+import { Button, Title } from '@/components/elements';
 import { cormorant } from '@/assets/fonts';
 import { cn } from '@/lib';
 import { SiteSettings } from '../SiteSettings';
 import { Session } from 'next-auth';
 import { SignInLink } from '../SignInLink';
+import { IoClose } from 'react-icons/io5';
 
 type MenuNavProps = {
   session: Session;
+  onToggle: () => void;
   authLink: StrapiLinkType;
   sessionLinks: StrapiLinkType[];
   pages: {
@@ -26,7 +28,15 @@ type MenuNavProps = {
   };
 };
 
-export const MenuNav: FC<MenuNavProps> = ({ pages, categories, authLink, session, collections, sessionLinks }) => {
+export const MenuNav: FC<MenuNavProps> = ({
+  pages,
+  categories,
+  authLink,
+  onToggle,
+  session,
+  collections,
+  sessionLinks
+}) => {
   const printCategory = (item: CategoryLinkType) => (
     <MenuItem
       id={item.id}
@@ -64,9 +74,14 @@ export const MenuNav: FC<MenuNavProps> = ({ pages, categories, authLink, session
   return (
     <div className='relative p-2.5'>
       <div className='form-control gap-y-6'>
-        <Title level='5' className={cn(cormorant.className, 'text-2xl capitalize')}>
-          {pages.title}
-        </Title>
+        <div className='flex justify-between'>
+          <Title level='5' className={cn(cormorant.className, 'text-2xl capitalize')}>
+            {pages.title}
+          </Title>
+          <Button onClick={onToggle} type='button' className='r-0 relative'>
+            <IoClose className='h-6 w-6 fill-base-200' />
+          </Button>
+        </div>
         <div className='form-control'>
           <ul>{pages.data.map(printPage)}</ul>
           {session?.accessToken ? (

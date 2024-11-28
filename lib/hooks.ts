@@ -12,6 +12,7 @@ const useMediaQuery = (query: string) => {
 
   useEffect(() => {
     const media = window.matchMedia(query);
+    const controller = new AbortController();
 
     const updateMatches = () => {
       if (media.matches !== matches) {
@@ -21,12 +22,10 @@ const useMediaQuery = (query: string) => {
 
     const debouncedUpdate = debounce(updateMatches, 100);
 
-    updateMatches();
-
-    media.addEventListener('change', debouncedUpdate);
+    media.addEventListener('change', debouncedUpdate, { signal: controller.signal });
 
     return () => {
-      media.addEventListener('change', debouncedUpdate);
+      controller.abort();
     };
   }, [matches, query]);
 
@@ -103,21 +102,22 @@ export const usePrevNextButtons = (
 
 export const useScrollLock = (isLocked: boolean) => {
   useEffect(() => {
+    const controller = new AbortController();
     const preventScroll = (e: Event) => {
       e.preventDefault();
     };
 
     if (isLocked) {
       document.body.style.overflow = 'hidden';
-      window.addEventListener('scroll', preventScroll);
+      window.addEventListener('scroll', preventScroll, { signal: controller.signal });
     } else {
       document.body.style.overflow = '';
-      window.removeEventListener('scroll', preventScroll);
+      controller.abort();
     }
 
     return () => {
       document.body.style.overflow = '';
-      window.removeEventListener('scroll', preventScroll);
+      controller.abort();
     };
   }, [isLocked]);
 };

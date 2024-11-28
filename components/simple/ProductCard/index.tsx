@@ -23,7 +23,7 @@ export const ProductCard: FC<ProductCardProps> = ({
       <div className='relative'>
         <AnimatedImage product={product} className={imgClassName} />
         <span className='absolute left-0 top-0 z-[3] bg-neutral p-2 text-base-300'>{product.hintText}</span>
-        {product.saleValue > 0 && (
+        {product?.saleValue > 0 && (
           <span className='absolute left-0 top-12 z-[3] bg-neutral p-2 text-base-300'>-{product.saleValue}%</span>
         )}
         <Wishlist

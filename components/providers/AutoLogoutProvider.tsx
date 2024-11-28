@@ -35,16 +35,17 @@ export const AutoLogoutProvider: FC<PropsWithChildren<AutoLogoutProviderProps>> 
 
   useEffect(() => {
     const windowEvents: WindowActivityEvent[] = ['focus', 'scroll', 'click', 'keydown', 'mousemove'];
+    const controller = new AbortController();
 
-    windowEvents.forEach((event) => window.addEventListener(event, onUserActivity));
+    windowEvents.forEach((event) => window.addEventListener(event, onUserActivity, { signal: controller.signal }));
 
     const intervalId = setInterval(checkUserInactivity, timeoutCheckMs);
 
     return () => {
-      windowEvents.forEach((event) => window.removeEventListener(event, onUserActivity));
+      controller.abort();
       clearInterval(intervalId);
     };
-  }, [onUserActivity, checkUserInactivity, timeoutCheckMs]);
+  }, [timeoutCheckMs]);
 
   return <>{children}</>;
 };

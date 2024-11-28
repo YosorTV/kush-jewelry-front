@@ -12,10 +12,9 @@ export const Sidebar: FC<PropsWithChildren<SidebarProps>> = ({ opened, position,
   useScrollLock(opened);
 
   return (
-    <AnimatePresence mode='wait'>
+    <AnimatePresence mode='wait' presenceAffectsLayout>
       {opened && (
         <motion.div
-          layout
           initial={animCart.fade.initial}
           animate={animCart.fade.animate}
           exit={animCart.fade.exit}
@@ -23,6 +22,7 @@ export const Sidebar: FC<PropsWithChildren<SidebarProps>> = ({ opened, position,
           className='fixed left-0 top-0 z-20 h-screen w-full bg-black/50'
         >
           <motion.div
+            layout='position'
             onClick={(e) => e.stopPropagation()}
             className={cn(
               'fixed top-0 h-screen w-full overflow-auto overflow-x-hidden bg-info-content p-2.5 scrollbar sm:w-3/4 md:w-2/3 xl:w-5/12',
