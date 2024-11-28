@@ -51,10 +51,10 @@ export const CartList: FC<any> = ({ data, currency }) => {
   if (!cartStore.cart.length) {
     return (
       <motion.div
-        initial={animCart.basket.initial}
-        animate={animCart.basket.animate}
-        exit={animCart.basket.exit}
-        className='relative flex w-full flex-col items-center justify-center py-10'
+        initial={animCart.fade.initial}
+        animate={animCart.fade.animate}
+        exit={animCart.fade.exit}
+        className='relative flex w-full flex-col items-center justify-center gap-y-10 py-10'
       >
         <Title level='2'>{data.emptyList}</Title>
         <Lottie src={lottieAnim} playerClassName={cn(theme === 'sunset' ? 'invert' : 'invert-0', 'opacity-75')} />

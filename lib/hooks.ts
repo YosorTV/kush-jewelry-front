@@ -22,6 +22,8 @@ const useMediaQuery = (query: string) => {
 
     const debouncedUpdate = debounce(updateMatches, 100);
 
+    updateMatches();
+
     media.addEventListener('change', debouncedUpdate, { signal: controller.signal });
 
     return () => {

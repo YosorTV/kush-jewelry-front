@@ -52,7 +52,7 @@ export const Menu: FC<MenuProps> = ({ pages, categories, authLink, collections, 
         layout='position'
         initial={false}
         animate={menu.isOpen ? 'open' : 'closed'}
-        className='z-20 h-auto w-min lg:hidden'
+        className='h-7 w-7 lg:hidden'
       >
         <Hamburger isOpened={menu.isOpen} toggle={handleToggle} />
         <Portal selector='portal'>

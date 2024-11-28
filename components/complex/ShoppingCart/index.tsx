@@ -93,25 +93,25 @@ export const ShoppingCart: FC<ShoppingCartProps> = ({ data, locale, currency }) 
         className='relative flex cursor-pointer items-center gap-x-2 border-none bg-none text-lg font-medium outline-none'
       >
         {cartStore.cart.length > 0 && <Badge counter={cartStore.cart.length} />}
-        <BsFillBagFill className='h-6 w-6 fill-base-200' />
+        <BsFillBagFill height={24} width={24} className='h-6 w-6 fill-base-200' />
       </Button>
 
       <Portal selector='portal'>
         <Sidebar position='right' onToggle={handleToggle} opened={cartStore.isOpen}>
-          <div className={cn('relative flex w-full flex-col items-start px-6')}>
+          <div className={cn('relative flex w-full flex-col items-start p-2.5')}>
             <div className='flex w-full items-end justify-between'>
               <Button
                 type='button'
                 onClick={handleBack}
                 className='!text-xs underline-offset-8 hover:underline md:!text-sm'
-                icon={{ before: <IoArrowBack className='h-4 w-4 fill-base-200 md:h-6 md:w-6' /> }}
+                icon={{ before: <IoArrowBack className='h-6 w-6 fill-base-200' /> }}
               />
 
               <Button
                 type='button'
                 onClick={handleToggle}
                 className='!text-xs underline-offset-8 hover:underline md:!text-sm'
-                icon={{ before: <CloseIcon className='h-4 w-4 fill-base-200 md:h-6 md:w-6' /> }}
+                icon={{ before: <CloseIcon className='h-6 w-6 fill-base-200' /> }}
               />
             </div>
             {contentZone[cartStore.key]}
