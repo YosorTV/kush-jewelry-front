@@ -1,21 +1,15 @@
 'use client';
 
 import { FC } from 'react';
+import { signOut } from 'next-auth/react';
 
 import { cn } from '@/lib';
-import { signOut } from 'next-auth/react';
+
 import { ROOT } from '@/helpers/constants';
-import { useLocale } from 'next-intl';
 
-interface ISignOut {
-  text: string;
-  icon?: JSX.Element;
-  className?: string;
-}
+import { ISignOutButton } from '@/types/components/simple';
 
-export const SignOutButton: FC<ISignOut> = ({ text, icon, className }) => {
-  const locale = useLocale();
-
+export const SignOutButton: FC<ISignOutButton> = ({ text, icon, className, locale = 'uk' }) => {
   return (
     <button
       type='button'

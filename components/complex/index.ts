@@ -15,3 +15,4 @@ export * from '@/components/complex/Search';
 export * from '@/components/complex/SignInProviders';
 export * from '@/components/complex/SpotlightSection';
 export * from '@/components/complex/UserSession';
+export * from '@/components/complex/ShoppingCart';

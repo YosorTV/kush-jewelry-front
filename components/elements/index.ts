@@ -1,3 +1,4 @@
+export * from '@/components/elements/Avatar';
 export * from '@/components/elements/Accordion';
 export * from '@/components/elements/Header';
 export * from '@/components/elements/Footer';

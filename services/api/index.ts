@@ -22,3 +22,4 @@ export * from '@/services/api/login';
 export * from '@/services/api/payment-create';
 export * from '@/services/api/post-user-message';
 export * from '@/services/api/provider-login';
+export * from '@/services/api/get-wishlist-notification';

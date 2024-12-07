@@ -39,3 +39,4 @@ export * from '@/components/simple/OrderCardMobile';
 export * from '@/components/simple/StatusBadge';
 export * from '@/components/simple/ProductCarousel';
 export * from '@/components/simple/SiteSettings';
+export * from '@/components/simple/WishlistNotification';

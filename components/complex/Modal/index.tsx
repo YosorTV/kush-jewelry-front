@@ -1,16 +1,14 @@
 'use client';
 
-import { CloseIcon } from '@/assets/icons';
-import { cn } from '@/lib';
-import { usePathname } from '@/lib/navigation';
 import { FC, PropsWithChildren, useEffect, useRef } from 'react';
 
-interface IModal {
-  id: string;
-  className?: string;
-}
+import { cn } from '@/lib';
+import { usePathname } from '@/lib/navigation';
 
-const Modal: FC<PropsWithChildren<IModal>> = ({ id = 'my_modal_3', children, className }) => {
+import { CloseIcon } from '@/assets/icons';
+import { IModal } from '@/types/components';
+
+export const Modal: FC<PropsWithChildren<IModal>> = ({ id = 'my_modal_3', children, className }) => {
   const pathname = usePathname();
   const dialogRef = useRef<HTMLDialogElement | null>(null);
 
@@ -35,5 +33,3 @@ const Modal: FC<PropsWithChildren<IModal>> = ({ id = 'my_modal_3', children, cla
     </dialog>
   );
 };
-
-export default Modal;

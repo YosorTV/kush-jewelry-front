@@ -7,3 +7,4 @@ export * from '@/components/forms/FilterForm';
 export * from '@/components/forms/ContactUsForm';
 export * from '@/components/forms/DeliveryForm';
 export * from '@/components/forms/PeronalCheckoutForm';
+export * from '@/components/forms/SubscribeForm';

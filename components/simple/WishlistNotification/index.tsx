@@ -1,12 +1,9 @@
 import { FC } from 'react';
 
+import { getWishlistNotiifcation } from '@/services/api';
 import { NextLink, Title } from '@/components/elements';
 
-import { getWishlistNotiifcation } from '@/services/api/get-wishlist-notification';
-
-interface IWishlistNotification {
-  locale: string;
-}
+import { IWishlistNotification } from '@/types/components';
 
 export const WishlistNotification: FC<IWishlistNotification> = async ({ locale }) => {
   const { data } = await getWishlistNotiifcation({ locale });

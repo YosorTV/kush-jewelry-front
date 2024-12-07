@@ -11,3 +11,4 @@ export * from '@/types/components/elements/lottie.types';
 export * from '@/types/components/elements/portal.types';
 export * from '@/types/components/elements/accordion.types';
 export * from '@/types/components/elements/sidebar.types';
+export * from '@/types/components/elements/avatar.types';

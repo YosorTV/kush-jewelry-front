@@ -1,14 +1,12 @@
 import { FC } from 'react';
 
+import { NextLink, Title } from '@/components/elements';
+import { SubscribeForm } from '@/components/forms';
 import { Copyright, ListOfPages, SiteSettings, SocialLink } from '@/components/simple';
 
-import { NextLink } from '@/elements/Link';
-import { Title } from '@/elements/Title';
-
 import { FooterProps } from '@/types/components';
-import { SubscribeForm } from '@/components/forms/SubscribeForm';
 
-export const Footer: FC<FooterProps> = ({ data, locale }) => {
+const Footer: FC<FooterProps> = ({ data, locale }) => {
   return (
     <footer className='footer relative flex min-h-40 w-full border-t border-info-content bg-base-100 px-6 py-6 drop-shadow-lg'>
       <div className='flex w-full flex-col gap-y-6'>
@@ -64,3 +62,5 @@ export const Footer: FC<FooterProps> = ({ data, locale }) => {
     </footer>
   );
 };
+
+export default Footer;

@@ -1,13 +1,10 @@
-'use client';
-
-import { Search } from '@/components/complex';
-import { ShoppingCart } from '@/components/complex/ShoppingCart';
 import { Logo } from '@/components/elements';
 import { Menu } from '@/components/simple';
+import { Search, ShoppingCart, UserSession } from '@/components/complex';
+
+import { generateHeaderData } from '@/helpers';
 
 import { HeaderProps } from '@/types/components';
-import { generateHeaderData } from '@/helpers';
-import UserSession from '@/components/complex/UserSession';
 
 export default function Header({ data, cart, session, locale, currency }: HeaderProps) {
   const collectionsData = generateHeaderData(data?.collectionTitle, data?.collections?.data);
@@ -18,7 +15,6 @@ export default function Header({ data, cart, session, locale, currency }: Header
     <header className='fixed z-50 flex min-h-20 w-screen cursor-pointer items-center border-b border-info-content bg-base-100 px-3 drop-shadow-md lg:px-6'>
       <nav className='relative flex w-full items-center justify-between'>
         <Logo width={160} height={48} className='lg:absolute-center relative top-1.5 -z-10 block lg:w-full' />
-
         <div className='flex flex-1 flex-row-reverse items-center gap-x-6 lg:flex-row lg:items-center lg:justify-between'>
           <Menu
             pages={pagesData}

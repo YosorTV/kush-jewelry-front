@@ -10,32 +10,16 @@ import { usePathname } from '@/lib/navigation';
 import { ListOfPages } from '../ListOfPages';
 
 import { useMenu } from '@/store';
-import { StrapiLinkType } from '@/types/components';
 import { useSearchParams } from 'next/navigation';
 import { useSession } from 'next-auth/react';
+import { TMenu } from '@/types/components/simple/menu.types';
 
-type MenuProps = {
-  pages: {
-    title: string;
-    data: StrapiLinkType[];
-  };
-  collections: {
-    title: string;
-    data: any[];
-  };
-  categories: {
-    title: string;
-    data: any[];
-  };
-  sessionLinks: StrapiLinkType[];
-  authLink: StrapiLinkType;
-};
-
-export const Menu: FC<MenuProps> = ({ pages, categories, authLink, collections, sessionLinks }) => {
+export const Menu: FC<TMenu> = ({ pages, categories, authLink, collections, sessionLinks }) => {
   const menu = useMenu();
+  const session = useSession();
   const pathname = usePathname();
   const params = useSearchParams();
-  const session = useSession();
+
   const category = params.get('categories');
 
   const handleToggle = () => menu.onToggle();
@@ -48,12 +32,7 @@ export const Menu: FC<MenuProps> = ({ pages, categories, authLink, collections, 
   return (
     <>
       <ListOfPages pages={pages?.data} categories={categories} collections={collections} className='hidden lg:flex' />
-      <motion.div
-        layout='position'
-        initial={false}
-        animate={menu.isOpen ? 'open' : 'closed'}
-        className='h-7 w-7 lg:hidden'
-      >
+      <motion.div initial={false} animate={menu.isOpen ? 'open' : 'closed'} className='h-7 w-7 lg:hidden'>
         <Hamburger isOpened={menu.isOpen} toggle={handleToggle} />
         <Portal selector='portal'>
           <Sidebar opened={menu.isOpen} position='right' onToggle={handleToggle}>

@@ -1,12 +1,13 @@
-import { NextLink } from '@/components/elements';
-import { Avatar } from '@/components/elements/Avatar';
-import { SignInLink } from '@/components/simple';
-import { SignOutButton } from '@/components/simple/SignOutButton';
-import { StrapiLinkType } from '@/types/components';
+import { FC } from 'react';
 
-export default function UserSession({ cta, signOutTitle, session, sessionLinks = [] }: any) {
+import { NextLink, Avatar } from '@/components/elements';
+import { SignInLink, SignOutButton } from '@/components/simple';
+
+import { IUserSession, StrapiLinkType } from '@/types/components';
+
+export const UserSession: FC<IUserSession> = ({ cta, signOutTitle, session, sessionLinks = [], locale = 'uk' }) => {
   if (!session) {
-    return <SignInLink {...cta} />;
+    return <SignInLink url={cta.url} isExternal={cta.isExternal} text={cta.text} />;
   }
 
   const printMenuLink = (link: StrapiLinkType, index: number) => (
@@ -29,10 +30,10 @@ export default function UserSession({ cta, signOutTitle, session, sessionLinks =
         >
           {sessionLinks.map(printMenuLink)}
           <li tabIndex={4}>
-            <SignOutButton text={signOutTitle} />
+            <SignOutButton text={signOutTitle} locale={locale} />
           </li>
         </ul>
       </div>
     </nav>
   );
-}
+};
