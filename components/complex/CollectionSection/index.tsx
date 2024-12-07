@@ -2,8 +2,8 @@
 
 import { FC } from 'react';
 
+import { AnimatedTag } from '@/components/simple';
 import CollectionCarousel from '@/components/simple/CollectionCarousel';
-import AnimatedTag from '@/components/simple/AnimatedTag';
 
 interface ICollectionSection {
   data: {

@@ -1,7 +1,8 @@
-import { SpotlightCarousel } from '@/components/simple';
-import AnimatedTag from '@/components/simple/AnimatedTag';
-import { getCurrency } from '@/services';
 import { getLocale } from 'next-intl/server';
+
+import { getCurrency } from '@/services';
+
+import { SpotlightCarousel, AnimatedTag } from '@/components/simple';
 
 export async function SpotlightSection({ data }: any) {
   const locale = await getLocale();

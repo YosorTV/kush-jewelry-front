@@ -1,9 +1,10 @@
-import { Title } from '@/components/elements';
-import { StrapiContentBlock, StrapiImage } from '@/components/simple';
-import AnimatedTag from '@/components/simple/AnimatedTag';
-import { IImageFormats } from '@/types/components';
-import { BlocksContent } from '@strapi/blocks-react-renderer';
 import { FC } from 'react';
+import { BlocksContent } from '@strapi/blocks-react-renderer';
+
+import { Title } from '@/components/elements';
+import { StrapiContentBlock, StrapiImage, AnimatedTag } from '@/components/simple';
+
+import { IImageFormats } from '@/types/components';
 
 interface IAboutSection {
   title: string;

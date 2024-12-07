@@ -9,3 +9,5 @@ export * from '@/types/components/simple/strapiContentBlock.types';
 export * from '@/types/components/simple/wishListNotification.types';
 export * from '@/types/components/simple/menu.types';
 export * from '@/types/components/simple/signOutButton.types';
+export * from '@/types/components/simple/productListGroup.types';
+export * from '@/types/components/simple/productList.types';

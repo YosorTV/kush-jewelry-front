@@ -8,15 +8,14 @@ import { cn } from '@/lib';
 import { ProductCardProps } from '@/types/components';
 import { Price } from '../Price';
 import { Wishlist } from '../Wishlist';
-import AnimatedTag from '../AnimatedTag';
+import { AnimatedTag } from '../AnimatedTag';
 
 export const ProductCard: FC<ProductCardProps> = ({
   product,
   className,
   imgClassName,
   session = null,
-  currency = 41,
-  t
+  currency = 41
 }) => {
   return (
     <AnimatedTag tag='figure' className={cn('grid cursor-pointer overflow-hidden', className)}>

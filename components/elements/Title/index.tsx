@@ -4,6 +4,7 @@ import { cn } from '@/lib';
 import { title } from '@/lib/tailwind/variants';
 
 import { ITitle, ITitleSizes, THeadingTag } from '@/types/components';
+import { AnimatedTag } from '@/components/simple';
 
 export const Title: FC<PropsWithChildren<ITitle>> = ({ level, className, children, variant, size, ...rest }) => {
   if (!children) return null;
@@ -16,7 +17,7 @@ export const Title: FC<PropsWithChildren<ITitle>> = ({ level, className, childre
     ['3', 'lg'], // h3
     ['4', 'md'], // h4
     ['5', 'sm'], // h5
-    ['6', 'xs'], // h6
+    ['6', 'xs'] // h6
   ]);
 
   const titleAttribute = typeof children === 'string' ? children : undefined;
@@ -28,7 +29,7 @@ export const Title: FC<PropsWithChildren<ITitle>> = ({ level, className, childre
       className={cn(title({ size: size || levelSize.get(level), variant }), className)}
       {...rest}
     >
-      {children}
+      <AnimatedTag tag='span'>{children}</AnimatedTag>
     </HeadingTag>
   );
 };

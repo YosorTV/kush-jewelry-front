@@ -14,7 +14,7 @@ interface TAnimatedImage {
   className?: string;
 }
 
-const AnimatedImage: FC<TAnimatedImage> = ({ product, className = 'h-120 xl:h-[584px]' }) => {
+const AnimatedImage: FC<TAnimatedImage> = ({ product, className = 'h-120 md:h-[30rem] xl:h-[36rem]' }) => {
   const [showOverlay, setShowOverlay] = useState<boolean>(false);
   const router = useRouter();
 

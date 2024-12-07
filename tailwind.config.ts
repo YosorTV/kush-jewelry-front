@@ -33,7 +33,7 @@ module.exports = {
         md: '50vh',
         sm: '25vh',
         '112': '380px',
-        '120': '468px'
+        '120': '26rem'
       },
       screens: {
         xs: '475px', // extra small screen

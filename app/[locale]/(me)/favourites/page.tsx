@@ -1,13 +1,16 @@
 import { Metadata } from 'next';
-
-import { inWishlistDataAdatapter } from '@/adapters/product';
-import { auth } from '@/auth';
-import { Title } from '@/components/elements';
-import ProductListGroup from '@/components/simple/ProductListGroup';
-import { getWishlistProducts } from '@/services/api/get-wished-products';
-import { PageProps } from '@/types/app/page.types';
 import { getTranslations } from 'next-intl/server';
 import { notFound } from 'next/navigation';
+
+import { auth } from '@/auth';
+
+import { Title } from '@/components/elements';
+import { ProductListGroup } from '@/components/simple';
+
+import { getWishlistProducts } from '@/services/api/get-wished-products';
+
+import { inWishlistDataAdatapter } from '@/adapters/product';
+import { PageProps } from '@/types/app/page.types';
 
 export async function generateMetadata(props: PageProps): Promise<Metadata> {
   const { locale } = props.params;

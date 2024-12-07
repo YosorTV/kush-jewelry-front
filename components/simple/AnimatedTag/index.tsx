@@ -7,7 +7,7 @@ import { revealAnimation } from '@/assets/animations/reveal';
 
 import { IAnimatedTag } from '@/types/components/simple/animatedTag.types';
 
-const AnimatedTag: FC<PropsWithChildren<IAnimatedTag>> = ({ children, tag = 'div', ...props }) => {
+export const AnimatedTag: FC<PropsWithChildren<IAnimatedTag>> = ({ children, tag = 'div', ...props }) => {
   const ref = useRef<HTMLElement>(null);
   const isInView = useInView(ref as RefObject<Element>, { once: true });
 
@@ -19,5 +19,3 @@ const AnimatedTag: FC<PropsWithChildren<IAnimatedTag>> = ({ children, tag = 'div
     </MotionTag>
   );
 };
-
-export default AnimatedTag;

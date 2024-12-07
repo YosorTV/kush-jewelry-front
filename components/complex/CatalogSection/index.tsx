@@ -1,8 +1,8 @@
-import { ProductsController } from '@/components/simple';
+import { FC } from 'react';
+
+import { ProductsController, AnimatedTag } from '@/components/simple';
 import CategoryFilterButton from '@/components/simple/CatagoryFilterButton';
 import { ProductList } from '@/components/simple/ProductList';
-
-import { FC } from 'react';
 
 interface ICatalogSection {
   title?: string;
@@ -11,10 +11,10 @@ interface ICatalogSection {
 
 export const CatalogSection: FC<ICatalogSection> = async ({ title, ...rest }) => {
   return (
-    <section className='flex min-h-[640px] flex-col gap-y-3 p-2.5 md:p-5'>
+    <AnimatedTag tag='section' className='flex min-h-[640px] flex-col p-5 md:p-6'>
       <ProductsController title={title} />
       <CategoryFilterButton />
       <ProductList {...rest} />
-    </section>
+    </AnimatedTag>
   );
 };

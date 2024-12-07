@@ -42,9 +42,9 @@ const Footer: FC<FooterProps> = ({ data, locale }) => {
               </ul>
             </address>
           </nav>
-          <nav className='relative flex h-min w-full items-center gap-x-3 lg:-top-1.5 lg:justify-end'>
+          <nav className='relative flex h-min w-full flex-col gap-y-3 lg:justify-end'>
             <Title level='4'>{data?.socialGroupTitle}</Title>
-            <ul className='flex gap-x-6'>
+            <ul className='flex gap-x-6 py-1'>
               {data?.socialLinks.map((link: any) => (
                 <li key={link.id}>
                   <SocialLink id={link.id} format={link.format} url={link.url} isExternal={link.isExternal} />
