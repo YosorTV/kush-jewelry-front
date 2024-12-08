@@ -12,7 +12,7 @@ export default function Header({ data, cart, session, locale, currency }: Header
   const pagesData = generateHeaderData(data?.pagesTitle, data?.pages);
 
   return (
-    <header className='fixed z-50 flex min-h-20 w-screen cursor-pointer items-center border-b border-info-content bg-base-100 px-5 drop-shadow-md lg:px-6'>
+    <header className='fixed -top-0.5 z-50 flex min-h-20 w-screen cursor-pointer items-center border-b border-info-content bg-base-100 px-5 drop-shadow-md lg:px-6'>
       <nav className='relative flex w-full items-center justify-between'>
         <Logo width={160} height={48} className='lg:absolute-center relative top-1.5 -z-10 block lg:w-full' />
         <div className='flex flex-1 flex-row-reverse items-center gap-x-6 lg:flex-row lg:items-center lg:justify-between'>
@@ -26,15 +26,13 @@ export default function Header({ data, cart, session, locale, currency }: Header
           <div className='flex items-center gap-x-6'>
             <Search placeholder={data?.searchTitle} />
             <ShoppingCart data={cart} locale={locale} currency={currency} />
-            <div className='hidden lg:flex'>
-              <UserSession
-                cta={data?.cta}
-                locale={locale}
-                session={session}
-                signOutTitle={data?.signOutTitle}
-                sessionLinks={data?.sessionLinks}
-              />
-            </div>
+            <UserSession
+              cta={data?.cta}
+              locale={locale}
+              session={session}
+              signOutTitle={data?.signOutTitle}
+              sessionLinks={data?.sessionLinks}
+            />
           </div>
         </div>
       </nav>

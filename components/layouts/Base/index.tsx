@@ -34,7 +34,7 @@ export default function BaseLayout({
             <AutoLogoutProvider locale={locale} session={session}>
               <ThemeProvider>
                 <Header data={header} currency={currency} cart={cart} locale={locale} session={session} />
-                <main className='flex min-h-dvh flex-1 flex-col'>{children}</main>
+                <main className='flex min-h-dvh flex-col'>{children}</main>
                 <Footer data={footer} sessionLinks={header?.sessionLinks} session={session} locale={locale} />
                 <CookieSection />
                 <Modal id='my_modal_3'>

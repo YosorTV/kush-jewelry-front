@@ -63,11 +63,11 @@
   }
 
   .auth-page_wrapper {
-    @apply relative h-screen w-full items-center justify-start overflow-hidden;
+    @apply relative h-svh w-svw items-center justify-center overflow-hidden;
   }
 
   .auth-page_form {
-    @apply ml-auto flex h-full h-min w-full flex-col justify-start gap-y-3 overflow-hidden bg-base-100 bg-opacity-90 px-5 shadow-2xl md:w-3/4 md:p-10 xl:w-1/2;
+    @apply ml-auto flex h-auto w-full flex-col justify-center gap-y-3 overflow-hidden bg-base-100 bg-opacity-90 px-5 shadow-2xl md:w-3/4 md:p-10 xl:w-1/2;
   }
 
   .auth-form_submit {
@@ -79,7 +79,7 @@
   }
 
   .auth-link {
-    @apply btn w-full rounded-none border-none bg-transparent shadow-none outline-none hover:bg-base-200 hover:text-base-100;
+    @apply btn w-full rounded-none border-none bg-transparent text-base text-base-200 shadow-none outline-none hover:bg-base-200 hover:text-base-100;
   }
 }
 

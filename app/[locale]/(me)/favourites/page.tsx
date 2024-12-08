@@ -5,7 +5,7 @@ import { notFound } from 'next/navigation';
 import { auth } from '@/auth';
 
 import { Title } from '@/components/elements';
-import { ProductListGroup } from '@/components/simple';
+import { AnimatedTag, ProductListGroup } from '@/components/simple';
 
 import { getWishlistProducts } from '@/services/api/get-wished-products';
 
@@ -45,12 +45,12 @@ export default async function FavouritesPage({ params, searchParams }: PageProps
   const wishlist = inWishlistDataAdatapter(data?.[0]?.products?.data);
 
   return (
-    <section className='mt-10 flex w-full flex-col bg-info-content p-5'>
+    <AnimatedTag tag='section' className='mt-20 flex w-full flex-col bg-info-content p-5'>
       <Title level='2' variant='subheading' className='text-center'>
         {t('wishlist')}
       </Title>
       <div className='divider' />
       <ProductListGroup data={wishlist} className='grid-cols-fluid lg:grid-cols-3 2xl:grid-cols-4' />
-    </section>
+    </AnimatedTag>
   );
 }

@@ -48,7 +48,7 @@
   },
   "validation": {
     "length": "Мінімум {number} символів",
-    "special": "Мінімум {number} спеціальний символ",
+    "special": "Мінімум {number} спец символ",
     "uppercase": "Мінімум {number} велика літера",
     "number": "Мінімум {number} цифра",
     "lowercase": "Мінімум {number} мала літера"

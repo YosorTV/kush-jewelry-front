@@ -1,12 +1,11 @@
 import { MenuItem } from './MenuItem';
 import { CategoryLinkType, CollectionLinkType, StrapiLinkType } from '@/types/components';
 import { FC } from 'react';
-import { Button, Title } from '@/components/elements';
+import { Button, NextLink, Title } from '@/components/elements';
 import { cormorant } from '@/assets/fonts';
 import { cn } from '@/lib';
 import { SiteSettings } from '../SiteSettings';
 import { Session } from 'next-auth';
-import { SignInLink } from '../SignInLink';
 import { IoClose } from 'react-icons/io5';
 
 type MenuNavProps = {
@@ -73,7 +72,7 @@ export const MenuNav: FC<MenuNavProps> = ({
 
   return (
     <div className='relative p-2.5'>
-      <div className='form-control gap-y-6'>
+      <div className='form-control'>
         <div className='flex justify-between'>
           <Title level='5' className={cn(cormorant.className, 'text-2xl capitalize')}>
             {pages.title}
@@ -87,19 +86,24 @@ export const MenuNav: FC<MenuNavProps> = ({
           {session?.accessToken ? (
             <ul>{sessionLinks?.map(printPage)}</ul>
           ) : (
-            <SignInLink url={authLink.url} isExternal={authLink.isExternal} text={authLink.text} />
+            <NextLink
+              href={authLink.url}
+              className='py-2.5 text-sm font-medium underline-offset-8 hover:text-base-200 hover:underline lg:text-base-200'
+            >
+              {authLink.text}
+            </NextLink>
           )}
         </div>
       </div>
       <div className='divider' />
-      <div className='form-control gap-y-6'>
+      <div className='form-control'>
         <Title level='5' className={cn(cormorant.className, 'text-2xl capitalize')}>
           {categories.title}
         </Title>
         <ul>{categories.data.map(printCategory)}</ul>
       </div>
       <div className='divider' />
-      <div className='form-control gap-y-6'>
+      <div className='form-control'>
         <Title level='5' className={cn(cormorant.className, 'text-2xl capitalize')}>
           {collections.title}
         </Title>

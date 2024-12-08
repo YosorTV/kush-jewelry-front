@@ -17,17 +17,10 @@ interface IPasswordValidation {
   error: boolean | string;
 }
 
-export const PasswordValidation: FC<IPasswordValidation> = ({
-  error,
-  rules,
-  password,
-}) => {
+export const PasswordValidation: FC<IPasswordValidation> = ({ error, rules, password }) => {
   const t = useTranslations('validation');
 
-  const ruleStatusClassName = (
-    condition: boolean,
-    error?: boolean | string
-  ) => {
+  const ruleStatusClassName = (condition: boolean, error?: boolean | string) => {
     switch (true) {
       case password === '' && !error:
         return 'text-gray-500';
@@ -47,9 +40,11 @@ export const PasswordValidation: FC<IPasswordValidation> = ({
     </li>
   );
 
+  const sortedRules = [...rules].sort((a, b) => a.key.localeCompare(b.key));
+
   return (
-    <ul className='mt-5 flex list-inside flex-col gap-y-1 text-xs'>
-      {rules.map(printRule)}
+    <ul className='mt-5 grid list-inside grid-cols-2 gap-2 text-xs lg:grid-cols-1'>
+      {sortedRules.map(printRule).sort()}
     </ul>
   );
 };

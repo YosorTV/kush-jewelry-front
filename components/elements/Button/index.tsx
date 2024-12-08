@@ -26,7 +26,7 @@ export const Button: FC<IButton> = ({ icon, children, className, disabled, onCli
       className={cn(
         className,
         !disabled && 'cursor-pointer',
-        'btn no-animation m-0 rounded-none border-none bg-transparent p-0 font-semibold uppercase text-base-200 no-underline underline-offset-8 shadow-none outline-none transition-all hover:bg-transparent disabled:bg-transparent'
+        'btn no-animation m-0 rounded-none border-none bg-transparent p-0 font-semibold text-base-200 no-underline underline-offset-8 shadow-none outline-none transition-all hover:bg-transparent disabled:bg-transparent'
       )}
     >
       {printButtonContent()}

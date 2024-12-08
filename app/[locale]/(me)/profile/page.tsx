@@ -9,6 +9,7 @@ import { getProfileData } from '@/services';
 import { getMe } from '@/services/api/get-me';
 import { PageProps } from '@/types/app/page.types';
 import { getTranslations } from 'next-intl/server';
+import { AnimatedTag } from '@/components/simple';
 
 export async function generateMetadata(props: PageProps): Promise<Metadata> {
   const { locale } = props.params;
@@ -37,12 +38,12 @@ export default async function ProfilePage({ params }: PageProps) {
   }
 
   return (
-    <section className='mt-10 w-full bg-info-content p-5'>
+    <AnimatedTag tag='section' className='mt-20 w-full bg-info-content p-5'>
       <Title level='2' variant='subheading' className='my-5 whitespace-nowrap text-center'>
         {t('profile')}
       </Title>
       <div className='divider' />
       <ProfileForm data={profilePage.data.formFields} state={me.data} locale={locale} token={session.accessToken} />
-    </section>
+    </AnimatedTag>
   );
 }

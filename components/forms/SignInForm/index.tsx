@@ -9,9 +9,9 @@ import { StrapiLinkType } from '@/types/components';
 import { useState } from 'react';
 
 export const SignInForm = ({ data, locale = 'uk' }: any) => {
-  const schema = schemas.login(locale);
+  const [rememberMe, setRememberMe] = useState<boolean>(false);
 
-  const [rememberMe, setRememberMe] = useState(false);
+  const schema = schemas.login(locale);
 
   const printInputs = (data: any) => {
     if (!data) return;
@@ -87,7 +87,7 @@ export const SignInForm = ({ data, locale = 'uk' }: any) => {
             key={data.createAccountLink.id}
             href={data.createAccountLink.url}
             replace={data.createAccountLink.isExternal}
-            className='auth-link uppercase'
+            className='auth-link'
           >
             {data.createAccountLink.text}
           </NextLink>

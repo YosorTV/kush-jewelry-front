@@ -23,7 +23,7 @@ export const ForgotForm = ({ data, locale }: any) => {
       <Title level='1' className='auth-form_title'>
         {data.title}
       </Title>
-      <div className='mx-auto flex w-full flex-col py-10 md:w-3/4'>
+      <div className='mx-auto flex w-full flex-col py-5 md:w-3/4'>
         <Input hidden readOnly name='locale' value={locale} className='hidden' />
         {data.formFields.map(printInput)}
       </div>

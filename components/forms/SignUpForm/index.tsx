@@ -5,7 +5,7 @@ import { FC } from 'react';
 import { schemas } from '@/lib';
 import { createUserAction } from '@/services';
 
-import { Form, Input, Title } from '@/components/elements';
+import { Form, Input } from '@/components/elements';
 import { SubmitButton } from '@/components/simple';
 
 import { InputProps } from '@/types/components';
@@ -35,13 +35,10 @@ export const SignUpForm: FC<ISignUpForm> = ({ title, formFields, className, loca
       action={createUserAction}
       className='auth-page_form absolute-center h-full'
     >
-      <div className='relative w-full pt-5'>
-        <Title level='1' className='auth-form_title'>
-          {title}
-        </Title>
+      <div className='relative w-full pt-10'>
         <Input id='locale' name='locale' value={locale} containerClass='hidden' type='text' hidden readOnly />
-        <div className='grid grid-cols-1 gap-y-6 pt-5'>{printInputs(formFields)}</div>
-        <div className='divider m-0 mb-5 w-full px-6' />
+        <div className='grid grid-cols-1 gap-y-6 py-5'>{printInputs(formFields)}</div>
+        <div className='divider my-2 px-6' />
         <SubmitButton text={cta.text} loadingText={cta.loadingText} className='auth-form_submit' />
       </div>
     </Form>

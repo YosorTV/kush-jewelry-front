@@ -8,10 +8,8 @@ import { usePathname } from '@/lib/navigation';
 import { UserIcon } from '@/assets/icons';
 
 import { StrapiLinkType } from '@/types/components';
-import { useScreen } from '@/lib/hooks';
 
 export const SignInLink: FC<StrapiLinkType> = ({ url, text = 'Login' }) => {
-  const { lg } = useScreen();
   const pathname = usePathname();
 
   const isActive = pathname.startsWith(url);
@@ -24,7 +22,7 @@ export const SignInLink: FC<StrapiLinkType> = ({ url, text = 'Login' }) => {
         isActive && 'text-base-200 underline'
       )}
     >
-      {lg ? <UserIcon /> : text}
+      <UserIcon />
     </NextLink>
   );
 };

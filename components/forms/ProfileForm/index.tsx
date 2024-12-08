@@ -57,7 +57,6 @@ export const ProfileForm = ({ data, state, locale = DEFAULT_LOCALE, token }: any
       <Input type='hidden' hidden name='locale' value={locale} className='hidden' />
       <Input type='hidden' hidden name='userId' value={state.id} className='hidden' />
       <Input type='hidden' hidden name='username' value={state.username} className='hidden' />
-
       <div className='flex flex-col gap-5 lg:flex-row'>{printInputs(updatedGeneralFields)}</div>
       <div className='divider' />
       <div className='flex flex-col gap-y-6'>
@@ -67,7 +66,7 @@ export const ProfileForm = ({ data, state, locale = DEFAULT_LOCALE, token }: any
       <div className='divider' />
       <div className='flex flex-col gap-y-6'>
         <Title level='3'>{data?.additionalTitle}</Title>
-        <div className='flex flex-col gap-5 lg:flex-row'>
+        <div className='flex flex-col gap-6 lg:flex-row'>
           <NovaPostOptions
             cityOptions={{ label: state.city, value: state.cityID }}
             warehouseOptions={{ label: state.warehouse, value: state.warehouseID }}
