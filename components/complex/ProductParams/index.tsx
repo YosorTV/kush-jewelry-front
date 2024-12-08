@@ -18,7 +18,9 @@ export const ProductParams: FC<PropsWithChildren<any>> = ({
   const pathname = usePathname();
 
   useEffect(() => {
-    state.onReset();
+    return () => {
+      state.onReset();
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname]);
 
