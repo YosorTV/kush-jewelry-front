@@ -19,7 +19,7 @@ export const CookieSection = () => {
       <p className='pb-2 pr-5 pt-2.5 text-xs sm:py-2.5 sm:pr-2.5'>{t('cookie')}</p>
       <div className='flex w-full items-baseline justify-between gap-x-5 sm:w-min sm:justify-end sm:pr-5'>
         <div className='flex whitespace-nowrap text-sm uppercase sm:mb-0'>
-          <Button className='link-hover link' onClick={acceptCookieConsent}>
+          <Button className='link-hover link !text-white' onClick={acceptCookieConsent}>
             {t('accept')}
           </Button>
         </div>
