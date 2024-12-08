@@ -12,7 +12,7 @@ export default function Header({ data, cart, session, locale, currency }: Header
   const pagesData = generateHeaderData(data?.pagesTitle, data?.pages);
 
   return (
-    <header className='fixed left-0 top-0 z-50 flex min-h-20 w-screen cursor-pointer items-center border-b border-info-content bg-base-100 px-5 drop-shadow-md lg:px-6'>
+    <header className='fixed top-0 z-50 flex min-h-20 w-screen cursor-pointer items-center border-b border-info-content bg-base-100 px-5 drop-shadow-md lg:px-6'>
       <nav className='relative flex w-full items-center justify-between'>
         <Logo width={160} height={48} className='lg:absolute-center relative top-1.5 -z-10 block lg:w-full' />
         <div className='flex flex-1 flex-row-reverse items-center gap-x-6 lg:flex-row lg:items-center lg:justify-between'>
