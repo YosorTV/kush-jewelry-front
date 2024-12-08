@@ -36,7 +36,6 @@ export const Search: FC<TSearch> = ({ placeholder }) => {
       <Button onClick={handleOpen} type='button'>
         <IoSearchSharp className='h-6 w-6 fill-base-200' />
       </Button>
-
       <Portal selector='portal'>
         <SearchController onClose={handleClose} placeholder={placeholder}>
           <SearchContent currency={state.currency} />

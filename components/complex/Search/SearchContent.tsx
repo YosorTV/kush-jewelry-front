@@ -32,9 +32,9 @@ export const SearchContent: FC<{ currency: number }> = ({ currency }) => {
   };
 
   const printContent = useMemo(() => {
-    if (state.isLoading && !state.searchResult.length) {
+    if (state.isLoading) {
       return (
-        <div className='flex h-screen items-center justify-center overflow-hidden bg-transparent'>
+        <div className='absolute-center bg-transparent'>
           <span className='loading loading-infinity w-12' />
         </div>
       );
@@ -44,14 +44,20 @@ export const SearchContent: FC<{ currency: number }> = ({ currency }) => {
       return state.searchResult.map(printProducts);
     }
 
-    return <Lottie text={t('emptyList')} src={lottieAnim} className='relative top-20' playerClassName='h-120 w-96' />;
+    if (!state.searchResult.length && !state.isLoading) {
+      return <Lottie text={t('emptyList')} src={lottieAnim} className='relative top-20' playerClassName='h-120 w-96' />;
+    }
+
+    return null;
   }, [state.isLoading, state.searchResult.length, t]);
 
   return (
     <div
       className={cn(
         'mt-10',
-        state.searchResult.length > 0 ? 'grid grid-cols-fluid gap-x-3 gap-y-6 lg:grid-cols-3 2xl:grid-cols-4' : 'h-auto'
+        state.searchResult.length > 0
+          ? 'grid grid-cols-fluid gap-x-3 gap-y-6 lg:grid-cols-3 2xl:grid-cols-4'
+          : 'flex h-full flex-col items-center justify-center gap-6'
       )}
     >
       {printContent}
