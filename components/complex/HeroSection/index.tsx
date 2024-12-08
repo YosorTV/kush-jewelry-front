@@ -16,7 +16,7 @@ export const HeroSection: FC<IHeroSection> = ({ data }) => {
           src={data.image.url}
           formats={data.image.formats}
           alt={data.image.alternativeText}
-          className='aspect-square h-full w-full object-cover transition-transform duration-300 ease-out'
+          className='aspect-[4/3] h-full w-full object-cover transition-transform duration-300 ease-out md:aspect-video'
         />
         {data?.title && (
           <Title level='1' variant='subheading' className='absolute-center px-6 text-center text-base-300'>

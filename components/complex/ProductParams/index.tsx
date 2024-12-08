@@ -18,14 +18,12 @@ export const ProductParams: FC<PropsWithChildren<any>> = ({
   const pathname = usePathname();
 
   useEffect(() => {
-    return () => {
-      state.onReset();
-    };
+    state.onReset();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname]);
 
   return (
-    <section className='flex flex-col gap-y-3 md:gap-y-6'>
+    <section className='flex flex-col gap-y-6'>
       {materials && <MaterialOptions data={materials} title={t('material.title')} />}
       {availableSizes.length ? <SizeOptions data={sizes} sizes={availableSizes} title={t('size.title')} /> : null}
       {children}

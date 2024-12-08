@@ -1,7 +1,5 @@
 'use client';
 
-import { EmblaOptionsType } from 'embla-carousel';
-
 import { FC } from 'react';
 
 import { Zoom } from '@/components/elements';
@@ -11,11 +9,9 @@ import { StrapiImage } from '../StrapiImage';
 
 type PropType = {
   data: any[];
-  options?: EmblaOptionsType;
-  containerClass: string;
 };
 
-export const ProductCarousel: FC<PropType> = ({ data, options, containerClass }) => {
+export const ProductCarousel: FC<PropType> = ({ data }) => {
   const printProductSlide = (image: any) => {
     return (
       <li key={image.id} className='embla__slide hover:cursor-grab active:cursor-grabbing'>
@@ -40,7 +36,7 @@ export const ProductCarousel: FC<PropType> = ({ data, options, containerClass })
       total={data.length}
       options={{ loop: data.length > 3 }}
       titleClass='pt-1.5 md:py-0 text-white'
-      className='px-5 pb-5 lg:px-6'
+      className='w-svw px-5 pb-5 lg:hidden lg:px-6'
       fill='fill-white'
     >
       {data.map(printProductSlide)}

@@ -52,7 +52,7 @@ export default async function ProductDetails({ params }: PageProps) {
     <PageLayout className='mb-5 mt-20'>
       <StepBack className='absolute z-20 !mx-5 justify-start !text-base-300' />
       <article className='relative flex flex-col-reverse xl:flex-row-reverse'>
-        <section className='flex h-full w-full flex-col gap-5 bg-base-100 p-2.5 md:p-5 xl:w-[50svw]'>
+        <section className='flex h-full w-svw flex-col gap-5 bg-base-100 p-2.5 md:p-5 xl:w-[50svw]'>
           <header className='flex w-full flex-wrap justify-between gap-3 pt-0' role='product-name'>
             {data?.title && (
               <Title
