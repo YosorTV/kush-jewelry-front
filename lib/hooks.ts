@@ -180,3 +180,22 @@ export const useCurrency = () => {
 
   return currency;
 };
+
+export const useCookieConsent = () => {
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const cookiePolicy = localStorage.getItem('cookie-police');
+
+    if (cookiePolicy !== '1') {
+      setIsVisible(true);
+    }
+  }, []);
+
+  const acceptCookieConsent = () => {
+    localStorage.setItem('cookie-police', '1');
+    setIsVisible(false);
+  };
+
+  return { isVisible, acceptCookieConsent };
+};

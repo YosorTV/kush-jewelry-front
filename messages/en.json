@@ -18,7 +18,9 @@
     "price": "Price per unit:",
     "size": "Size: {number}",
     "total": "Total amount of payment: {number}",
-    "remove": "Remove"
+    "remove": "Remove",
+    "cookie": "Our website uses cookies to personalize content and to analyze our traffic which may also result in profiling.",
+    "accept": "Accept"
   },
   "validation": {
     "length": "Min {number} characters long",

@@ -25,7 +25,7 @@ export default async function Home({ params, searchParams }: PageProps) {
   if (!data) notFound();
 
   return (
-    <PageLayout>
+    <PageLayout className='mt-20'>
       <StrapiBlockRender data={data.blocks} {...searchParams} />
     </PageLayout>
   );

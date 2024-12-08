@@ -19,21 +19,16 @@ module.exports = {
       xl: '1280px', // extra large screen
       '2xl': '1536px' // 2X extra large screen
     },
-    minWidth: {
-      btn: 240
-    },
     extend: {
       height: {
-        '3xl': '130vh',
-        '2xl': '120vh',
-        xl: '110vh',
-        '2lg': '90vh',
-        lg: '80vh',
-        '2md': '70vh',
-        md: '50vh',
-        sm: '25vh',
-        '112': '380px',
-        '120': '26rem'
+        xl: '60rem',
+        lg: '45rem',
+        md: '36rem',
+        sm: '18rem',
+        '110': '24rem',
+        '120': '26rem',
+        '128': '30rem',
+        '130': '32rem'
       },
       screens: {
         xs: '475px', // extra small screen
@@ -74,20 +69,6 @@ module.exports = {
       gridTemplateColumns: {
         hero: 'auto 1fr',
         fluid: 'repeat(auto-fit, minmax(19rem, 1fr))'
-      },
-      keyframes: {
-        zoomOut: {
-          '0%': { transform: 'scale(1.2)', opacity: '0.5' },
-          '100%': { transform: 'scale(1)', opacity: '1' }
-        },
-        reveal: {
-          '0%': { opacity: '0' },
-          '100%': { opacity: '1' }
-        }
-      },
-      animation: {
-        zoomOut: 'zoomOut 0.5s ease-out forwards',
-        reveal: 'reveal 0.5s ease-out 0.5s forwards'
       }
     }
   },

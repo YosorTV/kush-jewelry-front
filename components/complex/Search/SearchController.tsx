@@ -77,10 +77,9 @@ export const SearchController: FC<TSearchController> = ({ onClose, children, pla
   const isLastPage = state.meta.page === state.meta.pageCount || !state.searchResult.length;
 
   return (
-    <AnimatePresence mode='wait' presenceAffectsLayout>
+    <AnimatePresence mode='sync'>
       {state.isOpen && (
         <motion.div
-          layout='position'
           initial='initial'
           animate='animate'
           exit='exit'
@@ -116,7 +115,7 @@ export const SearchController: FC<TSearchController> = ({ onClose, children, pla
             </motion.div>
             <motion.div initial='initial' animate='visible' exit='hidden' variants={childrenVariants}>
               {children}
-              {state.meta.total > 0 && (
+              {state.meta.total > 0 && !state.isLoading && (
                 <div className='flex flex-col items-center justify-center py-6 pb-10 lg:pt-16'>
                   <span className='text-sm font-medium uppercase text-base-200'>
                     {cta.total} {state.meta.total}
@@ -124,7 +123,7 @@ export const SearchController: FC<TSearchController> = ({ onClose, children, pla
                   <Button
                     className='btn-link'
                     disabled={isLastPage}
-                    onClick={() => handleMore(state.meta.pageSize * 2)}
+                    onClick={() => handleMore(state.meta.pageSize + 8)}
                   >
                     {cta.title}
                   </Button>

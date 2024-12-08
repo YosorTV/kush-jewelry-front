@@ -16,3 +16,4 @@ export * from '@/components/complex/SignInProviders';
 export * from '@/components/complex/SpotlightSection';
 export * from '@/components/complex/UserSession';
 export * from '@/components/complex/ShoppingCart';
+export * from '@/components/complex/CookieSection';

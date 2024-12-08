@@ -11,3 +11,4 @@ export * from '@/types/components/simple/menu.types';
 export * from '@/types/components/simple/signOutButton.types';
 export * from '@/types/components/simple/productListGroup.types';
 export * from '@/types/components/simple/productList.types';
+export * from '@/types/components/simple/strapiImage.types';

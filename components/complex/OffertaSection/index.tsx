@@ -17,7 +17,7 @@ export const OffertaSection: FC<IOffertaSection> = ({ title, content }) => {
       <div className='flex flex-col gap-5 p-5'>
         {content && (
           <section className='flex flex-1 flex-col gap-5'>
-            <StrapiContentBlock content={content} imageClass='h-2md' />
+            <StrapiContentBlock content={content} imageClass='h-lg' />
           </section>
         )}
       </div>

@@ -9,7 +9,7 @@ export const searchSlice: StateCreator<TSearchState> = (set) => ({
   searchValue: '',
   searchResult: [],
   error: null,
-  meta: { page: 1, pageCount: 0, pageSize: 4, total: 0 },
+  meta: { page: 1, pageCount: 0, pageSize: 8, total: 0 },
   onToggle: () => set((state) => ({ isOpen: !state.isOpen })),
   onSearch: (value) => set({ searchValue: value }),
   onReset: () =>

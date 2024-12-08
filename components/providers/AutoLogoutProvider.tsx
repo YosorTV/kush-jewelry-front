@@ -1,20 +1,18 @@
 'use client';
 
 import { FC, PropsWithChildren, useCallback, useEffect } from 'react';
-import { useSession } from 'next-auth/react';
 
 import { useActivity } from '@/store';
 import { logout } from '@/services';
 
 import { AutoLogoutProviderProps, WindowActivityEvent } from '@/types/components';
-import { useLocale } from 'next-intl';
 
 export const AutoLogoutProvider: FC<PropsWithChildren<AutoLogoutProviderProps>> = ({
   timeoutCheckMs = 60000,
+  locale = 'uk',
+  session,
   children
 }) => {
-  const locale = useLocale();
-  const { data: session } = useSession();
   const { lastActivity, setLastActivity } = useActivity();
 
   const getCurrentTime = useCallback(() => new Date().getTime(), []);

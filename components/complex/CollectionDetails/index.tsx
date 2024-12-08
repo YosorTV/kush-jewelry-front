@@ -2,12 +2,11 @@ import { type BlocksContent } from '@strapi/blocks-react-renderer';
 import { FC } from 'react';
 
 import { Title } from '@/components/elements';
-import { ProductCard, StrapiContentBlock, StrapiImage } from '@/components/simple';
+import { AnimatedTag, ProductCard, StrapiContentBlock, StrapiImage } from '@/components/simple';
 
 import { auth } from '@/auth';
 import { getCurrency } from '@/services';
-import { IImageFormats } from '@/types/components';
-import { getTranslations } from 'next-intl/server';
+import { IImageFormats, Product } from '@/types/components';
 
 interface ICollectionDetails {
   title?: string;
@@ -21,17 +20,16 @@ interface ICollectionDetails {
 }
 
 export const CollectionDetails: FC<ICollectionDetails> = async ({ content, title, cover, products = [] }) => {
-  const t = await getTranslations('system');
   const session = await auth();
   const currency = await getCurrency();
 
-  const printProduct = (product: any) => {
-    return <ProductCard t={t} session={session} product={product} key={product.id} currency={currency} />;
+  const printProduct = (product: Product) => {
+    return <ProductCard session={session} product={product} key={product.id} currency={currency} />;
   };
 
   return (
     <article className='flex flex-col'>
-      <div className='relative h-sm md:h-md'>
+      <div className='relative h-md lg:h-lg'>
         <Title level='1' variant='heading' className='absolute-center z-10 text-base-300'>
           {title}
         </Title>
@@ -42,10 +40,10 @@ export const CollectionDetails: FC<ICollectionDetails> = async ({ content, title
           formats={cover.formats}
           src={cover.url}
           alt={cover?.alternativeText}
-          className='absolute aspect-auto h-full w-full object-cover'
+          className='absolute aspect-video h-full w-full object-cover'
         />
       </div>
-      <div className='flex flex-col gap-5 py-5'>
+      <AnimatedTag tag='div' className='flex flex-col gap-10 py-10'>
         {content && (
           <section className='flex flex-1 flex-col gap-5'>
             <StrapiContentBlock content={content} />
@@ -54,7 +52,7 @@ export const CollectionDetails: FC<ICollectionDetails> = async ({ content, title
         {products.length > 0 && (
           <section className='grid h-min w-full grid-cols-fluid gap-5 px-6'>{products.map(printProduct)}</section>
         )}
-      </div>
+      </AnimatedTag>
     </article>
   );
 };

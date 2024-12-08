@@ -26,7 +26,7 @@ export const UserSession: FC<IUserSession> = ({ cta, signOutTitle, session, sess
         </button>
         <ul
           tabIndex={0}
-          className='menu dropdown-content right-0 top-12 min-w-btn space-y-2.5 rounded-sm border border-t-0 border-info-content bg-base-100 shadow'
+          className='min-w-60 menu dropdown-content right-0 top-12 space-y-2.5 rounded-sm border border-t-0 border-info-content bg-base-100 shadow'
         >
           {sessionLinks.map(printMenuLink)}
           <li tabIndex={4}>
