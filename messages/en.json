@@ -18,9 +18,7 @@
     "price": "Price per unit:",
     "size": "Size: {number}",
     "total": "Total amount of payment: {number}",
-    "remove": "Remove",
-    "cookie": "Our website uses cookies to personalize content and to analyze our traffic which may also result in profiling.",
-    "accept": "Accept"
+    "remove": "Remove"
   },
   "validation": {
     "length": "Min {number} characters long",
@@ -47,7 +45,9 @@
     "available": "In stock {number}",
     "orders": "Orders",
     "wishlist": "Wish list",
-    "profile": "Profile information"
+    "profile": "Profile information",
+    "cookie": "Our website uses cookies to personalize content and to analyze our traffic which may also result in profiling.",
+    "accept": "Accept"
   },
   "copyright": {
     "title": "Copyright",
