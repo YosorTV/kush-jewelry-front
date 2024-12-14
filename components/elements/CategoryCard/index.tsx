@@ -49,8 +49,8 @@ export const CategoryCard: FC<any> = ({ data, currency }) => {
             fill
             priority
             overlay={showOverlay}
-            formats={data?.images?.data?.[0]?.formats}
             src={data?.images?.data?.[0]?.url}
+            formats={data?.images?.data?.[0]?.formats}
             alt={data?.images?.data?.[0]?.alternativeText}
             className='aspect-square h-full w-full object-cover'
           />

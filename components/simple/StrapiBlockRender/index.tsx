@@ -1,13 +1,15 @@
+'use server';
+
 import { FC } from 'react';
 
 import { CatalogSection, CollectionSection, HeroSection, SpotlightSection } from '@/components/complex';
 
 import { ProductList } from '../ProductList';
 
-function blockRenderer(block: any, params: any) {
+function blockRenderer(block: any, device: string, params: any) {
   switch (block.__component) {
     case 'complex.hero-section':
-      return <HeroSection key={block.id} data={block} />;
+      return <HeroSection key={block.id} data={block} device={device} />;
     case 'complex.spotlight':
       return <SpotlightSection key={block.id} data={block} />;
     case 'complex.products':
@@ -21,6 +23,6 @@ function blockRenderer(block: any, params: any) {
   }
 }
 
-export const StrapiBlockRender: FC<any> = ({ data = [], ...params }: any) => {
-  return data.map((block: any) => blockRenderer(block, params));
+export const StrapiBlockRender: FC<any> = ({ data = [], device, ...params }: any) => {
+  return data.map((block: any) => blockRenderer(block, device, params));
 };

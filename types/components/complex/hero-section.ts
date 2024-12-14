@@ -2,6 +2,7 @@ import { StrapiLinkType } from '../elements';
 import { IStrapiImage } from '../simple/strapiImage.types';
 
 export interface IHeroSection {
+  device: string;
   data: {
     id: number;
     __component: string;

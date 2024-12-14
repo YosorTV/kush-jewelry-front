@@ -8,6 +8,8 @@ import { StrapiBlockRender } from '@/components/simple';
 import { STRAPI_ENTRIES } from '@/helpers/constants';
 
 import { PageProps } from '@/types/app/page.types';
+import { headers } from 'next/headers';
+import { userAgent } from 'next/server';
 
 export async function generateMetadata(props: PageProps): Promise<Metadata> {
   const { locale } = props.params;
@@ -20,13 +22,17 @@ export async function generateMetadata(props: PageProps): Promise<Metadata> {
 export default async function Home({ params, searchParams }: PageProps) {
   const { locale } = params;
 
+  const { device } = userAgent({ headers: headers() });
+
   const { data } = await getHomeData({ locale });
 
-  if (!data) notFound();
+  if (!data) {
+    return notFound();
+  }
 
   return (
     <PageLayout className='mt-20'>
-      <StrapiBlockRender data={data.blocks} {...searchParams} />
+      <StrapiBlockRender data={data.blocks} device={device.type} {...searchParams} />
     </PageLayout>
   );
 }

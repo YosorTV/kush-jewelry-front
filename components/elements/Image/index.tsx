@@ -19,7 +19,7 @@ export const Image: FC<IImageProps> = ({
   if (fill) {
     return (
       <NextImage
-        quality={99}
+        quality={100}
         sizes={sizes}
         src={src}
         fill={fill}

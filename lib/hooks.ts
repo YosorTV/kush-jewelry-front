@@ -187,13 +187,13 @@ export const useCookieConsent = () => {
   useEffect(() => {
     const cookiePolicy = localStorage.getItem('cookie-police');
 
-    if (cookiePolicy !== '1') {
+    if (cookiePolicy !== 'accepted') {
       setIsVisible(true);
     }
   }, []);
 
   const acceptCookieConsent = () => {
-    localStorage.setItem('cookie-police', '1');
+    localStorage.setItem('cookie-police', 'accepted');
     setIsVisible(false);
   };
 

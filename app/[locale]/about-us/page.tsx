@@ -7,6 +7,8 @@ import { STRAPI_ENTRIES } from '@/helpers/constants';
 import { getMetadata } from '@/services';
 import { getAboutUsData } from '@/services/api/get-about-us';
 import { PageProps } from '@/types/app/page.types';
+import { headers } from 'next/headers';
+import { userAgent } from 'next/server';
 
 export async function generateMetadata(props: PageProps): Promise<Metadata> {
   const { locale } = props.params;
@@ -19,6 +21,8 @@ export async function generateMetadata(props: PageProps): Promise<Metadata> {
 export default async function AboutUs({ params }: PageProps) {
   const { locale } = params;
 
+  const { device } = userAgent({ headers: headers() });
+
   const { data } = await getAboutUsData({ locale });
 
   if (!data) {
@@ -28,11 +32,12 @@ export default async function AboutUs({ params }: PageProps) {
   return (
     <PageLayout className='mt-20'>
       <AboutSection
+        device={device.type}
         cover={data?.cover}
         title={data?.title}
         content={data?.story}
-        description={data?.description}
         subImage={data?.subImage}
+        description={data?.description}
       />
     </PageLayout>
   );

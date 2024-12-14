@@ -6,5 +6,6 @@ export interface IAboutSection {
   description?: string;
   content?: BlocksContent;
   cover: IStrapiImage;
+  device?: string;
   subImage?: IStrapiImage;
 }

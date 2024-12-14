@@ -8,14 +8,17 @@ interface IStrapiLoader {
   quality: number | 'auto';
 }
 
-export default function strapiLoader({ src, width = 75, quality = 100 }: IStrapiLoader) {
-  if (src == null) return null;
+export default function strapiLoader({ src, width = 300, quality = 100 }: IStrapiLoader) {
+  if (!src) return null;
+
   if (src.startsWith('data:')) return src;
+
   if (src.startsWith('http') || src.startsWith('//')) {
     if (src.includes('res.cloudinary.com')) {
-      const params = ['f_auto', 'c_limit', `w_${width}`, `q_${quality || 'auto'}`];
+      const params = ['f_auto', 'c_limit', `w_${width}`, `q_${quality || 'auto'}`, 'dpr_auto'];
 
       const [base, publicId] = src.split('/upload/');
+
       return `${base}/upload/${params.join(',')}/${publicId}`;
     }
 

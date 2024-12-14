@@ -20,6 +20,14 @@ const nextConfig = {
           { key: 'Content-Type', value: 'text/plain' },
           { key: 'Cache-Control', value: 'no-cache, no-store, must-revalidate' }
         ]
+      },
+      {
+        source: '/_next/image',
+        headers: [{ key: 'Cache-Control', value: 'public, max-age=31536000, immutable' }]
+      },
+      {
+        source: '/(.*)',
+        headers: [{ key: 'Cache-Control', value: 'public, max-age=31536000, immutable' }]
       }
     ];
   },

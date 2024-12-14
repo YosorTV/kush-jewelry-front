@@ -36,28 +36,29 @@ const AnimatedImage: FC<TAnimatedImage> = ({ product, className = 'h-120 md:h-12
       onMouseLeave={() => md && setShowOverlay(false)}
       className={cn('relative', className)}
     >
-      {[img1, img2].map((img, idx) => (
-        <div
-          key={idx}
-          className={cn(
-            'absolute inset-0 h-full w-full transform-gpu overflow-hidden transition-opacity duration-300 ease-in-out',
-            showOverlay === (idx === 1) ? 'opacity-100' : 'opacity-0',
-            product.quantity === 0 && 'grayscale filter'
-          )}
-        >
-          <StrapiImage
-            priority
-            src={img?.url}
-            formats={img?.formats}
-            alt={img?.alternativeText}
-            previewUrl={img?.previewUrl || img?.formats?.thumbnail?.url}
-            width={img?.width ?? 500}
-            height={img?.height ?? 500}
-            fill
-            className='aspect-square h-full w-full overflow-hidden object-cover'
-          />
-        </div>
-      ))}
+      {[img1, img2].map((img, idx) => {
+        return (
+          <div
+            key={idx}
+            className={cn(
+              'absolute inset-0 h-full w-full transform-gpu overflow-hidden transition-opacity duration-300 ease-in-out',
+              showOverlay === (idx === 1) ? 'opacity-100' : 'opacity-0',
+              product.quantity === 0 && 'grayscale filter'
+            )}
+          >
+            <StrapiImage
+              priority
+              src={img?.url}
+              formats={img?.formats}
+              alt={img?.alternativeText}
+              previewUrl={img?.previewUrl || img?.formats?.thumbnail?.url}
+              width={img?.width ?? 1000}
+              height={img?.height ?? 500}
+              className='aspect-square h-full w-full overflow-hidden object-cover'
+            />
+          </div>
+        );
+      })}
     </div>
   );
 };
