@@ -6,10 +6,12 @@ import { getCurrency, getOrdersData } from '@/services';
 import { PageProps } from '@/types/app/page.types';
 
 import { Title } from '@/components/elements';
-import { PaginateController } from '@/components/simple/PaginateController';
 import { getTranslations } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import { AnimatedTag } from '@/components/simple';
+import dynamic from 'next/dynamic';
+
+const PaginateController = dynamic(() => import('@/components/simple/PaginateController'), { ssr: false });
 
 export async function generateMetadata(props: PageProps): Promise<Metadata> {
   const { locale } = props.params;
@@ -27,8 +29,8 @@ export default async function OrdersPage({ params, searchParams }: PageProps) {
   const { page, pageSize } = searchParams;
 
   const session = await auth();
-  const t = await getTranslations('system');
   const currency = await getCurrency();
+  const t = await getTranslations('system');
 
   const { data, meta } = await getOrdersData({
     locale,

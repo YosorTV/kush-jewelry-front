@@ -1,10 +1,9 @@
-'use server';
-
 import { FC } from 'react';
+import dynamic from 'next/dynamic';
 
 import { CatalogSection, CollectionSection, HeroSection, SpotlightSection } from '@/components/complex';
 
-import { ProductList } from '../ProductList';
+const ProductList = dynamic(() => import('@/components/simple/ProductList'));
 
 function blockRenderer(block: any, device: string, params: any) {
   switch (block.__component) {

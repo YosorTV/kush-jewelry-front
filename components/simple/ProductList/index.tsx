@@ -1,16 +1,20 @@
 import { FC } from 'react';
+
+import dynamic from 'next/dynamic';
 import { getLocale } from 'next-intl/server';
 
 import { getProductsData } from '@/services';
 
 import { Title } from '@/components/elements';
-import { PaginateController, ProductListGroup } from '@/components/simple';
+import { ProductListGroup } from '@/components/simple';
 
 import { cn } from '@/lib';
 
 import { IProductsList } from '@/types/components';
 
-export const ProductList: FC<IProductsList> = async ({ className, title, ...rest }) => {
+const PaginateController = dynamic(() => import('@/components/simple/PaginateController'), { ssr: false });
+
+const ProductList: FC<IProductsList> = async ({ className, title, ...rest }) => {
   const locale = await getLocale();
 
   const { data, meta } = await getProductsData({ locale, ...rest });
@@ -29,3 +33,5 @@ export const ProductList: FC<IProductsList> = async ({ className, title, ...rest
     </section>
   );
 };
+
+export default ProductList;

@@ -12,7 +12,7 @@ import { AnimatedTag } from '@/components/simple';
 
 import { IPaginateController } from '@/types/components';
 
-export const PaginateController: FC<IPaginateController> = ({ total = 0, disabled = true, perPage = 8 }) => {
+const PaginateController: FC<IPaginateController> = ({ total = 0, disabled = true, perPage = 8 }) => {
   const t = useTranslations('system');
 
   const pathname = usePathname();
@@ -39,3 +39,5 @@ export const PaginateController: FC<IPaginateController> = ({ total = 0, disable
     </AnimatedTag>
   );
 };
+
+export default PaginateController;

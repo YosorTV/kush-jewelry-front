@@ -2,12 +2,15 @@ import { FC } from 'react';
 
 import { ProductsController, AnimatedTag } from '@/components/simple';
 import CategoryFilterButton from '@/components/simple/CatagoryFilterButton';
-import { ProductList } from '@/components/simple/ProductList';
+
+import dynamic from 'next/dynamic';
 
 interface ICatalogSection {
   title?: string;
   filterForm?: any;
 }
+
+const ProductList = dynamic(() => import('@/components/simple/ProductList'));
 
 export const CatalogSection: FC<ICatalogSection> = async ({ title, ...rest }) => {
   return (
