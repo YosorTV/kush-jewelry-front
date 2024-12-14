@@ -65,7 +65,7 @@ export const ShoppingCart: FC<ShoppingCartProps> = ({ data, locale, currency }) 
     if (newParams) {
       router.replace(`?${newParams}`, { scroll: false });
     }
-  }, [newParams]);
+  }, [newParams, cartStore.isOpen]);
 
   const handleToggle = () => cartStore.onToggle();
 
