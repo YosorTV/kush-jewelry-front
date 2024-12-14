@@ -5,16 +5,15 @@ import { StrapiContentBlock, AnimatedTag } from '@/components/simple';
 
 import { IAboutSection } from '@/types/components';
 
-export const AboutSection: FC<IAboutSection> = ({ title, cover, content }) => {
+export const AboutSection: FC<IAboutSection> = ({ title, description, cover, content }) => {
   const heroData = {
     id: 1,
-    __component: 'complex.hero-section',
-    description:
-      'Ювелірний дім KUSH jewelry: це синергія сміливих фантазій дизайнерів та неймовірна точність кожного руху майстрів.',
     title,
+    description,
     image: cover,
+    link: null as null,
     sub_image: null as null,
-    link: null as null
+    __component: 'complex.hero-section'
   };
 
   return (

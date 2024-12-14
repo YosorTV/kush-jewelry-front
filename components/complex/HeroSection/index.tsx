@@ -7,7 +7,7 @@ import { IHeroSection } from '@/types/components/complex/hero-section';
 export const HeroSection: FC<IHeroSection> = ({ data }) => {
   return (
     <section className='group relative flex flex-col items-center justify-center'>
-      <div className='relative h-lg w-full lg:h-xl'>
+      <div className='relative h-lg w-full lg:h-lg'>
         <StrapiImage
           fill
           overlay
