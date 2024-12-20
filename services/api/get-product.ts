@@ -5,6 +5,7 @@ import { ISlugQuery } from '@/types/services/quries';
 import { STRAPI_QUERIES } from '../queries';
 import { getStrapiData } from '../strapi';
 import { getWishlistProducts } from './get-wished-products';
+import { generateProductMetaTags } from '@/helpers';
 
 export async function getProductData({ locale, slug }: ISlugQuery) {
   const productApi = STRAPI_QUERIES.PRODUCT({ locale, slug });
@@ -43,13 +44,36 @@ export async function getProductMeta({ locale, slug }: any) {
 
   const { data } = await getStrapiData('products', generateStrapiQuery(productMetaApi));
 
+  const metaTags = generateProductMetaTags(data?.[0]);
+
+  const facebookMeta = data?.[0]?.seo?.metaSocial?.find((item: any) => item.socialNetwork === 'Facebook');
+  const twitterMeta = data?.[0]?.seo?.metaSocial?.find((item: any) => item.socialNetwork === 'Twitter');
+
   return {
     title: {
       default: `KUSH | ${data[0]?.seo?.metaTitle.toUpperCase()}`,
       template: '%s | KUSH'
     },
+    openGraph: {
+      title: facebookMeta?.title ?? data[0]?.seo?.metaTitle,
+      description: facebookMeta?.description ?? data[0]?.seo?.metaDescription,
+      url: `${data[0]?.seo?.canonicalURL}`,
+      images: [data[0]?.seo?.metaImage],
+      siteName: 'KUSH JEWELRY',
+      locale
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: twitterMeta?.title || data?.[0]?.metaTitle,
+      description: twitterMeta?.description || data?.[0]?.metaDescription,
+      images: twitterMeta?.image?.url ? [twitterMeta.image.url] : []
+    },
     description: data[0]?.seo?.metaDescription ?? '',
     robots: data[0]?.seo?.metaRobots ?? '',
-    keywords: data[0]?.seo?.keywords ?? ''
+    keywords: data[0]?.seo?.keywords?.split(',').map((keyword: string) => keyword.trim()) ?? [],
+    additionalMetaTags: metaTags.map((tag) => ({
+      property: tag.property,
+      content: tag.content
+    }))
   };
 }

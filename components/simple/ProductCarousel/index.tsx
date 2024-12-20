@@ -36,7 +36,7 @@ export const ProductCarousel: FC<PropType> = ({ data }) => {
       total={data.length}
       options={{ loop: data.length > 3 }}
       titleClass='pt-1.5 md:py-0 text-white'
-      className='w-svw px-5 pb-5 lg:hidden lg:px-6'
+      className='w-svw px-5 pb-5 xl:hidden xl:px-6'
       fill='fill-white'
     >
       {data.map(printProductSlide)}

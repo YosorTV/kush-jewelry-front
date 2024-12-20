@@ -13,6 +13,8 @@ import { CartItemType } from '@/types/store';
 import { notFound } from 'next/navigation';
 
 import { auth } from '@/auth';
+import { generateProductJsonLd } from '@/helpers';
+import Script from 'next/script';
 
 export async function generateMetadata(props: PageProps): Promise<Metadata> {
   const { locale, slug } = props.params;
@@ -36,6 +38,8 @@ export default async function ProductDetails({ params }: PageProps) {
   if (!data) {
     return notFound();
   }
+
+  const productJsonLd = generateProductJsonLd(data);
 
   const cartData: CartItemType = {
     id: data.id,
@@ -96,6 +100,12 @@ export default async function ProductDetails({ params }: PageProps) {
       </article>
       <DeliveryRules locale={locale} />
       <CompleteLook products={products} currency={currency} category={data.category} session={session} />
+      <Script
+        id='product-json-ld'
+        type='application/ld+json'
+        strategy='afterInteractive'
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(productJsonLd) }}
+      />
     </PageLayout>
   );
 }
