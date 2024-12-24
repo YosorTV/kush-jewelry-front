@@ -56,21 +56,21 @@ export async function getProductMeta({ locale, slug }: any) {
     },
     openGraph: {
       title: facebookMeta?.title ?? data[0]?.seo?.metaTitle,
-      description: facebookMeta?.description ?? data[0]?.seo?.metaDescription,
+      description: facebookMeta?.description.toLowerCase() ?? data[0]?.seo?.metaDescription.toLowerCase(),
       url: `${data[0]?.seo?.canonicalURL}`,
       images: [data[0]?.seo?.metaImage],
       siteName: 'KUSH JEWELRY',
-      id: data?.[0]?.seo.id,
+      id: data?.[0]?.id,
       locale
     },
     twitter: {
       card: 'summary_large_image',
-      id: data?.[0]?.seo.id,
+      id: data?.[0]?.id,
       title: twitterMeta?.title || data?.[0]?.metaTitle,
-      description: twitterMeta?.description || data?.[0]?.metaDescription,
+      description: twitterMeta?.description?.toLowerCase() || data?.[0]?.metaDescription.toLowerCase(),
       images: twitterMeta?.image?.url ? [twitterMeta.image.url] : []
     },
-    id: data?.[0]?.seo.id,
+    id: data?.[0]?.id,
     description: data[0]?.seo?.metaDescription ?? '',
     robots: data[0]?.seo?.metaRobots ?? '',
     keywords: data[0]?.seo?.keywords?.split(',').map((keyword: string) => keyword.trim()) ?? [],
