@@ -9,7 +9,7 @@ export const generateProductMetaTags = (product: any) => {
     { property: 'product:availability', content: product.available ? 'in stock' : 'out of stock' },
     { property: 'product:price:amount', content: product.price },
     { property: 'product:price:currency', content: 'UAH' },
-    { property: 'product:id', content: String(product.id) }
+    { property: 'id', content: String(product.id) }
   ];
 };
 
@@ -30,6 +30,7 @@ export const generateProductJsonLd = (product: any) => {
     offers: {
       '@type': 'Offer',
       priceCurrency: 'UAH',
+      id: product.id,
       price: product.price,
       availability: product.available ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock'
     }
