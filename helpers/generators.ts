@@ -9,7 +9,7 @@ export const generateProductMetaTags = (product: any) => {
     { property: 'product:availability', content: product.available ? 'in stock' : 'out of stock' },
     { property: 'product:price:amount', content: product.price },
     { property: 'product:price:currency', content: 'UAH' },
-    { property: 'product:id', content: product.id }
+    { property: 'product:id', content: String(product.id) }
   ];
 };
 
@@ -24,7 +24,8 @@ export const generateProductJsonLd = (product: any) => {
     url: `${process.env.NEXT_PUBLIC_URL}/catalog/${product.slug}`,
     brand: {
       '@type': 'Category',
-      name: product.category
+      name: product.category,
+      id: String(product.id)
     },
     offers: {
       '@type': 'Offer',

@@ -60,23 +60,23 @@ export async function getProductMeta({ locale, slug }: any) {
       url: `${data[0]?.seo?.canonicalURL}`,
       images: [data[0]?.seo?.metaImage],
       siteName: 'KUSH JEWELRY',
-      id: data?.[0]?.id,
+      id: String(data?.[0]?.id),
       locale
     },
     twitter: {
       card: 'summary_large_image',
-      id: data?.[0]?.id,
+      id: String(data?.[0]?.id),
       title: twitterMeta?.title || data?.[0]?.metaTitle,
       description: twitterMeta?.description?.toLowerCase() || data?.[0]?.metaDescription.toLowerCase(),
       images: twitterMeta?.image?.url ? [twitterMeta.image.url] : []
     },
-    id: data?.[0]?.id,
-    description: data[0]?.seo?.metaDescription ?? '',
+    id: String(data?.[0]?.id),
+    description: data[0]?.seo?.metaDescription ?? 'No description',
     robots: data[0]?.seo?.metaRobots ?? '',
     keywords: data[0]?.seo?.keywords?.split(',').map((keyword: string) => keyword.trim()) ?? [],
-    ...Object.values(metaTags).map((tag) => ({
-      property: tag.property,
-      content: tag.content
-    }))
+    other: metaTags.reduce((acc: Record<string, string>, tag) => {
+      acc[tag.property] = tag.content;
+      return acc;
+    }, {})
   };
 }
