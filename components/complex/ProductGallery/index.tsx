@@ -33,7 +33,6 @@ export const ProductGallery = ({ images = [] }: { images: any[] }) => {
     );
   };
 
-  console.log('xl: ', xl);
   const printGallery = useMemo(() => {
     if (xl) {
       return <ul className='grid w-full grid-cols-fluid gap-3 md:grid-cols-2'>{gallery.map(printImage)}</ul>;

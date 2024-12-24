@@ -8,7 +8,8 @@ export const generateProductMetaTags = (product: any) => {
     { property: 'product:category', content: product.category },
     { property: 'product:availability', content: product.available ? 'in stock' : 'out of stock' },
     { property: 'product:price:amount', content: product.price },
-    { property: 'product:price:currency', content: 'UAH' }
+    { property: 'product:price:currency', content: 'UAH' },
+    { property: 'product:id', content: product.id }
   ];
 };
 
