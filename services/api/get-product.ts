@@ -60,18 +60,21 @@ export async function getProductMeta({ locale, slug }: any) {
       url: `${data[0]?.seo?.canonicalURL}`,
       images: [data[0]?.seo?.metaImage],
       siteName: 'KUSH JEWELRY',
+      id: data?.[0]?.seo.id,
       locale
     },
     twitter: {
       card: 'summary_large_image',
+      id: data?.[0]?.seo.id,
       title: twitterMeta?.title || data?.[0]?.metaTitle,
       description: twitterMeta?.description || data?.[0]?.metaDescription,
       images: twitterMeta?.image?.url ? [twitterMeta.image.url] : []
     },
+    id: data?.[0]?.seo.id,
     description: data[0]?.seo?.metaDescription ?? '',
     robots: data[0]?.seo?.metaRobots ?? '',
     keywords: data[0]?.seo?.keywords?.split(',').map((keyword: string) => keyword.trim()) ?? [],
-    additionalMetaTags: metaTags.map((tag) => ({
+    ...Object.values(metaTags).map((tag) => ({
       property: tag.property,
       content: tag.content
     }))

@@ -45,6 +45,7 @@ export const productMetaQuery = ({ slug, locale = DEFAULT_LOCALE }: TProductQuer
     seo: {
       fields: META_FIELDS,
       populate: {
+        metaSocial: true,
         metaImage: {
           data: {
             fields: IMAGE_FIELDS
