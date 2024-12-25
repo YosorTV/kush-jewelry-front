@@ -57,11 +57,11 @@ export async function getProductMeta({ locale, slug }: any) {
     openGraph: {
       title: facebookMeta?.title ?? data[0]?.seo?.metaTitle,
       description: facebookMeta?.description.toLowerCase() ?? data[0]?.seo?.metaDescription.toLowerCase(),
+      locale,
       url: `${data[0]?.seo?.canonicalURL}`,
       images: [data[0]?.seo?.metaImage],
       siteName: 'KUSH JEWELRY',
-      id: String(data?.[0]?.id),
-      locale
+      retailer_item_id: String(data?.[0]?.id)
     },
     twitter: {
       card: 'summary_large_image',
