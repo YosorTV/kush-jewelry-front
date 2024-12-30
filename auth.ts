@@ -26,7 +26,7 @@ export const {
       }
     }
   },
-  secret: process.env.NEXTAUTH_SECRET,
+  secret: process.env.AUTH_SECRET,
   pages: { signIn: '/login' },
   providers: [
     CredentialProvider({
@@ -49,7 +49,7 @@ export const {
     })
   ],
   callbacks: {
-    async jwt({ token, user, account }) {
+    async jwt({ token, user, account, trigger, session }) {
       if (account) {
         if (account.provider === 'credentials') {
           return tokenAdapter({ token, user });
@@ -60,12 +60,16 @@ export const {
             options: { ...token, access_token: account.access_token }
           });
 
-          if (response?.jwt) {
+          if (response?.exist) {
             return tokenAdapter({ token, user: response });
           }
 
           return googleTokenAdapter({ token, user: response });
         }
+      }
+
+      if (trigger === 'update' && session) {
+        return { ...token, user: session };
       }
 
       return token;
@@ -74,7 +78,7 @@ export const {
     async session({ token, session }: any) {
       session = sessionAdapter({ token });
 
-      return Promise.resolve(session);
+      return session;
     }
   }
 });
