@@ -3,12 +3,10 @@ import jwt from 'jsonwebtoken';
 import { SignInAdapterProps } from '@/types/adapters/auth';
 
 export const sessionAdapter = ({ token }: any) => {
-  if (!token) return null;
-
   if (token.provider === 'google') {
     return {
       accessToken: token.accessToken,
-      exp: token.exp,
+      exp: token.exp ?? null,
       user: {
         id: token.id,
         name: token.name,
@@ -18,10 +16,10 @@ export const sessionAdapter = ({ token }: any) => {
   }
 
   return {
-    accessToken: token.accessToken,
-    refreshToken: token.refreshToken,
-    exp: token.expires ?? token.exp,
-    user: token.user
+    accessToken: token.accessToken ?? null,
+    refreshToken: token.refreshToken ?? null,
+    exp: token.expires ?? token.exp ?? null,
+    user: token.user ?? null
   };
 };
 
@@ -51,7 +49,7 @@ export const tokenAdapter = ({ token, user }: any) => {
     return token;
   }
 
-  return null;
+  return token;
 };
 
 export const googleTokenAdapter = ({ token, user }: any) => {

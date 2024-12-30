@@ -9,6 +9,7 @@ declare module 'next-auth' {
     lastName: string;
     phoneNumber: string;
     city: string;
+    date: string;
     warehouse: string;
     cityID: string;
     warehouseID: string;
