@@ -11,26 +11,26 @@ export async function POST(req: Request) {
   const executeCheckout = await withMetaDataAction(checkoutAction);
 
   const checkoutData = {
-    currency: body.currency,
-    value: body.amount,
-    content_ids: body.products.map((product: ProductItem) => product.id),
-    content_name: body.shop_name,
+    currency: body?.currency,
+    value: body?.amount,
+    content_ids: body?.products.map((product: ProductItem) => product.id),
+    content_name: body?.shop_name,
     contents: body.products.map((product: ProductItem) => ({
       id: product.id,
       quantity: product.quantity,
       price: Number(product.price)
     })),
     customer: {
-      firstName: body.customer.firstName,
-      lastName: body.customer.lastName,
-      email: body.customer.email,
-      phone: body.customer.phone,
-      city: body.customer.customer_city,
-      warehouse: body.customer.customer_warehouse,
-      self_delivery: body.customer.self_delivery
+      firstName: body?.customer.firstName,
+      lastName: body?.customer.lastName,
+      email: body?.customer.email,
+      phone: body?.customer.phone,
+      city: body?.customer.customer_city,
+      warehouse: body?.customer.customer_warehouse,
+      self_delivery: body?.customer.self_delivery
     },
-    order_id: body.order_id,
-    description: body.description
+    order_id: body?.order_id,
+    description: body?.description
   };
 
   try {

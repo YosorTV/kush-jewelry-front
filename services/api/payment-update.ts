@@ -1,8 +1,3 @@
-'use server';
-
-import { revalidateTag } from 'next/cache';
-import { postStrapiData } from '../strapi';
-
 interface IPayment {
   data: string;
   signature: string;
@@ -14,9 +9,13 @@ interface IPayment {
 }
 
 export const paymentCallback = async (data: IPayment) => {
-  const response = await postStrapiData('payment/callback', data);
+  const response = await fetch('/api/cart/payments', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data)
+  });
 
-  revalidateTag('orders');
+  const result = await response.json();
 
-  return response;
+  return result;
 };

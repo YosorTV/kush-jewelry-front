@@ -17,7 +17,7 @@ interface ICartCheckout {
   liqPayData: { data: string; signature: string };
 }
 
-export const CartCheckout: FC<ICartCheckout> = ({ currency, liqPayData }) => {
+const CartCheckout: FC<ICartCheckout> = ({ currency, liqPayData }) => {
   const locale = useLocale();
   const cartStore = useCart();
   const router = useRouter();
@@ -42,7 +42,7 @@ export const CartCheckout: FC<ICartCheckout> = ({ currency, liqPayData }) => {
 
   const debouncedCallback = useCallback(
     debounce(async ({ data, signature, paytype, status }) => {
-      const result = await paymentCallback({
+      const payload = {
         data,
         signature,
         status,
@@ -58,7 +58,10 @@ export const CartCheckout: FC<ICartCheckout> = ({ currency, liqPayData }) => {
           customer_warehouse: cartStore.delivery.self ? '' : cartStore.delivery.novapostWarehouse.label,
           self_delivery: cartStore.delivery.self
         }
-      });
+      };
+
+      const result = await paymentCallback(payload);
+      console.log('result: ', result);
 
       if (result.status === 200) {
         router.push(`/?checkout=success`);
@@ -70,7 +73,8 @@ export const CartCheckout: FC<ICartCheckout> = ({ currency, liqPayData }) => {
   );
 
   useEffect(() => {
-    if (liqPayData.data && liqPayData.signature) {
+    if (liqPayData?.data && liqPayData?.signature) {
+      // Clean the container for LiqPay
       if (liqPayContainerRef.current) {
         liqPayContainerRef.current.innerHTML = '';
       }
@@ -79,12 +83,14 @@ export const CartCheckout: FC<ICartCheckout> = ({ currency, liqPayData }) => {
         liqPayInstanceRef.current.destroy?.();
       }
 
+      // Initialize LiqPay instance
       liqPayInstanceRef.current = LiqPayCheckout.init(liqPayAdapter(liqPayData)).on(
         'liqpay.callback',
         debouncedCallback
       );
     }
 
+    // Cleanup the LiqPay instance on unmount
     return () => {
       if (liqPayInstanceRef.current) {
         liqPayInstanceRef.current.destroy?.();
@@ -95,3 +101,5 @@ export const CartCheckout: FC<ICartCheckout> = ({ currency, liqPayData }) => {
 
   return <div ref={liqPayContainerRef} className='h-full w-full overflow-hidden pb-10 pt-5' id='liqpay_checkout' />;
 };
+
+export default CartCheckout;

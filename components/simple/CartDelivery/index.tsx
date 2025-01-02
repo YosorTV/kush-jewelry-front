@@ -7,7 +7,7 @@ import { useSession } from 'next-auth/react';
 import { isFormIncomplete } from '@/helpers/validator';
 import { useTranslations } from 'next-intl';
 
-export const CartDelivery = () => {
+const CartDelivery = () => {
   const cartStore = useCart();
   const session = useSession();
   const t = useTranslations();
@@ -27,3 +27,5 @@ export const CartDelivery = () => {
     </div>
   );
 };
+
+export default CartDelivery;

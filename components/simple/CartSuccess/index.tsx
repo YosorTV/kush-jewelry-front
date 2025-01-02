@@ -6,7 +6,7 @@ import { useTranslations } from 'next-intl';
 import { useRouter } from '@/lib';
 import { useCart } from '@/store';
 
-export const Success = () => {
+const CartSuccess = () => {
   const cartStore = useCart();
   const router = useRouter();
   const t = useTranslations('cart');
@@ -38,3 +38,5 @@ export const Success = () => {
     </motion.div>
   );
 };
+
+export default CartSuccess;

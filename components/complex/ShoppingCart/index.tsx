@@ -2,22 +2,27 @@
 
 import { FC, useCallback, useEffect, useMemo, useState } from 'react';
 
+import dynamic from 'next/dynamic';
+import { useSearchParams } from 'next/navigation';
+
+import { IoArrowBack } from 'react-icons/io5';
+import { BsFillBagFill } from 'react-icons/bs';
+
 import { useCart } from '@/store';
 
 import { paymentDataAdapter } from '@/adapters/payment';
 import { CloseIcon } from '@/assets/icons';
 import { Button, Portal, Sidebar } from '@/components/elements';
 import { Badge } from '@/components/elements/Badge';
-import { CartList } from '@/components/simple';
-import { CartCheckout } from '@/components/simple/CartCheckout';
-import { CartDelivery } from '@/components/simple/CartDelivery';
+
 import { cn, useRouter } from '@/lib';
 import { paymentCreate } from '@/services';
 import { ShoppingCartProps } from '@/types/components/complex';
-import { useSearchParams } from 'next/navigation';
-import { BsFillBagFill } from 'react-icons/bs';
-import { IoArrowBack } from 'react-icons/io5';
-import { Success } from '../Success';
+
+const CartList = dynamic(() => import('@/components/simple/CartList'), { ssr: false });
+const CartDelivery = dynamic(() => import('@/components/simple/CartDelivery'), { ssr: false });
+const CartCheckout = dynamic(() => import('@/components/simple/CartCheckout'), { ssr: false });
+const CartSuccess = dynamic(() => import('@/components/simple/CartSuccess'), { ssr: false });
 
 export const ShoppingCart: FC<ShoppingCartProps> = ({ data, locale, currency }) => {
   const cartStore = useCart();
@@ -40,8 +45,8 @@ export const ShoppingCart: FC<ShoppingCartProps> = ({ data, locale, currency }) 
 
     const response = await paymentCreate(options);
 
-    if (response.success) {
-      setLiqPayData(response.data);
+    if (response?.data) {
+      setLiqPayData(response);
     }
   }, [currency, cartStore.cart, cartStore.delivery, cartStore.prePurchase]);
 
@@ -83,12 +88,14 @@ export const ShoppingCart: FC<ShoppingCartProps> = ({ data, locale, currency }) 
     }
   };
 
-  const contentZone = {
-    cart: <CartList data={data} currency={currency} />,
-    delivery: <CartDelivery />,
-    checkout: <CartCheckout currency={currency} liqPayData={liqPayData} />,
-    success: <Success />
-  };
+  const contentZone = useMemo(() => {
+    return {
+      cart: <CartList data={data} currency={currency} />,
+      delivery: <CartDelivery />,
+      checkout: <CartCheckout currency={currency} liqPayData={liqPayData} />,
+      success: <CartSuccess />
+    };
+  }, [data, currency, liqPayData]);
 
   return (
     <>

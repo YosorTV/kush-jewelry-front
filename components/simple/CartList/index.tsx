@@ -19,7 +19,7 @@ import { CartItem } from '../CartItem';
 
 import lottieAnim from '@/public/LottieEmpty.json';
 
-export const CartList: FC<any> = ({ data, currency }) => {
+const CartList: FC<any> = ({ data, currency }) => {
   const t = useTranslations();
 
   const cartStore = useCart();
@@ -94,3 +94,5 @@ export const CartList: FC<any> = ({ data, currency }) => {
     </div>
   );
 };
+
+export default CartList;
