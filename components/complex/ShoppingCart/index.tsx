@@ -88,14 +88,12 @@ export const ShoppingCart: FC<ShoppingCartProps> = ({ data, locale, currency }) 
     }
   };
 
-  const contentZone = useMemo(() => {
-    return {
-      cart: <CartList data={data} currency={currency} />,
-      delivery: <CartDelivery />,
-      checkout: <CartCheckout currency={currency} liqPayData={liqPayData} />,
-      success: <CartSuccess />
-    };
-  }, [data, currency, liqPayData]);
+  const contentZone = {
+    cart: <CartList data={data} currency={currency} />,
+    delivery: <CartDelivery />,
+    checkout: <CartCheckout currency={currency} liqPayData={liqPayData} />,
+    success: <CartSuccess />
+  };
 
   return (
     <>
