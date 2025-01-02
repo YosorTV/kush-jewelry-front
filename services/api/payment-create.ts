@@ -1,5 +1,3 @@
-import { postStrapiData } from '../strapi';
-
 interface IPayment {
   amount: number;
   currency: string;
@@ -8,7 +6,13 @@ interface IPayment {
 }
 
 export const paymentCreate = async (data: IPayment) => {
-  const response = await postStrapiData('payment/create', data);
+  const response = await fetch('/api/cart/checkout', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data)
+  });
 
-  return response;
+  const result = await response.json();
+
+  return result;
 };

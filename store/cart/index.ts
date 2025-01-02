@@ -38,37 +38,78 @@ export const cartSlice: StateCreator<CartState> = (set) => ({
   onToggle: () => set((state) => ({ isOpen: !state.isOpen })),
   setTotalPrice: (price) => set(() => ({ totalPrice: price })),
   onPrePurchase: () => set((state) => ({ prePurchase: !state.prePurchase })),
-  onSubmit: (item) =>
+  onSubmit: async (item) => {
+    const cartItem = {
+      currency: 'USD',
+      content_ids: [Number(item.id)],
+      content_name: item.name,
+      content_description: item.description,
+      content_material: item.material,
+      content_category: item.category,
+      content_size: item.size,
+      value: item.unit_amount,
+      quantity: item.quantity || 1
+    };
+
+    const response = await fetch('/api/cart/add', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(cartItem)
+    });
+
+    if (!response.ok) {
+      console.error('Error adding item to server-side cart:', await response.text());
+      return;
+    }
+
     set((state) => {
-      const existedItem = state.cart.find(({ id }) => item.id === id);
+      const existedItem = state.cart.find(
+        (cartItem) => cartItem.id === item.id && cartItem.size === item.size && cartItem.material === item.material
+      );
 
       if (existedItem) {
-        const updatedCart = state.cart.map((el) => {
-          if (el.id === item.id) return { ...el, quantity: el.quantity! + 1 };
+        const updatedCart = state.cart.map((el) =>
+          el.id === item.id && el.size === item.size && el.material === item.material
+            ? { ...el, quantity: el.quantity! + 1 }
+            : el
+        );
 
-          return el;
-        });
         return { cart: updatedCart };
       }
 
-      return { cart: [...state.cart, { ...item, quantity: 1 }] };
-    }),
+      return {
+        cart: [...state.cart, item]
+      };
+    });
+  },
   onRemove: (item) =>
     set((state) => {
-      const existedItem = state.cart.find((el) => el.id === item.id);
+      const existedItem = state.cart.find(
+        (cartItem) => cartItem.id === item.id && cartItem.size === item.size && cartItem.material === item.material
+      );
 
       if (existedItem && existedItem.quantity! > 1) {
-        const updatedCart = state.cart.map((el) => {
-          if (el.id === item.id) return { ...el, quantity: el.quantity! - 1 };
-          return el;
-        });
+        const updatedCart = state.cart.map((el) =>
+          el.id === item.id && el.size === item.size && el.material === item.material
+            ? { ...el, quantity: el.quantity! - 1 }
+            : el
+        );
 
         return { cart: updatedCart };
       }
 
-      return { cart: state.cart.filter((el) => el.id !== item.id) };
+      return {
+        cart: state.cart.filter(
+          (cartItem) => !(cartItem.id === item.id && cartItem.size === item.size && cartItem.material === item.material)
+        )
+      };
     }),
-  onDelete: (item) => set((state) => ({ cart: state.cart.filter((el) => el.id !== item.id) })),
+  onDelete: (item) =>
+    set((state) => ({
+      cart: state.cart.filter(
+        (cartItem) => !(cartItem.id === item.id && cartItem.size === item.size && cartItem.material === item.material)
+      )
+    })),
   onAdd: ({ key, value }) =>
     set((state) => ({
       formState: {
@@ -76,16 +117,18 @@ export const cartSlice: StateCreator<CartState> = (set) => ({
         [key]: value
       }
     })),
-  onIncrease: (data: CartItemType) =>
+  onIncrease: (data) =>
     set((state) => {
-      const existingItem = state.cart.find((cartItem) => cartItem.id === data.id);
+      const existingItem = state.cart.find(
+        (cartItem) => cartItem.id === data.id && cartItem.size === data.size && cartItem.material === data.material
+      );
 
       if (existingItem) {
-        const updatedCart = state.cart.map((el) => {
-          if (el.id === data.id) return { ...el, quantity: el.quantity! + 1 };
-
-          return el;
-        });
+        const updatedCart = state.cart.map((el) =>
+          el.id === data.id && el.size === data.size && el.material === data.material
+            ? { ...el, quantity: el.quantity! + 1 }
+            : el
+        );
 
         return { cart: updatedCart };
       }

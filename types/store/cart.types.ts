@@ -11,6 +11,18 @@ export type CartItemType = {
   url?: string;
 };
 
+export type TMetaCartItem = {
+  currency: string;
+  content_ids: number[];
+  content_name: string;
+  content_description: string;
+  content_material: string;
+  content_category: string;
+  content_size: number;
+  value: number;
+  quantity: number;
+};
+
 export interface IDeliveryForm {
   firstName: string;
   lastName: string;
@@ -37,9 +49,9 @@ export type CartState = {
   setPaymentIntentId: (value: string) => void;
   setForm: (value: FormKey) => void;
   onToggle: () => void;
+  onSubmit: (item: CartItemType) => Promise<void>;
   onDelete: (item: CartItemType) => void;
   onAdd: (field: { key: keyof CartItemType; value: any }) => void;
-  onSubmit: (item: CartItemType) => void;
   onRemove: (item: CartItemType) => void;
   onReset: () => void;
   onIncrease: (data: CartItemType) => void;

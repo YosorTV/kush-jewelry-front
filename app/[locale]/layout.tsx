@@ -7,10 +7,12 @@ import BaseLayout from '@/components/layouts/Base';
 import { auth } from '@/auth';
 import { getCurrency, getLayoutData } from '@/services';
 import { pageViewAction } from '@/services/actions/pageViewAction';
-import { postMetaAction } from '@/services/actions/getMetaAction';
+import { withMetaDataAction } from '@/services/actions/withMetaDataAction';
 
 export default async function GlobalLayout({ children, params }: LayoutProps) {
   const { locale = 'uk' } = params;
+
+  const executePageViewAction = await withMetaDataAction(pageViewAction);
 
   setRequestLocale(locale ?? 'uk');
 
@@ -18,10 +20,9 @@ export default async function GlobalLayout({ children, params }: LayoutProps) {
     getLayoutData({ locale }),
     getMessages(),
     getCurrency(),
-    auth()
+    auth(),
+    executePageViewAction()
   ]);
-
-  await postMetaAction(pageViewAction);
 
   return (
     <BaseLayout

@@ -56,7 +56,7 @@ export async function getProductMeta({ locale, slug }: any) {
     },
     openGraph: {
       title: facebookMeta?.title ?? data[0]?.seo?.metaTitle,
-      description: facebookMeta?.description.toLowerCase() ?? data[0]?.seo?.metaDescription.toLowerCase(),
+      description: facebookMeta?.description.toLowerCase() ?? data[0]?.seo?.metaDescription?.toLowerCase(),
       locale,
       url: `${data[0]?.seo?.canonicalURL}`,
       images: [data[0]?.seo?.metaImage],
@@ -67,7 +67,7 @@ export async function getProductMeta({ locale, slug }: any) {
       card: 'summary_large_image',
       id: String(data?.[0]?.id),
       title: twitterMeta?.title || data?.[0]?.metaTitle,
-      description: twitterMeta?.description?.toLowerCase() || data?.[0]?.metaDescription.toLowerCase(),
+      description: twitterMeta?.description?.toLowerCase() || data?.[0]?.metaDescription?.toLowerCase(),
       images: twitterMeta?.image?.url ? [twitterMeta.image.url] : []
     },
     id: String(data?.[0]?.id),

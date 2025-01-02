@@ -15,6 +15,15 @@ import { notFound } from 'next/navigation';
 import { auth } from '@/auth';
 import { generateProductJsonLd } from '@/helpers';
 import Script from 'next/script';
+import { viewContentAction } from '@/services/actions/viewContentAction';
+import { withMetaDataAction } from '@/services/actions/withMetaDataAction';
+
+export type TViewContentProps = {
+  content_ids: number;
+  content_name: string;
+  value: string;
+  currency: string;
+};
 
 export async function generateMetadata(props: PageProps): Promise<Metadata> {
   const { locale, slug } = props.params;
@@ -27,13 +36,29 @@ export async function generateMetadata(props: PageProps): Promise<Metadata> {
 export default async function ProductDetails({ params }: PageProps) {
   const { locale, slug } = params;
 
-  const t = await getTranslations();
-  const session = await auth();
+  const executeViewContent = await withMetaDataAction(viewContentAction);
 
-  const currency = await getCurrency();
-  const { data } = await getProductData({ locale, slug });
-  const { data: sizes } = await getSizesData({ locale });
-  const { data: products } = await getProductsData({ locale });
+  const [t, session, currency, productData, sizesData, productsData] = await Promise.all([
+    getTranslations(),
+    auth(),
+    getCurrency(),
+    getProductData({ locale, slug }),
+    getSizesData({ locale }),
+    getProductsData({ locale })
+  ]);
+
+  const { data } = productData;
+  const { data: sizes } = sizesData;
+  const { data: products } = productsData;
+
+  const payload = {
+    content_ids: [data.id],
+    content_name: data.title,
+    value: data.price,
+    currency: 'USD'
+  };
+
+  await executeViewContent(payload);
 
   if (!data) {
     return notFound();
