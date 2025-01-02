@@ -51,21 +51,18 @@ export const cartSlice: StateCreator<CartState> = (set) => ({
       quantity: item.quantity || 1
     };
 
-    const response = await fetch('/api/cart/add', {
+    await fetch('/api/cart/add', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(cartItem)
     });
 
-    if (!response.ok) {
-      console.error('Error adding item to server-side cart:', await response.text());
-      return;
-    }
-
     set((state) => {
       const existedItem = state.cart.find(
         (cartItem) => cartItem.id === item.id && cartItem.size === item.size && cartItem.material === item.material
       );
+
+      console.log('existedItem: ', existedItem);
 
       if (existedItem) {
         const updatedCart = state.cart.map((el) =>

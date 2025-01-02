@@ -47,7 +47,7 @@ export const AddCart: FC<AddCartProps> = ({ data, isSizesNotAvailable, isDisable
     setTimeout(() => {
       setAdded(false);
     }, 500);
-  }, [state.onSubmit]);
+  }, [state.onSubmit, state.formState]);
 
   return (
     <button
