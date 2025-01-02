@@ -46,7 +46,7 @@ export const ShoppingCart: FC<ShoppingCartProps> = ({ data, locale, currency }) 
     const response = await paymentCreate(options);
 
     if (response?.data) {
-      setLiqPayData(response);
+      setLiqPayData(response.data);
     }
   }, [currency, cartStore.cart, cartStore.delivery, cartStore.prePurchase]);
 
