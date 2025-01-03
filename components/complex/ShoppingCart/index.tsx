@@ -1,8 +1,6 @@
 'use client';
 
-import { FC, useCallback, useEffect, useMemo, useState } from 'react';
-
-import dynamic from 'next/dynamic';
+import { FC, useCallback, useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 
 import { IoArrowBack } from 'react-icons/io5';
@@ -10,19 +8,19 @@ import { BsFillBagFill } from 'react-icons/bs';
 
 import { useCart } from '@/store';
 
-import { paymentDataAdapter } from '@/adapters/payment';
-import { CloseIcon } from '@/assets/icons';
-import { Button, Portal, Sidebar } from '@/components/elements';
-import { Badge } from '@/components/elements/Badge';
+import { Button, Portal, Sidebar, Badge } from '@/components/elements';
 
 import { cn, useRouter } from '@/lib';
 import { paymentCreate } from '@/services';
-import { ShoppingCartProps } from '@/types/components/complex';
 
-const CartList = dynamic(() => import('@/components/simple/CartList'), { ssr: false });
-const CartDelivery = dynamic(() => import('@/components/simple/CartDelivery'), { ssr: false });
-const CartCheckout = dynamic(() => import('@/components/simple/CartCheckout'), { ssr: false });
-const CartSuccess = dynamic(() => import('@/components/simple/CartSuccess'), { ssr: false });
+import { CloseIcon } from '@/assets/icons';
+import { paymentDataAdapter } from '@/adapters/payment';
+
+import { ShoppingCartProps } from '@/types/components/complex';
+import CartCheckout from '@/components/simple/CartCheckout';
+import CartList from '@/components/simple/CartList';
+import CartDelivery from '@/components/simple/CartDelivery';
+import CartSuccess from '@/components/simple/CartSuccess';
 
 export const ShoppingCart: FC<ShoppingCartProps> = ({ data, locale, currency }) => {
   const cartStore = useCart();
@@ -50,33 +48,11 @@ export const ShoppingCart: FC<ShoppingCartProps> = ({ data, locale, currency }) 
     }
   }, [currency, cartStore.cart, cartStore.delivery, cartStore.prePurchase]);
 
-  useEffect(() => {
-    if (cartStore.key === 'checkout') {
-      fetchLiqPayData();
-    }
-  }, [cartStore.key]);
+  const handleToggle = useCallback(() => {
+    cartStore.onToggle();
+  }, [cartStore.onToggle]);
 
-  const newParams = useMemo(() => {
-    const params = new URLSearchParams(searchParams.toString());
-
-    if (cartStore.isOpen) {
-      params.set('checkout', cartStore.key);
-    } else {
-      params.delete('checkout');
-    }
-
-    return params.toString();
-  }, [cartStore.isOpen, cartStore.key, searchParams]);
-
-  useEffect(() => {
-    if (newParams) {
-      router.replace(`?${newParams}`, { scroll: false });
-    }
-  }, [newParams, cartStore.isOpen]);
-
-  const handleToggle = () => cartStore.onToggle();
-
-  const handleBack = () => {
+  const handleBack = useCallback(() => {
     if (cartStore.key === 'cart') {
       handleToggle();
     } else if (cartStore.key === 'delivery') {
@@ -86,7 +62,27 @@ export const ShoppingCart: FC<ShoppingCartProps> = ({ data, locale, currency }) 
     } else {
       handleToggle();
     }
-  };
+  }, [cartStore.key, cartStore.setForm, handleToggle]);
+
+  useEffect(() => {
+    if (cartStore.key === 'checkout') {
+      fetchLiqPayData();
+    } else {
+      setLiqPayData({ data: '', signature: '' });
+    }
+  }, [cartStore.key]);
+
+  useEffect(() => {
+    const params = new URLSearchParams(searchParams.toString());
+
+    if (cartStore.isOpen) {
+      params.set('checkout', cartStore.key);
+    } else {
+      params.delete('checkout');
+    }
+
+    router.replace(`?${params.toString()}`, { scroll: false });
+  }, [cartStore.isOpen, cartStore.key, searchParams, router]);
 
   const contentZone = {
     cart: <CartList data={data} currency={currency} />,

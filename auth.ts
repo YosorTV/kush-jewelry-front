@@ -15,17 +15,17 @@ export const {
 } = NextAuth({
   trustHost: true,
   session: { strategy: 'jwt' },
-  cookies: {
-    sessionToken: {
-      name: `__Secure-next-auth.session-token`,
-      options: {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === 'production',
-        sameSite: 'none',
-        path: '/'
-      }
-    }
-  },
+  // cookies: {
+  //   sessionToken: {
+  //     name: `__Secure-next-auth.session-token`,
+  //     options: {
+  //       httpOnly: process.env.NODE_ENV === 'production',
+  //       secure: process.env.NODE_ENV === 'production' && process.env.VERCEL_ENV !== 'development',
+  //       sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
+  //       path: '/'
+  //     }
+  //   }
+  // },
   secret: process.env.AUTH_SECRET,
   pages: { signIn: '/login' },
   providers: [
@@ -49,11 +49,12 @@ export const {
     })
   ],
   callbacks: {
-    async jwt({ token, user, account, trigger, session }) {
+    async jwt({ token, user, account }) {
       if (account) {
         if (account.provider === 'credentials') {
           return tokenAdapter({ token, user });
         }
+
         if (account.provider === 'google') {
           const response = await strapiProviderLogin({
             provider: account.provider,
@@ -68,15 +69,13 @@ export const {
         }
       }
 
-      if (trigger === 'update' && session) {
-        return { ...token, user: session };
-      }
-
       return token;
     },
 
     async session({ token, session }: any) {
-      session = sessionAdapter({ token });
+      const adaptedSession = sessionAdapter({ token });
+
+      session = adaptedSession;
 
       return session;
     }

@@ -110,7 +110,7 @@ input:-webkit-autofill:active {
 }
 
 .embla__viewport {
-  overflow: hidden;
+  overflow-x: hidden;
   padding: 0;
 }
 

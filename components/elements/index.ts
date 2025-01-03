@@ -22,3 +22,4 @@ export * from '@/components/elements/RangeTrack';
 export * from '@/components/elements/Link';
 export * from '@/components/elements/AsyncSelect';
 export * from '@/components/elements/Lottie';
+export * from '@/components/elements/Badge';

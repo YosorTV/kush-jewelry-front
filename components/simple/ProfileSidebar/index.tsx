@@ -12,13 +12,14 @@ import { NextLink } from '@/components/elements';
 interface IProfileSidebar {
   links: StrapiLinkType[];
   signOutTitle?: string;
+  locale: string;
 }
 
 type TIconVariant = 'profile' | 'orders' | 'favourites';
 
 type IIconType = { [key in TIconVariant]: JSX.Element };
 
-export const ProfileSidebar: FC<IProfileSidebar> = ({ links = [], signOutTitle = 'Вийти' }) => {
+export const ProfileSidebar: FC<IProfileSidebar> = ({ links = [], locale, signOutTitle = 'Вийти' }) => {
   const IconByPath: IIconType = {
     profile: <TbUsers className='h-4 w-4 stroke-base-200' />,
     orders: <PiListDashesFill className='h-4 w-4 fill-base-200' />,
@@ -49,11 +50,12 @@ export const ProfileSidebar: FC<IProfileSidebar> = ({ links = [], signOutTitle =
   };
 
   return (
-    <nav className='mt-20 hidden w-max min-w-[300px] px-6 lg:block'>
+    <nav className='mt-32 hidden w-max min-w-[300px] px-6 lg:block'>
       <ul className='flex flex-col gap-y-3'>
         {links.length > 0 && links?.map(printLink)}
         <li className='flex h-12 w-full items-center'>
           <SignOutButton
+            locale={locale}
             text={signOutTitle}
             className='link-hover flex items-center gap-x-2 font-semibold uppercase text-base-200 hover:bg-none'
             icon={<RiLogoutBoxRLine className='h-4 w-4 fill-base-200' />}

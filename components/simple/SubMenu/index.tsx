@@ -11,8 +11,8 @@ import CollectionCarousel from '../CollectionCarousel';
 
 const SubMenu: FC<TSubMenu> = ({ categoryTitle, categories, collections, collectionTitle }) => {
   return (
-    <nav className='fixed top-20 z-30 flex h-130 w-svw gap-x-20 bg-info-content px-6'>
-      <div className='relative top-5 z-30 flex flex-col gap-y-3'>
+    <nav className='fixed top-20 z-30 flex h-130 w-svw gap-x-20 overflow-hidden bg-info-content px-6'>
+      <div className='relative top-5 z-30 flex h-min flex-col gap-y-3'>
         {categoryTitle && (
           <Title level='5' className={cn('text-xl uppercase text-base-200', cormorant.className)}>
             {categoryTitle}
@@ -41,7 +41,7 @@ const SubMenu: FC<TSubMenu> = ({ categoryTitle, categories, collections, collect
           title={collectionTitle}
           fill='fill-base-200'
           titleClass='!text-xl py-5'
-          slideClass='h-120 p-0'
+          slideClass='h-120 p-0 w-full'
           className='ml-auto w-full'
         />
       )}

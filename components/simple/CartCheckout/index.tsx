@@ -61,7 +61,6 @@ const CartCheckout: FC<ICartCheckout> = ({ currency, liqPayData }) => {
       };
 
       const result = await paymentCallback(payload);
-      console.log('result: ', result);
 
       if (result.status === 200) {
         router.push(`/?checkout=success`);

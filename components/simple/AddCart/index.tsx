@@ -39,7 +39,7 @@ export const AddCart: FC<AddCartProps> = ({ data, isSizesNotAvailable, isDisable
     setDisabled(disabled);
   }, [state.formState, data, isSizesNotAvailable, isDisabled]);
 
-  const handleAdd = useCallback(async () => {
+  const handleAdd = useCallback(() => {
     setAdded(true);
 
     state.onSubmit(state.formState);
@@ -52,7 +52,7 @@ export const AddCart: FC<AddCartProps> = ({ data, isSizesNotAvailable, isDisable
   return (
     <button
       aria-label='add to cart'
-      disabled={disabled}
+      disabled={disabled || added}
       onClick={handleAdd}
       className='btn btn-neutral no-animation btn-block rounded-none font-semibold text-white disabled:!bg-gray-500/50'
     >

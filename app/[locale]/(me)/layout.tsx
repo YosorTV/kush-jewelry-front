@@ -22,7 +22,7 @@ export default async function ProfileLayout({ children, params: { locale } }: Re
   return (
     <PageLayout>
       <section className='flex w-full flex-grow justify-between'>
-        <ProfileSidebar links={data.navigation} signOutTitle={t('signOut')} />
+        <ProfileSidebar links={data.navigation} locale={locale} signOutTitle={t('signOut')} />
         {children}
       </section>
     </PageLayout>

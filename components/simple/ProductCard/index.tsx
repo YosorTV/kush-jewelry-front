@@ -29,7 +29,7 @@ export const ProductCard: FC<ProductCardProps> = ({
           className='absolute !right-0 top-0 !z-[3]'
           session={session}
           locale={product.locale}
-          productId={product.id}
+          product={product}
           inWishlist={product?.inWishlist ?? false}
         />
       </div>

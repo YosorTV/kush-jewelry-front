@@ -51,22 +51,22 @@ export const ProfileForm = ({ data, state, locale = DEFAULT_LOCALE, token }: any
     <Form
       schema={schema}
       action={updateProfileAction}
-      className='mx-auto flex flex-col justify-center gap-5 p-5 lg:w-3/4 lg:p-10'
+      className='mx-auto flex flex-col justify-center gap-5 p-5 lg:w-[650px] lg:p-10'
     >
       <Input type='hidden' hidden name='token' value={token} className='hidden' />
       <Input type='hidden' hidden name='locale' value={locale} className='hidden' />
       <Input type='hidden' hidden name='userId' value={state.id} className='hidden' />
       <Input type='hidden' hidden name='username' value={state.username} className='hidden' />
-      <div className='flex flex-col gap-5 lg:flex-row'>{printInputs(updatedGeneralFields)}</div>
+      <div className='flex flex-col gap-5'>{printInputs(updatedGeneralFields)}</div>
       <div className='divider' />
       <div className='flex flex-col gap-y-6'>
         <Title level='3'>{data?.contactsTitle}</Title>
-        <div className='flex flex-col gap-5 lg:flex-row'>{printInputs(updatedContactsFields)}</div>
+        <div className='flex flex-col gap-5'>{printInputs(updatedContactsFields)}</div>
       </div>
       <div className='divider' />
       <div className='flex flex-col gap-y-6'>
         <Title level='3'>{data?.additionalTitle}</Title>
-        <div className='flex flex-col gap-6 lg:flex-row'>
+        <div className='flex flex-col gap-6'>
           <NovaPostOptions
             cityOptions={{ label: state.city, value: state.cityID }}
             warehouseOptions={{ label: state.warehouse, value: state.warehouseID }}

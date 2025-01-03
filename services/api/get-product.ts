@@ -9,15 +9,14 @@ import { generateProductMetaTags } from '@/helpers';
 
 export async function getProductData({ locale, slug }: ISlugQuery) {
   const productApi = STRAPI_QUERIES.PRODUCT({ locale, slug });
-
   const session = await auth();
 
-  const response = await getStrapiData('products', generateStrapiQuery(productApi));
+  const response = await getStrapiData('products', generateStrapiQuery(productApi), { next: { tags: ['product'] } });
 
   if (response?.data && response?.data?.length > 0) {
     const product = response.data[0];
 
-    if (session?.user && session?.accessToken) {
+    if (session?.accessToken) {
       const { data: wishlist } = await getWishlistProducts({
         locale,
         userId: Number(session.user.id),
@@ -27,13 +26,15 @@ export async function getProductData({ locale, slug }: ISlugQuery) {
       });
 
       const wishlistProductIds = wishlist
-        .flatMap((item: any) => item.products.data)
-        .map((product: Product) => product.id);
+        ?.flatMap((item: any) => item.products.data)
+        ?.map((product: Product) => product.id);
 
-      return { data: { ...product, inWishlist: wishlistProductIds.includes(product.id) } };
+      const isInWishlist = wishlistProductIds?.includes(product.id);
+
+      return { data: { ...product, inWishlist: isInWishlist } };
     }
 
-    return { data: { ...product } };
+    return { data: { ...product, inWishlist: false } };
   }
 
   return { data: null };

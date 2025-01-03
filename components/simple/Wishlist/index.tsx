@@ -9,10 +9,11 @@ import { HeartIcon } from '@/assets/icons';
 import { Button } from '@/components/elements';
 
 import { cn } from '@/lib';
-import addToWishlist from '@/services/actions/addToWishlist';
+import { postWishlistItem } from '@/services/api/post-wishlist-item';
+import { Product } from '@/types/components';
 
 interface IWishlist {
-  productId: number;
+  product: Product;
   locale: string;
   inWishlist: boolean;
   text?: string;
@@ -20,7 +21,7 @@ interface IWishlist {
   className?: string;
 }
 
-export const Wishlist: FC<IWishlist> = ({ productId, text, locale, session = null, inWishlist = false, className }) => {
+export const Wishlist: FC<IWishlist> = ({ product, text, locale, session = null, inWishlist = false, className }) => {
   const dialogRef = useRef<HTMLDialogElement | null>(null);
 
   const [add, setAdd] = useState(inWishlist);
@@ -34,15 +35,11 @@ export const Wishlist: FC<IWishlist> = ({ productId, text, locale, session = nul
       dialogRef.current?.showModal();
     } else {
       setAdd((prev) => !prev);
-      const { message } = await addToWishlist({
-        locale,
-        productId,
-        userId: Number(session.user.id),
-        access_token: session.accessToken
-      });
 
-      if (message) {
-        toast.success(message);
+      const { data } = await postWishlistItem({ locale, product });
+
+      if (data) {
+        toast.success(data?.message);
       }
     }
   };

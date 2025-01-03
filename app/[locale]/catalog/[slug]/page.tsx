@@ -36,35 +36,27 @@ export async function generateMetadata(props: PageProps): Promise<Metadata> {
 export default async function ProductDetails({ params }: PageProps) {
   const { locale, slug } = params;
 
+  const [t, session, currency] = await Promise.all([getTranslations(), auth(), getCurrency()]);
+
+  const { data } = await getProductData({ locale, slug });
+  const { data: products } = await getProductsData({ locale });
+  const { data: sizes } = await getSizesData({ locale });
+
   const executeViewContent = await withMetaDataAction(viewContentAction);
-
-  const [t, session, currency, productData, sizesData, productsData] = await Promise.all([
-    getTranslations(),
-    auth(),
-    getCurrency(),
-    getProductData({ locale, slug }),
-    getSizesData({ locale }),
-    getProductsData({ locale })
-  ]);
-
-  const { data } = productData;
-  const { data: sizes } = sizesData;
-  const { data: products } = productsData;
-
-  const payload = {
-    content_ids: [data.id],
-    content_name: data.title,
-    value: data.price,
-    currency: 'USD'
-  };
-
-  await executeViewContent(payload);
 
   if (!data) {
     return notFound();
   }
 
   const productJsonLd = generateProductJsonLd(data);
+
+  const payload = {
+    content_ids: [data.id],
+    content_name: data.title,
+    content_category: data.category,
+    content_price: data.price,
+    currency: 'USD'
+  };
 
   const cartData: CartItemType = {
     id: data.id,
@@ -76,6 +68,8 @@ export default async function ProductDetails({ params }: PageProps) {
     images: data?.images?.data?.[0],
     unit_amount: data.price - data.price * (data.saleValue / 100)
   };
+
+  await executeViewContent(payload);
 
   return (
     <PageLayout className='mb-5 mt-20'>
@@ -112,7 +106,7 @@ export default async function ProductDetails({ params }: PageProps) {
                 text={t(data?.inWishlist ? 'wishlist.added' : 'wishlist.add')}
                 session={session}
                 locale={locale}
-                productId={data?.id}
+                product={data}
                 inWishlist={data?.inWishlist}
               />
               <div className='divider' />

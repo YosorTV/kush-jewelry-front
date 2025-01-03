@@ -96,7 +96,7 @@ export const ListOfPages: FC<ListOFPagesProps> = ({
   return (
     <ul className={cn('flex gap-x-6', className)}>
       {pages.length > 0 && pages.map(printLink)}
-      <AnimatePresence mode='wait'>
+      <AnimatePresence mode='sync'>
         <Portal selector='portal'>
           {isLgScreen ? (
             <motion.div

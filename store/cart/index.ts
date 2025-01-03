@@ -62,8 +62,6 @@ export const cartSlice: StateCreator<CartState> = (set) => ({
         (cartItem) => cartItem.id === item.id && cartItem.size === item.size && cartItem.material === item.material
       );
 
-      console.log('existedItem: ', existedItem);
-
       if (existedItem) {
         const updatedCart = state.cart.map((el) =>
           el.id === item.id && el.size === item.size && el.material === item.material
