@@ -15,17 +15,17 @@ export const {
 } = NextAuth({
   trustHost: true,
   session: { strategy: 'jwt' },
-  // cookies: {
-  //   sessionToken: {
-  //     name: `__Secure-next-auth.session-token`,
-  //     options: {
-  //       httpOnly: process.env.NODE_ENV === 'production',
-  //       secure: process.env.NODE_ENV === 'production' && process.env.VERCEL_ENV !== 'development',
-  //       sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
-  //       path: '/'
-  //     }
-  //   }
-  // },
+  cookies: {
+    sessionToken: {
+      name: `__Secure-next-auth.session-token`,
+      options: {
+        httpOnly: process.env.NODE_ENV === 'production',
+        secure: process.env.NODE_ENV === 'production',
+        sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
+        path: '/'
+      }
+    }
+  },
   secret: process.env.AUTH_SECRET,
   pages: { signIn: '/login' },
   providers: [
