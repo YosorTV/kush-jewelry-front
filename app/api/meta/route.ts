@@ -39,6 +39,19 @@ export async function GET(req: Request) {
     const workbook = xlsx.utils.book_new();
     const worksheet = xlsx.utils.json_to_sheet(formattedData);
 
+    worksheet['!cols'] = [
+      { wch: 10 }, // ID column width
+      { wch: 100 }, // Title column width
+      { wch: 100 }, // Description column width
+      { wch: 100 }, // Link column width
+      { wch: 100 }, // Image Link column width
+      { wch: 100 }, // Availability column width
+      { wch: 100 }, // Price column width
+      { wch: 100 }, // Category column width
+      { wch: 100 }, // Brand column width
+      { wch: 100 } // Condition column width
+    ];
+
     xlsx.utils.book_append_sheet(workbook, worksheet, 'Catalog');
 
     const buffer = xlsx.write(workbook, { type: 'buffer', bookType: 'xlsx' });
