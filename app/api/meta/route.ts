@@ -17,7 +17,10 @@ export async function GET(req: Request) {
     const currency = await getCurrency();
 
     const formattedData = products.map((product: any) => {
-      const price = formatPrice(product?.other['product:price:amount'], currency).replace(/[^\d.,-]/g, '');
+      const price =
+        locale === 'uk'
+          ? formatPrice(product?.other['product:price:amount'], currency).replace(/[^\d.,-]/g, '')
+          : product?.other['product:price:amount'];
 
       return {
         ID: product.id,
