@@ -53,5 +53,9 @@ export const productMetaQuery = ({ slug, locale = DEFAULT_LOCALE }: TProductQuer
         }
       }
     }
+  },
+  pagination: {
+    page: '1',
+    pageSize: '500'
   }
 });

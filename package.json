@@ -28,7 +28,8 @@
     "react-select-async-paginate": "^0.7.5",
     "react-tailwindcss-datepicker": "^1.7.2",
     "react-use": "^17.5.1",
-    "uuid": "^10.0.0"
+    "uuid": "^10.0.0",
+    "xlsx": "^0.18.5"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.24.1",

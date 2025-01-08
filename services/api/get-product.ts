@@ -6,6 +6,7 @@ import { STRAPI_QUERIES } from '../queries';
 import { getStrapiData } from '../strapi';
 import { getWishlistProducts } from './get-wished-products';
 import { generateProductMetaTags } from '@/helpers';
+import { metaProductsDataAdapter } from '@/adapters/products';
 
 export async function getProductData({ locale, slug }: ISlugQuery) {
   const productApi = STRAPI_QUERIES.PRODUCT({ locale, slug });
@@ -80,4 +81,14 @@ export async function getProductMeta({ locale, slug }: any) {
       return acc;
     }, {})
   };
+}
+
+export async function getProductsMeta({ locale, slug }: any) {
+  const productMetaApi = STRAPI_QUERIES.META_PRODUCT({ locale, slug });
+
+  const { data } = await getStrapiData('products', generateStrapiQuery(productMetaApi));
+
+  const metaData = metaProductsDataAdapter({ data, locale });
+
+  return metaData;
 }

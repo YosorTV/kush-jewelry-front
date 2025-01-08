@@ -4,6 +4,8 @@ export const generateHeaderData = (title?: string, data?: any[]) => ({
 });
 
 export const generateProductMetaTags = (product: any) => {
+  if (!product) return [];
+
   return [
     { property: 'product:category', content: product.category },
     { property: 'product:availability', content: product.available ? 'in stock' : 'out of stock' },

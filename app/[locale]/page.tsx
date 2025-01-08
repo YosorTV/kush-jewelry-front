@@ -16,7 +16,12 @@ export async function generateMetadata(props: PageProps): Promise<Metadata> {
 
   const response = await getMetadata({ path: STRAPI_ENTRIES.home, locale });
 
-  return response;
+  return {
+    ...response,
+    other: {
+      rss: `${process.env.NEXT_PUBLIC_URL}/api/meta/products`
+    }
+  };
 }
 
 export default async function Home({ params, searchParams }: PageProps) {
