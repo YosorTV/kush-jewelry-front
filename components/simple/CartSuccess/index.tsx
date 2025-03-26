@@ -1,7 +1,8 @@
 'use client';
 
+import { useCallback, useEffect } from 'react';
+import { useLocale, useTranslations } from 'next-intl';
 import { motion } from 'framer-motion';
-import { useTranslations } from 'next-intl';
 
 import { useRouter } from '@/lib';
 import { useCart } from '@/store';
@@ -9,13 +10,19 @@ import { useCart } from '@/store';
 const CartSuccess = () => {
   const cartStore = useCart();
   const router = useRouter();
+  const locale = useLocale();
   const t = useTranslations('cart');
 
-  const handleClose = () => {
+  const handleClose = useCallback(() => {
     cartStore.onToggle();
-    cartStore.globalReset();
-    router.push('/');
-  };
+    router.push(`/${locale}`);
+  }, [cartStore, locale, router]);
+
+  useEffect(() => {
+    return () => {
+      cartStore.globalReset();
+    };
+  }, []);
 
   return (
     <motion.div
