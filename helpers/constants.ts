@@ -195,3 +195,5 @@ export const passwordValidationRules = (value: string) => ({
   number: /\d/.test(value),
   special: /[!@#$%^&*(),.?":{}|<>]/.test(value)
 });
+
+export const TIKTOK_PIXEL_ID = 'D07OAKBC77UFFMMCNQE0';
