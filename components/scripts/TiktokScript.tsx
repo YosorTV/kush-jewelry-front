@@ -10,6 +10,7 @@ export const TiktokScript = ({ pixelId }: TiktokScriptProps) => {
   return (
     <Script
       id="tiktok-pixel"
+      type="text/javascript"
       strategy="afterInteractive"
       dangerouslySetInnerHTML={{
         __html: `

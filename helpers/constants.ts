@@ -197,3 +197,17 @@ export const passwordValidationRules = (value: string) => ({
 });
 
 export const TIKTOK_PIXEL_ID = 'D07OAKBC77UFFMMCNQE0';
+
+export const TIKTOK_EVENTS = {
+  VIEW_CONTENT: 'ViewContent',
+  SEARCH: 'Search',
+  ADD_TO_CART: 'AddToCart',
+  ADD_TO_WISHLIST: 'AddToWishlist',
+  INITIATE_CHECKOUT: 'InitiateCheckout',
+  PURCHASE: 'Purchase',
+  SUBSCRIBE: "Subscribe",
+  CONTACT: "Contact",
+  COMPLETE_REGISTRATION: "CompleteRegistration",
+  SUBMIT_FORM: "SubmitForm",
+  PAGE_VIEW: "PageView"
+};

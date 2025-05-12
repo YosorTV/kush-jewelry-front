@@ -6,17 +6,13 @@ import { LayoutProps } from '@/types/app/layout.types';
 import BaseLayout from '@/components/layouts/Base';
 
 import { auth } from '@/auth';
-import { LOCALES } from '@/helpers/constants';
 
 import { getCurrency, getLayoutData } from '@/services';
 import { pageViewAction } from '@/services/actions/pageViewAction';
 import { withMetaDataAction } from '@/services/actions/withMetaDataAction';
 
 import '../globals.css';
-
-export function generateStaticParams() {
-  return LOCALES.map((locale) => ({ locale }));
-}
+import { tikTokPageViewAction } from '@/services/actions/tikTokActions';
 
 export const viewport: Viewport = {
   colorScheme: 'dark light',
@@ -33,8 +29,6 @@ export const viewport: Viewport = {
 export default async function GlobalLayout({ children, params }: LayoutProps) {
   const { locale = 'uk' } = params;
 
-  const executePageViewAction = await withMetaDataAction(pageViewAction);
-
   setRequestLocale(locale ?? 'uk');
 
   const [data, messages, currency, session] = await Promise.all([
@@ -42,7 +36,8 @@ export default async function GlobalLayout({ children, params }: LayoutProps) {
     getMessages(),
     getCurrency(),
     auth(),
-    executePageViewAction()
+    withMetaDataAction(pageViewAction),
+    withMetaDataAction(tikTokPageViewAction)
   ]);
 
   return (

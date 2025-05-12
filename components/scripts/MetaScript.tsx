@@ -3,8 +3,7 @@ import Script from 'next/script';
 export const MetaScript = () => {
   return (
     <>
-      <link rel='preload' href='https://www.facebook.com/tr?id=351610264681498&ev=PageView&noscript=1' as='image' />
-      <Script id='meta-pixel' strategy='afterInteractive'>
+      <Script id='meta-pixel' strategy='afterInteractive' type='text/javascript'>
         {`
       !function(f,b,e,v,n,t,s)
       {if(f.fbq)return;n=f.fbq=function(){n.callMethod?

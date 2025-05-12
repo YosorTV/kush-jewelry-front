@@ -1,5 +1,5 @@
-import { InputProps } from '@/types/components';
 import React from 'react';
+import { InputProps } from '@/types/components';
 import { v4 as uuidv4 } from 'uuid';
 
 export function getStrapiURL() {
@@ -118,3 +118,4 @@ export const getStatusBorder = (status: string) => {
       return 'border-purple-600';
   }
 };
+

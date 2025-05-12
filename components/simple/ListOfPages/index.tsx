@@ -1,6 +1,6 @@
 'use client';
 
-import { AnimatePresence, motion } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { FC, useCallback, useEffect, useMemo, useState } from 'react';
 
 import { useFilters } from '@/store';
@@ -9,7 +9,7 @@ import { cn } from '@/lib';
 import { useScreen } from '@/lib/hooks';
 import { usePathname } from '@/lib/navigation';
 
-import { NextLink, Portal } from '@/components/elements';
+import { NextLink } from '@/components/elements';
 
 import { ROOT } from '@/helpers/constants';
 import { StrapiLinkType } from '@/types/components';
@@ -94,10 +94,8 @@ export const ListOfPages: FC<ListOFPagesProps> = ({
   if (!pages?.length) return null;
 
   return (
-    <ul className={cn('flex gap-x-6', className)}>
+    <ul className={cn('flex gap-x-6 relative', className)}>
       {pages.length > 0 && pages.map(printLink)}
-      <AnimatePresence mode='sync'>
-        <Portal selector='portal'>
           {isLgScreen ? (
             <motion.div
               initial='initial'
@@ -114,8 +112,6 @@ export const ListOfPages: FC<ListOFPagesProps> = ({
               />
             </motion.div>
           ) : null}
-        </Portal>
-      </AnimatePresence>
     </ul>
   );
 };
