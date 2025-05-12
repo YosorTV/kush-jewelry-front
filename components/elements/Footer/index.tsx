@@ -26,15 +26,15 @@ const Footer: FC<FooterProps> = ({ data, locale }) => {
               <Title level='4'>{data?.contactGroupTitle}</Title>
               <ul className='flex flex-col justify-center gap-x-6 font-medium lg:items-start lg:justify-start'>
                 <li className='flex flex-col flex-wrap justify-start gap-x-6 gap-y-6 py-3 xs:flex-row lg:flex-col lg:justify-start'>
-                  <NextLink className='hover:text-base-200' href={`tel:${data?.primaryPhone}`}>
+                  {data?.primaryPhone && <NextLink className='hover:text-base-200' href={`tel:${data?.primaryPhone}`}>
                     {data?.primaryPhone}
-                  </NextLink>
-                  <NextLink className='hover:text-base-200' href={`tel:${data?.secondaryPhone}`}>
+                  </NextLink>}
+                  {data?.secondaryPhone && <NextLink className='hover:text-base-200' href={`tel:${data?.secondaryPhone}`}>
                     {data?.secondaryPhone}
-                  </NextLink>
-                  <NextLink className='hover:text-base-200' href={`tel:${data?.tertiaryPhone}`}>
+                  </NextLink>}
+                  {data?.tertiaryPhone && <NextLink className='hover:text-base-200' href={`tel:${data?.tertiaryPhone}`}>
                     {data?.tertiaryPhone}
-                  </NextLink>
+                  </NextLink>}
                 </li>
                 <li className='py-3 hover:text-base-200 sm:whitespace-nowrap lg:max-w-56'>
                   <span>{data?.address}</span>
