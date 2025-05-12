@@ -69,7 +69,11 @@ export default async function ProductDetails({ params }: PageProps) {
     unit_amount: data.price - data.price * (data.saleValue / 100)
   };
 
-  await executeViewContent(payload);
+  try {
+    await executeViewContent(payload);
+  } catch (error) {
+    console.error('Failed to track view content:', error);
+  }
 
   return (
     <PageLayout className='mb-5 mt-20'>

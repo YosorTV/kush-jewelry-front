@@ -13,9 +13,9 @@ type MetaAction<T> = (data: MetaActionProps<T>) => Promise<void>;
 
 export async function withMetaDataAction<T>(action: MetaAction<T>): Promise<(customData?: T) => Promise<void>> {
   const session = await auth();
-  const fbp = cookies().get('_fbp')?.value || null;
-  const userAgent = headers().get('user-agent') || '';
-  const ip = headers().get('x-forwarded-for') || '';
+  const fbp = cookies()?.get('_fbp')?.value || null;
+  const userAgent = headers()?.get('user-agent') || '';
+  const ip = headers()?.get('x-forwarded-for') || '';
 
   return async (customData?: T) => {
     await action({

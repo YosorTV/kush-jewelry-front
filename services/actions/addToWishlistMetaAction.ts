@@ -2,7 +2,7 @@ import { postStrapiData } from '../strapi';
 import { MetaActionProps } from './withMetaDataAction';
 
 export async function addToWishlistMetaAction<T>({ user_data, custom_data }: MetaActionProps<T>): Promise<void> {
-  const response = await postStrapiData(`conversion`, {
+  const response = await postStrapiData(`conversion-meta-event`, {
     user_data,
     custom_data,
     event_name: 'AddToWishlist',
