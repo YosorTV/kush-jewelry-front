@@ -39,7 +39,7 @@ export const config = {
   matcher: [
     '/(uk|en)/:path*',
     {
-      source: '/((?!api|_next/static|_next/image|_next/data|favicon.ico).*)',
+      source: '/((?!api|_next/static|_next/image|favicon.ico).*)',
       missing: [
         { type: 'header', key: 'next-router-prefetch' },
         { type: 'header', key: 'next-action' },
