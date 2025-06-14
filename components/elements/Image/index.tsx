@@ -24,7 +24,7 @@ export const Image: FC<IImageProps> = ({
     src,
     alt: alt ?? "image",
     priority,
-    quality: fill ? 100 : 99,
+    quality: fill ? 90 : 80,
     placeholder: "blur" as PlaceholderValue,
     blurDataURL,
     className: cn("transition-opacity duration-300", className),
