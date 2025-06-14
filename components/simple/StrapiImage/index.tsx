@@ -17,7 +17,7 @@ export function StrapiImage({
   width,
   priority = false,
   overlay = false,
-  sizes = '100vw'
+  sizes = '50vw'
 }: Readonly<IStrapiImageProps>) {
   const imageFallback = `https://placehold.co/${width}x${height}`;
 
