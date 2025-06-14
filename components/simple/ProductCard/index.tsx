@@ -8,6 +8,7 @@ import { cn } from '@/lib';
 import { ProductCardProps } from '@/types/components';
 import { Price } from '../Price';
 import { Wishlist } from '../Wishlist';
+import { AnimatedTag } from '../AnimatedTag';
 
 export const ProductCard: FC<ProductCardProps> = ({
   product,
@@ -17,7 +18,7 @@ export const ProductCard: FC<ProductCardProps> = ({
   currency = 41
 }) => {
   return (
-    <figure className={cn('grid cursor-pointer overflow-hidden', className)}>
+    <AnimatedTag tag='figure' className={cn('grid cursor-pointer overflow-hidden', className)}>
       <div className='relative'>
         <AnimatedImage product={product} className={imgClassName} />
         <span className='absolute left-0 top-0 z-[3] bg-neutral p-2 text-base-300'>{product.hintText}</span>
@@ -42,6 +43,6 @@ export const ProductCard: FC<ProductCardProps> = ({
           <Price currency={currency} price={product?.price} sale={product?.saleValue} />
         </div>
       </figcaption>
-    </figure>
+    </AnimatedTag>
   );
 };

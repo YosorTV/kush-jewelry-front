@@ -18,7 +18,7 @@ const AnimatedImage: FC<TAnimatedImage> = ({ product, className  }) => {
   const [showOverlay, setShowOverlay] = useState<boolean>(false);
   const router = useRouter();
 
-  const { sm, md } = useScreen();
+  const { md } = useScreen();
 
   const [img1, img2] = useMemo(() => {
     return product?.images?.data || [];
