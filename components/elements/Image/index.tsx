@@ -1,6 +1,9 @@
-import { IImageProps } from '@/types/components';
-import NextImage from 'next/image';
 import { FC } from 'react';
+import NextImage from 'next/image';
+import { PlaceholderValue } from 'next/dist/shared/lib/get-img-props';
+
+import { cn } from '@/lib';
+import { IImageProps } from '@/types/components';
 
 export const Image: FC<IImageProps> = ({
   src,
@@ -12,38 +15,24 @@ export const Image: FC<IImageProps> = ({
   fill = false,
   formats,
   loading,
-  sizes = '(max-width:768px) 50vw, (max-width:968px) 70vw, (max-width:1200px) 100vw'
+  sizes = '80vw'
 }) => {
   const blurDataURL = formats?.thumbnail?.url;
 
-  if (fill) {
-    return (
-      <NextImage
-        quality={100}
-        sizes={sizes}
-        src={src}
-        fill={fill}
-        priority={priority}
-        placeholder={blurDataURL ? 'blur' : 'empty'}
-        blurDataURL={formats && blurDataURL}
-        alt={alt ?? 'image'}
-        className={className}
-      />
-    );
+  const imageProps = {
+    src,
+    alt: alt ?? "image",
+    priority,
+    quality: fill ? 100 : 99,
+    placeholder: "blur" as PlaceholderValue,
+    blurDataURL,
+    className: cn("transition-opacity duration-300", className),
+    loading,
   }
 
   return (
-    <NextImage
-      src={src}
-      height={height}
-      width={width}
-      placeholder={blurDataURL ? 'blur' : 'empty'}
-      blurDataURL={formats && blurDataURL}
-      className={className}
-      alt={alt ?? 'image'}
-      priority={priority}
-      quality={99}
-      loading={loading}
-    />
+    <>
+      {fill ? <NextImage {...imageProps} fill={fill} sizes={sizes} /> : <NextImage {...imageProps} height={height} width={width} />}
+    </>
   );
 };

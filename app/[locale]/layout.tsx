@@ -9,10 +9,10 @@ import { auth } from '@/auth';
 
 import { getCurrency, getLayoutData } from '@/services';
 import { pageViewAction } from '@/services/actions/pageViewAction';
+import { tikTokPageViewAction } from '@/services/actions/tikTokActions';
 import { withMetaDataAction } from '@/services/actions/withMetaDataAction';
 
 import '../globals.css';
-import { tikTokPageViewAction } from '@/services/actions/tikTokActions';
 
 export const viewport: Viewport = {
   colorScheme: 'dark light',
