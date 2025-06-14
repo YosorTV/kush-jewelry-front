@@ -14,6 +14,8 @@ export const HeroSection: FC<IHeroSection> = ({ data, device }) => {
         <StrapiImage
           overlay
           priority
+          loading='eager'
+          sizes='80vw'
           width={width}
           height={height}
           src={data.image.url}
