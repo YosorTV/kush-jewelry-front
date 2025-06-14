@@ -4,9 +4,9 @@ import { NextLink, Title } from '@/components/elements';
 import { StrapiImage, AnimatedTag } from '@/components/simple';
 import { IHeroSection } from '@/types/components/complex/hero-section';
 
-export const HeroSection: FC<IHeroSection> = ({ data, device }) => {
-  const height = device === 'mobile' && data.image.formats.large.height;
-  const width = device === 'mobile' && data.image.formats.large.width;
+export const HeroSection: FC<IHeroSection> = ({ data }) => {
+  const height = data.image.formats.large.height;
+  const width = data.image.formats.large.width;
 
   return (
     <section className='group relative flex flex-col items-center justify-center'>
@@ -15,11 +15,10 @@ export const HeroSection: FC<IHeroSection> = ({ data, device }) => {
           overlay
           priority
           loading='eager'
-          sizes='80vw'
+          sizes='100vw'
           width={width}
           height={height}
           src={data.image.url}
-          fill={device !== 'mobile'}
           formats={data.image.formats}
           alt={data.image.alternativeText}
           className='aspect-square h-full w-full object-cover transition-transform duration-300 ease-out md:aspect-video'
