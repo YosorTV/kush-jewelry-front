@@ -34,7 +34,7 @@ export const searchSlice: StateCreator<TSearchState> = (set) => ({
 
     const pagination = meta?.pagination || {
       page: 1,
-      pageSize: 8,
+      pageSize: 6,
       pageCount: 1,
       total: 0
     };

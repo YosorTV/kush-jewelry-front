@@ -32,7 +32,7 @@ export const SearchController: FC<TSearchController> = ({ onClose, children, pla
       name,
       locale,
       page: '1',
-      pageSize: '8'
+      pageSize: '6'
     });
   }, [state, locale, name]);
 
@@ -123,7 +123,7 @@ export const SearchController: FC<TSearchController> = ({ onClose, children, pla
                   <Button
                     className='btn-link'
                     disabled={isLastPage}
-                    onClick={() => handleMore(state.meta.pageSize + 8)}
+                    onClick={() => handleMore(state.meta.pageSize + 6)}
                   >
                     {cta.title}
                   </Button>

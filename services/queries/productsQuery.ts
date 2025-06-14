@@ -8,7 +8,7 @@ export const productsQuery = ({
   locale = DEFAULT_LOCALE,
   category,
   page = '1',
-  pageSize = '8',
+  pageSize = '6',
   ...options
 }: PageProps['searchParams']) => {
   let sort;
