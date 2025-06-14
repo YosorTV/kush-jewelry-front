@@ -22,7 +22,7 @@ export const ProductCarousel: FC<PropType> = ({ data }) => {
             src={image.url}
             height={image.height}
             width={image.width}
-            className='aspect-square h-full w-full object-cover sm:h-[468px]'
+            className='aspect-square h-full w-full object-cover max-h-[50dvh]'
           />
         </Zoom>
       </li>
