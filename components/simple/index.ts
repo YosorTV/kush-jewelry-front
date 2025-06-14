@@ -33,7 +33,6 @@ export * from '@/components/simple/Price';
 export * from '@/components/simple/Wishlist';
 export * from '@/components/simple/AddCart';
 export * from '@/components/simple/DeliveryBlock';
-export * from '@/components/simple/StepBack';
 export * from '@/components/simple/OrderCardMobile';
 export * from '@/components/simple/StatusBadge';
 export * from '@/components/simple/ProductCarousel';

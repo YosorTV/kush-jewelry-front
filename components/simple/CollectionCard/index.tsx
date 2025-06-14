@@ -59,8 +59,8 @@ export const CollectionCard: FC<TCollectioCard> = ({ img, className, title, hint
           formats={img?.formats}
           fill
           sizes='100vw'
-          loading='eager'
-          className='aspect-square h-full w-full object-cover'
+          loading='lazy'
+          className='aspect-[4/3] h-full w-full object-cover'
         />
         <Title
           level='4'

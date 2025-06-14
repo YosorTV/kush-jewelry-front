@@ -20,7 +20,6 @@ export const CompleteLook: FC<ICompleteLook> = async ({ products, currency, cate
         session={session}
         key={product.id}
         product={product}
-        imgClassName='h-120 sm:h-130'
         className='embla__slide cursor-grab active:cursor-grabbing'
       />
     );
@@ -31,7 +30,7 @@ export const CompleteLook: FC<ICompleteLook> = async ({ products, currency, cate
       title={t('look')}
       format='standart'
       total={data.length}
-      className='w-svw px-5 pb-10 md:px-6'
+      className='w-dvw px-5 pb-10 md:px-6'
       titleClass='text-base-200 md:py-5 py-2.5'
       options={{ loop: true, align: 'start' }}
     >

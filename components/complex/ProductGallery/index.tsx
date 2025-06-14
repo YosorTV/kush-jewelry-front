@@ -26,7 +26,7 @@ export const ProductGallery = ({ images = [] }: { images: any[] }) => {
             height={image.height}
             formats={image.formats}
             alt={image.alternativeText}
-            className='aspect-square h-[468px] w-full cursor-pointer object-cover'
+            className='aspect-square h-full w-full cursor-pointer object-cover'
           />
         </Zoom>
       </li>

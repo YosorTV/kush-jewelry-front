@@ -29,7 +29,7 @@ export const CollectionDetails: FC<ICollectionDetails> = async ({ content, title
 
   return (
     <article className='flex flex-col'>
-      <div className='relative h-md lg:h-lg'>
+      <div className='relative w-full h-full aspect-video max-h-[60dvh]'>
         <Title level='1' variant='heading' className='absolute-center z-10 text-base-300'>
           {title}
         </Title>

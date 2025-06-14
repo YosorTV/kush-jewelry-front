@@ -21,7 +21,7 @@ export const AboutSection: FC<IAboutSection> = ({ title, description, device = '
       <HeroSection data={heroData} device={device} />
       {content && (
         <AnimatedTag tag='section' className='flex flex-1 flex-col gap-5 pb-10'>
-          <StrapiContentBlock content={content} imageClass='h-md' />
+          <StrapiContentBlock content={content} />
         </AnimatedTag>
       )}
     </section>

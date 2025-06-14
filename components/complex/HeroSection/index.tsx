@@ -10,7 +10,7 @@ export const HeroSection: FC<IHeroSection> = ({ data, device }) => {
 
   return (
     <section className='group relative flex flex-col items-center justify-center'>
-      <div className='relative h-lg w-full lg:h-lg'>
+      <div className='relative aspect-video h-full w-full max-h-[82dvh]'>
         <StrapiImage
           overlay
           priority
@@ -20,7 +20,7 @@ export const HeroSection: FC<IHeroSection> = ({ data, device }) => {
           fill={device !== 'mobile'}
           formats={data.image.formats}
           alt={data.image.alternativeText}
-          className='aspect-[4/3] h-full w-full object-cover transition-transform duration-300 ease-out md:aspect-video'
+          className='aspect-square h-full w-full object-cover transition-transform duration-300 ease-out md:aspect-video'
         />
         {data?.title && (
           <Title level='1' variant='subheading' className='absolute-center px-6 text-center text-base-300'>

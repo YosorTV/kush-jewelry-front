@@ -44,7 +44,7 @@
   }
 
   .spotlight-img-carousel {
-    @apply relative h-128 w-full md:h-[580px] lg:h-[680px];
+    @apply relative aspect-square h-full w-full max-h-[60dvh];
   }
 
   .react-tel-input .flag-dropdown.open .selected-flag {

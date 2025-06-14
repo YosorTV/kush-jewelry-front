@@ -6,7 +6,7 @@ import { getCurrency, getProductData, getProductMeta, getProductsData, getSizesD
 import { CompleteLook, DeliveryRules, ProductGallery, ProductParams } from '@/components/complex';
 import { NextLink, Title } from '@/components/elements';
 import { PageLayout } from '@/components/layouts';
-import { AddCart, DeliveryBlock, Price, StepBack, Wishlist } from '@/components/simple';
+import { AddCart, DeliveryBlock, Price, Wishlist } from '@/components/simple';
 
 import { PageProps } from '@/types/app/page.types';
 import { CartItemType } from '@/types/store';
@@ -77,7 +77,6 @@ export default async function ProductDetails({ params }: PageProps) {
 
   return (
     <PageLayout className='mb-5 mt-20'>
-      <StepBack className='absolute z-20 !mx-5 justify-start !text-base-300' />
       <article className='relative flex flex-col-reverse xl:flex-row-reverse'>
         <section className='flex h-full w-svw flex-col gap-5 bg-base-100 p-2.5 md:p-5 xl:w-[50svw]'>
           <header className='flex w-full flex-wrap justify-between gap-3 pt-0' role='product-name'>

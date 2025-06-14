@@ -1,6 +1,6 @@
 'use client';
 
-import { FC, useMemo, useState } from 'react';
+import { FC, useCallback, useMemo, useState } from 'react';
 
 import { useRouter } from '@/lib/navigation';
 
@@ -14,7 +14,7 @@ interface TAnimatedImage {
   className?: string;
 }
 
-const AnimatedImage: FC<TAnimatedImage> = ({ product, className = 'h-120 md:h-128 xl:h-130' }) => {
+const AnimatedImage: FC<TAnimatedImage> = ({ product, className  }) => {
   const [showOverlay, setShowOverlay] = useState<boolean>(false);
   const router = useRouter();
 
@@ -24,9 +24,9 @@ const AnimatedImage: FC<TAnimatedImage> = ({ product, className = 'h-120 md:h-12
     return product?.images?.data || [];
   }, [product.images.data]);
 
-  const handleRedirect = () => {
+  const handleRedirect = useCallback(() => {
     router.push(`/catalog/${product.slug}`);
-  };
+  }, [product.slug, router]);
 
   return (
     <div
@@ -34,7 +34,15 @@ const AnimatedImage: FC<TAnimatedImage> = ({ product, className = 'h-120 md:h-12
       onClick={handleRedirect}
       onMouseEnter={() => md && setShowOverlay(true)}
       onMouseLeave={() => md && setShowOverlay(false)}
-      className={cn('relative', className)}
+      className={cn(
+        // Using dvh for consistent viewport-relative sizing
+        "relative w-full h-full",
+        // Responsive height using dvh (dynamic viewport height)
+        // "h-[50dvh]",
+        'aspect-square',
+        "cursor-pointer",
+        className,
+      )}
     >
       {[img1, img2].map((img, idx) => {
         return (

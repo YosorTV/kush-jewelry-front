@@ -1,9 +1,10 @@
 'use client';
 
-import { SCREEEN } from '@/helpers/constants';
-import { EmblaCarouselType } from 'embla-carousel';
 import { useCallback, useEffect, useState } from 'react';
+import { usePathname } from "next/navigation";
+import { EmblaCarouselType } from 'embla-carousel';
 
+import { SCREEEN } from '@/helpers/constants';
 import { getCurrency } from '@/services';
 import { debounce } from './utils';
 
@@ -199,3 +200,37 @@ export const useCookieConsent = () => {
 
   return { isVisible, acceptCookieConsent };
 };
+
+
+export function useNavigationHistory() {
+  const [history, setHistory] = useState<string[]>([])
+  const pathname = usePathname()
+
+  useEffect(() => {
+    const existingHistory = sessionStorage.getItem("site-navigation-history")
+    const parsedHistory = existingHistory ? JSON.parse(existingHistory) : []
+
+    if (parsedHistory[parsedHistory.length - 1] !== pathname) {
+      const updatedHistory = [...parsedHistory, pathname].slice(-20);
+      setHistory(updatedHistory)
+      sessionStorage.setItem("site-navigation-history", JSON.stringify(updatedHistory))
+    } else {
+      setHistory(parsedHistory)
+    }
+  }, [pathname])
+
+  const canGoBack = history.length > 1
+  const previousRoute = history[history.length - 2]
+
+  const clearHistory = () => {
+    setHistory([pathname])
+    sessionStorage.setItem("site-navigation-history", JSON.stringify([pathname]))
+  }
+
+  return {
+    history,
+    canGoBack,
+    previousRoute,
+    clearHistory,
+  }
+}

@@ -40,9 +40,9 @@ export const StrapiContentBlock: FC<IStrapiContentBlock> = ({ content, imageClas
               priority={false}
               formats={image?.formats}
               previewUrl={image?.previewUrl}
-              containerClass='h-full'
+              containerClass='h-full w-full max-h-[50dvh] aspect-video'
               overlay
-              className={cn('aspect-video h-96 w-full object-cover object-center', imageClass)}
+              className={cn('aspect-video h-full w-full max-h-[50dvh] object-cover object-center', imageClass)}
             />
           );
         },
