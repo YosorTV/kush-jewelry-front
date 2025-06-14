@@ -212,3 +212,5 @@ export const TIKTOK_EVENTS = {
   PAGE_VIEW: "PageView"
 };
 
+
+export const IMAGE_SIZES = '(max-width: 600px) 60vw, (max-width: 1200px) 50vw, 33vw';

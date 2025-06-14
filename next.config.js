@@ -46,6 +46,8 @@ const nextConfig = {
   images: {
     loader: 'custom',
     loaderFile: './lib/strapi.ts',
+    imageSizes: [234],
+    deviceSizes: [600, 1000, 3440],
     dangerouslyAllowSVG: true,
     remotePatterns: [
       {

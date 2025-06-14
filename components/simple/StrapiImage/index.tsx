@@ -1,4 +1,5 @@
 import { Image } from '@/components/elements';
+import { IMAGE_SIZES } from '@/helpers/constants';
 import { cn } from '@/lib';
 
 import { IStrapiImageProps } from '@/types/components/simple/strapiImage.types';
@@ -17,7 +18,7 @@ export function StrapiImage({
   width,
   priority = false,
   overlay = false,
-  sizes = '50vw'
+  sizes = IMAGE_SIZES
 }: Readonly<IStrapiImageProps>) {
   const imageFallback = `https://placehold.co/${width}x${height}`;
 

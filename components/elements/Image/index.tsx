@@ -4,6 +4,7 @@ import { PlaceholderValue } from 'next/dist/shared/lib/get-img-props';
 
 import { cn } from '@/lib';
 import { IImageProps } from '@/types/components';
+import { IMAGE_SIZES } from '@/helpers/constants';
 
 export const Image: FC<IImageProps> = ({
   src,
@@ -15,7 +16,7 @@ export const Image: FC<IImageProps> = ({
   fill = false,
   formats,
   loading,
-  sizes = '50vw'
+  sizes = IMAGE_SIZES
 }) => {
   const blurDataURL = formats?.thumbnail?.url;
 
