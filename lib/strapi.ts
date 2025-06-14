@@ -8,7 +8,7 @@ interface IStrapiLoader {
   quality: number | 'auto';
 }
 
-export default function strapiLoader({ src, width = 300, quality = 100 }: IStrapiLoader) {
+export default function strapiLoader({ src, width = 1000, quality = 75 }: IStrapiLoader) {
   if (!src) return null;
 
   if (src.startsWith('data:')) return src;

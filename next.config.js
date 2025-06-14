@@ -35,7 +35,7 @@ const nextConfig = {
     removeConsole: process.env.NODE_ENV === 'production'
   },
   experimental: {
-    optimizePackageImports: ['framer-motion']
+    optimizePackageImports: ['framer-motion', 'next-intl', 'embla-carousel-react', 'embla-carousel-auto-scroll', 'embla-carousel-autoplay', 'daisyui', 'next-themes']
   },
   eslint: {
     ignoreDuringBuilds: true
@@ -46,8 +46,8 @@ const nextConfig = {
   images: {
     loader: 'custom',
     loaderFile: './lib/strapi.ts',
-    imageSizes: [234],
-    deviceSizes: [600, 1000, 3440],
+    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
+    deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
     dangerouslyAllowSVG: true,
     remotePatterns: [
       {

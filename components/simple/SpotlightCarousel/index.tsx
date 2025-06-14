@@ -12,7 +12,7 @@ type PropType = {
   locale: string;
 };
 
-export const SpotlightCarousel: FC<PropType> = ({ data = [], title, currency, locale }) => {
+const SpotlightCarousel: FC<PropType> = ({ data = [], title, currency, locale }) => {
   const printSpotlightCard = (product: Product) => {
     return <CategoryCard data={product} key={product.id} currency={currency} locale={locale} />;
   };
@@ -32,3 +32,5 @@ export const SpotlightCarousel: FC<PropType> = ({ data = [], title, currency, lo
     </Carousel>
   );
 };
+
+export default SpotlightCarousel;

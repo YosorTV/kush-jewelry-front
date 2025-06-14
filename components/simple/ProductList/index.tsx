@@ -16,7 +16,6 @@ const PaginateController = dynamic(() => import('@/components/simple/PaginateCon
 
 const ProductList: FC<IProductsList> = async ({ className, title, ...rest }) => {
   const locale = await getLocale();
-
   const { data, meta } = await getProductsData({ locale, ...rest });
 
   const isLastPage = meta?.pagination?.page === meta?.pagination?.pageCount || !data.length;

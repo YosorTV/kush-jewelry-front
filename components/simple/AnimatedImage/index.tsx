@@ -18,7 +18,7 @@ const AnimatedImage: FC<TAnimatedImage> = ({ product, className  }) => {
   const [showOverlay, setShowOverlay] = useState<boolean>(false);
   const router = useRouter();
 
-  const { md } = useScreen();
+  const { sm, md } = useScreen();
 
   const [img1, img2] = useMemo(() => {
     return product?.images?.data || [];
@@ -28,6 +28,23 @@ const AnimatedImage: FC<TAnimatedImage> = ({ product, className  }) => {
     router.push(`/catalog/${product.slug}`);
   }, [product.slug, router]);
 
+  const imgSizeByScreen = useMemo(() => {
+    const defaultWidth = 1000;
+    const defaultHeight = 500;
+
+    return {
+      sm: {
+        width: img1?.formats?.large?.width ?? defaultWidth,
+        height: img1?.formats?.large?.height ?? defaultHeight,
+      },
+      xl: {
+        width: img1?.width ?? defaultWidth,
+        height: img1?.height ?? defaultHeight,
+      }
+    }
+  }, [img1, img2]);
+
+ 
   return (
     <div
       aria-hidden
@@ -35,12 +52,8 @@ const AnimatedImage: FC<TAnimatedImage> = ({ product, className  }) => {
       onMouseEnter={() => md && setShowOverlay(true)}
       onMouseLeave={() => md && setShowOverlay(false)}
       className={cn(
-        // Using dvh for consistent viewport-relative sizing
-        "relative w-full h-full",
-        // Responsive height using dvh (dynamic viewport height)
-        // "h-[50dvh]",
+        'relative h-full w-full cursor-pointer',
         'aspect-square',
-        "cursor-pointer",
         className,
       )}
     >
@@ -59,9 +72,9 @@ const AnimatedImage: FC<TAnimatedImage> = ({ product, className  }) => {
               src={img?.url}
               formats={img?.formats}
               alt={img?.alternativeText}
+              width={imgSizeByScreen['xl'].width}
+              height={imgSizeByScreen['xl'].height}
               previewUrl={img?.previewUrl || img?.formats?.thumbnail?.url}
-              width={img?.width ?? 1000}
-              height={img?.height ?? 500}
               className='aspect-square h-full w-full overflow-hidden object-cover'
             />
           </div>
