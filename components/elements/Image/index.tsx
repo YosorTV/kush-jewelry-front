@@ -15,7 +15,7 @@ export const Image: FC<IImageProps> = ({
   fill = false,
   formats,
   loading,
-  sizes = '80vw'
+  sizes = 'auto'
 }) => {
   const blurDataURL = formats?.thumbnail?.url;
 
