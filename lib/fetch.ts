@@ -10,7 +10,7 @@ const fetcher = async (url: string, options?: any) => {
 
     const result = await response.json();
 
-    if (result.error) {
+    if (result?.error) {
       return {
         data: null,
         error: result.error.message,

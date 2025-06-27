@@ -1,5 +1,5 @@
 import { Viewport } from 'next';
-import { getMessages } from 'next-intl/server';
+import { getMessages, setRequestLocale } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 
 import { LayoutProps } from '@/types/app/layout.types';
@@ -27,6 +27,8 @@ export const viewport: Viewport = {
 
 export default async function GlobalLayout({ children, params }: LayoutProps) {
   const { locale = 'uk' } = params;
+
+  setRequestLocale(locale);
 
   const [messages, session] = await Promise.allSettled([getMessages(), auth()]);
   const [data, currency] = await Promise.allSettled([getLayoutData({ locale }), getCurrency()]);
