@@ -12,17 +12,12 @@ export const ExternalScripts = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsReady(true);
-    }, 5000);
+    }, 2500);
 
     return () => clearTimeout(timer);
   }, []);
 
-  const isInstagramBrowser = typeof window !== 'undefined' && 
-    (window.navigator.userAgent.includes('Instagram') || 
-     window.navigator.userAgent.includes('FBAN') ||
-     window.navigator.userAgent.includes('FBAV'));
-
-  if (!isReady || isInstagramBrowser) {
+  if (!isReady) {
     return null;
   }
 
