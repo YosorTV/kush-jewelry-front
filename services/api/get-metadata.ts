@@ -42,8 +42,6 @@ export async function getMetadata({ path, locale: rawLocale }: IGenerateMeta): P
       description: twitterMeta?.description || seo?.metaDescription,
       images: twitterMeta?.image?.url ? [twitterMeta.image.url] : []
     },
-    // Structured Data (JSON-LD)
-    structuredData: seo?.structuredData ? JSON.parse(seo.structuredData) : null,
     // Canonical URL
     alternates: {
       canonical: seo?.canonicalURL ?? ''
