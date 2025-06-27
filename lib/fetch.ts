@@ -2,16 +2,7 @@ import { deleteParams, getParams, postParams, putParams } from '@/helpers/consta
 
 const fetcher = async (url: string, options?: any) => {
   try {
-    // Add timeout to prevent hanging requests
-    const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 30000); // 30 second timeout
-
-    const response = await fetch(url, {
-      ...options,
-      signal: controller.signal,
-    });
-
-    clearTimeout(timeoutId);
+    const response = await fetch(url, { ...options });
 
     if (!response.ok) {
       throw new Error(`HTTP Error: ${response.status} ${response.statusText}`);
@@ -29,16 +20,7 @@ const fetcher = async (url: string, options?: any) => {
 
     return result;
   } catch (error) {
-    console.error('Fetch error:', {
-      url,
-      error: error.message,
-      name: error.name,
-      stack: error.stack,
-    });
-
-    if (error.name === 'AbortError') {
-      throw new Error('Request timeout - please try again later');
-    }
+    console.error('Fetch error:', error);
 
     if (error.message.includes('fetch')) {
       throw new Error('Network error - please check your connection');

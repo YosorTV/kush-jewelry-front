@@ -68,6 +68,6 @@ export type ProductCardProps = {
   product: Product;
   className?: string;
   currency?: number;
-  session?: Session;
+  session?: Session | null;
   imgClassName?: string;
 };

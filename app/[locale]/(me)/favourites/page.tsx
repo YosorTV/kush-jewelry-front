@@ -11,6 +11,7 @@ import { getWishlistProducts } from '@/services/api/get-wished-products';
 
 import { inWishlistDataAdatapter } from '@/adapters/product';
 import { PageProps } from '@/types/app/page.types';
+import { getCurrency } from '@/services';
 
 export async function generateMetadata(props: PageProps): Promise<Metadata> {
   const { locale } = props.params;
@@ -29,6 +30,7 @@ export default async function FavouritesPage({ params, searchParams }: PageProps
 
   const session = await auth();
   const t = await getTranslations('system');
+  const currency = await getCurrency();
 
   const { data } = await getWishlistProducts({
     page,
@@ -50,7 +52,7 @@ export default async function FavouritesPage({ params, searchParams }: PageProps
         {t('wishlist')}
       </Title>
       <div className='divider' />
-      <ProductListGroup data={wishlist} className='grid-cols-fluid lg:grid-cols-3 2xl:grid-cols-4' />
+      <ProductListGroup session={session ?? null} currency={currency} t={t} data={wishlist} className='grid-cols-fluid lg:grid-cols-3 2xl:grid-cols-4' />
     </AnimatedTag>
   );
 }

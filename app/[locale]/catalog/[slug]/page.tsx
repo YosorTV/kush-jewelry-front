@@ -15,8 +15,6 @@ import { notFound } from 'next/navigation';
 import { auth } from '@/auth';
 import { generateProductJsonLd } from '@/helpers';
 import Script from 'next/script';
-import { viewContentAction } from '@/services/actions/viewContentAction';
-import { withMetaDataAction } from '@/services/actions/withMetaDataAction';
 
 export type TViewContentProps = {
   content_ids: number;
@@ -42,7 +40,7 @@ export default async function ProductDetails({ params }: PageProps) {
   const { data: products } = await getProductsData({ locale });
   const { data: sizes } = await getSizesData({ locale });
 
-  const executeViewContent = await withMetaDataAction(viewContentAction);
+  // const executeViewContent = await withMetaDataAction(viewContentAction);
 
   if (!data) {
     return notFound();
@@ -50,13 +48,13 @@ export default async function ProductDetails({ params }: PageProps) {
 
   const productJsonLd = generateProductJsonLd(data);
 
-  const payload = {
-    content_ids: [data.id],
-    content_name: data.title,
-    content_category: data.category,
-    content_price: data.price,
-    currency: 'USD'
-  };
+  // const payload = {
+  //   content_ids: [data.id],
+  //   content_name: data.title,
+  //   content_category: data.category,
+  //   content_price: data.price,
+  //   currency: 'USD'
+  // };
 
   const cartData: CartItemType = {
     id: data.id,
@@ -69,11 +67,13 @@ export default async function ProductDetails({ params }: PageProps) {
     unit_amount: data.price - data.price * (data.saleValue / 100)
   };
 
-  try {
-    await executeViewContent(payload);
-  } catch (error) {
-    console.error('Failed to track view content:', error);
-  }
+/* The `try-catch` block in the code snippet is used to handle errors that may occur when attempting to
+execute the `executeViewContent(payload)` function. */
+  // try {
+  //   await executeViewContent(payload);
+  // } catch (error) {
+  //   console.error('Failed to track view content:', error);
+  // }
 
   return (
     <PageLayout className='mb-5 mt-20'>

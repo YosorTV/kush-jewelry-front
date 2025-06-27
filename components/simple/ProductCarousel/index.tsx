@@ -15,8 +15,9 @@ export const ProductCarousel: FC<PropType> = ({ data }) => {
   const printProductSlide = (image: any) => {
     return (
       <li key={image.id} className='embla__slide hover:cursor-grab active:cursor-grabbing'>
-        <Zoom>
+        <Zoom key={image.id}>
           <StrapiImage
+            key={image.id}
             formats={image.formats}
             alt={image.alternativeText}
             src={image.url}

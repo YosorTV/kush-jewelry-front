@@ -1,6 +1,5 @@
 'use client';
 
-import { useEffect } from 'react';
 import { Button } from '@/components/elements';
 
 export default function Error({
@@ -10,15 +9,7 @@ export default function Error({
   error: Error & { digest?: string };
   reset: () => void;
 }) {
-  useEffect(() => {
-    // Log error details
-    console.error('Application error:', {
-      message: error.message,
-      digest: error.digest,
-      stack: error.stack,
-      name: error.name,
-    });
-  }, [error]);
+ 
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-center">
