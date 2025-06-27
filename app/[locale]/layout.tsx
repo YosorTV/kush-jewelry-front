@@ -44,12 +44,10 @@ export default async function GlobalLayout({ children, params }: LayoutProps) {
     const layoutData = data.status === 'fulfilled' ? data.value : null;
     const currencyRate = currency.status === 'fulfilled' ? currency.value : 41;
 
-    Promise.allSettled([
+    await Promise.allSettled([
       withMetaDataAction(pageViewAction).then(action => action()).catch(() => {}),
       withMetaDataAction(tikTokPageViewAction).then(action => action()).catch(() => {})
-    ]).catch(() => {
-      console.warn('Analytics tracking failed');
-    });
+    ]);
 
     return (
       <BaseLayout
