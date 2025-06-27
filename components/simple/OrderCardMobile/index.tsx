@@ -29,7 +29,7 @@ export const OrderCardMobile: FC<IOrderCard> = ({
           alt={image.alt}
           height={image.height}
           containerClass='md:w-80 w-full md:right-0'
-          className='aspect-square h-full w-full transform-gpu object-cover object-right transition-all duration-300 group-hover:scale-105 md:w-80'
+          className='aspect-square h-full w-full transform-cpu object-cover object-right transition-all duration-300 group-hover:scale-105 md:w-80'
         />
       </figure>
       <div className='card-body gap-y-6 !rounded-none font-medium !text-white'>

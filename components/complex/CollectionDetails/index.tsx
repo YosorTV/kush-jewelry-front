@@ -2,7 +2,7 @@ import { type BlocksContent } from '@strapi/blocks-react-renderer';
 import { FC } from 'react';
 
 import { Title } from '@/components/elements';
-import { AnimatedTag, ProductCard, StrapiContentBlock, StrapiImage } from '@/components/simple';
+import { ProductCard, StrapiContentBlock, StrapiImage } from '@/components/simple';
 
 import { auth } from '@/auth';
 import { getCurrency } from '@/services';
@@ -43,7 +43,7 @@ export const CollectionDetails: FC<ICollectionDetails> = async ({ content, title
           className='absolute aspect-video h-full w-full object-cover'
         />
       </div>
-      <AnimatedTag tag='div' className='flex flex-col gap-10 py-10'>
+      <div className='flex flex-col gap-10 py-10'>
         {content && (
           <section className='flex flex-1 flex-col gap-5'>
             <StrapiContentBlock content={content} />
@@ -52,7 +52,7 @@ export const CollectionDetails: FC<ICollectionDetails> = async ({ content, title
         {products.length > 0 && (
           <section className='grid h-min w-full grid-cols-fluid gap-5 px-6'>{products.map(printProduct)}</section>
         )}
-      </AnimatedTag>
+      </div>
     </article>
   );
 };

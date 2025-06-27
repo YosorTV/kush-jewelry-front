@@ -27,13 +27,13 @@ export default function BaseLayout({
   cart
 }: PropsWithChildren<BaseLayoutProps>) {
   return (
-    <html lang={locale} className={cn(montserrat.className, 'scroll-smooth scrollbar')}>
-      <body className='relative grid overflow-x-clip'>
+    <html lang={locale} suppressHydrationWarning className={cn(montserrat.className, 'scroll-smooth scrollbar')}>
+      <body className='relative grid overflow-x-clip' suppressHydrationWarning>
         <NextIntlClientProvider locale={locale} messages={messages}>
           <SessionProvider session={session}>
             <ThemeProvider>
               <Header data={header} currency={currency} cart={cart} locale={locale} session={session} />
-              <main className='flex min-h-dvh flex-col'>{children}</main>
+              <main className='flex min-h-dvh flex-col' suppressHydrationWarning>{children}</main>
               <Footer data={footer} sessionLinks={header?.sessionLinks} session={session} locale={locale} />
               <CookieSection />
               <Modal id='my_modal_3'>
@@ -41,8 +41,10 @@ export default function BaseLayout({
               </Modal>
             </ThemeProvider>
             <div id='portal' className='z-50' />
-            <ClientSideRender />
-            <ExternalScripts />
+            <div suppressHydrationWarning>
+              <ClientSideRender />
+              <ExternalScripts />
+            </div>
           </SessionProvider>
         </NextIntlClientProvider>
       </body>

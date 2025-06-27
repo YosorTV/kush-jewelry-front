@@ -1,11 +1,75 @@
 import { deleteParams, getParams, postParams, putParams } from '@/helpers/constants';
 
+// Custom error classes for better error handling
+class HTTPError extends Error {
+  public status: number;
+  public url: string;
+
+  constructor(message: string, status: number, url: string) {
+    super(message);
+    this.name = 'HTTPError';
+    this.status = status;
+    this.url = url;
+  }
+}
+
+class NetworkError extends Error {
+  public originalError: Error;
+
+  constructor(message: string, originalError: Error) {
+    super(message);
+    this.name = 'NetworkError';
+    this.originalError = originalError;
+  }
+}
+
+class ParseError extends Error {
+  public originalError: Error;
+
+  constructor(message: string, originalError: Error) {
+    super(message);
+    this.name = 'ParseError';
+    this.originalError = originalError;
+  }
+}
+
 const fetcher = async (url: string, options?: any) => {
   try {
+    // Log the request for debugging
+    if (process.env.NODE_ENV === 'development') {
+      console.log(`🚀 Fetching: ${url}`, { method: options?.method || 'GET' });
+    }
+
     const response = await fetch(url, { ...options });
 
     if (!response.ok) {
-      throw new Error(`HTTP Error: ${response.status} ${response.statusText}`);
+      // Enhanced error logging
+      const errorDetails = {
+        url,
+        status: response.status,
+        statusText: response.statusText,
+        method: options?.method || 'GET',
+        headers: options?.headers
+      };
+      
+      console.error('❌ HTTP Error Details:', errorDetails);
+      
+      // Try to get error details from response body
+      let errorMessage = `HTTP ${response.status}: ${response.statusText}`;
+      try {
+        const errorBody = await response.json();
+        if (errorBody?.error?.message) {
+          errorMessage = errorBody.error.message;
+        } else if (errorBody?.message) {
+          errorMessage = errorBody.message;
+        }
+      } catch (parseError) {
+        // Response body is not JSON or empty
+        console.warn('Could not parse error response body:', parseError);
+      }
+      
+      // Create a more informative error
+      throw new HTTPError(errorMessage, response.status, url);
     }
 
     const result = await response.json();
@@ -20,10 +84,21 @@ const fetcher = async (url: string, options?: any) => {
 
     return result;
   } catch (error) {
-    console.error('Fetch error:', error);
+    console.error('💥 Fetch error:', error);
 
-    if (error.message.includes('fetch')) {
-      throw new Error('Network error - please check your connection');
+    // Handle different types of errors
+    if (error instanceof HTTPError) {
+      // Re-throw HTTP errors with additional context
+      throw error;
+    }
+    
+    if (error instanceof Error && (error.message.includes('fetch') || error.name === 'TypeError')) {
+      throw new NetworkError('Network error - please check your connection', error);
+    }
+
+    // For JSON parsing errors or other unexpected errors
+    if (error instanceof Error && error.name === 'SyntaxError') {
+      throw new ParseError('Invalid server response format', error);
     }
 
     throw error;

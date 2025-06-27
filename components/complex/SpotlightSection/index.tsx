@@ -2,7 +2,6 @@ import { getLocale } from 'next-intl/server';
 
 import { getCurrency } from '@/services';
 
-import { AnimatedTag } from '@/components/simple';
 import SpotlightCarousel from '@/components/simple/SpotlightCarousel';
 
 export default async function SpotlightSection({ data }: any) {
@@ -10,10 +9,10 @@ export default async function SpotlightSection({ data }: any) {
   const currency = await getCurrency();
 
   return (
-    <AnimatedTag tag='section' className='relative flex h-auto flex-col bg-neutral'>
+    <section className='relative flex h-auto flex-col bg-neutral'>
       {data?.products?.data?.length > 0 && (
         <SpotlightCarousel locale={locale} currency={currency} title={data.title} data={data.products.data} />
       )}
-    </AnimatedTag>
+    </section>
   );
 }

@@ -1,7 +1,7 @@
 import { FC } from 'react';
 
 import { NextLink, Title } from '@/components/elements';
-import { StrapiImage, AnimatedTag } from '@/components/simple';
+import { StrapiImage } from '@/components/simple';
 import { IHeroSection } from '@/types/components/complex/hero-section';
 
 export const HeroSection: FC<IHeroSection> = ({ data }) => {
@@ -29,22 +29,20 @@ export const HeroSection: FC<IHeroSection> = ({ data }) => {
           </Title>
         )}
         {data?.link && (
-          <AnimatedTag tag='div'>
             <NextLink
               href={data?.link?.url}
               className='absolute-center link-hover link bottom-10 top-[90%] h-min w-svw !items-end text-base-300 underline-offset-8'
             >
               {data?.link?.text}
             </NextLink>
-          </AnimatedTag>
         )}
       </div>
       {data?.description && (
-        <AnimatedTag tag='div' className='relative px-5 py-6 text-center leading-tight md:px-6 md:py-10'>
+        <div className='relative px-5 py-6 text-center leading-tight md:px-6 md:py-10'>
           <Title level='3' variant='subheading'>
             {data.description}
           </Title>
-        </AnimatedTag>
+        </div>
       )}
     </section>
   );

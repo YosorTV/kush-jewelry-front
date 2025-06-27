@@ -52,7 +52,7 @@ const AnimatedImage: FC<TAnimatedImage> = ({ product, className  }) => {
       onMouseEnter={() => md && setShowOverlay(true)}
       onMouseLeave={() => md && setShowOverlay(false)}
       className={cn(
-        'relative h-full w-full cursor-pointer',
+        'relative h-full w-full cursor-pointer max-h-[640px]',
         'aspect-square',
         className,
       )}
@@ -62,7 +62,7 @@ const AnimatedImage: FC<TAnimatedImage> = ({ product, className  }) => {
           <div
             key={idx}
             className={cn(
-              'absolute inset-0 h-full w-full transform-gpu overflow-hidden transition-opacity duration-300 ease-in-out',
+              'absolute inset-0 h-full w-full transform-cpu overflow-hidden transition-opacity duration-300 ease-in-out',
               showOverlay === (idx === 1) ? 'opacity-100' : 'opacity-0',
               product.quantity === 0 && 'grayscale filter'
             )}

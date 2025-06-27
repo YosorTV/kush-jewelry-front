@@ -8,7 +8,6 @@ import { PageProps } from '@/types/app/page.types';
 import { Title } from '@/components/elements';
 import { getTranslations } from 'next-intl/server';
 import { notFound } from 'next/navigation';
-import { AnimatedTag } from '@/components/simple';
 import dynamic from 'next/dynamic';
 
 const PaginateController = dynamic(() => import('@/components/simple/PaginateController'), { ssr: false });
@@ -47,7 +46,7 @@ export default async function OrdersPage({ params, searchParams }: PageProps) {
   const isLastPage = meta.pagination.page === meta.pagination.pageCount || !data.length;
 
   return (
-    <AnimatedTag tag='section' className='mt-20 w-full bg-info-content p-5'>
+    <section className='mt-20 w-full bg-info-content p-5'>
       <Title level='2' variant='subheading' className='text-center'>
         {t('orders')}
       </Title>
@@ -58,6 +57,6 @@ export default async function OrdersPage({ params, searchParams }: PageProps) {
         total={meta.pagination.total}
         perPage={meta?.pagination?.pageSize + meta?.pagination?.pageSize}
       />
-    </AnimatedTag>
+    </section>
   );
 }

@@ -2,7 +2,6 @@
 
 import { FC } from 'react';
 
-import { AnimatedTag } from '@/components/simple';
 import CollectionCarousel from '@/components/simple/CollectionCarousel';
 
 interface ICollectionSection {
@@ -19,7 +18,7 @@ export const CollectionSection: FC<ICollectionSection> = ({ data }) => {
   const { title, collections } = data;
 
   return (
-    <AnimatedTag tag='section' className='relative flex flex-col bg-neutral p-3 lg:p-6'>
+    <section className='relative flex flex-col bg-neutral p-3 lg:p-6'>
       <CollectionCarousel
         autoScroll
         format='standart'
@@ -29,6 +28,6 @@ export const CollectionSection: FC<ICollectionSection> = ({ data }) => {
         data={collections.data}
         slideClass='spotlight-img-carousel'
       />
-    </AnimatedTag>
+    </section>
   );
 };

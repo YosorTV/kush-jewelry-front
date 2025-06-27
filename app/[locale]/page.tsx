@@ -1,15 +1,15 @@
-import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 
 import { getHomeData, getMetadata } from '@/services';
 
 import { PageLayout } from '@/components/layouts';
 import { StrapiBlockRender } from '@/components/simple';
-import { STRAPI_ENTRIES } from '@/helpers/constants';
 
 import { PageProps } from '@/types/app/page.types';
 import { headers } from 'next/headers';
 import { userAgent } from 'next/server';
+import { STRAPI_ENTRIES } from '@/helpers/constants';
+import { Metadata } from 'next';
 
 export async function generateMetadata(props: PageProps): Promise<Metadata> {
   const { locale } = props.params;
