@@ -30,26 +30,57 @@ export default async function GlobalLayout({ children, params }: LayoutProps) {
 
   setRequestLocale(locale ?? 'uk');
 
-  const [data, messages, currency, session] = await Promise.all([
-    getLayoutData({ locale }),
-    getMessages(),
-    getCurrency(),
-    auth(),
-    withMetaDataAction(pageViewAction),
-    withMetaDataAction(tikTokPageViewAction)
-  ]);
+  try {
+    const [messages, session] = await Promise.all([
+      getMessages().catch((): Record<string, any> => ({})),
+      auth().catch((): null => null),
+    ]);
 
-  return (
-    <BaseLayout
-      locale={locale}
-      session={session}
-      currency={currency}
-      messages={messages}
-      header={data?.header}
-      footer={data?.footer}
-      cart={data?.shoppingCart}
-    >
-      {children}
-    </BaseLayout>
-  );
+    const [data, currency] = await Promise.allSettled([
+      getLayoutData({ locale }),
+      getCurrency(),
+    ]);
+
+    const layoutData = data.status === 'fulfilled' ? data.value : null;
+    const currencyRate = currency.status === 'fulfilled' ? currency.value : 41;
+
+    Promise.allSettled([
+      withMetaDataAction(pageViewAction).then(action => action()).catch(() => {}),
+      withMetaDataAction(tikTokPageViewAction).then(action => action()).catch(() => {})
+    ]).catch(() => {
+      console.warn('Analytics tracking failed');
+    });
+
+    return (
+      <BaseLayout
+        locale={locale}
+        session={session}
+        currency={currencyRate}
+        messages={messages}
+        header={layoutData?.header}
+        footer={layoutData?.footer}
+        cart={layoutData?.shoppingCart}
+      >
+        {children}
+      </BaseLayout>
+    );
+  } catch (error) {
+    console.error('Layout error:', error);
+    
+    // Fallback layout with minimal functionality
+    return (
+      <html lang={locale}>
+        <body>
+          <div className="min-h-screen bg-base-100">
+            <div className="container mx-auto p-4">
+              <div className="alert alert-error mb-4">
+                <span>Some features may be temporarily unavailable. Please refresh the page.</span>
+              </div>
+              {children}
+            </div>
+          </div>
+        </body>
+      </html>
+    );
+  }
 }
