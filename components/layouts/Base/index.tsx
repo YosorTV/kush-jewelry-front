@@ -16,7 +16,7 @@ import { montserrat } from '@/assets/fonts';
 import { ExternalScripts } from '@/components/scripts';
 import { CookieSection } from '@/components/complex/CookieSection';
 
-export default function BaseLayout({
+export default async function BaseLayout({
   children,
   locale,
   header,
@@ -28,6 +28,13 @@ export default function BaseLayout({
 }: PropsWithChildren<BaseLayoutProps>) {
   return (
     <html lang={locale} suppressHydrationWarning suppressContentEditableWarning className={cn(montserrat.className, 'scroll-smooth scrollbar')}>
+      <head>
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+        <meta name="apple-touch-fullscreen" content="yes" />
+      </head>
       <body className='relative grid overflow-x-clip' suppressHydrationWarning suppressContentEditableWarning>
         <NextIntlClientProvider locale={locale} messages={messages}>
           <SessionProvider session={session}>

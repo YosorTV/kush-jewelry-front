@@ -18,10 +18,12 @@ export const viewport: Viewport = {
   colorScheme: 'dark light',
   width: 'device-width',
   initialScale: 1,
-  viewportFit: 'auto',
+  maximumScale: 1,
+  userScalable: false,
+  viewportFit: 'cover',
   themeColor: [
-    { media: '(prefers-color-scheme: light)', color: 'light' },
-    { media: '(prefers-color-scheme: dark)', color: 'sunset' }
+    { media: '(prefers-color-scheme: light)', color: '#ffffff' },
+    { media: '(prefers-color-scheme: dark)', color: '#1a1a1a' }
   ]
 };
 
