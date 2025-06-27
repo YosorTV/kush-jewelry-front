@@ -36,20 +36,5 @@ export default auth((req) => {
 });
 
 export const config = {
-  matcher: [
-    '/(uk|en)/:path*',
-    {
-      source: '/((?!api|_next/static|_next/image|favicon.ico).*)',
-      missing: [
-        { type: 'header', key: 'next-router-prefetch' },
-        { type: 'header', key: 'next-action' },
-        { type: 'header', key: 'purpose', value: 'prefetch' }
-      ]
-    }
-  ],
-  api: {
-    bodyParser: {
-      sizeLimit: '10mb'
-    }
-  }
+  matcher: ['/(uk|en)/:path*']
 };
