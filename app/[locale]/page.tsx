@@ -10,9 +10,11 @@ import { headers } from 'next/headers';
 import { userAgent } from 'next/server';
 import { STRAPI_ENTRIES } from '@/helpers/constants';
 import { Metadata } from 'next';
+import { validateLocale } from '@/lib/locale-utils';
 
 export async function generateMetadata(props: PageProps): Promise<Metadata> {
-  const { locale } = props.params;
+  const { locale: rawLocale } = props.params;
+  const locale = validateLocale(rawLocale);
 
   const response = await getMetadata({ path: STRAPI_ENTRIES.home, locale });
 
@@ -20,7 +22,8 @@ export async function generateMetadata(props: PageProps): Promise<Metadata> {
 }
 
 export default async function Home({ params, searchParams }: PageProps) {
-  const { locale } = params;
+  const { locale: rawLocale } = params;
+  const locale = validateLocale(rawLocale);
 
   const { device } = userAgent({ headers: headers() });
 

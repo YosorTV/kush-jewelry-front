@@ -15,33 +15,42 @@ import { cn } from '@/lib';
 import { montserrat } from '@/assets/fonts';
 import { ExternalScripts } from '@/components/scripts';
 import { CookieSection } from '@/components/complex/CookieSection';
+import { getCurrency, getLayoutData } from '@/services';
+import { auth } from '@/auth';
+import { getMessages } from 'next-intl/server';
+import { notFound } from 'next/navigation';
 
-export default function BaseLayout({
+export default async function BaseLayout({
   children,
   locale,
-  header,
-  footer,
-  session,
-  messages,
-  currency,
-  cart
 }: PropsWithChildren<BaseLayoutProps>) {
+  const messages = await getMessages();
+  const session = await auth();
+  const data = await getLayoutData({ locale });
+  const currency = await getCurrency();
+
+  if(!data) {
+    return notFound();
+  }
+
+  const { header, footer, shoppingCart } = data;
+
   return (
-    <html lang={locale} suppressHydrationWarning className={cn(montserrat.className, 'scroll-smooth scrollbar')}>
-      <body className='relative grid overflow-x-clip' suppressHydrationWarning>
+    <html lang={locale} className={cn(montserrat.className, 'scroll-smooth scrollbar')}>
+      <body className='relative grid overflow-x-clip'>
         <NextIntlClientProvider locale={locale} messages={messages}>
           <SessionProvider session={session}>
             <ThemeProvider>
-              <Header data={header} currency={currency} cart={cart} locale={locale} session={session} />
-              <main className='flex min-h-dvh flex-col' suppressHydrationWarning>{children}</main>
+              <Header data={header} currency={currency} cart={shoppingCart} locale={locale} session={session} />
+              <main className='flex min-h-dvh flex-col'>{children}</main>
               <Footer data={footer} sessionLinks={header?.sessionLinks} session={session} locale={locale} />
               <CookieSection />
               <Modal id='my_modal_3'>
                 <WishlistNotification locale={locale} />
-              </Modal>
+              </Modal> 
             </ThemeProvider>
             <div id='portal' className='z-50' />
-            <div suppressHydrationWarning>
+            <div>
               <ClientSideRender />
               <ExternalScripts />
             </div>

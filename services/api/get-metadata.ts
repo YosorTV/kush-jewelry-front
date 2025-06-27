@@ -1,10 +1,13 @@
 import { generateStrapiQuery } from '@/lib';
+import { validateLocale } from '@/lib/locale-utils';
 
 import { ExtendedMetadata, IGenerateMeta, Seo } from '@/types/services/api';
 import { STRAPI_QUERIES } from '../queries';
 import { getStrapiData } from '../strapi';
 
-export async function getMetadata({ path, locale }: IGenerateMeta): Promise<ExtendedMetadata> {
+export async function getMetadata({ path, locale: rawLocale }: IGenerateMeta): Promise<ExtendedMetadata> {
+  const locale = validateLocale(rawLocale);
+  
   const metaQP = generateStrapiQuery(STRAPI_QUERIES.META({ locale }));
   const { seo }: { seo: Seo } = await getStrapiData(path, metaQP);
 

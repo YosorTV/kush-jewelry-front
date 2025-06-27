@@ -69,6 +69,7 @@ const AnimatedImage: FC<TAnimatedImage> = ({ product, className  }) => {
           >
             <StrapiImage
               priority
+              loading='eager'
               src={img?.url}
               formats={img?.formats}
               alt={img?.alternativeText}

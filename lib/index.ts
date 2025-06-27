@@ -7,3 +7,4 @@ export * from '@/lib/zod';
 export * from '@/lib/utils';
 export * from '@/lib/map';
 export * from '@/lib/navigation';
+export * from '@/lib/locale-utils';
