@@ -1,10 +1,8 @@
 import { FC } from 'react';
-import dynamic from 'next/dynamic';
 
 import { CatalogSection, CollectionSection, HeroSection } from '@/components/complex';
-
-const ProductList = dynamic(() => import('@/components/simple/ProductList'));
-const SpotlightSection = dynamic(() => import('@/components/complex/SpotlightSection'));
+import ProductList from '../ProductList';
+import SpotlightSection from '@/components/complex/SpotlightSection';
 
 function blockRenderer(block: any, device: string, params: any) {
   switch (block.__component) {

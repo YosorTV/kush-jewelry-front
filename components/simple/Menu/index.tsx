@@ -25,7 +25,9 @@ export const Menu: FC<TMenu> = ({ pages, categories, authLink, collections, sess
   const handleToggle = () => menu.onToggle();
 
   useEffect(() => {
-    menu.onClose();
+    return () => {
+      menu.onClose();
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname, category]);
 
