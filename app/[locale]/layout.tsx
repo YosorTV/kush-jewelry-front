@@ -5,10 +5,11 @@ import { LayoutProps } from '@/types/app/layout.types';
 
 import BaseLayout from '@/components/layouts/Base';
 
-
-
 import '../globals.css';
 import { validateLocale } from '@/lib/locale-utils';
+import { withMetaDataAction } from '@/services/actions/withMetaDataAction';
+import { pageViewAction } from '@/services/actions/pageViewAction';
+import { tikTokPageViewAction } from '@/services/actions/tikTokActions';
 
 export const viewport: Viewport = {
   colorScheme: 'dark light',
@@ -25,13 +26,12 @@ export const viewport: Viewport = {
 
 export default async function GlobalLayout({ children, params }: LayoutProps) {
   const { locale: rawLocale = 'uk' } = params;
+
   const locale = validateLocale(rawLocale);
 
   setRequestLocale(locale);
 
-  return (
-    <BaseLayout locale={locale}>
-      {children}
-    </BaseLayout>
-  );
+  await Promise.allSettled([withMetaDataAction(pageViewAction), withMetaDataAction(tikTokPageViewAction)]);
+
+  return <BaseLayout locale={locale}>{children}</BaseLayout>;
 }

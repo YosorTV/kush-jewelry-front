@@ -7,7 +7,7 @@ import { getStrapiData } from '../strapi';
 
 export async function getMetadata({ path, locale: rawLocale }: IGenerateMeta): Promise<ExtendedMetadata> {
   const locale = validateLocale(rawLocale);
-  
+
   const metaQP = generateStrapiQuery(STRAPI_QUERIES.META({ locale }));
   const { seo }: { seo: Seo } = await getStrapiData(path, metaQP);
 
@@ -42,6 +42,7 @@ export async function getMetadata({ path, locale: rawLocale }: IGenerateMeta): P
       description: twitterMeta?.description || seo?.metaDescription,
       images: twitterMeta?.image?.url ? [twitterMeta.image.url] : []
     },
+    structuredData: seo?.structuredData ? JSON.parse(seo.structuredData) : null,
     // Canonical URL
     alternates: {
       canonical: seo?.canonicalURL ?? ''
