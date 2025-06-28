@@ -205,12 +205,11 @@ export const TIKTOK_EVENTS = {
   ADD_TO_WISHLIST: 'AddToWishlist',
   INITIATE_CHECKOUT: 'InitiateCheckout',
   PURCHASE: 'Purchase',
-  SUBSCRIBE: "Subscribe",
-  CONTACT: "Contact",
-  COMPLETE_REGISTRATION: "CompleteRegistration",
-  SUBMIT_FORM: "SubmitForm",
-  PAGE_VIEW: "PageView"
+  SUBSCRIBE: 'Subscribe',
+  CONTACT: 'Contact',
+  COMPLETE_REGISTRATION: 'CompleteRegistration',
+  SUBMIT_FORM: 'SubmitForm',
+  PAGE_VIEW: 'PageView'
 };
 
-
-export const IMAGE_SIZES = '(max-width: 600px) 60vw, (max-width: 1200px) 50vw, 33vw';
+export const IMAGE_SIZES = '(max-width: 600px) 50vw, (max-width: 1200px) 50vw, 33vw';

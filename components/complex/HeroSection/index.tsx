@@ -5,8 +5,8 @@ import { StrapiImage } from '@/components/simple';
 import { IHeroSection } from '@/types/components/complex/hero-section';
 
 export const HeroSection: FC<IHeroSection> = ({ data }) => {
-  const height = data.image.formats.large.height;
-  const width = data.image.formats.large.width;
+  const height = data?.image?.formats?.large?.height;
+  const width = data?.image?.formats?.large?.width;
 
   return (
     <section className='group relative flex flex-col items-center justify-center'>
@@ -15,12 +15,11 @@ export const HeroSection: FC<IHeroSection> = ({ data }) => {
           overlay
           priority
           loading='eager'
-          sizes='100vw'
+          src={data?.image?.url}
+          alt={data?.image?.alternativeText}
+          formats={data?.image?.formats}
           width={width}
           height={height}
-          src={data.image.url}
-          formats={data.image.formats}
-          alt={data.image.alternativeText}
           className='aspect-square h-full w-full object-cover transition-transform duration-300 ease-out md:aspect-video'
         />
         {data?.title && (

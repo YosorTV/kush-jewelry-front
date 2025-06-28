@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation';
 
-import { getHomeData, getMetadata } from '@/services';
+import { getCurrency, getHomeData, getMetadata } from '@/services';
 
 import { PageLayout } from '@/components/layouts';
 import { StrapiBlockRender } from '@/components/simple';
@@ -11,6 +11,7 @@ import { userAgent } from 'next/server';
 import { STRAPI_ENTRIES } from '@/helpers/constants';
 import { Metadata } from 'next';
 import { validateLocale } from '@/lib/locale-utils';
+import { auth } from '@/auth';
 
 export async function generateMetadata(props: PageProps): Promise<Metadata> {
   const { locale: rawLocale } = props.params;
@@ -23,19 +24,22 @@ export async function generateMetadata(props: PageProps): Promise<Metadata> {
 
 export default async function Home({ params, searchParams }: PageProps) {
   const { locale: rawLocale } = params;
+
   const locale = validateLocale(rawLocale);
 
   const { device } = userAgent({ headers: headers() });
 
   const { data } = await getHomeData({ locale });
-
+  const currency = await getCurrency();
+  const session = await auth();
+  
   if (!data) {
     return notFound();
   }
 
   return (
     <PageLayout className='mt-20'>
-      <StrapiBlockRender data={data.blocks} device={device.type} {...searchParams} />
+      <StrapiBlockRender data={data.blocks} device={device.type} locale={locale} currency={currency} session={session} {...searchParams} />
     </PageLayout>
   );
 }

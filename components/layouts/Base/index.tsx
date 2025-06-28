@@ -6,54 +6,40 @@ import Header from '@/components/elements/Header';
 import Footer from '@/components/elements/Footer';
 
 import { ThemeProvider } from '@/components/providers';
-import { ClientSideRender, Modal } from '@/components/complex';
-import { WishlistNotification } from '@/components/simple';
+import { ClientSideRender } from '@/components/complex';
 
 import { BaseLayoutProps } from '@/types/components';
 
 import { cn } from '@/lib';
 import { montserrat } from '@/assets/fonts';
-import { ExternalScripts } from '@/components/scripts';
-import { CookieSection } from '@/components/complex/CookieSection';
-import { getCurrency, getLayoutData } from '@/services';
+import { getCurrency, getLayoutData, getWishlistNotiifcation } from '@/services';
 import { auth } from '@/auth';
 import { getMessages } from 'next-intl/server';
-import { notFound } from 'next/navigation';
 
 export default async function BaseLayout({
   children,
   locale,
 }: PropsWithChildren<BaseLayoutProps>) {
-  const messages = await getMessages();
   const session = await auth();
-  const data = await getLayoutData({ locale });
+  const messages = await getMessages();
   const currency = await getCurrency();
-
-  if(!data) {
-    return notFound();
-  }
+  const data = await getLayoutData({ locale });
+  const { data: wishlistData } = await getWishlistNotiifcation({ locale });
 
   const { header, footer, shoppingCart } = data;
 
   return (
-    <html lang={locale} className={cn(montserrat.className, 'scroll-smooth scrollbar')}>
-      <body className='relative grid overflow-x-clip'>
+    <html lang={locale} className={cn(montserrat.className, 'scroll-smooth scrollbar')} suppressHydrationWarning>
+      <body className='relative grid overflow-x-clip' suppressHydrationWarning>
         <NextIntlClientProvider locale={locale} messages={messages}>
           <SessionProvider session={session}>
             <ThemeProvider>
               <Header data={header} currency={currency} cart={shoppingCart} locale={locale} session={session} />
-              <main className='flex min-h-dvh flex-col'>{children}</main>
+              <main className='flex min-h-dvh flex-col' suppressHydrationWarning>{children}</main>
               <Footer data={footer} sessionLinks={header?.sessionLinks} session={session} locale={locale} />
-              <CookieSection />
-              <Modal id='my_modal_3'>
-                <WishlistNotification locale={locale} />
-              </Modal> 
             </ThemeProvider>
+            <ClientSideRender locale={locale} wishlistData={wishlistData} />
             <div id='portal' className='z-50' />
-            <div>
-              <ClientSideRender />
-              <ExternalScripts />
-            </div>
           </SessionProvider>
         </NextIntlClientProvider>
       </body>

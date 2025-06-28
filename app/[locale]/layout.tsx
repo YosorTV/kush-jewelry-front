@@ -29,8 +29,6 @@ export default async function GlobalLayout({ children, params }: LayoutProps) {
 
   setRequestLocale(locale);
 
-
-
   return (
     <BaseLayout locale={locale}>
       {children}

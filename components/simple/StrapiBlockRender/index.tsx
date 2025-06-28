@@ -9,9 +9,9 @@ function blockRenderer(block: any, device: string, params: any) {
     case 'complex.hero-section':
       return <HeroSection key={block.id} data={block} device={device} />;
     case 'complex.spotlight':
-      return <SpotlightSection key={block.id} data={block} />;
+      return <SpotlightSection key={block.id} data={block} currency={params.currency} locale={params.locale} />;
     case 'complex.products':
-      return <ProductList key={block.id} title={block.title} className='px-5 md:px-6' {...params} />;
+      return <ProductList key={block.id} title={block.title} session={params.session} currency={params.currency} className='px-5 md:px-6' {...params} />;
     case 'complex.collection-group':
       return <CollectionSection key={block.id} data={block} />;
     case 'complex.category-group':
@@ -21,6 +21,6 @@ function blockRenderer(block: any, device: string, params: any) {
   }
 }
 
-export const StrapiBlockRender: FC<any> = ({ data = [], device, ...params }: any) => {
-  return data.map((block: any) => blockRenderer(block, device, params));
+export const StrapiBlockRender: FC<any> = ({ data = [], device, locale, currency, session, ...params }: any) => {
+  return data.map((block: any) => blockRenderer(block, device, { ...params, locale, currency, session }));
 };

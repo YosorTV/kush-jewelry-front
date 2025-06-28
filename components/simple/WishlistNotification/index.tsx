@@ -1,12 +1,10 @@
 import { FC } from 'react';
 
-import { getWishlistNotiifcation } from '@/services/api';
 import { NextLink, Title } from '@/components/elements';
 
 import { IWishlistNotification } from '@/types/components';
 
-export const WishlistNotification: FC<IWishlistNotification> = async ({ locale }) => {
-  const { data } = await getWishlistNotiifcation({ locale });
+export const WishlistNotification: FC<IWishlistNotification> = ({ locale, data }) => {
 
   return (
     <div className='flex flex-col gap-y-10'>

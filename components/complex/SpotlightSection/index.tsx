@@ -1,13 +1,8 @@
-import { getLocale } from 'next-intl/server';
-
-import { getCurrency } from '@/services';
 
 import SpotlightCarousel from '@/components/simple/SpotlightCarousel';
 
-export default async function SpotlightSection({ data }: any) {
-  const locale = await getLocale();
-  const currency = await getCurrency();
-
+export default function SpotlightSection({ data, currency = 41, locale = 'uk' }: any) {
+ 
   return (
     <section className='relative flex h-auto flex-col bg-neutral'>
       {data?.products?.data?.length > 0 && (
