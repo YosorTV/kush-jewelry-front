@@ -11,7 +11,7 @@ import { Button } from '@/components/elements';
 
 import { IPaginateController } from '@/types/components';
 
-const PaginateController: FC<IPaginateController> = ({ total = 0, disabled = true, perPage = 8 }) => {
+const PaginateController: FC<IPaginateController> = ({ total = 0, disabled = true, perPage = 4 }) => {
   const t = useTranslations('system');
 
   const pathname = usePathname();

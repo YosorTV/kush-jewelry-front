@@ -12,7 +12,6 @@ import { STRAPI_ENTRIES } from '@/helpers/constants';
 import { Metadata } from 'next';
 import { validateLocale } from '@/lib/locale-utils';
 import { auth } from '@/auth';
-import ProductList from '@/components/simple/ProductList';
 
 export async function generateMetadata(props: PageProps): Promise<Metadata> {
   const { locale: rawLocale } = props.params;
@@ -38,8 +37,6 @@ export default async function Home({ params, searchParams }: PageProps) {
     return notFound();
   }
 
-  const { title } = data.blocks.find((block: any) => block.__component === 'complex.products');
-
   return (
     <PageLayout className='mt-20'>
       <StrapiBlockRender
@@ -50,7 +47,6 @@ export default async function Home({ params, searchParams }: PageProps) {
         session={session}
         {...searchParams}
       />
-      <ProductList title={title} session={session} currency={currency} className='px-5 md:px-6' {...params} />
     </PageLayout>
   );
 }
