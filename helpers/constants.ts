@@ -212,4 +212,12 @@ export const TIKTOK_EVENTS = {
   PAGE_VIEW: 'PageView'
 };
 
-export const IMAGE_SIZES = '(max-width: 600px) 50vw, (max-width: 1200px) 50vw, 33vw';
+// Optimized responsive image sizes for better performance across devices
+export const IMAGE_SIZES =
+  '(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, (max-width: 1280px) 25vw, 20vw';
+
+// Specific image sizes for different use cases
+export const IMAGE_SIZES_HERO = '(max-width: 640px) 100vw, (max-width: 1024px) 100vw, 100vw';
+export const IMAGE_SIZES_CARD = '(max-width: 640px) 50vw, (max-width: 768px) 33vw, (max-width: 1024px) 25vw, 20vw';
+export const IMAGE_SIZES_GALLERY = '(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw';
+export const IMAGE_SIZES_THUMBNAIL = '(max-width: 640px) 25vw, (max-width: 768px) 20vw, (max-width: 1024px) 15vw, 10vw';

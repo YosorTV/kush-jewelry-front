@@ -20,20 +20,39 @@ export const Image: FC<IImageProps> = ({
 }) => {
   const blurDataURL = formats?.thumbnail?.url;
 
+  // Optimized quality based on use case
+  const getOptimizedQuality = () => {
+    if (priority) return 95; // High quality for critical images
+    if (fill) return 85; // Good quality for hero/background images
+    if (Number(width) <= 100 || Number(height) <= 100) return 70; // Lower quality for thumbnails
+    return 80; // Default quality
+  };
+
   const imageProps = {
     src,
-    alt: alt ?? "image",
+    alt: alt ?? 'image',
     priority,
-    quality: fill ? 90 : 80,
-    placeholder: "blur" as PlaceholderValue,
+    quality: getOptimizedQuality(),
+    placeholder: (blurDataURL ? 'blur' : 'empty') as PlaceholderValue,
     blurDataURL,
-    className: cn("transition-opacity duration-300", className),
+    className: cn(
+      'transition-opacity duration-300',
+      // Add object-fit for better responsive behavior
+      fill && 'object-cover',
+      className
+    ),
     loading,
-  }
+    // Add decoding hint for better performance
+    decoding: priority ? ('sync' as const) : ('async' as const)
+  };
 
   return (
     <>
-      {fill ? <NextImage {...imageProps} fill={fill} sizes={sizes} /> : <NextImage {...imageProps} height={height} width={width} />}
+      {fill ? (
+        <NextImage {...imageProps} fill={fill} sizes={sizes} />
+      ) : (
+        <NextImage {...imageProps} height={height} width={width} />
+      )}
     </>
   );
 };

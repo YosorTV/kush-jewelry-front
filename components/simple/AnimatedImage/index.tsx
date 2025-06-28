@@ -14,7 +14,7 @@ interface TAnimatedImage {
   className?: string;
 }
 
-const AnimatedImage: FC<TAnimatedImage> = ({ product, className  }) => {
+const AnimatedImage: FC<TAnimatedImage> = ({ product, className }) => {
   const [showOverlay, setShowOverlay] = useState<boolean>(false);
   const router = useRouter();
 
@@ -35,27 +35,22 @@ const AnimatedImage: FC<TAnimatedImage> = ({ product, className  }) => {
     return {
       sm: {
         width: img1?.formats?.large?.width ?? defaultWidth,
-        height: img1?.formats?.large?.height ?? defaultHeight,
+        height: img1?.formats?.large?.height ?? defaultHeight
       },
       xl: {
         width: img1?.width ?? defaultWidth,
-        height: img1?.height ?? defaultHeight,
+        height: img1?.height ?? defaultHeight
       }
-    }
-  }, [img1, img2]);
+    };
+  }, [img1]);
 
- 
   return (
     <div
       aria-hidden
       onClick={handleRedirect}
       onMouseEnter={() => md && setShowOverlay(true)}
       onMouseLeave={() => md && setShowOverlay(false)}
-      className={cn(
-        'relative h-full w-full cursor-pointer max-h-[640px]',
-        'aspect-square',
-        className,
-      )}
+      className={cn('relative h-full w-full cursor-pointer', 'aspect-square', className)}
     >
       {[img1, img2].map((img, idx) => {
         return (
@@ -68,8 +63,8 @@ const AnimatedImage: FC<TAnimatedImage> = ({ product, className  }) => {
             )}
           >
             <StrapiImage
-              priority
-              loading='eager'
+              priority={idx === 0}
+              loading={idx === 0 ? 'eager' : 'lazy'}
               src={img?.url}
               formats={img?.formats}
               alt={img?.alternativeText}
@@ -77,6 +72,7 @@ const AnimatedImage: FC<TAnimatedImage> = ({ product, className  }) => {
               height={imgSizeByScreen['xl'].height}
               previewUrl={img?.previewUrl || img?.formats?.thumbnail?.url}
               className='aspect-square h-full w-full overflow-hidden object-cover'
+              imageType='card'
             />
           </div>
         );
