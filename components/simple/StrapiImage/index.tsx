@@ -1,5 +1,11 @@
 import { Image } from '@/components/elements';
-import { IMAGE_SIZES, IMAGE_SIZES_CARD, IMAGE_SIZES_HERO, IMAGE_SIZES_THUMBNAIL } from '@/helpers/constants';
+import {
+  IMAGE_SIZES,
+  IMAGE_SIZES_CARD,
+  IMAGE_SIZES_HERO,
+  IMAGE_SIZES_THUMBNAIL,
+  IMAGE_SIZES_GALLERY
+} from '@/helpers/constants';
 import { cn } from '@/lib';
 
 import { IStrapiImageProps } from '@/types/components/simple/strapiImage.types';
@@ -20,7 +26,7 @@ export function StrapiImage({
   overlay = false,
   sizes = IMAGE_SIZES,
   imageType = 'default'
-}: Readonly<IStrapiImageProps & { imageType?: 'hero' | 'card' | 'thumbnail' | 'default' }>) {
+}: Readonly<IStrapiImageProps & { imageType?: 'hero' | 'card' | 'thumbnail' | 'gallery' | 'default' }>) {
   const imageFallback = `https://placehold.co/${width}x${height}`;
 
   // Auto-select appropriate sizes based on image type
@@ -34,6 +40,8 @@ export function StrapiImage({
         return IMAGE_SIZES_CARD;
       case 'thumbnail':
         return IMAGE_SIZES_THUMBNAIL;
+      case 'gallery':
+        return IMAGE_SIZES_GALLERY;
       default:
         return IMAGE_SIZES;
     }

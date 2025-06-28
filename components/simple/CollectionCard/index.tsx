@@ -16,6 +16,7 @@ type TCollectioCard = {
   slug: string;
   className?: string;
   textClassName?: string;
+  priority?: boolean;
   img: {
     alternativeText?: string;
     url: string;
@@ -23,7 +24,14 @@ type TCollectioCard = {
   };
 };
 
-export const CollectionCard: FC<TCollectioCard> = ({ img, className, title, hintText = 'Explore now', slug }) => {
+export const CollectionCard: FC<TCollectioCard> = ({
+  img,
+  className,
+  title,
+  hintText = 'Explore now',
+  slug,
+  priority = false
+}) => {
   const [showOverlay, setShowOverlay] = useState<boolean>(false);
 
   const handleShowOverlay = () => setShowOverlay(true);
@@ -58,9 +66,8 @@ export const CollectionCard: FC<TCollectioCard> = ({ img, className, title, hint
           alt={img?.alternativeText}
           formats={img?.formats}
           fill
-          sizes='100vw'
-          loading='lazy'
-          className='aspect-[4/3] h-full w-full object-cover'
+          loading={priority ? 'eager' : 'lazy'}
+          className='aspect-square h-full w-full object-cover'
         />
         <Title
           level='4'

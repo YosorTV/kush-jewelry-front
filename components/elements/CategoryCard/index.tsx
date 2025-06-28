@@ -48,6 +48,7 @@ export const CategoryCard: FC<any> = ({ data, currency }) => {
           <StrapiImage
             fill
             priority
+            imageType='card'
             overlay={showOverlay}
             src={data?.images?.data?.[0]?.url}
             formats={data?.images?.data?.[0]?.formats}

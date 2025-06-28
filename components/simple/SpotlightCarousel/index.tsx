@@ -25,7 +25,7 @@ const SpotlightCarousel: FC<PropType> = ({ data = [], title, currency, locale })
       total={data.length}
       options={{ loop: data.length > 3 }}
       titleClass='py-3 md:py-6 text-white'
-      className='px-2.5 pb-3 lg:pb-6 lg:px-6'
+      className='px-2.5 pb-3 lg:px-6 lg:pb-6'
       fill='fill-white'
     >
       {data.map(printSpotlightCard)}
