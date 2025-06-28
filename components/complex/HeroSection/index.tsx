@@ -10,7 +10,7 @@ export const HeroSection: FC<IHeroSection> = ({ data }) => {
 
   return (
     <section className='group relative flex flex-col items-center justify-center'>
-      <div className='relative aspect-square md:aspect-video h-full w-full max-h-[82dvh]'>
+      <div className='relative aspect-square h-full max-h-[80dvh] w-full md:aspect-video'>
         <StrapiImage
           overlay
           priority
@@ -28,12 +28,12 @@ export const HeroSection: FC<IHeroSection> = ({ data }) => {
           </Title>
         )}
         {data?.link && (
-            <NextLink
-              href={data?.link?.url}
-              className='absolute-center link-hover link bottom-10 top-[90%] h-min w-svw !items-end text-base-300 underline-offset-8'
-            >
-              {data?.link?.text}
-            </NextLink>
+          <NextLink
+            href={data?.link?.url}
+            className='absolute-center link-hover link bottom-10 top-[90%] h-min w-svw !items-end text-base-300 underline-offset-8'
+          >
+            {data?.link?.text}
+          </NextLink>
         )}
       </div>
       {data?.description && (
