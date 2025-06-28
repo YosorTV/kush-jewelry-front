@@ -26,7 +26,7 @@ export async function generateMetadata(props: PageProps): Promise<Metadata> {
 
 export default async function FavouritesPage({ params, searchParams }: PageProps) {
   const { locale } = params;
-  const { page = '1', pageSize = '6' } = searchParams;
+  const { page = '1', pageSize = '4' } = searchParams;
 
   const session = await auth();
   const t = await getTranslations('system');

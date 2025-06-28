@@ -1,4 +1,4 @@
-import { Session } from "next-auth";
+import { Session } from 'next-auth';
 
 export interface IProductsList {
   title?: string;
@@ -6,4 +6,5 @@ export interface IProductsList {
   currency?: number;
   locale?: string;
   session?: Session | null;
+  device?: string;
 }

@@ -9,7 +9,7 @@ export const searchSlice: StateCreator<TSearchState> = (set) => ({
   searchValue: '',
   searchResult: [],
   error: null,
-  meta: { page: 1, pageCount: 0, pageSize: 8, total: 0 },
+  meta: { page: 1, pageCount: 0, pageSize: 4, total: 0 },
   onToggle: () => set((state) => ({ isOpen: !state.isOpen })),
   onSearch: (value) => set({ searchValue: value }),
   onReset: () =>
@@ -18,7 +18,7 @@ export const searchSlice: StateCreator<TSearchState> = (set) => ({
       error: null,
       searchValue: '',
       searchResult: [],
-      meta: { page: 1, pageCount: 0, pageSize: 8, total: 0 }
+      meta: { page: 1, pageCount: 0, pageSize: 4, total: 0 }
     }),
   fetchCurrency: async () => {
     set({ isLoading: true, error: null });
@@ -34,7 +34,7 @@ export const searchSlice: StateCreator<TSearchState> = (set) => ({
 
     const pagination = meta?.pagination || {
       page: 1,
-      pageSize: 6,
+      pageSize: 4,
       pageCount: 1,
       total: 0
     };

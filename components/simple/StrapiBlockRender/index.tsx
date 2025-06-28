@@ -6,6 +6,8 @@ import SpotlightSection from '@/components/complex/SpotlightSection';
 // import SpotlightSection from '@/components/complex/SpotlightSection';
 
 function blockRenderer(block: any, device: string, params: any) {
+  console.log('device', device);
+
   switch (block.__component) {
     case 'complex.hero-section':
       return <HeroSection key={block.id} data={block} device={device} />;
@@ -18,6 +20,7 @@ function blockRenderer(block: any, device: string, params: any) {
           title={block.title}
           session={params.session}
           currency={params.currency}
+          device={device}
           className='px-5 md:px-6'
           {...params}
         />
@@ -25,7 +28,7 @@ function blockRenderer(block: any, device: string, params: any) {
     case 'complex.collection-group':
       return <CollectionSection key={block.id} data={block} />;
     case 'complex.category-group':
-      return <CatalogSection key={block.id} title={block.title} {...params} />;
+      return <CatalogSection key={block.id} title={block.title} device={device} {...params} />;
     default:
       return null;
   }

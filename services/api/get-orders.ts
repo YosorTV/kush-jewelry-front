@@ -12,7 +12,7 @@ interface IGetOrders {
   pageSize: string;
 }
 
-export const getOrdersData = async ({ locale, email, token, page = '1', pageSize = '6' }: IGetOrders): Promise<any> => {
+export const getOrdersData = async ({ locale, email, token, page = '1', pageSize = '4' }: IGetOrders): Promise<any> => {
   const orderesQP = generateStrapiQuery(STRAPI_QUERIES.ORDERS({ locale, email, page, pageSize }));
 
   const response = await getStrapiData(STRAPI_ENTRIES.orders, orderesQP, { token, next: { tags: ['orders'] } });

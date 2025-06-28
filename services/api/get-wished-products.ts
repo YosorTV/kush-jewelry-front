@@ -16,7 +16,7 @@ export const getWishlistProducts = async ({
   userId,
   token,
   page = '1',
-  pageSize = '6'
+  pageSize = '4'
 }: IGetWishlistProducts) => {
   const wishlistApi = STRAPI_QUERIES.WISHLIST_PRODUCTS({ locale, userId, page, pageSize });
 

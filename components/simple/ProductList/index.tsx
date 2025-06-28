@@ -12,8 +12,8 @@ import { cn } from '@/lib';
 import { IProductsList } from '@/types/components';
 import PaginateController from '../PaginateController';
 
-const ProductList: FC<IProductsList> = async ({ className, title, session, currency, ...rest }) => {
-  const { data, meta } = await getProductsData({ locale: rest.locale, ...rest });
+const ProductList: FC<IProductsList> = async ({ className, title, session, currency, device = 'desktop', ...rest }) => {
+  const { data, meta } = await getProductsData({ locale: rest.locale, pageSize: device === 'mobile' ? 4 : 8, ...rest });
 
   const t = await getTranslations('system');
 
@@ -27,10 +27,10 @@ const ProductList: FC<IProductsList> = async ({ className, title, session, curre
         </Title>
       )}
       <ProductListGroup
+        t={t}
         data={data}
         session={session ?? null}
         currency={currency ?? 41}
-        t={t}
         className='grid-cols-fluid md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4'
       />
       <PaginateController disabled={isLastPage} total={meta?.pagination?.total} perPage={meta?.pagination?.pageSize} />
