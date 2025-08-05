@@ -1,3 +1,5 @@
+'use client';
+
 import { FC } from 'react';
 
 import { Product } from '@/types/components';
@@ -23,7 +25,7 @@ const SpotlightCarousel: FC<PropType> = ({ data = [], title, currency, locale })
       format='standart'
       title={title}
       total={data.length}
-      options={{ loop: data.length > 3 }}
+      options={{ startIndex: 0, loop: data.length > 3, align: 'start' }}
       titleClass='py-3 md:py-6 text-white'
       className='px-2.5 pb-3 lg:px-6 lg:pb-6'
       fill='fill-white'

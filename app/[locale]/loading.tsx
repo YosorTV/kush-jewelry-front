@@ -1,5 +1,4 @@
 export default function Loading() {
-
   return (
     <div className='flex h-screen items-center justify-center overflow-hidden bg-base-100'>
       <div className='flex flex-col items-center gap-4'>

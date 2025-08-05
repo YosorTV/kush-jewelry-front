@@ -33,19 +33,15 @@ export default auth((req) => {
     response = intlMiddleware(req);
   }
 
-  // Add image optimization headers
-  if (nextUrl.pathname.includes('/images/') || nextUrl.pathname.includes('/_next/image')) {
+  // Add image optimization headers for Cloudinary and Next.js images
+  if (
+    nextUrl.pathname.includes('/images/') ||
+    nextUrl.pathname.includes('/_next/image') ||
+    nextUrl.pathname.includes('res.cloudinary.com')
+  ) {
     response.headers.set('Cache-Control', 'public, max-age=31536000, immutable');
     response.headers.set('X-Content-Type-Options', 'nosniff');
     response.headers.set('Accept-Ranges', 'bytes');
-  }
-
-  // Add preload hints for critical images on specific pages
-  if (nextUrl.pathname === '/' || nextUrl.pathname.includes('/catalog')) {
-    response.headers.set(
-      'Link',
-      `<${process.env.NEXT_PUBLIC_STRAPI_URL}/uploads/hero-image.webp>; rel=preload; as=image; type=image/webp`
-    );
   }
 
   // Enable Early Hints for supported browsers
@@ -60,7 +56,7 @@ export const config = {
   matcher: [
     '/(uk|en)/:path*',
     {
-      source: '/((?!api|_next/static|_next/image|favicon.ico).*)',
+      source: '/((?!api|_next/static|_next/image|favicon.ico|res.cloudinary.com).*)',
       missing: [
         { type: 'header', key: 'next-router-prefetch' },
         { type: 'header', key: 'next-action' },

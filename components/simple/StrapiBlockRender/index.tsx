@@ -1,3 +1,4 @@
+
 import { FC } from 'react';
 
 import { CatalogSection, CollectionSection, HeroSection } from '@/components/complex';
@@ -6,8 +7,6 @@ import SpotlightSection from '@/components/complex/SpotlightSection';
 // import SpotlightSection from '@/components/complex/SpotlightSection';
 
 function blockRenderer(block: any, device: string, params: any) {
-  console.log('device', device);
-
   switch (block.__component) {
     case 'complex.hero-section':
       return <HeroSection key={block.id} data={block} device={device} />;

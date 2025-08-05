@@ -1,3 +1,5 @@
+'use client';
+
 import { Image } from '@/components/elements';
 import {
   IMAGE_SIZES,
@@ -51,7 +53,7 @@ export function StrapiImage({
   const getLoadingStrategy = () => {
     if (priority) return undefined; // Let NextJS handle priority images
     if (imageType === 'hero') return 'eager';
-    if (imageType === 'thumbnail') return 'lazy';
+    if (imageType === 'thumbnail') return 'eager';
     return loading || 'lazy';
   };
 

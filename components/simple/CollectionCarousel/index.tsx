@@ -39,7 +39,7 @@ const CollectionCarousel: FC<ICollectionCarousel> = ({
       total={data.length}
       className={className}
       autoScroll={autoScroll}
-      options={{ loop, align: 'start' }}
+      options={{ startIndex: 0, loop, align: 'start' }}
       titleClass={cn('text-base-200', titleClass)}
     >
       {data.map(printCollectionCard)}

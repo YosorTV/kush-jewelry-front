@@ -74,10 +74,10 @@ export const getImgGrid = ({ images }: { images: any }) => {
   if (images.length < 4) {
     const additionalImages = Array.from({ length: 4 - images.length }, () => ({
       id: uuidv4(),
-      url: null,
+      url: '',
       width: 600,
       height: 600,
-      formats: null,
+      formats: {},
       alternativeText: 'Placeholder image'
     }));
 

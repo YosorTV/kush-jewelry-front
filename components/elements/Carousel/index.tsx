@@ -24,6 +24,21 @@ interface EmblaCarouselProps {
   format: 'standart' | 'mini';
 }
 
+const autoScrollPlugin = AutoScroll({
+  playOnInit: false,
+  startDelay: 1000,
+  stopOnMouseEnter: true,
+  stopOnInteraction: true,
+  stopOnFocusIn: true
+});
+
+const autoPlayPlugin = Autoplay({
+  playOnInit: false,
+  delay: 1000,
+  stopOnMouseEnter: true,
+  stopOnInteraction: true
+});
+
 const Carousel: FC<PropsWithChildren<EmblaCarouselProps>> = ({
   title,
   options,
@@ -38,14 +53,12 @@ const Carousel: FC<PropsWithChildren<EmblaCarouselProps>> = ({
 }) => {
   const { xl } = useScreen();
 
-  const autoScrollPlugin = AutoScroll({ playOnInit: false, stopOnMouseEnter: true, stopOnInteraction: true });
-  const autoPlayPlugin = Autoplay({ playOnInit: false, delay: 5000, stopOnMouseEnter: true, stopOnInteraction: true });
+  const plugins = [];
 
-  const plugins = [autoScroll ? autoScrollPlugin : null, autoplay ? autoPlayPlugin : null].filter(Boolean);
+  if (autoScroll) plugins.push(autoScrollPlugin);
+  if (autoplay) plugins.push(autoPlayPlugin);
 
   const [emblaRef, emblaApi] = useEmblaCarousel(options, plugins);
-
-  useAutoScroll(emblaApi, autoScroll);
 
   const isAvailableControllers = useMemo(() => {
     const showByFormat = {
@@ -59,6 +72,8 @@ const Carousel: FC<PropsWithChildren<EmblaCarouselProps>> = ({
       return true;
     }
   }, [format, xl, total]);
+
+  useAutoScroll(emblaApi, autoScroll);
 
   return (
     <div className={cn(`embla-${format}`, className)}>

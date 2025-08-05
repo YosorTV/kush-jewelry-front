@@ -29,17 +29,17 @@ const AnimatedImage: FC<TAnimatedImage> = ({ product, className }) => {
   }, [product.slug, router]);
 
   const imgSizeByScreen = useMemo(() => {
-    const defaultWidth = 1000;
+    const defaultWidth = 500;
     const defaultHeight = 500;
 
     return {
       sm: {
-        width: img1?.formats?.large?.width ?? defaultWidth,
-        height: img1?.formats?.large?.height ?? defaultHeight
+        width: img1?.formats?.medium?.width ?? defaultWidth,
+        height: img1?.formats?.medium?.height ?? defaultHeight
       },
       xl: {
-        width: img1?.width ?? defaultWidth,
-        height: img1?.height ?? defaultHeight
+        width: img1?.formats?.large?.width ?? defaultWidth,
+        height: img1?.formats?.large?.height ?? defaultHeight
       }
     };
   }, [img1]);
@@ -68,8 +68,8 @@ const AnimatedImage: FC<TAnimatedImage> = ({ product, className }) => {
               src={img?.url}
               formats={img?.formats}
               alt={img?.alternativeText}
-              width={imgSizeByScreen['xl'].width}
-              height={imgSizeByScreen['xl'].height}
+              width={md ? imgSizeByScreen['xl'].width : imgSizeByScreen['sm'].width}
+              height={md ? imgSizeByScreen['xl'].height : imgSizeByScreen['sm'].height}
               previewUrl={img?.previewUrl || img?.formats?.thumbnail?.url}
               className='aspect-square h-full w-full overflow-hidden object-cover'
               imageType='card'
