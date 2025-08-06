@@ -33,7 +33,6 @@ export default auth((req) => {
     response = intlMiddleware(req);
   }
 
-  // Add image optimization headers for Cloudinary and Next.js images
   if (
     nextUrl.pathname.includes('/images/') ||
     nextUrl.pathname.includes('/_next/image') ||
@@ -44,7 +43,6 @@ export default auth((req) => {
     response.headers.set('Accept-Ranges', 'bytes');
   }
 
-  // Enable Early Hints for supported browsers
   if (req.headers.get('accept')?.includes('image/avif')) {
     response.headers.set('Accept-CH', 'DPR, Viewport-Width, Width');
   }
