@@ -27,7 +27,7 @@ export default auth((req) => {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
       sameSite: 'strict',
-      maxAge: 60 * 60 * 24 * 30 // 30 days
+      maxAge: 60 * 60 * 24 * 30
     });
   } else {
     response = intlMiddleware(req);
