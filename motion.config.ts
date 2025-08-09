@@ -1,6 +1,7 @@
 export const motion = {
   transition: {
-    duration: 0.5,
-    ease: 'easeInOut',
+    type: 'tween',
+    duration: 0.25,
+    ease: 'linear',
   },
 };
