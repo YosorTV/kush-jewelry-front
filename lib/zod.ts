@@ -35,6 +35,12 @@ const requiredPasswordLengthMessage = (locale: Locale) => {
 
 const emailSchema = (locale: Locale) => z.string().email(getEmailErrorMessage(locale));
 
+// Allow only Gmail addresses for specific flows (e.g., Contact Us)
+const emailGmailSchema = (locale: Locale) =>
+  emailSchema(locale).refine((val) => /@gmail\.com$/i.test(String(val || '')), {
+    message: locale === 'uk' ? 'Дозволено лише адреси Gmail.' : 'Only Gmail addresses are allowed.'
+  });
+
 const passwordSchema = (locale: Locale) =>
   z
     .string()
@@ -66,6 +72,21 @@ const requiredPhoneField = (locale: Locale) =>
     },
     {
       message: requiredErrorMessage(locale)
+    }
+  );
+
+// UA phone number validator: must be in international format starting with 380 and 9 digits after (total 12)
+const requiredUaPhoneField = (locale: Locale) =>
+  z.string().refine(
+    (val) => {
+      const normalizedPhoneNumber = normalizePhoneNumber(val);
+      return /^380\d{9}$/.test(normalizedPhoneNumber);
+    },
+    {
+      message:
+        locale === 'uk'
+          ? 'Вкажіть український номер у форматі +380XXXXXXXXX.'
+          : 'Enter a Ukrainian phone in format +380XXXXXXXXX.'
     }
   );
 
@@ -126,8 +147,8 @@ export const subscriptionSchema = (locale: Locale) =>
 
 export const contactUsSchema = (locale: Locale) => {
   return z.object({
-    email: emailSchema(locale),
-    phone: requiredPhoneField(locale),
+    email: emailGmailSchema(locale),
+    phone: requiredUaPhoneField(locale),
     name: requiredTextField(locale),
     message: requiredTextField(locale),
     locale: z.string().readonly()

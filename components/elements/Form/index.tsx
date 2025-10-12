@@ -14,6 +14,7 @@ export const Form: FC<FormProps<any>> = ({
   children,
   className,
   action,
+  onSuccess,
   state = {
     data: null,
     url: null,
@@ -36,6 +37,15 @@ export const Form: FC<FormProps<any>> = ({
       ref.current.reset();
       if (formState?.url) {
         debouncedPush(formState?.url);
+      }
+
+      // Fire optional success callback for side effects (e.g., localStorage locks)
+      if (typeof onSuccess === 'function') {
+        try {
+          onSuccess(formState);
+        } catch (e) {
+          // no-op; callbacks must not break form UX
+        }
       }
 
       toaster({ key: 'success', message: formState.message });

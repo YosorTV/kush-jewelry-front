@@ -35,6 +35,8 @@ export const InputPhone: FC<InputProps> = ({ defaultValue, id, name, placeholder
       key={id}
       excludeCountries={['ru', 'by']}
       country='ua'
+      onlyCountries={['ua']}
+      countryCodeEditable={false}
       regions={['europe']}
       autocompleteSearch
       dropdownClass='top-10 !rounded-lg !bg-base-100 md:!w-72 !w-[90vw]'

@@ -14,18 +14,10 @@ interface IContactUs {
 export const ContactUsSection: FC<IContactUs> = async ({ data }) => {
   const { title, map, formFields, locale, submitBtn } = data;
 
-  const defaultMapParams = {
-    address: 'Dnipro, Dnipropetrovsk Oblast, Ukraine, 49000',
-    coordinates: { lat: 48.464717, lng: 35.046183 }
-  };
-
   return (
     <section className='flex w-full flex-col gap-x-6 lg:flex-row'>
       <div className='order-2 flex h-96 w-full lg:order-1 lg:h-screen lg:flex-1'>
-        <GoogleMap
-          center={map?.coordinates ?? defaultMapParams.coordinates}
-          address={map?.address ?? defaultMapParams.address}
-        />
+        <GoogleMap center={map?.coordinates} address={map?.address} />
       </div>
 
       <div className='order-1 flex flex-1 flex-col lg:order-2'>

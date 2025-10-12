@@ -4,6 +4,7 @@ export interface FormProps<T> {
   className?: string;
   schema?: any;
   onSubmit?: () => void;
+  onSuccess?: (state?: any) => void;
   action?: any | Promise<any>;
   method?: string;
   id?: string;

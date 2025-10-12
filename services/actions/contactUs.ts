@@ -15,6 +15,7 @@ export async function contactUs(prevState: any, formData: FormData) {
     locale: formData.get('locale')
   };
 
+  // Server-side validation (gmail-only email + UA phone enforced in schema)
   const validatedData: any = schemas.contacts(locale as string).safeParse(fields);
 
   if (!validatedData.success) {
