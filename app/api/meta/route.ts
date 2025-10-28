@@ -22,6 +22,8 @@ export async function GET(req: Request) {
           ? formatPrice(product?.other['product:price:amount'], currency).replace(/[^\d.,-]/g, '')
           : product?.other['product:price:amount'];
 
+      const priceCurrency = locale === 'en' ? 'USD' : product.other['product:price:currency'];
+
       return {
         ID: product.id,
         Title: product?.openGraph?.title || '',
@@ -29,7 +31,7 @@ export async function GET(req: Request) {
         Link: product.openGraph?.url || '',
         'Image Link': product.openGraph?.images[0]?.url || '',
         Availability: product.other['product:product:availability'] || 'in stock',
-        Price: `${price} ${product.other['product:price:currency']}`,
+        Price: `${price} ${priceCurrency}`,
         Category: product.other['product:category'] || '',
         Brand: 'KUSH JEWELRY',
         Condition: 'New'
