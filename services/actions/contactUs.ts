@@ -12,10 +12,13 @@ export async function contactUs(prevState: any, formData: FormData) {
     name: formData.get('name'),
     phone: formData.get('phone'),
     message: formData.get('message'),
-    locale: formData.get('locale')
+    locale: formData.get('locale'),
+    // Anti-spam fields
+    honeypot: formData.get('website') || '', // honeypot field (should be empty)
+    formTimestamp: formData.get('formTimestamp') || '' // timestamp for timing validation
   };
 
-  // Server-side validation (gmail-only email + UA phone enforced in schema)
+  // Server-side validation (gmail-only email + UA phone + anti-spam checks)
   const validatedData: any = schemas.contacts(locale as string).safeParse(fields);
 
   if (!validatedData.success) {
@@ -30,7 +33,10 @@ export async function contactUs(prevState: any, formData: FormData) {
     };
   }
 
-  const response = await postUserMessage(validatedData.data);
+  // Remove anti-spam fields before sending to Strapi (not needed in database)
+  const { honeypot, formTimestamp, ...dataToSend } = validatedData.data;
+
+  const response = await postUserMessage(dataToSend);
 
   if (response.error) {
     return {

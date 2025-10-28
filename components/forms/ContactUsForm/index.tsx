@@ -25,6 +25,9 @@ export const ContactUsForm: FC<IContactUsForm> = ({ data, locale, submit }) => {
   const [lockedUntil, setLockedUntil] = useState<number>(0);
   const isLocked = lockedUntil > Date.now();
 
+  // Anti-spam: timestamp when form renders
+  const [formTimestamp] = useState<string>(() => String(Date.now()));
+
   // get the lock key
   useEffect(() => {
     if (typeof window === 'undefined') return;
@@ -61,7 +64,30 @@ export const ContactUsForm: FC<IContactUsForm> = ({ data, locale, submit }) => {
       className='w-full'
       onSuccess={handleSuccess}
     >
+      {/* Hidden fields for form metadata */}
       <Input hidden readOnly name='locale' value={locale} className='hidden' />
+
+      {/* Anti-spam: honeypot field - invisible to humans, visible to bots */}
+      <input
+        name='website'
+        type='text'
+        autoComplete='off'
+        tabIndex={-1}
+        defaultValue=''
+        style={{
+          position: 'absolute',
+          left: '-9999px',
+          width: '1px',
+          height: '1px',
+          opacity: 0,
+          pointerEvents: 'none'
+        }}
+        aria-hidden='true'
+      />
+
+      {/* Anti-spam: timestamp for submission timing validation */}
+      <Input hidden readOnly name='formTimestamp' value={formTimestamp} className='hidden' />
+
       <div className='flex flex-col gap-y-6'>{data.map(printInput)}</div>
       {!isLocked ? (
         <SubmitButton

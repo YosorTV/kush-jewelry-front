@@ -151,7 +151,31 @@ export const contactUsSchema = (locale: Locale) => {
     phone: requiredUaPhoneField(locale),
     name: requiredTextField(locale),
     message: requiredTextField(locale),
-    locale: z.string().readonly()
+    locale: z.string().readonly(),
+    // Anti-spam: honeypot field (must be empty)
+    honeypot: z
+      .string()
+      .optional()
+      .refine((val) => !val || val.trim() === '', {
+        message: locale === 'uk' ? 'Виявлено підозрілу активність.' : 'Suspicious activity detected.'
+      }),
+    // Anti-spam: timestamp validation (min 3 sec, max 1 hour)
+    formTimestamp: z.string().refine(
+      (val) => {
+        const timestamp = parseInt(val, 10);
+        if (isNaN(timestamp)) return false;
+
+        const now = Date.now();
+        const elapsed = now - timestamp;
+        const minTime = 3000; // 3 seconds
+        const maxTime = 3600000; // 1 hour
+
+        return elapsed >= minTime && elapsed <= maxTime;
+      },
+      {
+        message: locale === 'uk' ? 'Виявлено підозрілу активність.' : 'Suspicious activity detected.'
+      }
+    )
   });
 };
 
