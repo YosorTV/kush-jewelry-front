@@ -39,11 +39,10 @@ export function StrapiImage({
 >) {
   const imageFallback = `https://placehold.co/${width}x${height}`;
 
-  const isDataUrl = (url: string | undefined) => url?.startsWith('data:');
-  const blurDataURL =
-    (previewUrl && isDataUrl(previewUrl) ? previewUrl : null) ??
-    (formats?.thumbnail?.url && isDataUrl(formats.thumbnail.url) ? formats.thumbnail.url : null) ??
-    BLUR_PLACEHOLDER;
+  console.log('previewUrl', previewUrl);
+  console.log('thumbnail url', formats?.thumbnail?.url);
+
+  const blurDataURL = formats?.thumbnail?.url ?? previewUrl ?? BLUR_PLACEHOLDER;
 
   // Auto-select appropriate sizes based on image type
   const getOptimizedSizes = () => {

@@ -21,8 +21,7 @@ export const Image: FC<IImageProps> = ({
   disableTransition = false
 }) => {
   const thumbnailUrl = formats?.thumbnail?.url;
-  const isDataUrl = (url: string | undefined) => url?.startsWith('data:');
-  const blurDataURL = blurDataURLProp ?? (isDataUrl(thumbnailUrl) ? thumbnailUrl : null) ?? BLUR_PLACEHOLDER;
+  const blurDataURL = blurDataURLProp ?? thumbnailUrl ?? BLUR_PLACEHOLDER;
 
   // Optimized quality based on use case
   const getOptimizedQuality = () => {
