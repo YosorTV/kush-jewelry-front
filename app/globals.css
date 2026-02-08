@@ -81,6 +81,11 @@
   .auth-link {
     @apply btn w-full rounded-none border-none bg-transparent text-base text-base-200 shadow-none outline-none hover:bg-base-200 hover:text-base-100;
   }
+
+  #liqpay_checkout.liqpay-theme #lp_checkout_root,
+  #liqpay_checkout.liqpay-theme #lp_checkout_root > div {
+    background-color: hsl(var(--inc)) !important;
+  }
 }
 
 input:-webkit-autofill,

@@ -109,7 +109,7 @@ const CartCheckout: FC<ICartCheckout> = ({ currency, liqPayData }) => {
   return (
     <div 
       ref={liqPayContainerRef} 
-      className='h-full w-full overflow-hidden pb-10 pt-5' 
+      className='liqpay-theme h-full w-full overflow-hidden bg-info-content pb-10 pt-5' 
       id='liqpay_checkout'
       aria-label="LiqPay payment form"
     />
