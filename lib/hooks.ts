@@ -140,30 +140,82 @@ export const useDebounce = (value: any, delay = 500) => {
   return debouncedValue;
 };
 
-export const useAutoScroll = (emblaApi: EmblaCarouselType, autoScroll: boolean) => {
-  const [isPlaying, setIsPlaying] = useState(false);
-
+export const useAutoScroll = (emblaApi: EmblaCarouselType | undefined, autoScroll: boolean) => {
   useEffect(() => {
-    if (!emblaApi || !autoScroll) return;
+    if (!emblaApi) return;
 
-    const onAutoScroll = emblaApi?.plugins()?.autoScroll;
+    const autoScrollPlugin = emblaApi.plugins()?.autoScroll;
+    if (!autoScrollPlugin) return;
 
-    setIsPlaying(onAutoScroll.isPlaying());
+    let slides: HTMLElement[] = [];
+    let pausedByHover = false;
 
-    const handlePlay = () => setIsPlaying(true);
-    const handleStop = () => setIsPlaying(false);
-    const handleReInit = () => setIsPlaying(onAutoScroll.isPlaying());
+    const stopForHover = () => {
+      if (autoScrollPlugin.isPlaying()) {
+        autoScrollPlugin.stop();
+        pausedByHover = true;
+      }
+    };
 
-    emblaApi.on('autoScroll:play', handlePlay).on('autoScroll:stop', handleStop).on('reInit', handleReInit);
+    const resumeFromHover = (event: MouseEvent) => {
+      const nextTarget = event.relatedTarget as Element | null;
 
-    if (!isPlaying) {
-      onAutoScroll.play();
+      if (nextTarget?.closest('.embla__slide')) return;
+      if (!autoScroll || !pausedByHover) return;
+
+      pausedByHover = false;
+
+      if (!autoScrollPlugin.isPlaying()) {
+        autoScrollPlugin.play();
+      }
+    };
+
+    const attachSlideListeners = () => {
+      slides = emblaApi.slideNodes();
+      slides.forEach((slide) => {
+        slide.addEventListener('mouseenter', stopForHover);
+        slide.addEventListener('mouseleave', resumeFromHover);
+      });
+    };
+
+    const detachSlideListeners = () => {
+      slides.forEach((slide) => {
+        slide.removeEventListener('mouseenter', stopForHover);
+        slide.removeEventListener('mouseleave', resumeFromHover);
+      });
+      slides = [];
+    };
+
+    if (!autoScroll) {
+      if (autoScrollPlugin.isPlaying()) {
+        autoScrollPlugin.stop();
+      }
+      return;
     }
 
-    return () => {
-      emblaApi.off('autoScroll:play', handlePlay).off('autoScroll:stop', handleStop).off('reInit', handleReInit);
+    const handleReInit = () => {
+      detachSlideListeners();
+      attachSlideListeners();
+
+      if (!autoScrollPlugin.isPlaying()) {
+        autoScrollPlugin.play();
+      }
     };
-  }, [autoScroll, emblaApi, isPlaying]);
+
+    emblaApi.on('reInit', handleReInit);
+
+    if (!autoScrollPlugin.isPlaying()) {
+      autoScrollPlugin.play();
+    }
+
+    attachSlideListeners();
+
+    return () => {
+      detachSlideListeners();
+      emblaApi.off('reInit', handleReInit);
+      autoScrollPlugin.stop();
+    };
+  }, [autoScroll, emblaApi]);
 };
 
 export const useCurrency = () => {

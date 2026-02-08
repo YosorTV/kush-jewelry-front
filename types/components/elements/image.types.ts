@@ -18,4 +18,6 @@ export interface IImageProps extends ImageProps {
   fill?: boolean;
   caption?: string | null;
   formats?: IImageFormats;
+  /** Disable opacity transition to avoid compositing glitches (e.g. inside Zoom) */
+  disableTransition?: boolean;
 }

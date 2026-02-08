@@ -105,8 +105,9 @@ input:-webkit-autofill:active {
   --slide-size: 100%;
   --slide-height: 300px;
   --slide-spacing: 0.25rem;
-  --slide-size-xl: calc(100% / 3);
   --slide-size-md: calc(100% / 2);
+  --slide-size-lg: calc(100% / 2);
+  --slide-size-xl: calc(100% / 2);
 }
 
 .embla__viewport {

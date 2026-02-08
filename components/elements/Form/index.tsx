@@ -47,7 +47,6 @@ export const Form: FC<FormProps<any>> = ({
           // no-op; callbacks must not break form UX
         }
       }
-
       toaster({ key: 'success', message: formState.message });
     } else if (formState?.status === 400) {
       toaster({

@@ -8,18 +8,21 @@ interface IStrapiLoader {
   quality: number | 'auto';
 }
 
+const MAX_CLOUDINARY_WIDTH = 1920;
+
 export default function strapiLoader({ src, width = 1000, quality = 75 }: IStrapiLoader) {
   if (!src) return null;
 
   if (src.startsWith('data:')) return src;
 
   if (src.startsWith('http') || src.startsWith('//')) {
-    // Enhanced Cloudinary optimization
+    // Enhanced Cloudinary optimization (cap width for performance)
     if (src.includes('res.cloudinary.com')) {
+      const cappedWidth = Math.min(Number(width) || 1000, MAX_CLOUDINARY_WIDTH);
       const params = [
         'f_auto', // Auto format (WebP/AVIF when supported)
         'c_limit', // Limit dimensions
-        `w_${width}`, // Width
+        `w_${cappedWidth}`, // Width (capped to reduce payload)
         `q_${quality || 'auto'}`, // Quality
         'dpr_auto', // Auto device pixel ratio
         'fl_progressive', // Progressive JPEG

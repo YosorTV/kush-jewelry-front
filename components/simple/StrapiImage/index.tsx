@@ -6,7 +6,9 @@ import {
   IMAGE_SIZES_CARD,
   IMAGE_SIZES_HERO,
   IMAGE_SIZES_THUMBNAIL,
-  IMAGE_SIZES_GALLERY
+  IMAGE_SIZES_GALLERY,
+  IMAGE_SIZES_CAROUSEL,
+  BLUR_PLACEHOLDER
 } from '@/helpers/constants';
 import { cn } from '@/lib';
 
@@ -27,9 +29,21 @@ export function StrapiImage({
   priority = false,
   overlay = false,
   sizes = IMAGE_SIZES,
-  imageType = 'default'
-}: Readonly<IStrapiImageProps & { imageType?: 'hero' | 'card' | 'thumbnail' | 'gallery' | 'default' }>) {
+  imageType = 'default',
+  disableTransition = false
+}: Readonly<
+  IStrapiImageProps & {
+    imageType?: 'hero' | 'card' | 'thumbnail' | 'gallery' | 'carousel' | 'default';
+    disableTransition?: boolean;
+  }
+>) {
   const imageFallback = `https://placehold.co/${width}x${height}`;
+
+  const isDataUrl = (url: string | undefined) => url?.startsWith('data:');
+  const blurDataURL =
+    (previewUrl && isDataUrl(previewUrl) ? previewUrl : null) ??
+    (formats?.thumbnail?.url && isDataUrl(formats.thumbnail.url) ? formats.thumbnail.url : null) ??
+    BLUR_PLACEHOLDER;
 
   // Auto-select appropriate sizes based on image type
   const getOptimizedSizes = () => {
@@ -44,6 +58,8 @@ export function StrapiImage({
         return IMAGE_SIZES_THUMBNAIL;
       case 'gallery':
         return IMAGE_SIZES_GALLERY;
+      case 'carousel':
+        return IMAGE_SIZES_CAROUSEL;
       default:
         return IMAGE_SIZES;
     }
@@ -57,8 +73,16 @@ export function StrapiImage({
     return loading || 'lazy';
   };
 
+  const noTransition = disableTransition || imageType === 'carousel';
+
   return (
-    <div className={cn('relative h-full w-full transition-all duration-300 ease-linear', containerClass)}>
+    <div
+      className={cn(
+        'relative h-full w-full',
+        !noTransition && 'transition-all duration-300 ease-linear',
+        containerClass
+      )}
+    >
       <Image
         id={id}
         src={src ?? imageFallback}
@@ -66,17 +90,13 @@ export function StrapiImage({
         formats={formats}
         priority={priority || imageType === 'hero'}
         loading={priority ? undefined : getLoadingStrategy()}
-        blurDataURL={previewUrl || formats?.thumbnail?.url}
+        blurDataURL={blurDataURL}
         fill={fill}
         sizes={!fill ? getOptimizedSizes() : undefined}
         height={!fill ? height : undefined}
         width={!fill ? width : undefined}
-        className={cn(
-          // Add better default styles for responsive behavior
-          'transition-opacity duration-300',
-          fill && 'object-cover',
-          className
-        )}
+        disableTransition={noTransition}
+        className={cn(!noTransition && 'transition-opacity duration-300', fill && 'object-cover', className)}
         unoptimized={!src}
       />
       {overlay && (

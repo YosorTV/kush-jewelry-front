@@ -4,7 +4,7 @@ import { PlaceholderValue } from 'next/dist/shared/lib/get-img-props';
 
 import { cn } from '@/lib';
 import { IImageProps } from '@/types/components';
-import { IMAGE_SIZES } from '@/helpers/constants';
+import { IMAGE_SIZES, BLUR_PLACEHOLDER } from '@/helpers/constants';
 
 export const Image: FC<IImageProps> = ({
   src,
@@ -16,9 +16,13 @@ export const Image: FC<IImageProps> = ({
   fill = false,
   formats,
   loading,
-  sizes = IMAGE_SIZES
+  sizes = IMAGE_SIZES,
+  blurDataURL: blurDataURLProp,
+  disableTransition = false
 }) => {
-  const blurDataURL = formats?.thumbnail?.url;
+  const thumbnailUrl = formats?.thumbnail?.url;
+  const isDataUrl = (url: string | undefined) => url?.startsWith('data:');
+  const blurDataURL = blurDataURLProp ?? (isDataUrl(thumbnailUrl) ? thumbnailUrl : null) ?? BLUR_PLACEHOLDER;
 
   // Optimized quality based on use case
   const getOptimizedQuality = () => {
@@ -35,12 +39,7 @@ export const Image: FC<IImageProps> = ({
     quality: getOptimizedQuality(),
     placeholder: (blurDataURL ? 'blur' : 'empty') as PlaceholderValue,
     blurDataURL,
-    className: cn(
-      'transition-opacity duration-300',
-      // Add object-fit for better responsive behavior
-      fill && 'object-cover',
-      className
-    ),
+    className: cn(!disableTransition && 'transition-opacity duration-300', fill && 'object-cover', className),
     loading,
     // Add decoding hint for better performance
     decoding: priority ? ('sync' as const) : ('async' as const)

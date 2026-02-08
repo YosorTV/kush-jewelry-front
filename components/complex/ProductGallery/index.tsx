@@ -15,19 +15,28 @@ export const ProductGallery = ({ images = [] }: { images: any[] }) => {
 
   const gallery = getImgGrid({ images });
 
-  const printImage = (image: any) => {
+  const printImage = (image: any, index: number) => {
+    const width =
+      image.formats?.large?.width ?? image.formats?.medium?.width ?? image.width ?? 828;
+    const height =
+      image.formats?.large?.height ?? image.formats?.medium?.height ?? image.height ?? 828;
+
     return (
       <li key={image.id} id={image.id} className='h-full overflow-clip'>
         <Zoom>
-          <StrapiImage
-            priority
-            src={image.url}
-            width={image.width}
-            height={image.height}
-            formats={image.formats}
-            alt={image.alternativeText}
-            className='aspect-square h-full w-full cursor-pointer object-cover'
-          />
+          <div className='relative aspect-square h-full w-full min-h-0 overflow-hidden'>
+            <StrapiImage
+              priority={index < 2}
+              loading={index < 2 ? 'eager' : 'lazy'}
+              src={image.url}
+              width={width}
+              height={height}
+              formats={image.formats}
+              alt={image.alternativeText}
+              imageType='gallery'
+              className='aspect-square h-full w-full cursor-pointer object-cover'
+            />
+          </div>
         </Zoom>
       </li>
     );
@@ -35,7 +44,7 @@ export const ProductGallery = ({ images = [] }: { images: any[] }) => {
 
   const printGallery = useMemo(() => {
     if (xl) {
-      return <ul className='grid w-full grid-cols-fluid gap-3 md:grid-cols-2'>{gallery.map(printImage)}</ul>;
+      return <ul className='grid w-full grid-cols-fluid gap-3 md:grid-cols-2'>{gallery.map((img: any, i: number) => printImage(img, i))}</ul>;
     }
 
     return <ProductCarousel data={images} />;

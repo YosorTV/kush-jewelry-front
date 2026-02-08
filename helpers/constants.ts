@@ -212,9 +212,15 @@ export const TIKTOK_EVENTS = {
   PAGE_VIEW: 'PageView'
 };
 
+/** Base64 data URL for blur placeholder (Next.js requires data URL, not remote URL) */
+export const BLUR_PLACEHOLDER =
+  'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFgABAQEAAAAAAAAAAAAAAAAAAAUH/8QAIhAAAgEDBAMBAAAAAAAAAAAAAQIDAAQRBRIhMQYTQVFh/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBEQACEQAD8A';
+
 export const IMAGE_SIZES =
   '(max-width: 640px) 33vw, (max-width: 768px) 50vw, (max-width: 1024px) 60vw, (max-width: 1280px) 80vw';
 export const IMAGE_SIZES_HERO = '(max-width: 640px) 50vw, (max-width: 768px) 100vw, 50vw';
 export const IMAGE_SIZES_CARD = '(max-width: 640px) 33vw, (max-width: 768px) 50vw, (max-width: 1024px) 60vw';
 export const IMAGE_SIZES_GALLERY = '(max-width: 640px) 33vw, (max-width: 768px) 50vw, (max-width: 1024px) 60vw';
+/** One slide in mobile product carousel — limits requested width for performance */
+export const IMAGE_SIZES_CAROUSEL = '(max-width: 768px) 85vw, 50vw';
 export const IMAGE_SIZES_THUMBNAIL = '(max-width: 640px) 25vw, (max-width: 768px) 20vw, (max-width: 1024px) 15vw, 10vw';
