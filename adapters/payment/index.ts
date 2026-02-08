@@ -17,8 +17,9 @@ interface ILiqPayAdapter {
   signature: string;
 }
 
-export const paymentDataAdapter = ({ data, currency, prePurchase = false, customer }: IPaymentAdapter) => {
+export const paymentDataAdapter = ({ data, currency, locale, prePurchase = false, customer }: IPaymentAdapter) => {
   const { totalPrice } = formatTotalAmount(data);
+  const language = locale === 'en' ? 'en' : 'uk';
 
   const order_id = `order_${uuidv4()}`;
   const description = data.map((item: CartItemType) => item.name).join(',');
@@ -40,6 +41,7 @@ export const paymentDataAdapter = ({ data, currency, prePurchase = false, custom
     currency: 'UAH',
     description: `Оплата ювелірних прикрас: ${description}`,
     order_id,
+    language,
     products,
     customer: {
       firstName: customer.firstName,
