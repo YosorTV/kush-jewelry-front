@@ -17,22 +17,25 @@ import { CloseIcon } from '@/assets/icons';
 import { paymentDataAdapter } from '@/adapters/payment';
 
 import { ShoppingCartProps } from '@/types/components/complex';
-import CartCheckout from '@/components/simple/CartCheckout';
+import CartCheckout, { MonoIframeCheckoutData } from '@/components/simple/CartCheckout';
 import CartList from '@/components/simple/CartList';
 import CartDelivery from '@/components/simple/CartDelivery';
 import CartSuccess from '@/components/simple/CartSuccess';
+
+// LiqPay: was fetching {data, signature} for embed SDK
+// Mono iframe: fetches {checkoutUrl, invoiceId, orderId} and renders iframe src={checkoutUrl}
 
 export const ShoppingCart: FC<ShoppingCartProps> = ({ data, locale, currency }) => {
   const cartStore = useCart();
   const router = useRouter();
   const searchParams = useSearchParams();
 
-  const [liqPayData, setLiqPayData] = useState({
-    data: '',
-    signature: ''
-  });
+  const [monoCheckoutData, setMonoCheckoutData] = useState<MonoIframeCheckoutData | null>(null);
 
-  const fetchLiqPayData = useCallback(async () => {
+  // LiqPay liqPayData state — commented, replaced by monoWidgetConfig
+  // const [liqPayData, setLiqPayData] = useState({ data: '', signature: '' });
+
+  const fetchMonoCheckoutData = useCallback(async () => {
     const options = paymentDataAdapter({
       locale,
       currency,
@@ -41,12 +44,26 @@ export const ShoppingCart: FC<ShoppingCartProps> = ({ data, locale, currency }) 
       prePurchase: cartStore.prePurchase
     });
 
-    const response = await paymentCreate(options);
+    try {
+      const response = await paymentCreate(options);
 
-    if (response?.data) {
-      setLiqPayData(response.data);
+      // Next route returns { success, data }, where data may already be checkout object
+      // or a nested data wrapper depending on Strapi response shape.
+      const raw = response?.data;
+      const checkoutData = raw?.checkoutUrl ? raw : raw?.data;
+
+      if (checkoutData?.checkoutUrl) {
+        setMonoCheckoutData(checkoutData as MonoIframeCheckoutData);
+      } else {
+        console.error('Mono: unexpected response from payment/create', response);
+      }
+    } catch (err) {
+      console.error('Mono fetchCheckoutData error:', err);
     }
-  }, [currency, cartStore.cart, cartStore.delivery, cartStore.prePurchase]);
+  }, [currency, cartStore.cart, cartStore.delivery, cartStore.prePurchase, locale]);
+
+  // LiqPay fetchLiqPayData — commented, replaced by fetchMonoWidgetConfig
+  // const fetchLiqPayData = useCallback(async () => { ... }, [...]);
 
   const handleToggle = useCallback(() => {
     cartStore.onToggle();
@@ -66,11 +83,12 @@ export const ShoppingCart: FC<ShoppingCartProps> = ({ data, locale, currency }) 
 
   useEffect(() => {
     if (cartStore.key === 'checkout') {
-      fetchLiqPayData();
+      fetchMonoCheckoutData();
     } else {
-      setLiqPayData({ data: '', signature: '' });
+      setMonoCheckoutData(null);
+      // LiqPay: setLiqPayData({ data: '', signature: '' }); — replaced by setMonoCheckoutData(null)
     }
-  }, [cartStore.key]);
+  }, [cartStore.key, fetchMonoCheckoutData]);
 
   useEffect(() => {
     const params = new URLSearchParams(searchParams.toString());
@@ -84,10 +102,16 @@ export const ShoppingCart: FC<ShoppingCartProps> = ({ data, locale, currency }) 
     router.replace(`?${params.toString()}`, { scroll: false });
   }, [cartStore.isOpen, cartStore.key, searchParams, router]);
 
-  const contentZone = {
+  const contentZone: Record<string, React.ReactNode> = {
     cart: <CartList data={data} currency={currency} />,
     delivery: <CartDelivery />,
-    checkout: <CartCheckout currency={currency} liqPayData={liqPayData} />,
+    // LiqPay: checkout: <CartCheckout currency={currency} liqPayData={liqPayData} />
+    checkout: (
+      <CartCheckout
+        checkoutData={monoCheckoutData}
+        locale={locale}
+      />
+    ),
     success: <CartSuccess />
   };
 
@@ -103,7 +127,7 @@ export const ShoppingCart: FC<ShoppingCartProps> = ({ data, locale, currency }) 
 
       <Portal selector='portal'>
         <Sidebar position='right' onToggle={handleToggle} opened={cartStore.isOpen}>
-          <div className={cn('relative flex w-full flex-col items-start p-2.5')}>
+          <div className={cn('relative flex h-full w-full flex-col items-start p-2.5')}>
             <div className='flex w-full items-end justify-between'>
               <Button
                 type='button'
@@ -119,7 +143,9 @@ export const ShoppingCart: FC<ShoppingCartProps> = ({ data, locale, currency }) 
                 icon={{ before: <CloseIcon className='h-6 w-6 fill-base-200' /> }}
               />
             </div>
-            {contentZone[cartStore.key]}
+            <div className='flex min-h-0 w-full flex-1'>
+              {contentZone[cartStore.key]}
+            </div>
           </div>
         </Sidebar>
       </Portal>

@@ -34,6 +34,7 @@ export async function POST(req: Request) {
   };
 
   try {
+    // Strapi now returns {checkoutUrl, invoiceId, orderId} (mono) instead of {data, signature} (LiqPay)
     const response = await postStrapiData('payment/create', body);
     await executeCheckout(checkoutData);
     return NextResponse.json({ success: true, data: response });

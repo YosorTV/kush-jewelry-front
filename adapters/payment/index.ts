@@ -12,14 +12,29 @@ interface IPaymentAdapter {
   prePurchase: boolean;
 }
 
-interface ILiqPayAdapter {
-  data: string;
-  signature: string;
-}
+// LiqPay adapter — commented, replaced by mono (no client-side adapter needed)
+// interface ILiqPayAdapter {
+//   data: string;
+//   signature: string;
+// }
 
 export const paymentDataAdapter = ({ data, currency, locale, prePurchase = false, customer }: IPaymentAdapter) => {
   const { totalPrice } = formatTotalAmount(data);
   const language = locale === 'en' ? 'en' : 'uk';
+  const strapiBaseUrl = (process.env.NEXT_PUBLIC_STRAPI_URL || '').replace(/\/+$/, '');
+
+  const resolveImageUrl = (item: CartItemType) => {
+    const candidate =
+      item?.images?.[0]?.url
+      || item?.images?.url
+      || item?.images?.data?.[0]?.attributes?.url
+      || item?.images?.data?.attributes?.url
+      || '';
+
+    if (!candidate) return '';
+    if (candidate.startsWith('http://') || candidate.startsWith('https://')) return candidate;
+    return strapiBaseUrl ? `${strapiBaseUrl}${candidate}` : candidate;
+  };
 
   const order_id = `order_${uuidv4()}`;
   const description = data.map((item: CartItemType) => item.name).join(',');
@@ -32,6 +47,7 @@ export const paymentDataAdapter = ({ data, currency, locale, prePurchase = false
     name: item.name,
     quantity: item.quantity,
     url: item.url,
+    icon: resolveImageUrl(item),
     price: formatPrice(item.unit_amount, currency).replace(/[^\d.,-]/g, '')
   }));
 
@@ -52,22 +68,23 @@ export const paymentDataAdapter = ({ data, currency, locale, prePurchase = false
       customer_warehouse: customer.self ? '' : customer.novapostWarehouse.label,
       self_delivery: customer.self
     },
-    rro_info: {
-      items: products,
-      delivery_emails: [customer.email],
-      total_amount: amount,
-      cashier: 'KUSH'
-    }
+    // rro_info was liqpay-specific — commented
+    // rro_info: {
+    //   items: products,
+    //   delivery_emails: [customer.email],
+    //   total_amount: amount,
+    //   cashier: 'KUSH'
+    // }
   };
 };
 
-export const liqPayAdapter = ({ data, signature }: ILiqPayAdapter) => {
-  if (!data || !signature) return null;
-
-  return {
-    data,
-    signature,
-    embedTo: '#liqpay_checkout',
-    mode: 'embed'
-  };
-};
+// LiqPay embed adapter — commented, replaced by mono (mono uses redirect, not embed SDK)
+// export const liqPayAdapter = ({ data, signature }: ILiqPayAdapter) => {
+//   if (!data || !signature) return null;
+//   return {
+//     data,
+//     signature,
+//     embedTo: '#liqpay_checkout',
+//     mode: 'embed'
+//   };
+// };

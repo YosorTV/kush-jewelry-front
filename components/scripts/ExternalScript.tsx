@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { LiqPayScript } from '@/components/scripts/LiqPayScript';
+import Script from 'next/script';
 import { MetaScript } from '@/components/scripts/MetaScript';
 import { TiktokScript } from '@/components/scripts/TiktokScript';
 import { TIKTOK_PIXEL_ID } from '@/helpers/constants';
@@ -24,7 +24,10 @@ export const ExternalScripts = () => {
   return (
     <>
       <MetaScript />
-      <LiqPayScript />
+      <Script
+        src='https://pay.monobank.ua/mono-pay-button/v1/mono-pay-button.js'
+        strategy='afterInteractive'
+      />
       <TiktokScript pixelId={TIKTOK_PIXEL_ID} />
     </>
   );
