@@ -24,11 +24,12 @@ const CartList: FC<any> = ({ data, currency }) => {
 
   const cartStore = useCart();
   const { theme } = useTheme();
+  const PREPAYMENT_RATE = 0.5;
 
   const { totalPrice } = formatTotalAmount(cartStore.cart);
 
   const handleSubmit = () => {
-    cartStore.setTotalPrice(cartStore.prePurchase ? totalPrice * 0.3 : totalPrice);
+    cartStore.setTotalPrice(cartStore.prePurchase ? totalPrice * PREPAYMENT_RATE : totalPrice);
     cartStore.setForm('delivery');
   };
 
@@ -84,7 +85,7 @@ const CartList: FC<any> = ({ data, currency }) => {
           />
         </form>
         <p className='font-semibold text-base-200'>
-          {t('checkout.total')}: {formatPrice(cartStore.prePurchase ? totalPrice * 0.3 : totalPrice, currency)}
+          {t('checkout.total')}: {formatPrice(cartStore.prePurchase ? totalPrice * PREPAYMENT_RATE : totalPrice, currency)}
         </p>
       </div>
       <div className='divider my-0' />

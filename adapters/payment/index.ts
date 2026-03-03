@@ -22,6 +22,8 @@ export const paymentDataAdapter = ({ data, currency, locale, prePurchase = false
   const { totalPrice } = formatTotalAmount(data);
   const language = locale === 'en' ? 'en' : 'uk';
   const strapiBaseUrl = (process.env.NEXT_PUBLIC_STRAPI_URL || '').replace(/\/+$/, '');
+  // Keep payment math consistent with UI price presentation (rounded to nearest 100 UAH).
+  const toRoundedUah = (usdAmount: number) => Math.round((usdAmount * currency) / 100) * 100;
 
   const resolveImageUrl = (item: CartItemType) => {
     const candidate =
@@ -36,12 +38,13 @@ export const paymentDataAdapter = ({ data, currency, locale, prePurchase = false
     return strapiBaseUrl ? `${strapiBaseUrl}${candidate}` : candidate;
   };
 
+  const PREPAYMENT_RATE = 0.5;
   const order_id = `order_${uuidv4()}`;
   const description = data.map((item: CartItemType) => item.name).join(',');
-  const rawTotal = prePurchase ? totalPrice * 0.3 : totalPrice;
+  const rawTotal = prePurchase ? totalPrice * PREPAYMENT_RATE : totalPrice;
 
-  // rawTotal (USD) × currency (UAH/USD rate) = UAH; backend converts to kopecks (× 100)
-  const amount = Math.round(rawTotal * currency);
+  // rawTotal (USD) -> rounded UAH amount; backend converts to kopecks (× 100)
+  const amount = toRoundedUah(rawTotal);
 
   if (!Number.isFinite(amount) || amount <= 0) {
     throw new Error(`Invalid payment amount: ${amount} (rawTotal=${rawTotal}, currency=${currency})`);
@@ -53,8 +56,8 @@ export const paymentDataAdapter = ({ data, currency, locale, prePurchase = false
     quantity: item.quantity,
     url: item.url,
     icon: resolveImageUrl(item),
-    // unit_amount (USD) × currency = UAH; backend converts to kopecks (× 100)
-    price: Math.round(item.unit_amount * currency)
+    // unit_amount (USD) -> rounded UAH amount; backend converts to kopecks (× 100)
+    price: toRoundedUah(item.unit_amount)
   }));
 
   return {
@@ -74,23 +77,5 @@ export const paymentDataAdapter = ({ data, currency, locale, prePurchase = false
       customer_warehouse: customer.self ? '' : customer.novapostWarehouse.label,
       self_delivery: customer.self
     },
-    // rro_info was liqpay-specific — commented
-    // rro_info: {
-    //   items: products,
-    //   delivery_emails: [customer.email],
-    //   total_amount: amount,
-    //   cashier: 'KUSH'
-    // }
   };
 };
-
-// LiqPay embed adapter — commented, replaced by mono (mono uses redirect, not embed SDK)
-// export const liqPayAdapter = ({ data, signature }: ILiqPayAdapter) => {
-//   if (!data || !signature) return null;
-//   return {
-//     data,
-//     signature,
-//     embedTo: '#liqpay_checkout',
-//     mode: 'embed'
-//   };
-// };
