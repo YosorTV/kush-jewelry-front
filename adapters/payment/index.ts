@@ -43,6 +43,10 @@ export const paymentDataAdapter = ({ data, currency, locale, prePurchase = false
   // Keep amount numeric to avoid locale parsing issues (e.g. comma separators -> NaN).
   const amount = Math.round(((rawTotal * currency) / 100) / 100) * 100;
 
+  if (!Number.isFinite(amount) || amount <= 0) {
+    throw new Error(`Invalid payment amount: ${amount} (rawTotal=${rawTotal}, currency=${currency})`);
+  }
+
   const products = data.map((item: CartItemType) => ({
     id: item.id,
     name: item.name,

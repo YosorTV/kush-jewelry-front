@@ -1,11 +1,3 @@
-// LiqPay CartCheckout — commented out, replaced by MonoPay iframe below
-// (original LiqPay embed component preserved for reference)
-//
-// 'use client';
-// import { liqPayAdapter } from '@/adapters/payment'; // LiqPay
-// const CartCheckout: FC<{ currency: number; liqPayData: { data: string; signature: string } }> = ...
-// LiqPayCheckout.init(liqPayAdapter(liqPayData)).on('liqpay.callback', handlePaymentCallback);
-// export default CartCheckout;
 
 'use client';
 

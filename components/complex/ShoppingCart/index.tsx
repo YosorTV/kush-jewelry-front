@@ -22,27 +22,32 @@ import CartList from '@/components/simple/CartList';
 import CartDelivery from '@/components/simple/CartDelivery';
 import CartSuccess from '@/components/simple/CartSuccess';
 
-// LiqPay: was fetching {data, signature} for embed SDK
-// Mono iframe: fetches {checkoutUrl, invoiceId, orderId} and renders iframe src={checkoutUrl}
-
 export const ShoppingCart: FC<ShoppingCartProps> = ({ data, locale, currency }) => {
   const cartStore = useCart();
   const router = useRouter();
   const searchParams = useSearchParams();
 
   const [monoCheckoutData, setMonoCheckoutData] = useState<MonoIframeCheckoutData | null>(null);
-
-  // LiqPay liqPayData state — commented, replaced by monoWidgetConfig
-  // const [liqPayData, setLiqPayData] = useState({ data: '', signature: '' });
+  const [checkoutError, setCheckoutError] = useState<string | null>(null);
 
   const fetchMonoCheckoutData = useCallback(async () => {
-    const options = paymentDataAdapter({
-      locale,
-      currency,
-      data: cartStore.cart,
-      customer: cartStore.delivery,
-      prePurchase: cartStore.prePurchase
-    });
+    setCheckoutError(null);
+
+    let options;
+    try {
+      options = paymentDataAdapter({
+        locale,
+        currency,
+        data: cartStore.cart,
+        customer: cartStore.delivery,
+        prePurchase: cartStore.prePurchase
+      });
+    } catch (err) {
+      const message = err instanceof Error ? err.message : 'Failed to build payment data';
+      console.error('Mono paymentDataAdapter error:', err);
+      setCheckoutError(message);
+      return;
+    }
 
     try {
       const response = await paymentCreate(options);
@@ -55,15 +60,16 @@ export const ShoppingCart: FC<ShoppingCartProps> = ({ data, locale, currency }) 
       if (checkoutData?.checkoutUrl) {
         setMonoCheckoutData(checkoutData as MonoIframeCheckoutData);
       } else {
+        const errMsg = raw?.message || 'Payment service unavailable. Please try again.';
         console.error('Mono: unexpected response from payment/create', response);
+        setCheckoutError(errMsg);
       }
     } catch (err) {
+      const message = err instanceof Error ? err.message : 'Failed to create payment. Please try again.';
       console.error('Mono fetchCheckoutData error:', err);
+      setCheckoutError(message);
     }
   }, [currency, cartStore.cart, cartStore.delivery, cartStore.prePurchase, locale]);
-
-  // LiqPay fetchLiqPayData — commented, replaced by fetchMonoWidgetConfig
-  // const fetchLiqPayData = useCallback(async () => { ... }, [...]);
 
   const handleToggle = useCallback(() => {
     cartStore.onToggle();
@@ -86,7 +92,7 @@ export const ShoppingCart: FC<ShoppingCartProps> = ({ data, locale, currency }) 
       fetchMonoCheckoutData();
     } else {
       setMonoCheckoutData(null);
-      // LiqPay: setLiqPayData({ data: '', signature: '' }); — replaced by setMonoCheckoutData(null)
+      setCheckoutError(null);
     }
   }, [cartStore.key, fetchMonoCheckoutData]);
 
@@ -105,8 +111,18 @@ export const ShoppingCart: FC<ShoppingCartProps> = ({ data, locale, currency }) 
   const contentZone: Record<string, React.ReactNode> = {
     cart: <CartList data={data} currency={currency} />,
     delivery: <CartDelivery />,
-    // LiqPay: checkout: <CartCheckout currency={currency} liqPayData={liqPayData} />
-    checkout: (
+    checkout: checkoutError ? (
+      <div className='flex h-full w-full flex-col items-center justify-center gap-y-4 px-4 py-16'>
+        <p className='text-center text-sm text-error'>{checkoutError}</p>
+        <Button
+          type='button'
+          onClick={fetchMonoCheckoutData}
+          className='!text-xs underline-offset-8 hover:underline md:!text-sm'
+        >
+          {locale === 'en' ? 'Try again' : 'Спробувати ще раз'}
+        </Button>
+      </div>
+    ) : (
       <CartCheckout
         checkoutData={monoCheckoutData}
         locale={locale}
