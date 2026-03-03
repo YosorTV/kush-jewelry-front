@@ -40,8 +40,8 @@ export const paymentDataAdapter = ({ data, currency, locale, prePurchase = false
   const description = data.map((item: CartItemType) => item.name).join(',');
   const rawTotal = prePurchase ? totalPrice * 0.3 : totalPrice;
 
-  // Keep amount numeric to avoid locale parsing issues (e.g. comma separators -> NaN).
-  const amount = Math.round(((rawTotal * currency) / 100) / 100) * 100;
+  // rawTotal (USD) × currency (UAH/USD rate) = UAH; backend converts to kopecks (× 100)
+  const amount = Math.round(rawTotal * currency);
 
   if (!Number.isFinite(amount) || amount <= 0) {
     throw new Error(`Invalid payment amount: ${amount} (rawTotal=${rawTotal}, currency=${currency})`);
@@ -53,8 +53,8 @@ export const paymentDataAdapter = ({ data, currency, locale, prePurchase = false
     quantity: item.quantity,
     url: item.url,
     icon: resolveImageUrl(item),
-    // Send numeric per-item price in UAH for backend basketOrder math.
-    price: Math.round(((item.unit_amount * currency) / 100) / 100) * 100
+    // unit_amount (USD) × currency = UAH; backend converts to kopecks (× 100)
+    price: Math.round(item.unit_amount * currency)
   }));
 
   return {
