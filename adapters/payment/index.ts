@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from 'uuid';
 
-import { formatPrice, formatTotalAmount } from '@/helpers/formatters';
+import { formatTotalAmount } from '@/helpers/formatters';
 
 import { CartItemType, IDeliveryForm } from '@/types/store';
 
@@ -38,9 +38,10 @@ export const paymentDataAdapter = ({ data, currency, locale, prePurchase = false
 
   const order_id = `order_${uuidv4()}`;
   const description = data.map((item: CartItemType) => item.name).join(',');
-  const amount = parseFloat(
-    formatPrice(prePurchase ? totalPrice * 0.3 : totalPrice, currency).replace(/[^\d.,-]/g, '')
-  );
+  const rawTotal = prePurchase ? totalPrice * 0.3 : totalPrice;
+
+  // Keep amount numeric to avoid locale parsing issues (e.g. comma separators -> NaN).
+  const amount = Math.round(((rawTotal * currency) / 100) / 100) * 100;
 
   const products = data.map((item: CartItemType) => ({
     id: item.id,
@@ -48,7 +49,8 @@ export const paymentDataAdapter = ({ data, currency, locale, prePurchase = false
     quantity: item.quantity,
     url: item.url,
     icon: resolveImageUrl(item),
-    price: formatPrice(item.unit_amount, currency).replace(/[^\d.,-]/g, '')
+    // Send numeric per-item price in UAH for backend basketOrder math.
+    price: Math.round(((item.unit_amount * currency) / 100) / 100) * 100
   }));
 
   return {
